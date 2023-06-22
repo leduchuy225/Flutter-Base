@@ -19,13 +19,15 @@ class HttpService {
   void configureDio() {
     print('Configure dio');
 
-    _dio.options.baseUrl = 'https://pokeapi.co/api/v2';
-    // _dio.options.connectTimeout = const Duration(seconds: 5);
-    // _dio.options.receiveTimeout = const Duration(seconds: 3);
+    // _dio.options.baseUrl = 'https://pokeapi.co/api/v2';
+    _dio.options.baseUrl = 'http://localhost:8080';
+
+    _dio.options.connectTimeout = const Duration(seconds: 5);
+    _dio.options.receiveTimeout = const Duration(seconds: 3);
 
     _dio.interceptors.addAll([
-      AuthenticationInterceptor(),
       LogInterceptor(),
+      AuthenticationInterceptor(),
     ]);
   }
 }
