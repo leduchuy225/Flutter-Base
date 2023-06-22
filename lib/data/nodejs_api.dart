@@ -1,4 +1,4 @@
-import 'package:flutter_base/data/api_base.dart';
+import 'package:flutter_base/core/api_base.dart';
 
 import 'nodejs_retrofit_api.dart';
 

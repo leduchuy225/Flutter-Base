@@ -1,4 +1,4 @@
-import 'package:flutter_base/data/api_base.dart';
+import 'package:flutter_base/core/api_base.dart';
 import 'package:flutter_base/data/pokemon_retrofit_api.dart';
 
 class PokemonApi extends ApiBase {
