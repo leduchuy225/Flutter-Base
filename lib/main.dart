@@ -30,7 +30,11 @@ class _MainAppState extends State<MainApp> {
     return GetMaterialApp(
       initialRoute: '/',
       theme: AppTheme.themeData,
+      defaultTransition: Transition.cupertino,
       onGenerateRoute: MainRouter.generateRoute,
+      builder: (context, child) {
+        return SafeArea(child: child!);
+      },
     );
   }
 }

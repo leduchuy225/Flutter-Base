@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_base/interceptors/authentication_interceptor.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class HttpService {
   factory HttpService() {
@@ -17,17 +17,12 @@ class HttpService {
   Dio get dio => _dio;
 
   void configureDio() {
-    print('Configure dio');
-
-    // _dio.options.baseUrl = 'https://pokeapi.co/api/v2';
-    _dio.options.baseUrl = 'http://localhost:8080';
+    _dio.options.baseUrl = 'https://pokeapi.co/api/v2';
+    // _dio.options.baseUrl = 'http://localhost:8080';
 
     _dio.options.connectTimeout = const Duration(seconds: 5);
     _dio.options.receiveTimeout = const Duration(seconds: 3);
 
-    _dio.interceptors.addAll([
-      LogInterceptor(),
-      AuthenticationInterceptor(),
-    ]);
+    _dio.interceptors.addAll([PrettyDioLogger()]);
   }
 }

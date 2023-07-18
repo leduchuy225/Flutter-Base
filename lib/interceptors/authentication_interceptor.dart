@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 class AuthenticationInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
+    // Try catch
     super.onError(err, handler);
     return handler.next(err);
   }

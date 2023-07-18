@@ -9,4 +9,7 @@ abstract class PokemonRetrofitApi {
 
   @GET('/pokemon/')
   Future getPokemonsList();
+
+  @GET('/pokemon/huy')
+  Future getPokemonFail();
 }
