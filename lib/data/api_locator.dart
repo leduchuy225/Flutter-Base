@@ -7,6 +7,4 @@ void setupApiLocator() {
   final dio = Get.find<HttpService>().dio;
 
   Get.put(PokemonApi(api: PokemonRetrofitApi(dio)));
-
-  // Get.put(NodejsApi(api: NodejsRetrofitApi(dio)));
 }

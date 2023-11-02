@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/api_base.dart';
 import '../../data/pokemon_api.dart';
+import '../../extensions/future_extension.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,10 +21,11 @@ class _HomePageState extends State<HomePage> {
         child: InkWell(
           child: const Text('Home Screen'),
           onTap: () async {
-            final data = await Get.find<PokemonApi>().getPokemonFail(
-              apiParameters: ApiParameters(iShowError: true, errorMessage: 'Get Pokemon Fail'),
-            );
-            print('Pokemon Error $data');
+            try {
+              await Get.find<PokemonApi>().getPokemonFail();
+            } catch (error) {
+              print('tryCatch ${error.toString()}');
+            }
           },
         ),
       ),

@@ -1,20 +1,23 @@
-import 'package:flutter_base/core/api_base.dart';
 import 'package:flutter_base/data/pokemon_retrofit_api.dart';
+import 'package:flutter_base/extensions/future_extension.dart';
 
-class PokemonApi extends ApiBase implements PokemonRetrofitApi {
+import '../core/base_response.dart';
+
+class PokemonApi {
   PokemonApi({required this.api});
 
   final PokemonRetrofitApi api;
 
-  @override
-  Future getPokemonsList({ApiParameters? apiParameters}) {
+  Future<BaseResponseModel<List>> getPokemonsList({ApiParameters? apiParameters}) {
     print('API getPokemonsList');
-    return callAPI(api.getPokemonsList, apiParameters: apiParameters);
+    return api.getPokemonsList().call(apiParameters: apiParameters);
   }
 
-  @override
-  Future getPokemonFail({ApiParameters? apiParameters}) {
-    print('API getPokemonsFail');
-    return callAPI(api.getPokemonFail, apiParameters: apiParameters);
+  Future<BaseResponseModel> getButterFreePokemon({ApiParameters? apiParameters}) {
+    return api.getButterFreePokemon().call(apiParameters: apiParameters);
+  }
+
+  Future<BaseResponseModel> getPokemonFail() {
+    return api.getPokemonFail().call();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/extensions/future_extension.dart';
 import 'package:get/get.dart';
 
 import '../../data/pokemon_api.dart';
-import '../../helper/dialog_utils.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -16,9 +16,10 @@ class SettingsPage extends StatelessWidget {
         child: InkWell(
           child: const Text('Settings Screen'),
           onTap: () async {
-            final data = await Get.find<PokemonApi>().getPokemonsList();
-            print('Pokemon List $data');
-            DialogUtility.dialog('Testing Dialog');
+            await Get.find<PokemonApi>().getButterFreePokemon(
+              apiParameters: ApiParameters(iShowError: true),
+            );
+            // print(data);
           },
         ),
       ),

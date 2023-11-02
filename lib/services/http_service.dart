@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../interceptors/interceptor.dart';
+
 class HttpService {
   factory HttpService() {
     return _singleton;
@@ -16,13 +18,22 @@ class HttpService {
 
   Dio get dio => _dio;
 
+  Dio get dioInstance {
+    return Dio(baseOptions);
+  }
+
+  BaseOptions get baseOptions {
+    return BaseOptions(
+      baseUrl: 'https://pokeapi.co/api/v2',
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 3),
+    );
+  }
+
   void configureDio() {
-    _dio.options.baseUrl = 'https://pokeapi.co/api/v2';
-    // _dio.options.baseUrl = 'http://localhost:8080';
-
-    _dio.options.connectTimeout = const Duration(seconds: 5);
-    _dio.options.receiveTimeout = const Duration(seconds: 3);
-
-    _dio.interceptors.addAll([PrettyDioLogger()]);
+    _dio.options = baseOptions;
+    _dio.interceptors.addAll(
+      [PrettyDioLogger(), MyInterceptor()],
+    );
   }
 }

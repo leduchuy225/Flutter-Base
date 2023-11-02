@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DialogUtility {
-  DialogUtility._();
+class MyDialog {
+  MyDialog._();
 
   static void snackbar(String message) {
-    Get.snackbar('Snackbar', message, snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar('Notification', message, snackPosition: SnackPosition.TOP);
   }
 
   static void dialog(String message) {
