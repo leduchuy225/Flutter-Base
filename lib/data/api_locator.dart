@@ -1,5 +1,3 @@
-import 'package:flutter_base/data/nodejs_api.dart';
-import 'package:flutter_base/data/nodejs_retrofit_api.dart';
 import 'package:flutter_base/data/pokemon_api.dart';
 import 'package:flutter_base/data/pokemon_retrofit_api.dart';
 import 'package:flutter_base/services/http_service.dart';
@@ -10,5 +8,5 @@ void setupApiLocator() {
 
   Get.put(PokemonApi(api: PokemonRetrofitApi(dio)));
 
-  Get.put(NodejsApi(api: NodejsRetrofitApi(dio)));
+  // Get.put(NodejsApi(api: NodejsRetrofitApi(dio)));
 }
