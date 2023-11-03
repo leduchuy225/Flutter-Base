@@ -2,6 +2,6 @@
   "dart.lineLength": 200,
   "files.exclude": {
     "**/*.freezed.dart": true,
-    "**/*.g.dart": false
+    "**/*.g.dart": true,
   }
 }

@@ -30,6 +30,17 @@ class _MainAppState extends State<MainApp> {
     return GetMaterialApp(
       initialRoute: '/',
       theme: AppTheme.themeData,
+      // darkTheme: AppTheme.themeData.copyWith(
+      //   brightness: Brightness.dark,
+      //   textTheme: const TextTheme(
+      //     bodyMedium: TextStyle(
+      //       color: Colors.green,
+      //     ),
+      //   ),
+      //   appBarTheme: AppBarTheme(
+      //     color: Colors.green.shade100,
+      //   ),
+      // ),
       defaultTransition: Transition.cupertino,
       onGenerateRoute: MainRouter.generateRoute,
       builder: (context, child) {
