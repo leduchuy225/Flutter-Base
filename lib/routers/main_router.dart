@@ -24,7 +24,7 @@ class MainRouter {
         return GetPageRoute(page: () => SettingsPage());
       case COUNTER:
         return GetPageRoute(
-          page: () => CounterPage(),
+          page: () => const CounterPage(),
           binding: BindingsBuilder.put(() => CounterPageController()),
         );
       default:
