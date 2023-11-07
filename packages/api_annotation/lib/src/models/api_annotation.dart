@@ -1,3 +1,0 @@
-class ApiAnnotation {
-  const ApiAnnotation();
-}
