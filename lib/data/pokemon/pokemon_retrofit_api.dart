@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
-import '../core/base_response.dart';
+import '../../models/base_response.dart';
 
-part 'pokemon_retrofit_api.g.dart';
+part './pokemon_retrofit_api.g.dart';
 
 @RestApi()
 abstract class PokemonRetrofitApi {

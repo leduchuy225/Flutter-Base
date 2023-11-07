@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'routers/main_router.dart';
 import 'theme/app_theme.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 

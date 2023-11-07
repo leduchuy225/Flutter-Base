@@ -1,4 +1,4 @@
-import 'package:flutter_base/core/base_response.dart';
+import 'package:flutter_base/models/base_response.dart';
 
 import '../core/error_handler.dart';
 

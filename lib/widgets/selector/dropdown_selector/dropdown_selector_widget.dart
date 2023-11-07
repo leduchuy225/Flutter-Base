@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyDropdown extends StatelessWidget {
+class MyDropdownSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButton(

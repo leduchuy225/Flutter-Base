@@ -3,14 +3,14 @@ import 'package:flutter_base/widgets/loading/loading_widget.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/drawer/scaffold_drawer_widget.dart';
-import 'counter_page_controller.dart';
+import 'counter_page_state_controller.dart';
 
 class CounterPage extends StatelessWidget {
   const CounterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<CounterPageController>();
+    final controller = Get.find<CounterPageStateController>();
 
     return DrawerScaffold(
       appBar: AppBar(

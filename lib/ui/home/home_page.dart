@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/routers/main_router.dart';
 import 'package:flutter_base/widgets/drawer/scaffold_drawer_widget.dart';
+import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/dropdown/dropdown_widget.dart';
 import '../../widgets/search_field/search_field_widget.dart';
+import '../../widgets/selector/bottomsheet_selector/bottomsheet_selector_widget.dart';
+import '../../widgets/selector/dropdown_selector/dropdown_selector_widget.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
 
@@ -14,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final selectorController = SelectorController();
   final textInputController = TextEditingController();
   final myTextInputController = MyTextFieldController();
 
@@ -49,7 +53,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -63,6 +67,7 @@ class _HomePageState extends State<HomePage> {
                 // }
                 myTextInputController.text = 'Tran Thanh Loan';
                 myTextInputController.enable = !myTextInputController.enable;
+                selectorController.selectors = [MySelectorModel(id: 'HomeScreen', name: 'HomeScreen')];
               },
             ),
             const SizedBox(height: 16),
@@ -80,19 +85,28 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                myTextInputController.shake(errorTexts: ['123', '456']);
+                // myTextInputController.shake(errorTexts: ['123', '456']);
                 //MyDialog.snackbar(myTextInputController.text);
+
+                print(selectorController.first?.id);
+                print(selectorController.first?.name);
               },
               child: const Text('Hello world'),
             ),
             const SizedBox(height: 16),
-            MyDropdown(),
+            MyDropdownSelector(),
             const SizedBox(height: 16),
             MySearchField(
               onFiltered: (text) {
                 print(text);
               },
             ),
+            const SizedBox(height: 16),
+            MyBottomsheetSelector(
+              controller: selectorController,
+            ),
+            const SizedBox(height: 50),
+            const Text('I love you more than i can say'),
           ],
         ),
       ),

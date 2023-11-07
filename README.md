@@ -1,44 +1,6 @@
 # flutter_application
 
-## Theme
+## TODO
 
-- ### Techniques
-
-  - #### GetX
-  - #### InheritedWidget
-
-- ### Todo
-  - #### [ ] Change theme
-
-## Router
-
-- ### Techniques
-
-  - #### GetX
-
-- ### Todo
-
-  - #### [ ] Authentication Route
-
-## Http Request
-
-- ### Techniques
-
-  - ### Dio
-  - ### Retrofit
-
-- ### Todo
-
-## State Management
-
-- ### Techniques
-  - #### Cubit
-- ### Todo
-
-## Internationalization
-
-## Dependency Injection
-
-- ### Techniques
-  - #### GetX
-- ### Todo
+- Check whether there is an Internet connection available
+- Save selector data in local storage

@@ -3,7 +3,7 @@ import 'package:flutter_base/extensions/future_extension.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:get/get.dart';
 
-import '../../data/pokemon_api.dart';
+import '../../data/pokemon/pokemon_api.dart';
 
 class SettingsPage extends StatelessWidget {
   @override

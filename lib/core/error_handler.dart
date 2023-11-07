@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_base/core/base_error.dart';
+import 'package:flutter_base/models/base_error.dart';
 
 import '../extensions/future_extension.dart';
 import '../widgets/dialog/dialog_widget.dart';

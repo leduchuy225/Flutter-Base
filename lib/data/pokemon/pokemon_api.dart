@@ -1,7 +1,7 @@
-import 'package:flutter_base/data/pokemon_retrofit_api.dart';
+import 'package:flutter_base/data/pokemon/pokemon_retrofit_api.dart';
 import 'package:flutter_base/extensions/future_extension.dart';
 
-import '../core/base_response.dart';
+import '../../models/base_response.dart';
 
 class PokemonApi {
   PokemonApi({required this.api});

@@ -7,10 +7,21 @@ import '../animate/animate_widget.dart';
 
 class MyTextField extends StatefulWidget {
   final bool? enable;
+  final bool readOnly;
+  final bool isRequired;
   final String? labelText;
+  final void Function()? onTap;
   final MyTextFieldController? controller;
 
-  const MyTextField({super.key, this.controller, this.labelText, this.enable});
+  const MyTextField({
+    super.key,
+    this.onTap,
+    this.enable,
+    this.labelText,
+    this.controller,
+    this.readOnly = false,
+    this.isRequired = false,
+  });
 
   @override
   State<MyTextField> createState() => _MyTextFieldState();
@@ -57,11 +68,13 @@ class _MyTextFieldState extends State<MyTextField> {
       controller: _animateController,
       effects: const [ShakeEffect()],
       child: TextFormField(
-        enabled: _isEnableState,
+        onTap: widget.onTap,
         controller: controller,
+        enabled: _isEnableState,
+        readOnly: widget.readOnly,
         decoration: InputDecoration(
           errorText: _errorTextState,
-          labelText: widget.labelText,
+          labelText: '${widget.labelText} ${widget.isRequired ? ' *' : ''}',
         ),
       ),
     );

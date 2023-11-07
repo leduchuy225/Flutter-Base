@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/counter/counter_page.dart';
-import 'package:flutter_base/ui/counter/counter_page_controller.dart';
+import 'package:flutter_base/ui/counter/counter_page_state_controller.dart';
 import 'package:get/get.dart';
 
 import '../ui/empty/empty_page.dart';
@@ -25,7 +25,7 @@ class MainRouter {
       case COUNTER:
         return GetPageRoute(
           page: () => const CounterPage(),
-          binding: BindingsBuilder.put(() => CounterPageController()),
+          binding: BindingsBuilder.put(() => CounterPageStateController()),
         );
       default:
         return GetPageRoute(page: () => const EmptyPage());
