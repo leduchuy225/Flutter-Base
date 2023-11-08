@@ -1,35 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../theme/snackbar_theme.dart';
+
+enum SnackbarType {
+  ERROR,
+  SUCCESS,
+  WARNING,
+  INFORMATION,
+}
+
 class MyDialog {
   MyDialog._();
 
-  static void snackbar(String message) {
-    Get.snackbar(
-      'Notification',
-      message,
-      snackPosition: SnackPosition.TOP,
-      margin: const EdgeInsets.all(16),
+  static void snackbar(
+    String? message, {
+    Widget? icon,
+    String title = 'Notification',
+    SnackbarType type = SnackbarType.INFORMATION,
+  }) {
+    if ((message ?? '').isEmpty) {
+      return;
+    }
+    Get.showSnackbar(
+      GetSnackBar(
+        icon: icon,
+        title: title,
+        message: message,
+        backgroundColor: type.colors[0],
+        duration: const Duration(seconds: 3),
+      ),
     );
   }
 
-  static void dialog(String message) {
-    Get.dialog(AlertDialog(
-      content: const Text('Do you love me ?'),
-      actions: [
-        TextButton(
-          onPressed: () {},
-          child: const Text('OK'),
-        ),
-        TextButton(
-          onPressed: () {
-            if (Get.isDialogOpen == true) {
-              Get.back();
-            }
-          },
-          child: const Text('Cancel'),
-        )
-      ],
-    ));
+  static void alertDialog(String message) {
+    Get.dialog(
+      AlertDialog(
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: const Text('OK'),
+          ),
+          TextButton(
+            onPressed: () {
+              if (Get.isDialogOpen == true) {
+                Get.back();
+              }
+            },
+            child: const Text('Cancel'),
+          )
+        ],
+      ),
+    );
   }
 }

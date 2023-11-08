@@ -17,6 +17,8 @@ dependencies:
   flutter_animate: ^4.2.0+1
   shared_preferences: ^2.2.2
   collection: ^1.17.0
+  connectivity_plus: ^5.0.1
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

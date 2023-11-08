@@ -3,7 +3,7 @@ import 'package:collection/collection.dart';
 import '../../models/base_selector.dart';
 import '../text_field/text_field_controller.dart';
 
-class SelectorController extends MyTextFieldController {
+class MySelectorController extends MyTextFieldController {
   List<MySelectorModel> _selectorData = [];
 
   set selectors(List<MySelectorModel> selectors) {

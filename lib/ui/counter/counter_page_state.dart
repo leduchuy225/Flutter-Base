@@ -6,7 +6,7 @@ class MyDefinedData {
   MyDefinedData(this.name);
 }
 
-class CounterPageStateController extends GetxController {
+class CounterPageState extends GetxController {
   var count = 0.obs;
   var myData = [MyDefinedData('Huy')].obs;
 

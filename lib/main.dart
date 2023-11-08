@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/app_binding.dart';
 import 'package:flutter_base/data/api_locator.dart';
 import 'package:flutter_base/services/service_locator.dart';
 import 'package:get/get.dart';
@@ -31,6 +32,7 @@ class _MainAppState extends State<MainApp> {
     return GetMaterialApp(
       initialRoute: '/',
       theme: AppTheme.themeData,
+      initialBinding: AppBinding(),
       // darkTheme: AppTheme.themeData.copyWith(
       //   brightness: Brightness.dark,
       //   textTheme: const TextTheme(

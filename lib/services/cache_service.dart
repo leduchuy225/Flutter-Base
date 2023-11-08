@@ -1,5 +1,5 @@
-class ConfigService {
-  ConfigService() : _cache = <String, Object>{};
+class CacheService {
+  CacheService() : _cache = <String, Object>{};
 
   final Map<String, Object> _cache;
 
@@ -19,6 +19,6 @@ class ConfigService {
   }
 }
 
-class ConfigServiceKey {
+class CacheServiceKey {
   static String ACCESS_TOKEN = 'accessToken';
 }

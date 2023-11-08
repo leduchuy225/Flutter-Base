@@ -2,24 +2,30 @@ import 'package:get/get.dart';
 
 import '../../models/base_selector.dart';
 
-class SelectorStateController extends GetxController {
+class SelectorState extends GetxController {
   final MySelectorArguments? argument;
   final List<MySelectorModel> Function()? getStaticData;
+
+  List<MySelectorModel> dataChoosen = [];
 
   final dataList = <MySelectorModel>[].obs;
   final title = 'BottomSheetSelectorTitlte'.obs;
 
-  SelectorStateController({this.argument, this.getStaticData});
+  SelectorState({this.argument, this.getStaticData});
 
   @override
   void onInit() {
     super.onInit();
-    dataList.value = staticData;
+    dataList.value = _staticData;
   }
 
-  List<MySelectorModel> get staticData => getStaticData != null ? getStaticData!() : [];
+  List<MySelectorModel> get _staticData => getStaticData != null ? getStaticData!() : [];
 
   void updateTitleName(String name) {
     title.value = name;
+  }
+
+  void select(List<MySelectorModel> items) {
+    dataChoosen = items;
   }
 }

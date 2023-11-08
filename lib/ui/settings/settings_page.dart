@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/extensions/future_extension.dart';
-import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
+import 'package:flutter_base/widgets/checkbox/checkbox_controller.dart';
+import 'package:flutter_base/widgets/checkbox/checkbox_widget.dart';
 import 'package:get/get.dart';
 
 import '../../data/pokemon/pokemon_api.dart';
 
 class SettingsPage extends StatelessWidget {
+  final checkboxController = MyCheckboxController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +33,25 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                MyDialog.dialog('AHIHI');
+                checkboxController
+                  ..enable = true
+                  ..isSelected = false
+                  ..title = 'Test checkbox done';
+
+                // print(checkboxController.isSelected);
+
+                // MyDialog.alertDialog(checkboxController.isSelected.toString());
               },
               child: const Icon(Icons.smart_button),
+            ),
+            const SizedBox(height: 16),
+            MyCheckbox(
+              value: true,
+              title: 'Test checkbox',
+              onChanged: (value) {
+                print('Hello world $value');
+              },
+              controller: checkboxController,
             )
           ],
         ),

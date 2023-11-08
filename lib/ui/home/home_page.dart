@@ -5,19 +5,15 @@ import 'package:flutter_base/widgets/drawer/scaffold_drawer_widget.dart';
 import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/dialog/dialog_widget.dart';
 import '../../widgets/search_field/search_field_widget.dart';
 import '../../widgets/selector/bottomsheet_selector/bottomsheet_selector_widget.dart';
 import '../../widgets/selector/dropdown_selector/dropdown_selector_widget.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final selectorController = SelectorController();
+class HomePage extends StatelessWidget {
+  final mySelectorController = MySelectorController();
   final textInputController = TextEditingController();
   final myTextInputController = MyTextFieldController();
 
@@ -67,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 // }
                 myTextInputController.text = 'Tran Thanh Loan';
                 myTextInputController.enable = !myTextInputController.enable;
-                selectorController.selectors = [MySelectorModel(id: 'HomeScreen', name: 'HomeScreen')];
+                mySelectorController.selectors = [MySelectorModel(id: 'HomeScreen', name: 'HomeScreen')];
               },
             ),
             const SizedBox(height: 16),
@@ -86,10 +82,10 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               onPressed: () {
                 // myTextInputController.shake(errorTexts: ['123', '456']);
-                //MyDialog.snackbar(myTextInputController.text);
+                MyDialog.snackbar('Giac mo trua', title: 'Thuy chi');
 
-                print(selectorController.first?.id);
-                print(selectorController.first?.name);
+                print(mySelectorController.first?.id);
+                print(mySelectorController.first?.name);
               },
               child: const Text('Hello world'),
             ),
@@ -103,7 +99,13 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 16),
             MyBottomsheetSelector(
-              controller: selectorController,
+              controller: mySelectorController,
+              getStaticData: () {
+                return [
+                  MySelectorModel(id: '1', name: 'Huy'),
+                  MySelectorModel(id: '2', name: 'Loan'),
+                ];
+              },
             ),
             const SizedBox(height: 50),
             const Text('I love you more than i can say'),

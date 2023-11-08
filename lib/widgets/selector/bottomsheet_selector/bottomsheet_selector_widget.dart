@@ -4,17 +4,16 @@ import 'package:flutter_base/models/selector_interface.dart';
 import 'package:flutter_base/widgets/bottom_sheet/bottom_sheet_widget.dart';
 import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../../text_field/text_field_widget.dart';
-import '../selector_state_controller.dart';
+import '../selector_state.dart';
 import 'bottomsheet_selector_content_widget.dart';
 
 class MyBottomsheetSelector extends StatefulWidget implements SelectorInterface {
   @override
   final MySelectorArguments? argument;
   @override
-  final SelectorController? controller;
+  final MySelectorController? controller;
   @override
   final List<MySelectorModel> Function()? getStaticData;
 
@@ -30,14 +29,15 @@ class MyBottomsheetSelector extends StatefulWidget implements SelectorInterface 
 }
 
 class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
-  SelectorController? get controller => widget.controller;
+  MySelectorController? get controller => widget.controller;
 
   @override
   void initState() {
     super.initState();
     controller?.addListener(() {
-      controller?.text = textValue;
-      Get.find<SelectorStateController>().updateTitleName(textValue);
+      if (controller?.text != textValue) {
+        updateTextValue();
+      }
     });
   }
 
@@ -47,14 +47,20 @@ class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
     controller?.dispose();
   }
 
+  void updateTextValue() {
+    controller?.text = textValue;
+    // Get.find<SelectorState>().select(controller?.selectors ?? []);
+  }
+
   String get textValue {
+    // TODO Update if having multiple data
     return controller?.first?.name ?? '';
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: SelectorStateController(
+      init: SelectorState(
         argument: widget.argument,
         getStaticData: widget.getStaticData,
       ),
@@ -74,7 +80,9 @@ class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
                 );
               },
             );
-            controller?.selectors = data ?? [];
+            if (data != null) {
+              controller?.selectors = data;
+            }
           },
         );
       },

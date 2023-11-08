@@ -1,4 +1,6 @@
-class MySelectorModel {
+import 'package:equatable/equatable.dart';
+
+class MySelectorModel with EquatableMixin {
   final String id;
   final String name;
   final String? description;
@@ -8,6 +10,9 @@ class MySelectorModel {
     required this.id,
     required this.name,
   });
+
+  @override
+  List<Object?> get props => [id];
 }
 
 class MySelectorArguments {

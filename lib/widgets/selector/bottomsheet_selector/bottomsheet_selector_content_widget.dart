@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/models/base_selector.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-import '../selector_state_controller.dart';
+import '../selector_state.dart';
 
 class MyBottomsheetSelectorContent {
   static Widget buildBottomSheetContent(
     BuildContext context,
     ScrollController scrollController, {
-    required SelectorStateController controller,
+    required SelectorState controller,
   }) {
     return Container(
       padding: const EdgeInsets.all(8),
@@ -19,10 +18,7 @@ class MyBottomsheetSelectorContent {
               InkWell(
                 child: const Text('Cancel'),
                 onTap: () {
-                  Navigator.pop(
-                    context,
-                    [MySelectorModel(id: 'Cancel', name: controller.title.value)],
-                  );
+                  Navigator.pop(context);
                 },
               ),
               Expanded(
@@ -35,27 +31,30 @@ class MyBottomsheetSelectorContent {
               InkWell(
                 child: const Text('Done'),
                 onTap: () {
-                  Navigator.pop(
-                    context,
-                    [MySelectorModel(id: 'Done', name: controller.title.value)],
-                  );
+                  Navigator.pop(context);
                 },
               ),
             ],
           ),
           const SizedBox(height: 16),
           Expanded(
-            child: ListView.builder(
-              controller: scrollController,
-              itemCount: 25,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  title: Text('Item $index'),
-                  onTap: () {
-                    controller.updateTitleName(index.toString());
-                  },
-                );
-              },
+            child: Obx(
+              () => ListView.builder(
+                controller: scrollController,
+                itemCount: controller.dataList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Text(controller.dataList[index].name),
+                    onTap: () {
+                      controller.select([controller.dataList[index]]);
+                      Navigator.pop(
+                        context,
+                        controller.dataChoosen.toList(),
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           )
         ],

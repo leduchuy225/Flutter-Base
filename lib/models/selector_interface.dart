@@ -3,7 +3,7 @@ import 'base_selector.dart';
 
 class SelectorInterface {
   final MySelectorArguments? argument;
-  final SelectorController? controller;
+  final MySelectorController? controller;
   final List<MySelectorModel> Function()? getStaticData;
 
   SelectorInterface({
