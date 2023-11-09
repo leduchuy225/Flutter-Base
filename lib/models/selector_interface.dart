@@ -10,8 +10,5 @@ class SelectorInterface {
     this.argument,
     this.getStaticData,
     this.controller,
-  }) : assert(
-          argument != null && getStaticData != null,
-          'Can not provide both parameters argument and getStaticData',
-        );
+  }) : assert(argument != null && getStaticData != null);
 }

@@ -9,7 +9,10 @@ class SelectorApi {
   final SelectorRetrofitApi api;
 
   Future<List<MySelectorModel>> getPokemonsList({ApiParameters? apiParameters}) {
-    print('API getPokemonsList');
-    return Future.value([]);
+    return api.getPokemonsList().call().then((value) {
+      return (value.results ?? []).map((e) {
+        return MySelectorModel(id: e['name'], name: e['name'], description: e['url']);
+      }).toList();
+    });
   }
 }

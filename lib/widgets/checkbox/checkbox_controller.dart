@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 class MyCheckboxController extends ChangeNotifier {
   String? _title;
   bool? _isEnable;
-  bool? _isSelected;
+  bool? _value;
 
   set enable(bool? value) {
     _isEnable = value;
@@ -23,12 +23,12 @@ class MyCheckboxController extends ChangeNotifier {
     return _title;
   }
 
-  set isSelected(bool? value) {
-    _isSelected = value;
+  set value(bool? value) {
+    _value = value;
     notifyListeners();
   }
 
-  bool? get isSelected {
-    return _isSelected;
+  bool? get value {
+    return _value;
   }
 }

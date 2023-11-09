@@ -8,18 +8,11 @@ class SelectorState extends GetxController {
 
   List<MySelectorModel> dataChoosen = [];
 
+  final isLoading = true.obs;
   final dataList = <MySelectorModel>[].obs;
   final title = 'BottomSheetSelectorTitlte'.obs;
 
   SelectorState({this.argument, this.getStaticData});
-
-  @override
-  void onInit() {
-    super.onInit();
-    dataList.value = _staticData;
-  }
-
-  List<MySelectorModel> get _staticData => getStaticData != null ? getStaticData!() : [];
 
   void updateTitleName(String name) {
     title.value = name;
@@ -27,5 +20,21 @@ class SelectorState extends GetxController {
 
   void select(List<MySelectorModel> items) {
     dataChoosen = items;
+  }
+
+  Future<void> updateDataList() async {
+    isLoading.value = true;
+    dataList.value = await _getData();
+    isLoading.value = false;
+  }
+
+  Future<List<MySelectorModel>> _getData() async {
+    if (argument != null) {
+      return argument!.apiSource!();
+    }
+    if (getStaticData != null) {
+      return Future.value(getStaticData!());
+    }
+    return Future.value([]);
   }
 }

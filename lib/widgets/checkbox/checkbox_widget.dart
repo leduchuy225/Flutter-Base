@@ -15,30 +15,26 @@ class MyCheckbox extends StatefulWidget {
 }
 
 class _MyCheckboxState extends State<MyCheckbox> {
-  late bool? _isSelected;
-  late MyCheckboxController controller;
+  late bool? _value;
 
-  MyCheckboxController get mainController => widget.controller ?? controller;
+  MyCheckboxController get _mainController => widget.controller ?? MyCheckboxController();
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.controller == null) {
-      controller = MyCheckboxController();
-    }
-    mainController.title ??= widget.title;
-    mainController.isSelected ??= widget.value;
+    _mainController.title ??= widget.title;
+    _mainController.value ??= widget.value;
 
-    _isSelected = mainController.isSelected;
+    _value = _mainController.value;
 
-    mainController.addListener(() {
+    _mainController.addListener(() {
       print('Listener');
-      if (_isSelected != mainController.isSelected) {
+      if (_value != _mainController.value) {
         setState(() {
-          _isSelected = mainController.isSelected;
+          _value = _mainController.value;
         });
-        widget.onChanged(_isSelected);
+        widget.onChanged(_value);
       }
     });
   }
@@ -46,17 +42,17 @@ class _MyCheckboxState extends State<MyCheckbox> {
   @override
   void dispose() {
     super.dispose();
-    mainController.dispose();
+    _mainController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      value: _isSelected,
-      enabled: mainController.enable,
-      title: Text(mainController.title ?? ''),
+      value: _value,
+      enabled: _mainController.enable,
+      title: Text(_mainController.title ?? ''),
       onChanged: (value) {
-        mainController.isSelected = value;
+        _mainController.value = value;
       },
     );
   }

@@ -35,12 +35,12 @@ class SettingsPage extends StatelessWidget {
               onPressed: () {
                 checkboxController
                   ..enable = true
-                  ..isSelected = false
+                  ..value = false
                   ..title = 'Test checkbox done';
 
-                // print(checkboxController.isSelected);
+                // print(checkboxController.value);
 
-                // MyDialog.alertDialog(checkboxController.isSelected.toString());
+                // MyDialog.alertDialog(checkboxController.value.toString());
               },
               child: const Icon(Icons.smart_button),
             ),

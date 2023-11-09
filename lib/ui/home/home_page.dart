@@ -5,6 +5,7 @@ import 'package:flutter_base/widgets/drawer/scaffold_drawer_widget.dart';
 import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:get/get.dart';
 
+import '../../data/selector/selector_api.dart';
 import '../../widgets/dialog/dialog_widget.dart';
 import '../../widgets/search_field/search_field_widget.dart';
 import '../../widgets/selector/bottomsheet_selector/bottomsheet_selector_widget.dart';
@@ -100,12 +101,15 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 16),
             MyBottomsheetSelector(
               controller: mySelectorController,
-              getStaticData: () {
-                return [
-                  MySelectorModel(id: '1', name: 'Huy'),
-                  MySelectorModel(id: '2', name: 'Loan'),
-                ];
-              },
+              argument: MySelectorArguments(
+                apiSource: Get.find<SelectorApi>().getPokemonsList,
+              ),
+              // getStaticData: () {
+              //   return [
+              //     MySelectorModel(id: '1', name: 'Huy'),
+              //     MySelectorModel(id: '2', name: 'Loan'),
+              //   ];
+              // },
             ),
             const SizedBox(height: 50),
             const Text('I love you more than i can say'),

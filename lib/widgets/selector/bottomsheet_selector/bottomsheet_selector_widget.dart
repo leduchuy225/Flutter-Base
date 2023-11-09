@@ -29,13 +29,13 @@ class MyBottomsheetSelector extends StatefulWidget implements SelectorInterface 
 }
 
 class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
-  MySelectorController? get controller => widget.controller;
+  MySelectorController get _mainController => widget.controller ?? MySelectorController();
 
   @override
   void initState() {
     super.initState();
-    controller?.addListener(() {
-      if (controller?.text != textValue) {
+    _mainController.addListener(() {
+      if (_mainController.text != textValue) {
         updateTextValue();
       }
     });
@@ -44,17 +44,16 @@ class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
   @override
   void dispose() {
     super.dispose();
-    controller?.dispose();
+    _mainController.dispose();
   }
 
   void updateTextValue() {
-    controller?.text = textValue;
-    // Get.find<SelectorState>().select(controller?.selectors ?? []);
+    _mainController.text = textValue;
   }
 
   String get textValue {
     // TODO Update if having multiple data
-    return controller?.first?.name ?? '';
+    return _mainController.first?.name ?? '';
   }
 
   @override
@@ -67,7 +66,7 @@ class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
       builder: (bottomSheetController) {
         return MyTextField(
           readOnly: true,
-          controller: controller,
+          controller: _mainController,
           labelText: 'MyBottomsheetSelector',
           onTap: () async {
             final data = await MyBottomSheet.showDraggableScrollableSheet<List<MySelectorModel>>(
@@ -76,12 +75,11 @@ class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
                 return MyBottomsheetSelectorContent.buildBottomSheetContent(
                   context,
                   scrollController,
-                  controller: bottomSheetController,
                 );
               },
             );
             if (data != null) {
-              controller?.selectors = data;
+              _mainController.selectors = data;
             }
           },
         );
