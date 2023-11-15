@@ -3,7 +3,7 @@ import 'package:retrofit/http.dart';
 
 import '../../models/base_response.dart';
 
-part './selector_retrofit_api.g.dart';
+part 'selector_retrofit_api.g.dart';
 
 @RestApi()
 abstract class SelectorRetrofitApi {

@@ -1,28 +1,16 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-part './base_response.g.dart';
+part 'base_response.freezed.dart';
+part 'base_response.g.dart';
 
-@JsonSerializable(genericArgumentFactories: true, createToJson: false)
-class BaseResponseModel<T> {
-  @JsonKey(name: 'count')
-  final int? count;
-  @JsonKey(name: 'next')
-  final String? next;
-  @JsonKey(name: 'previous')
-  final String? previous;
-  @JsonKey(name: 'results')
-  final T? results;
+@Freezed(genericArgumentFactories: true)
+class BaseResponseModel<T> with _$BaseResponseModel<T> {
+  factory BaseResponseModel({
+    @JsonKey(name: 'count') final int? count,
+    @JsonKey(name: 'next') final String? next,
+    @JsonKey(name: 'results') final T? results,
+    @JsonKey(name: 'previous') final String? previous,
+  }) = _BaseResponseModel;
 
-  BaseResponseModel({
-    this.count,
-    this.next,
-    this.previous,
-    this.results,
-  });
-
-  factory BaseResponseModel.fromJson(
-    Map<String, dynamic> json,
-    T Function(dynamic json) fromJsonT,
-  ) =>
-      _$BaseResponseModelFromJson(json, fromJsonT);
+  factory BaseResponseModel.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) => _$BaseResponseModelFromJson(json, fromJsonT);
 }
