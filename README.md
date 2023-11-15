@@ -2,4 +2,5 @@
 
 ## TODO
 
-- Save selector data in local storage
+- shimmer: Loading indicator
+- flutter_speed_dial: Floating button
