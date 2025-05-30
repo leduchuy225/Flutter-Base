@@ -10,8 +10,8 @@ class ConnectivityService extends GetxService {
   @override
   void onInit() {
     super.onInit();
-    _streamSubscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      switch (result) {
+    _streamSubscription = Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+      switch (result[0]) {
         case ConnectivityResult.none:
           MyDialog.snackbar('Lost internet connection');
           return;

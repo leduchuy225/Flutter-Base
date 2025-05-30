@@ -4,7 +4,7 @@ part 'base_response.freezed.dart';
 part 'base_response.g.dart';
 
 @Freezed(genericArgumentFactories: true)
-class BaseResponseModel<T> with _$BaseResponseModel<T> {
+abstract class BaseResponseModel<T> with _$BaseResponseModel<T> {
   factory BaseResponseModel({
     @JsonKey(name: 'count') final int? count,
     @JsonKey(name: 'next') final String? next,

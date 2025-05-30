@@ -7,9 +7,7 @@ class MyLoading extends StatelessWidget {
       return;
     }
     Get.dialog(
-      MyLoading(),
-      barrierDismissible: true,
-      barrierColor: Colors.green.shade50.withOpacity(0.5),
+      MyLoading(), barrierDismissible: true, barrierColor: Colors.green.shade50, //.withOpacity(0.5),
     );
   }
 
@@ -32,10 +30,10 @@ class MyLoading extends StatelessWidget {
           color: Colors.blue[200],
         ),
         alignment: AlignmentDirectional.center,
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             SizedBox(
               height: 50.0,
               width: 50.0,

@@ -6,48 +6,47 @@ part of 'selector_retrofit_api.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
 class _SelectorRetrofitApi implements SelectorRetrofitApi {
-  _SelectorRetrofitApi(
-    this._dio, {
-    this.baseUrl,
-  });
+  _SelectorRetrofitApi(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
   String? baseUrl;
 
+  final ParseErrorLogger? errorLogger;
+
   @override
   Future<BaseResponseModel<List<dynamic>>> getPokemonsList() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponseModel<List<dynamic>>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/pokemon/',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = BaseResponseModel<List<dynamic>>.fromJson(
-      _result.data!,
-      (json) => json is List<dynamic>
-          ? json.map<dynamic>((i) => i as Map<String, dynamic>).toList()
-          : List.empty(),
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<BaseResponseModel<List<dynamic>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/pokemon/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    return value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponseModel<List<dynamic>> _value;
+    try {
+      _value = BaseResponseModel<List<dynamic>>.fromJson(
+        _result.data!,
+        (json) => json is List<dynamic>
+            ? json.map<dynamic>((i) => i as Map<String, dynamic>).toList()
+            : List.empty(),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
@@ -63,10 +62,7 @@ class _SelectorRetrofitApi implements SelectorRetrofitApi {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

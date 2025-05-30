@@ -21,7 +21,7 @@ class AppTheme {
       ),
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.blue,
-        onBackground: Colors.white,
+        // onBackground: Colors.white,
       ),
     );
   }
