@@ -23,17 +23,11 @@ class HttpService {
   }
 
   BaseOptions get baseOptions {
-    return BaseOptions(
-      baseUrl: 'https://pokeapi.co/api/v2',
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 3),
-    );
+    return BaseOptions(baseUrl: 'https://pokeapi.co/api/v2', connectTimeout: const Duration(seconds: 5), receiveTimeout: const Duration(seconds: 3));
   }
 
   void configureDio() {
     _dio.options = baseOptions;
-    _dio.interceptors.addAll(
-      [PrettyDioLogger(), MyInterceptor()],
-    );
+    _dio.interceptors.addAll([PrettyDioLogger(), MyInterceptor()]);
   }
 }

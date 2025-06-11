@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/extensions/future_extension.dart';
+import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/widgets/checkbox/checkbox_controller.dart';
 import 'package:flutter_base/widgets/checkbox/checkbox_widget.dart';
 import 'package:get/get.dart';
@@ -13,9 +13,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.red[50],
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+      appBar: AppBar(title: const Text('Settings')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -24,9 +22,7 @@ class SettingsPage extends StatelessWidget {
             InkWell(
               child: const Text('Settings Screen'),
               onTap: () async {
-                await Get.find<PokemonApi>().getButterFreePokemon(
-                  apiParameters: ApiParameters(iShowError: true),
-                );
+                await Get.find<PokemonApi>().getButterFreePokemon(apiParameters: ApiParameters(iShowError: true));
                 // print(data);
               },
             ),
@@ -52,7 +48,7 @@ class SettingsPage extends StatelessWidget {
                 print('Hello world $value');
               },
               controller: checkboxController,
-            )
+            ),
           ],
         ),
       ),

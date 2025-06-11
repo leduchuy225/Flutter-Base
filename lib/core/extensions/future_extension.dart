@@ -1,6 +1,6 @@
 import 'package:flutter_base/models/base_response.dart';
 
-import '../core/error_handler.dart';
+import '../error_handler.dart';
 
 class ApiParameters {
   final bool iShowError;

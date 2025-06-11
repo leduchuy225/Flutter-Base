@@ -13,8 +13,6 @@ extension SnackbarTypeExtension on SnackbarType {
         return [Colors.yellow, Colors.white];
       case SnackbarType.SUCCESS:
         return [Colors.green, Colors.white];
-      default:
-        return [Colors.blue, Colors.white];
     }
   }
 }

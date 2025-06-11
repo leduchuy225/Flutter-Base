@@ -1,5 +1,5 @@
+import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/pokemon/pokemon_retrofit_api.dart';
-import 'package:flutter_base/extensions/future_extension.dart';
 
 import '../../models/base_response.dart';
 

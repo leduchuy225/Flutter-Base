@@ -1,6 +1,6 @@
 import 'package:flutter_base/models/base_selector.dart';
 
-import '../../extensions/future_extension.dart';
+import '../../core/extensions/future_extension.dart';
 import '../selector/selector_retrofit_api.dart';
 
 class SelectorApi {
