@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 
 import '../ui/empty/empty_page.dart';
 import '../ui/home/home_page.dart';
-import '../ui/main/main_page.dart';
+// import '../ui/main/main_page.dart';
+import '../ui/login/login_screen.dart';
 import '../ui/settings/settings_page.dart';
 
 class MainRouter {
@@ -17,16 +18,14 @@ class MainRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case MAIN:
-        return GetPageRoute(page: () => MainPage());
+        return GetPageRoute(page: () => const LoginPage());
+      // return GetPageRoute(page: () => MainPage());
       case HOME:
         return GetPageRoute(page: () => HomePage());
       case SETTINGS:
         return GetPageRoute(page: () => SettingsPage());
       case COUNTER:
-        return GetPageRoute(
-          page: () => const CounterPage(),
-          binding: BindingsBuilder.put(() => CounterPageState()),
-        );
+        return GetPageRoute(page: () => const CounterPage(), binding: BindingsBuilder.put(() => CounterPageState()));
       default:
         return GetPageRoute(page: () => const EmptyPage());
     }

@@ -30,8 +30,8 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: mainTheme,
       initialRoute: '/',
-      theme: AppTheme.themeData,
       initialBinding: AppBinding(),
       // darkTheme: AppTheme.themeData.copyWith(
       //   brightness: Brightness.dark,

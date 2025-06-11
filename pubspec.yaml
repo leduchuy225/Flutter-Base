@@ -45,6 +45,7 @@ dependencies:
   infinite_scroll_pagination: ^5.0.0
   json_annotation: ^4.9.0
   logger: ^2.4.0
+  flutter_svg: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,18 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/vectors/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Black.ttf
+        - asset: fonts/Roboto-BlackItalic.ttf
+        - asset: fonts/Roboto-Bold.ttf
+        - asset: fonts/Roboto-BoldItalic.ttf
+        - asset: fonts/Roboto-Italic.ttf
+        - asset: fonts/Roboto-Light.ttf
+        - asset: fonts/Roboto-LightItalic.ttf
+        - asset: fonts/Roboto-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,8 +1,8 @@
 {
-  "dart.lineLength": 200,
+  // "dart.lineLength": 200,
   "files.exclude": {
     "**/*.g.dart": true,
-    "**/*.freezed.dart": true,
+    "**/*.freezed.dart": true
   },
   "dart.flutterSdkPath": "${HOME}/fvm/versions/3.32.0"
 }
