@@ -23,7 +23,7 @@ class AuthenticationScaffold extends StatelessWidget {
             children: [
               Text('MobiFiber', style: AppTextStyles.h1),
               AppStyles.pdt6,
-              Text('Đăng nhập', style: AppTextStyles.h3),
+              Text(title, style: AppTextStyles.h3),
             ],
           ),
           Padding(padding: const EdgeInsets.all(20), child: child),

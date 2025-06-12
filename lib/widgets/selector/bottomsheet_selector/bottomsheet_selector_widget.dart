@@ -43,11 +43,11 @@ class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
     });
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _mainController.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _mainController.dispose();
+  // }
 
   void updateTextValue() {
     _mainController.text = textValue;

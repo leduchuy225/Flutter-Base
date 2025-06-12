@@ -3,10 +3,12 @@ import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/button/button_controller.dart';
 import 'package:flutter_base/widgets/button/button_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../theme/icon.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
+import 'update_password_screen.dart';
 import 'widgets/authentication_scaffold.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _obscurePasswordNotifier = ValueNotifier(true);
 
   final _useNameController = MyTextFieldController();
-  final _passWordController = MyTextFieldController();
+  final _passwordController = MyTextFieldController();
 
   final _loginButtonController = MyButtonController();
 
@@ -35,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
           AppStyles.pdt20,
           MyTextField(
             labelText: 'Tên đăng nhập',
-            hintText: 'Nhập số điện thoại',
+            // hintText: 'Nhập số điện thoại',
             controller: _useNameController,
             onChanged: (text) {
               // _useNameController.errorTexts = [text];
@@ -49,8 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
               return MyTextField(
                 obscureText: value,
                 labelText: 'Mật khẩu',
-                hintText: 'Nhập mật khẩu',
-                controller: _passWordController,
+                // hintText: 'Nhập mật khẩu',
+                controller: _passwordController,
                 suffixIcon: IconButton(
                   onPressed: () {
                     _obscurePasswordNotifier.value = !value;
@@ -69,8 +71,10 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                onPressed: () {},
                 child: Text('Quên mật khẩu', style: AppTextStyles.body1),
+                onPressed: () {
+                  Get.to(() => const UpdatePasswordScreen());
+                },
               ),
             ],
           ),

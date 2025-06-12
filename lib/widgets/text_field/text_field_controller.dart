@@ -6,7 +6,7 @@ class MyTextFieldController extends TextEditingController {
 
   late void Function({List<String> errorTexts}) shake;
 
-  MyTextFieldController({isEnable}) {
+  MyTextFieldController({bool? isEnable}) {
     _isEnable = isEnable;
   }
 
