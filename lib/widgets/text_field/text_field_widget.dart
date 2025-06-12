@@ -98,6 +98,9 @@ class _MyTextFieldState extends State<MyTextField> {
   }
 }
 
-String getErrorText(List<String>? errorTexts) {
-  return (errorTexts ?? []).reduce((value, element) => '$value\n$element');
+String? getErrorText(List<String>? errorTexts) {
+  if (errorTexts == null) {
+    return null;
+  }
+  return errorTexts.reduce((value, element) => '$value\n$element');
 }

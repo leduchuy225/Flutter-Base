@@ -1,7 +1,15 @@
 class CacheService {
-  CacheService() : _cache = <String, Object>{};
+  static final CacheService _singleton = CacheService._internal();
 
-  final Map<String, Object> _cache;
+  factory CacheService() {
+    return _singleton;
+  }
+
+  CacheService._internal();
+
+  // CacheService() : _cache = <String, Object>{};
+
+  final Map<String, Object> _cache = {};
 
   /// Writes the provide [key], [value] pair to the in-memory cache.
   void write<T extends Object>({required String key, required T value}) {
@@ -19,6 +27,6 @@ class CacheService {
   }
 }
 
-class CacheServiceKey {
-  static String ACCESS_TOKEN = 'accessToken';
-}
+// class CacheServiceKey {
+//   static String ACCESS_TOKEN = 'accessToken';
+// }

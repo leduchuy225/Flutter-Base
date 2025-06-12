@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/authentication/widgets/authentication_scaffold.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/text_field/text_field_widget.dart';
 
@@ -34,6 +35,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
     return AuthenticationScaffold(
       title: 'Đổi mật khẩu',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppStyles.pdt20,
           ValueListenableBuilder(
@@ -85,6 +87,13 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 ),
               );
             },
+          ),
+          AppStyles.pdt30,
+          ElevatedButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('Lưu thay đổi'),
           ),
         ],
       ),

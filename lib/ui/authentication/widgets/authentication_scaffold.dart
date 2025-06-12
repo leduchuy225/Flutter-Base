@@ -16,6 +16,8 @@ class AuthenticationScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: ListView(
         padding: EdgeInsets.zero,
         children: [

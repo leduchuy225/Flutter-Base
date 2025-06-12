@@ -119,8 +119,8 @@ class AppTheme {
         ),
       ),
     ),
-    filledButtonTheme: FilledButtonThemeData(
-      style: FilledButton.styleFrom(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: AppColors.primary,
         disabledBackgroundColor: Colors.grey.shade300,
@@ -128,9 +128,20 @@ class AppTheme {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        // textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
       ),
     ),
+    // filledButtonTheme: FilledButtonThemeData(
+    //   style: FilledButton.styleFrom(
+    //     foregroundColor: Colors.black,
+    //     backgroundColor: AppColors.primary,
+    //     disabledBackgroundColor: Colors.grey.shade300,
+    //     minimumSize: const Size(double.infinity, 52),
+    //     shape: const RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.all(Radius.circular(12)),
+    //     ),
+    //     // textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+    //   ),
+    // ),
   );
 
   // static const TextStyle titleLarge = TextStyle(

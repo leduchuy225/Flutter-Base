@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/ui/authentication/otp_screen.dart';
 import 'package:flutter_base/widgets/button/button_controller.dart';
 import 'package:flutter_base/widgets/button/button_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../core/services/shared_preference_service.dart';
 import '../../theme/icon.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
@@ -25,6 +28,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = MyTextFieldController();
 
   final _loginButtonController = MyButtonController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((data) async {
+      _useNameController.text = await SharedPreference.getStringValuesSF(
+        SharedPreference.username,
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +96,21 @@ class _LoginScreenState extends State<LoginScreen> {
           MyButton(
             controller: _loginButtonController,
             buttonChild: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final cache1 = CacheService();
+                final cache2 = CacheService();
+
+                cache1.write(key: '1', value: '1');
+
+                print(cache2.read(key: '1'));
+
+                await SharedPreference.addStringToSF(
+                  SharedPreference.username,
+                  _useNameController.text,
+                );
+
+                Get.to(() => const OtpScreen());
+              },
               child: const Text('Đăng nhập'),
             ),
           ),
@@ -102,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
             onPressed: () {
               _loginButtonController.enable = true;
             },
-            icon: SvgPicture.asset(MyIcons.google, width: 14),
+            icon: SvgPicture.asset(MyIcons.google),
             label: const Text('Google'),
           ),
         ],
