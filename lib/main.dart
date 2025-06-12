@@ -30,7 +30,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: mainTheme,
+      theme: AppTheme.themeData,
       initialRoute: '/',
       initialBinding: AppBinding(),
       // darkTheme: AppTheme.themeData.copyWith(
@@ -47,7 +47,7 @@ class _MainAppState extends State<MainApp> {
       defaultTransition: Transition.cupertino,
       onGenerateRoute: MainRouter.generateRoute,
       builder: (context, child) {
-        return SafeArea(child: child!);
+        return SafeArea(child: child!, top: false);
       },
     );
   }

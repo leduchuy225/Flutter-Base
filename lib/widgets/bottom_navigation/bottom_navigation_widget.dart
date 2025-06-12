@@ -28,10 +28,7 @@ class MyBottomNavigation extends StatelessWidget {
       tabBar: CupertinoTabBar(
         height: kBottomNavigationBarHeight,
         items: pages.map((e) {
-          return BottomNavigationBarItem(
-            icon: e.icon,
-            label: e.label,
-          );
+          return BottomNavigationBarItem(icon: e.icon, label: e.label);
         }).toList(),
       ),
     );

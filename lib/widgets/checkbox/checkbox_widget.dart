@@ -8,7 +8,13 @@ class MyCheckbox extends StatefulWidget {
   final void Function(bool?) onChanged;
   final MyCheckboxController? controller;
 
-  const MyCheckbox({Key? key, this.value, required this.onChanged, this.title, this.controller}) : super(key: key);
+  const MyCheckbox({
+    Key? key,
+    this.value,
+    required this.onChanged,
+    this.title,
+    this.controller,
+  }) : super(key: key);
 
   @override
   State<MyCheckbox> createState() => _MyCheckboxState();
@@ -16,8 +22,9 @@ class MyCheckbox extends StatefulWidget {
 
 class _MyCheckboxState extends State<MyCheckbox> {
   late bool? _value;
+  final _controller = MyCheckboxController();
 
-  MyCheckboxController get _mainController => widget.controller ?? MyCheckboxController();
+  MyCheckboxController get _mainController => widget.controller ?? _controller;
 
   @override
   void initState() {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/base_selector.dart';
-import 'package:flutter_base/routers/main_router.dart';
 import 'package:flutter_base/widgets/drawer/scaffold_drawer_widget.dart';
 import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:get/get.dart';
@@ -13,7 +12,7 @@ import '../../widgets/selector/dropdown_selector/dropdown_selector_widget.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   final mySelectorController = MySelectorController();
   final textInputController = TextEditingController();
   final myTextInputController = MyTextFieldController();
@@ -30,14 +29,16 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.shopping_cart),
             tooltip: 'Open shopping cart',
             onPressed: () {
-              Get.toNamed(MainRouter.COUNTER);
+              // Get.toNamed(MainRouter.COUNTER);
             },
           ),
           IconButton(
             icon: const Icon(Icons.theater_comedy),
             tooltip: 'Change theme',
             onPressed: () {
-              Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
+              Get.changeTheme(
+                Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
+              );
             },
           ),
           IconButton(
@@ -64,7 +65,9 @@ class HomePage extends StatelessWidget {
                 // }
                 myTextInputController.text = 'Tran Thanh Loan';
                 myTextInputController.enable = !myTextInputController.enable;
-                mySelectorController.selectors = [MySelectorModel(id: 'HomeScreen', name: 'HomeScreen')];
+                mySelectorController.selectors = [
+                  MySelectorModel(id: 'HomeScreen', name: 'HomeScreen'),
+                ];
               },
             ),
             const SizedBox(height: 16),

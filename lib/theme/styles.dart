@@ -114,6 +114,17 @@ class AppColors {
   static const Color textFieldBackground = Color(0x1E000000);
   static const Color hintColor = Color(0x99000000);
   static const Color statusBarColor = Color(0x1e000000);
+
+  static const Color textGrey1 = Color(0xFF9E9E9E);
+  static const Color textGrey2 = Color(0xFF6D6D6D);
+  static const Color textGrey3 = Color(0xFF454545);
+  static const Color textGreyDark = Color(0xFF050505);
+  static const Color textGreyDark2 = Color(0xFF272727);
+
+  static const List<Color> defaultGradient = [
+    AppColors.primary,
+    AppColors.error,
+  ];
 }
 
 class AppStyles {

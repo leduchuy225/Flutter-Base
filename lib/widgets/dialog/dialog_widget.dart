@@ -7,11 +7,24 @@ enum SnackbarType { ERROR, SUCCESS, WARNING, INFORMATION }
 class MyDialog {
   MyDialog._();
 
-  static void snackbar(String? message, {Widget? icon, String title = 'Notification', SnackbarType type = SnackbarType.INFORMATION}) {
+  static void snackbar(
+    String? message, {
+    Widget? icon,
+    String title = 'Notification',
+    SnackbarType type = SnackbarType.INFORMATION,
+  }) {
     if ((message ?? '').isEmpty) {
       return;
     }
-    Get.showSnackbar(GetSnackBar(icon: icon, title: title, message: message, backgroundColor: type.colors[0], duration: const Duration(seconds: 3)));
+    Get.showSnackbar(
+      GetSnackBar(
+        icon: icon,
+        title: title,
+        message: message,
+        backgroundColor: type.colors[0],
+        duration: const Duration(seconds: 3),
+      ),
+    );
   }
 
   static void alertDialog(String message) {

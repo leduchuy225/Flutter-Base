@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/ui/home/home_page.dart';
-import 'package:flutter_base/ui/settings/settings_page.dart';
+import 'package:flutter_base/ui/home/home_screen.dart';
+import 'package:flutter_base/ui/settings/settings_screen.dart';
 import 'package:flutter_base/widgets/bottom_navigation/bottom_navigation_widget.dart';
 
 import '../../widgets/bottom_navigation/bottom_navigation_tab.dart';
 
-class MainPage extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainPageState extends State<MainPage> {
-  List<GlobalKey<NavigatorState>> tabKeys = [GlobalKey<NavigatorState>(), GlobalKey<NavigatorState>()];
+class _MainScreenState extends State<MainScreen> {
+  List<GlobalKey<NavigatorState>> tabKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +23,13 @@ class _MainPageState extends State<MainPage> {
         BottomNavigationTab(
           label: 'Home',
           key: tabKeys[0],
-          page: HomePage(),
+          page: HomeScreen(),
           icon: const Icon(Icons.home),
         ),
         BottomNavigationTab(
           label: 'Setting',
           key: tabKeys[1],
-          page: SettingsPage(),
+          page: SettingsScreen(),
           icon: const Icon(Icons.settings),
         ),
       ],

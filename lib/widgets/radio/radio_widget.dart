@@ -24,8 +24,9 @@ class MyRadio<T> extends StatefulWidget {
 
 class _MyRadioState<T> extends State<MyRadio> {
   String? _title;
+  final _controller = MyRadioController();
 
-  MyRadioController get _mainController => widget.controller ?? MyRadioController();
+  MyRadioController get _mainController => widget.controller ?? _controller;
 
   @override
   void initState() {

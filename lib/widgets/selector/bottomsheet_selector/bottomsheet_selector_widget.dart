@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/models/selector_interface.dart';
-import 'package:flutter_base/widgets/bottom_sheet/bottom_sheet_widget.dart';
+import 'package:flutter_base/widgets/dialog/bottom_sheet_widget.dart';
 import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +9,8 @@ import '../../text_field/text_field_widget.dart';
 import '../selector_state.dart';
 import 'bottomsheet_selector_content_widget.dart';
 
-class MyBottomsheetSelector extends StatefulWidget implements SelectorInterface {
+class MyBottomsheetSelector extends StatefulWidget
+    implements SelectorInterface {
   @override
   final MySelectorArguments? argument;
   @override
@@ -29,7 +30,8 @@ class MyBottomsheetSelector extends StatefulWidget implements SelectorInterface 
 }
 
 class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
-  MySelectorController get _mainController => widget.controller ?? MySelectorController();
+  MySelectorController get _mainController =>
+      widget.controller ?? MySelectorController();
 
   @override
   void initState() {
@@ -69,15 +71,18 @@ class _MyBottomsheetSelectorState extends State<MyBottomsheetSelector> {
           controller: _mainController,
           labelText: 'MyBottomsheetSelector',
           onTap: () async {
-            final data = await MyBottomSheet.showDraggableScrollableSheet<List<MySelectorModel>>(
-              context,
-              builder: (context, scrollController) {
-                return MyBottomsheetSelectorContent.buildBottomSheetContent(
+            final data =
+                await MyBottomSheet.showDraggableScrollableSheet<
+                  List<MySelectorModel>
+                >(
                   context,
-                  scrollController,
+                  builder: (context, scrollController) {
+                    return MyBottomsheetSelectorContent.buildBottomSheetContent(
+                      context,
+                      scrollController,
+                    );
+                  },
                 );
-              },
-            );
             if (data != null) {
               _mainController.selectors = data;
             }

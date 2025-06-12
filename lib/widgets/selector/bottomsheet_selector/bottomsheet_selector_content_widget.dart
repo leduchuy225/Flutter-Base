@@ -8,9 +8,7 @@ class MyBottomsheetSelectorContent {
     BuildContext context,
     ScrollController scrollController,
   ) {
-    return _MyBottomsheetSelectorContent(
-      scrollController: scrollController,
-    );
+    return _MyBottomsheetSelectorContent(scrollController: scrollController);
   }
 }
 
@@ -20,10 +18,12 @@ class _MyBottomsheetSelectorContent extends StatefulWidget {
   const _MyBottomsheetSelectorContent({required this.scrollController});
 
   @override
-  State<_MyBottomsheetSelectorContent> createState() => _MyBottomsheetSelectorContentState();
+  State<_MyBottomsheetSelectorContent> createState() =>
+      _MyBottomsheetSelectorContentState();
 }
 
-class _MyBottomsheetSelectorContentState extends State<_MyBottomsheetSelectorContent> {
+class _MyBottomsheetSelectorContentState
+    extends State<_MyBottomsheetSelectorContent> {
   @override
   void initState() {
     super.initState();
@@ -49,11 +49,7 @@ class _MyBottomsheetSelectorContentState extends State<_MyBottomsheetSelectorCon
                 },
               ),
               Expanded(
-                child: Center(
-                  child: Obx(
-                    () => Text(controller.title.value),
-                  ),
-                ),
+                child: Center(child: Obx(() => Text(controller.title.value))),
               ),
               InkWell(
                 child: const Text('Done'),
@@ -65,39 +61,32 @@ class _MyBottomsheetSelectorContentState extends State<_MyBottomsheetSelectorCon
           ),
           const SizedBox(height: 16),
           Expanded(
-            child: Obx(
-              () {
-                if (controller.isLoading.isTrue) {
-                  return const SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-
-                return ListView.builder(
-                  controller: widget.scrollController,
-                  itemCount: controller.dataList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final item = controller.dataList[index];
-                    return ListTile(
-                      title: Text(item.name),
-                      subtitle: Text(item.description ?? ''),
-                      onTap: () {
-                        controller.select([item]);
-                        Navigator.pop(
-                          context,
-                          controller.dataChoosen.toList(),
-                        );
-                      },
-                    );
-                  },
+            child: Obx(() {
+              if (controller.isLoading.isTrue) {
+                return const SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: Center(child: CircularProgressIndicator()),
                 );
-              },
-            ),
-          )
+              }
+
+              return ListView.builder(
+                controller: widget.scrollController,
+                itemCount: controller.dataList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final item = controller.dataList[index];
+                  return ListTile(
+                    title: Text(item.name),
+                    subtitle: Text(item.description ?? ''),
+                    onTap: () {
+                      controller.select([item]);
+                      Navigator.pop(context, controller.dataChoosen.toList());
+                    },
+                  );
+                },
+              );
+            }),
+          ),
         ],
       ),
     );

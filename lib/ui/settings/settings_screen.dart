@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../data/pokemon/pokemon_api.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsScreen extends StatelessWidget {
   final checkboxController = MyCheckboxController();
 
   @override
@@ -22,7 +22,9 @@ class SettingsPage extends StatelessWidget {
             InkWell(
               child: const Text('Settings Screen'),
               onTap: () async {
-                await Get.find<PokemonApi>().getButterFreePokemon(apiParameters: ApiParameters(iShowError: true));
+                await Get.find<PokemonApi>().getButterFreePokemon(
+                  apiParameters: ApiParameters(iShowError: true),
+                );
                 // print(data);
               },
             ),

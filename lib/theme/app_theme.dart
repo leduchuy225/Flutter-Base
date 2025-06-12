@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 import '../widgets/dialog/dialog_widget.dart';
 import 'styles.dart';
 
-ThemeData mainTheme = ThemeData(
-  fontFamily: AppFonts.roboto,
-  brightness: Brightness.light,
-  primarySwatch: Colors.blue,
-  // colorSchemeSeed: Colors.white,
-  scaffoldBackgroundColor: Colors.white,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
-  appBarTheme: const AppBarTheme(
-    backgroundColor: Colors.white,
-    foregroundColor: Colors.black,
-  ),
-  // textTheme: TextTheme(
-  //   titleLarge: AppTextStyles.title1,
-  //   titleMedium: AppTextStyles.title2,
-  //   bodyLarge: AppTextStyles.body1,
-  //   bodyMedium: AppTextStyles.body2,
-  //   bodySmall: AppTextStyles.body3,
-  // ),
-);
+// ThemeData mainTheme = ThemeData(
+//   fontFamily: AppFonts.roboto,
+//   brightness: Brightness.light,
+//   primarySwatch: Colors.blue,
+//   // colorSchemeSeed: Colors.white,
+//   scaffoldBackgroundColor: Colors.white,
+//   visualDensity: VisualDensity.adaptivePlatformDensity,
+//   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
+//   appBarTheme: const AppBarTheme(
+//     backgroundColor: Colors.white,
+//     foregroundColor: Colors.black,
+//   ),
+//   // textTheme: TextTheme(
+//   //   titleLarge: AppTextStyles.title1,
+//   //   titleMedium: AppTextStyles.title2,
+//   //   bodyLarge: AppTextStyles.body1,
+//   //   bodyMedium: AppTextStyles.body2,
+//   //   bodySmall: AppTextStyles.body3,
+//   // ),
+// );
 
 // TextTheme textTheme = TextTheme(
 //   displayLarge: TextStyle(height: 1.2, color: AppColors.black, fontSize: Get.width <= 667 ? 17 : 18, fontWeight: FontWeight.w700),
@@ -52,4 +52,96 @@ extension SnackbarTypeExtension on SnackbarType {
         return [Colors.green, Colors.white];
     }
   }
+}
+
+// import 'package:flutter/material.dart';
+
+// import 'app_colors.dart';
+
+class AppTheme {
+  AppTheme._();
+
+  static const textFormFieldBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(12)),
+    borderSide: BorderSide(color: AppColors.textGrey1, width: 1),
+  );
+
+  static final ThemeData themeData = ThemeData(
+    useMaterial3: true,
+    colorSchemeSeed: AppColors.primary,
+    scaffoldBackgroundColor: Colors.white,
+    // textTheme: const TextTheme(
+    //   titleLarge: TextStyle(
+    //     fontWeight: FontWeight.bold,
+    //     color: Colors.white,
+    //     fontSize: 34,
+    //     letterSpacing: 0.5,
+    //   ),
+    //   bodySmall: TextStyle(
+    //     color: Colors.grey,
+    //     fontSize: 14,
+    //     letterSpacing: 0.5,
+    //   ),
+    // ),
+    inputDecorationTheme: const InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.transparent,
+      // errorStyle: TextStyle(fontSize: 12),
+      contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+      border: textFormFieldBorder,
+      errorBorder: textFormFieldBorder,
+      focusedBorder: textFormFieldBorder,
+      focusedErrorBorder: textFormFieldBorder,
+      enabledBorder: textFormFieldBorder,
+      // labelStyle: TextStyle(
+      //   fontSize: 17,
+      //   color: Colors.grey,
+      //   fontWeight: FontWeight.w500,
+      // ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.primary,
+        padding: const EdgeInsets.all(4),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        // textStyle: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.primary,
+        minimumSize: const Size(double.infinity, 50),
+        side: BorderSide(color: Colors.grey.shade200),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+      ),
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        foregroundColor: Colors.black,
+        backgroundColor: AppColors.primary,
+        disabledBackgroundColor: Colors.grey.shade300,
+        minimumSize: const Size(double.infinity, 52),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+        // textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+      ),
+    ),
+  );
+
+  // static const TextStyle titleLarge = TextStyle(
+  //   fontWeight: FontWeight.bold,
+  //   color: Colors.white,
+  //   fontSize: 34,
+  //   letterSpacing: 0.5,
+  // );
+
+  // static const TextStyle bodySmall = TextStyle(
+  //   color: Colors.grey,
+  //   letterSpacing: 0.5,
+  // );
 }

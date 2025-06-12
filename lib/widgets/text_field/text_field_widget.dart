@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 
+import '../../theme/styles.dart';
 import '../animate/animate_controller.dart';
 import '../animate/animate_widget.dart';
 
@@ -9,18 +10,26 @@ class MyTextField extends StatefulWidget {
   final bool? enable;
   final bool readOnly;
   final bool isRequired;
+  final String? hintText;
   final String? labelText;
+  final bool obscureText;
+  final Widget? suffixIcon;
   final void Function()? onTap;
   final MyTextFieldController? controller;
+  final void Function(String)? onChanged;
 
   const MyTextField({
     super.key,
     this.onTap,
     this.enable,
+    this.hintText,
     this.labelText,
     this.controller,
+    this.suffixIcon,
     this.readOnly = false,
     this.isRequired = false,
+    this.obscureText = false,
+    this.onChanged,
   });
 
   @override
@@ -35,6 +44,7 @@ class _MyTextFieldState extends State<MyTextField> {
 
   MyTextFieldController? get controller => widget.controller;
 
+  List<String>? get errorTexts => controller?.errorTexts;
   bool? get enable => controller?.enable ?? widget.enable;
 
   void shake({List<String>? errorTexts}) {
@@ -52,6 +62,7 @@ class _MyTextFieldState extends State<MyTextField> {
     controller?.addListener(() {
       setState(() {
         _isEnableState = enable;
+        _errorTextState = getErrorText(errorTexts);
       });
     });
   }
@@ -72,9 +83,15 @@ class _MyTextFieldState extends State<MyTextField> {
         controller: controller,
         enabled: _isEnableState,
         readOnly: widget.readOnly,
+        onChanged: widget.onChanged,
+        obscureText: widget.obscureText,
         decoration: InputDecoration(
+          hintText: widget.hintText,
           errorText: _errorTextState,
+          suffixIcon: widget.suffixIcon,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
           labelText: '${widget.labelText} ${widget.isRequired ? ' *' : ''}',
+          hintStyle: AppTextStyles.caption.copyWith(color: AppColors.textGrey2),
         ),
       ),
     );

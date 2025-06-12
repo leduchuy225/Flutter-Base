@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/context_extension.dart';
 
+import '../theme/styles.dart';
+
 class GradientBackground extends StatelessWidget {
-  const GradientBackground({required this.children, this.colors = Colors.accents, super.key});
+  const GradientBackground({
+    required this.children,
+    this.colors = AppColors.defaultGradient,
+    super.key,
+  });
 
   final List<Color> colors;
   final List<Widget> children;

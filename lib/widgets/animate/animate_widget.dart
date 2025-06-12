@@ -8,13 +8,19 @@ class MyAnimateWidget extends StatefulWidget {
   final MyAnimateController controller;
   final List<Effect<dynamic>>? effects;
 
-  const MyAnimateWidget({super.key, required this.child, this.effects, required this.controller});
+  const MyAnimateWidget({
+    super.key,
+    required this.child,
+    this.effects,
+    required this.controller,
+  });
 
   @override
   State<MyAnimateWidget> createState() => _MyAnimateWidgetState();
 }
 
-class _MyAnimateWidgetState extends State<MyAnimateWidget> with SingleTickerProviderStateMixin {
+class _MyAnimateWidgetState extends State<MyAnimateWidget>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _myAnimateController;
 
   void animate() {
