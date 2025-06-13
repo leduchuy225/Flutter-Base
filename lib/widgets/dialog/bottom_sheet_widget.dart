@@ -8,6 +8,7 @@ class MyBottomSheet {
     return showModalBottomSheet(
       context: context,
       isDismissible: true,
+      useRootNavigator: true,
       isScrollControlled: true,
       // backgroundColor: Colors.transparent,
       builder: (context) {

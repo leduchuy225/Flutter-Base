@@ -40,6 +40,10 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.buttonChild is! ElevatedButton &&
+        widget.buttonChild is! OutlinedButton) {
+      return const SizedBox.shrink();
+    }
     if (_isEnable == false) {
       return ElevatedButton(
         onPressed: null,

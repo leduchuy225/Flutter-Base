@@ -70,6 +70,10 @@ class AppTheme {
     useMaterial3: true,
     colorSchemeSeed: AppColors.primary,
     scaffoldBackgroundColor: Colors.white,
+    // dialogTheme: const DialogThemeData(
+    //   titleTextStyle: TextStyle(color: Colors.amber),
+    //   contentTextStyle: TextStyle(color: Colors.amber),
+    // ),
     // textTheme: const TextTheme(
     //   titleLarge: TextStyle(
     //     fontWeight: FontWeight.bold,

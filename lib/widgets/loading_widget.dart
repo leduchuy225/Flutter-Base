@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/theme/styles.dart';
 import 'package:get/get.dart';
 
 class MyLoading extends StatelessWidget {
@@ -9,7 +10,7 @@ class MyLoading extends StatelessWidget {
     Get.dialog(
       MyLoading(),
       barrierDismissible: true,
-      barrierColor: Colors.green.shade50, //.withOpacity(0.5),
+      barrierColor: Colors.black54, //.withOpacity(0.5),
     );
   }
 
@@ -22,30 +23,58 @@ class MyLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: Container(
-        width: 100.0,
-        height: 100.0,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.blue[200],
-        ),
-        alignment: AlignmentDirectional.center,
-        child: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Stack(
           children: [
-            SizedBox(
-              height: 50.0,
-              width: 50.0,
-              child: CircularProgressIndicator(),
+            Center(
+              child: Container(
+                margin: const EdgeInsets.only(top: 30),
+                constraints: const BoxConstraints(
+                  minWidth: 200.0,
+                  maxWidth: 280.0,
+                ),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  color: Colors.white,
+                ),
+                padding: const EdgeInsets.fromLTRB(10, 50, 10, 20),
+                child: Column(
+                  children: [
+                    Text(
+                      'Đang xử lý yêu cầu...',
+                      textAlign: TextAlign.center,
+                      style: AppTextStyles.title2.copyWith(
+                        color: AppColors.initial,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            SizedBox(height: 16),
-            Text('Loading.. Wait...'),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                width: 60,
+                height: 60,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  border: Border.all(width: 5, color: Colors.white),
+                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                ),
+                child: const SizedBox(
+                  width: 50.0,
+                  height: 50.0,
+                  child: CircularProgressIndicator(color: AppColors.white),
+                ),
+              ),
+            ),
           ],
         ),
-      ),
+      ],
     );
   }
 }

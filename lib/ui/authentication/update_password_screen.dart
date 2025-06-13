@@ -5,6 +5,7 @@ import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/text_field/text_field_widget.dart';
+import '../settings/settings_screen.dart';
 
 class UpdatePasswordScreen extends StatefulWidget {
   const UpdatePasswordScreen({super.key});
@@ -91,7 +92,9 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
           AppStyles.pdt30,
           ElevatedButton(
             onPressed: () {
-              Get.back();
+              Get.to(() => SettingsScreen());
+
+              // Get.back();
             },
             child: const Text('Lưu thay đổi'),
           ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/ui/authentication/otp_screen.dart';
 import 'package:flutter_base/widgets/button/button_controller.dart';
 import 'package:flutter_base/widgets/button/button_widget.dart';
+import 'package:flutter_base/widgets/dialog/bottom_sheet_widget.dart';
+import 'package:flutter_base/widgets/loading_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -109,7 +110,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   _useNameController.text,
                 );
 
-                Get.to(() => const OtpScreen());
+                MyLoading.show();
+
+                // Get.to(() => const OtpScreen());
               },
               child: const Text('Đăng nhập'),
             ),
@@ -129,6 +132,21 @@ class _LoginScreenState extends State<LoginScreen> {
           OutlinedButton.icon(
             onPressed: () {
               _loginButtonController.enable = true;
+
+              MyBottomSheet.showDraggableScrollableSheet(
+                context,
+                builder: (context, scrollController) {
+                  return ListView.builder(
+                    controller: scrollController,
+                    itemBuilder: (context, index) {
+                      return Text(index.toString());
+                    },
+                    itemCount: 100,
+                  );
+
+                  // return HomeScreen();
+                },
+              );
             },
             icon: SvgPicture.asset(MyIcons.google),
             label: const Text('Google'),
