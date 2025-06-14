@@ -20,7 +20,6 @@ class GradientBackground extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: context.heightFraction(sizeFraction: 0.1)),
             ...children,

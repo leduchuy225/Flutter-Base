@@ -43,13 +43,13 @@ extension SnackbarTypeExtension on SnackbarType {
   List<Color> get colors {
     switch (this) {
       case SnackbarType.ERROR:
-        return [Colors.red, Colors.white];
+        return [AppColors.error, AppColors.textLight];
       case SnackbarType.INFORMATION:
-        return [Colors.blue, Colors.white];
+        return [AppColors.info, AppColors.textLight];
       case SnackbarType.WARNING:
-        return [Colors.yellow, Colors.white];
+        return [AppColors.warning, AppColors.textLight];
       case SnackbarType.SUCCESS:
-        return [Colors.green, Colors.white];
+        return [AppColors.success, AppColors.textLight];
     }
   }
 }
@@ -69,7 +69,8 @@ class AppTheme {
   static final ThemeData themeData = ThemeData(
     useMaterial3: true,
     colorSchemeSeed: AppColors.primary,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.bgColorScreen,
+    appBarTheme: const AppBarTheme(foregroundColor: AppColors.textLight),
     // dialogTheme: const DialogThemeData(
     //   titleTextStyle: TextStyle(color: Colors.amber),
     //   contentTextStyle: TextStyle(color: Colors.amber),
@@ -105,8 +106,8 @@ class AppTheme {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: AppColors.primary,
         padding: const EdgeInsets.all(4),
+        foregroundColor: AppColors.primary,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
@@ -125,8 +126,8 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.black,
         backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.textLight,
         disabledBackgroundColor: Colors.grey.shade300,
         minimumSize: const Size(double.infinity, 52),
         shape: const RoundedRectangleBorder(

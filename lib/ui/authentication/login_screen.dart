@@ -9,7 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../core/services/shared_preference_service.dart';
-import '../../theme/icon.dart';
+import '../../theme/assets.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
 import 'update_password_screen.dart';
@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               );
             },
-            icon: SvgPicture.asset(MyIcons.google),
+            icon: SvgPicture.asset(MyAssets.google),
             label: const Text('Google'),
           ),
         ],

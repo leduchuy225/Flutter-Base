@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../theme/styles.dart';
 import '../../../widgets/gradient_background.dart';
+import '../../../widgets/mobile_fiber.dart';
 
 class AuthenticationScaffold extends StatelessWidget {
   final String title;
@@ -23,9 +24,12 @@ class AuthenticationScaffold extends StatelessWidget {
         children: [
           GradientBackground(
             children: [
-              Text('MobiFiber', style: AppTextStyles.h1),
-              AppStyles.pdt6,
-              Text(title, style: AppTextStyles.h3),
+              MobileFiber(style: AppTextStyles.h1),
+              AppStyles.pdt15,
+              Text(
+                title,
+                style: AppTextStyles.h2.copyWith(color: AppColors.textLight),
+              ),
             ],
           ),
           Padding(padding: const EdgeInsets.all(20), child: child),
