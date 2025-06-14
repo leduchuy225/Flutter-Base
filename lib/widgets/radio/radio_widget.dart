@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'radio_controller.dart';
 
 class MyRadio<T> extends StatefulWidget {
   final T value;
-  final String? title;
+  final String title;
   final void Function(T?)? onChanged;
   final MyRadioController? controller;
   final ValueNotifier<T> groupValueNotifier;
 
   const MyRadio({
     Key? key,
-    this.title,
     this.onChanged,
     this.controller,
+    this.title = '',
     required this.value,
     required this.groupValueNotifier,
   }) : super(key: key);
@@ -23,8 +24,7 @@ class MyRadio<T> extends StatefulWidget {
 }
 
 class _MyRadioState<T> extends State<MyRadio> {
-  String? _title;
-  final _controller = MyRadioController();
+  late final MyRadioController _controller;
 
   MyRadioController get _mainController => widget.controller ?? _controller;
 
@@ -32,16 +32,11 @@ class _MyRadioState<T> extends State<MyRadio> {
   void initState() {
     super.initState();
 
-    _mainController.title ??= widget.title;
-    _title = _mainController.title;
+    if (widget.controller == null) {
+      _controller = MyRadioController();
+    }
 
-    _mainController.addListener(() {
-      if (_title != _mainController.title) {
-        setState(() {
-          _title = _mainController.title;
-        });
-      }
-    });
+    _mainController.title.value = widget.title;
   }
 
   @override
@@ -55,12 +50,14 @@ class _MyRadioState<T> extends State<MyRadio> {
     return ValueListenableBuilder(
       valueListenable: widget.groupValueNotifier,
       builder: (context, value, child) {
-        return RadioListTile<T>(
-          groupValue: value,
-          value: widget.value,
-          title: Text(_title ?? ''),
-          onChanged: widget.onChanged,
-        );
+        return Obx(() {
+          return RadioListTile<T>(
+            groupValue: value,
+            value: widget.value,
+            onChanged: widget.onChanged,
+            title: Text(_mainController.title.value),
+          );
+        });
       },
     );
   }

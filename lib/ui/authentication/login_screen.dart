@@ -131,7 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
           AppStyles.pdt20,
           OutlinedButton.icon(
             onPressed: () {
-              _loginButtonController.enable = true;
+              _loginButtonController.isEnable.value =
+                  !_loginButtonController.isEnable.value;
 
               MyBottomSheet.showDraggableScrollableSheet(
                 context,

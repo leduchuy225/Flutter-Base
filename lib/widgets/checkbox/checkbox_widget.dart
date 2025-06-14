@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'checkbox_controller.dart';
 
 class MyCheckbox extends StatefulWidget {
-  final bool? value;
-  final String? title;
+  final String title;
+  final bool isSelected;
   final void Function(bool?) onChanged;
   final MyCheckboxController? controller;
 
   const MyCheckbox({
     Key? key,
-    this.value,
-    required this.onChanged,
-    this.title,
     this.controller,
+    this.title = '',
+    this.isSelected = false,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -21,8 +22,7 @@ class MyCheckbox extends StatefulWidget {
 }
 
 class _MyCheckboxState extends State<MyCheckbox> {
-  late bool? _value;
-  final _controller = MyCheckboxController();
+  late final MyCheckboxController _controller;
 
   MyCheckboxController get _mainController => widget.controller ?? _controller;
 
@@ -30,20 +30,12 @@ class _MyCheckboxState extends State<MyCheckbox> {
   void initState() {
     super.initState();
 
-    _mainController.title ??= widget.title;
-    _mainController.value ??= widget.value;
+    if (widget.controller == null) {
+      _controller = MyCheckboxController();
+    }
 
-    _value = _mainController.value;
-
-    _mainController.addListener(() {
-      print('Listener');
-      if (_value != _mainController.value) {
-        setState(() {
-          _value = _mainController.value;
-        });
-        widget.onChanged(_value);
-      }
-    });
+    _mainController.title.value = widget.title;
+    _mainController.isSelected.value = widget.isSelected;
   }
 
   @override
@@ -54,13 +46,16 @@ class _MyCheckboxState extends State<MyCheckbox> {
 
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-      value: _value,
-      enabled: _mainController.enable,
-      title: Text(_mainController.title ?? ''),
-      onChanged: (value) {
-        _mainController.value = value;
-      },
-    );
+    return Obx(() {
+      return CheckboxListTile(
+        value: _mainController.isSelected.value,
+        enabled: _mainController.isEnable.value,
+        title: Text(_mainController.title.value),
+        onChanged: (value) {
+          widget.onChanged(value);
+          _mainController.isSelected.value = value;
+        },
+      );
+    });
   }
 }

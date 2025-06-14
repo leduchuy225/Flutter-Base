@@ -1,14 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
-class MyButtonController extends ChangeNotifier {
-  bool? _isEnable;
-
-  set enable(bool? value) {
-    _isEnable = value;
-    notifyListeners();
-  }
-
-  bool? get enable {
-    return _isEnable;
-  }
+class MyButtonController extends GetxController {
+  Rx<bool> isEnable = true.obs;
 }

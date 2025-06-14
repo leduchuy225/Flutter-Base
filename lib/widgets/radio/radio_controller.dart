@@ -1,12 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 
-class MyRadioController extends ChangeNotifier {
-  String? _title;
-
-  String? get title => _title;
-
-  set title(String? value) {
-    _title = value;
-    notifyListeners();
-  }
+class MyRadioController extends GetxController {
+  Rx<String> title = ''.obs;
 }

@@ -32,9 +32,9 @@ class SettingsScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 checkboxController
-                  ..enable = true
-                  ..value = false
-                  ..title = 'Test checkbox done';
+                  ..isEnable.value = true
+                  ..isSelected.value = false
+                  ..title.value = 'Test checkbox done';
 
                 // print(checkboxController.value);
 
@@ -44,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             MyCheckbox(
-              value: true,
+              isSelected: true,
               title: 'Test checkbox',
               onChanged: (value) {
                 print('Hello world $value');

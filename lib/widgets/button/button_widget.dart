@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:get/get.dart';
 
 import 'button_controller.dart';
 
@@ -14,9 +15,7 @@ class MyButton extends StatefulWidget {
 }
 
 class _MyButtonState extends State<MyButton> {
-  bool? _isEnable;
-
-  final _controller = MyButtonController();
+  late final MyButtonController _controller;
 
   MyButtonController get _mainController => widget.controller ?? _controller;
 
@@ -24,12 +23,9 @@ class _MyButtonState extends State<MyButton> {
   void initState() {
     super.initState();
 
-    _isEnable = _mainController.enable;
-    _mainController.addListener(() {
-      setState(() {
-        _isEnable = _mainController.enable;
-      });
-    });
+    if (widget.controller == null) {
+      _controller = MyButtonController();
+    }
   }
 
   @override
@@ -44,15 +40,17 @@ class _MyButtonState extends State<MyButton> {
         widget.buttonChild is! OutlinedButton) {
       return const SizedBox.shrink();
     }
-    if (_isEnable == false) {
-      return ElevatedButton(
-        onPressed: null,
-        child: widget.buttonChild.child,
-        style: widget.buttonChild.style?.copyWith(
-          backgroundColor: WidgetStateProperty.all<Color>(AppColors.muted),
-        ),
-      );
-    }
-    return widget.buttonChild;
+    return Obx(() {
+      if (_mainController.isEnable.value == false) {
+        return ElevatedButton(
+          onPressed: null,
+          child: widget.buttonChild.child,
+          style: widget.buttonChild.style?.copyWith(
+            backgroundColor: WidgetStateProperty.all<Color>(AppColors.muted),
+          ),
+        );
+      }
+      return widget.buttonChild;
+    });
   }
 }
