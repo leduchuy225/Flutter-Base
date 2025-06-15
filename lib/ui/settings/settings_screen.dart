@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/widgets/checkbox/checkbox_controller.dart';
 import 'package:flutter_base/widgets/checkbox/checkbox_widget.dart';
+import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:get/get.dart';
 
 import '../../data/pokemon/pokemon_api.dart';
@@ -12,8 +13,8 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red[50],
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: MyAppbar.appBar('Settings'),
+      // backgroundColor: Colors.red[50],
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8),
         child: Column(

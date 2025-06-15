@@ -64,7 +64,8 @@ class HomeScreen extends StatelessWidget {
                 //   print('tryCatch ${error.toString()}');
                 // }
                 myTextInputController.text = 'Tran Thanh Loan';
-                myTextInputController.enable = !myTextInputController.enable;
+                myTextInputController.isEnable =
+                    !myTextInputController.isEnable;
                 mySelectorController.selectors = [
                   MySelectorModel(id: 'HomeScreen', name: 'HomeScreen'),
                 ];

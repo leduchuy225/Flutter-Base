@@ -56,7 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
             controller: _useNameController,
             onChanged: (text) {
               // _useNameController.errorTexts = [text];
-              // _useNameController.shake(errorTexts: ['text']);
+              _useNameController.shake(errorTexts: ['text']);
+
+              // _useNameController.isEnable = false;
             },
           ),
           AppStyles.pdt20,

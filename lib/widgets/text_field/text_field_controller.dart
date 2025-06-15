@@ -1,30 +1,39 @@
 import 'package:flutter/material.dart';
 
 class MyTextFieldController extends TextEditingController {
-  bool? _isEnable;
-  List<String>? _errorTexts;
+  var state = ValueNotifier(const MyTextFieldValue());
 
   late void Function({List<String> errorTexts}) shake;
 
-  MyTextFieldController({bool? isEnable}) {
-    _isEnable = isEnable;
+  MyTextFieldController();
+
+  bool get isEnable {
+    return state.value.isEnable;
+  }
+
+  set isEnable(bool value) {
+    state.value = state.value.copyWith(isEnable: value);
   }
 
   List<String>? get errorTexts {
-    return _errorTexts;
+    return state.value.errorTexts;
   }
 
-  set errorTexts(List<String>? errors) {
-    _errorTexts = errors;
-    notifyListeners();
+  set errorTexts(List<String>? value) {
+    state.value = state.value.copyWith(errorTexts: value);
   }
+}
 
-  bool get enable {
-    return _isEnable ?? true;
-  }
+class MyTextFieldValue {
+  final bool isEnable;
+  final List<String>? errorTexts;
 
-  set enable(bool enable) {
-    _isEnable = enable;
-    notifyListeners();
+  const MyTextFieldValue({this.errorTexts, this.isEnable = true});
+
+  MyTextFieldValue copyWith({bool? isEnable, List<String>? errorTexts}) {
+    return MyTextFieldValue(
+      isEnable: isEnable ?? this.isEnable,
+      errorTexts: errorTexts ?? this.errorTexts,
+    );
   }
 }

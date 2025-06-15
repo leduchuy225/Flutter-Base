@@ -37,63 +37,63 @@ class MyTextField extends StatefulWidget {
 }
 
 class _MyTextFieldState extends State<MyTextField> {
-  String? _errorTextState;
-  late bool? _isEnableState;
+  late final MyTextFieldController _controller;
 
   final _animateController = MyAnimateController();
 
-  MyTextFieldController? get controller => widget.controller;
+  MyTextFieldController get _mainController => widget.controller ?? _controller;
 
-  List<String>? get errorTexts => controller?.errorTexts;
-  bool? get enable => controller?.enable ?? widget.enable;
+  bool? get enable => _mainController.isEnable;
+  List<String>? get errorTexts => _mainController.errorTexts;
 
   void shake({List<String>? errorTexts}) {
-    setState(() {
-      _animateController.animate();
-      _errorTextState = getErrorText(errorTexts);
-    });
+    _animateController.animate();
+    _mainController.errorTexts = errorTexts;
   }
 
   @override
   void initState() {
     super.initState();
-    _isEnableState = enable;
-    controller?.shake = shake;
-    controller?.addListener(() {
-      setState(() {
-        _isEnableState = enable;
-        _errorTextState = getErrorText(errorTexts);
-      });
-    });
+    if (widget.controller == null) {
+      _controller = MyTextFieldController();
+    }
+    _mainController.shake = shake;
   }
 
   @override
   void dispose() {
     super.dispose();
-    controller?.dispose();
+    _mainController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MyAnimateWidget(
-      controller: _animateController,
-      effects: const [ShakeEffect()],
-      child: TextFormField(
-        onTap: widget.onTap,
-        controller: controller,
-        enabled: _isEnableState,
-        readOnly: widget.readOnly,
-        onChanged: widget.onChanged,
-        obscureText: widget.obscureText,
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          errorText: _errorTextState,
-          suffixIcon: widget.suffixIcon,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          labelText: '${widget.labelText} ${widget.isRequired ? ' *' : ''}',
-          hintStyle: AppTextStyles.caption.copyWith(color: AppColors.textGrey2),
-        ),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: _mainController.state,
+      builder: (context, value, child) {
+        return MyAnimateWidget(
+          controller: _animateController,
+          effects: const [ShakeEffect()],
+          child: TextFormField(
+            onTap: widget.onTap,
+            enabled: value.isEnable,
+            readOnly: widget.readOnly,
+            controller: _mainController,
+            onChanged: widget.onChanged,
+            obscureText: widget.obscureText,
+            decoration: InputDecoration(
+              hintText: widget.hintText,
+              suffixIcon: widget.suffixIcon,
+              errorText: getErrorText(value.errorTexts),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              labelText: '${widget.labelText} ${widget.isRequired ? ' *' : ''}',
+              hintStyle: AppTextStyles.caption.copyWith(
+                color: AppColors.textGrey2,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
