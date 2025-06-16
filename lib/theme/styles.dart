@@ -137,6 +137,13 @@ class AppColors {
   static const Color mobifoneRandom6 = Color(0xFF3C8CC8);
   static const Color mobifoneRandom7 = Color(0xFF147CD4);
 
+  static const Color bgRandom1 = Color(0xFFCCECFA);
+  static const Color bgRandom2 = Color(0xFFFFE5BD);
+  static const Color bgRandom3 = Color(0xFFC8F0E9);
+  static const Color bgRandom4 = Color(0xFFFAD4CC);
+  static const Color bgRandom5 = Color(0xFFFFD9ED);
+  static const Color bgRandom6 = Color(0xFFC5D0F9);
+
   static const List<Color> defaultGradient = [
     AppColors.secondary,
     AppColors.primary,
@@ -231,9 +238,10 @@ class AppTextStyles {
   );
 
   static TextStyle get body2 => body1.copyWith(
-    fontSize: AppFontSizes.s12,
+    // fontSize: AppFontSizes.s12,
     height: 1.2,
     letterSpacing: .2,
+    fontWeight: FontWeight.w500,
   );
 
   static TextStyle get body3 =>
