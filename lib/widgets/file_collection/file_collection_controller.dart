@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 
 import '../../models/file_collection_model.dart';
@@ -11,5 +13,16 @@ class FileCollectionController extends GetxController {
 
   void removeFile(FileCollectionModel data) {
     files.remove(data);
+  }
+
+  List<File> getLocalFiles() {
+    return files
+        .where((file) {
+          return file.isLocal;
+        })
+        .map((file) {
+          return File(file.filePath);
+        })
+        .toList();
   }
 }

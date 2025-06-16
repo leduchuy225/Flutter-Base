@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
@@ -57,9 +58,12 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
     ]);
   }
 
-  void onViewDetail() {
+  void onViewDetail(int index) {
     Get.to(() {
-      return FileCollectionSlider(data: _mainController.files);
+      return FileCollectionSlider(
+        initialPage: index,
+        data: _mainController.files,
+      );
     });
   }
 
@@ -87,8 +91,8 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
                       IconButton(
                         onPressed: () async {},
                         icon: const Icon(
-                          Icons.camera,
                           size: 30,
+                          Icons.camera_alt_rounded,
                           color: AppColors.primary,
                         ),
                       ),
@@ -97,8 +101,8 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
                           await onPickImage();
                         },
                         icon: const Icon(
-                          Icons.image,
                           size: 30,
+                          Icons.image,
                           color: AppColors.primary,
                         ),
                       ),
@@ -110,10 +114,12 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
               GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 3,
-                children: _mainController.files.map((file) {
+                children: _mainController.files.mapIndexed((index, file) {
                   return FileCollectionItem(
                     item: file,
-                    onViewDetail: onViewDetail,
+                    onViewDetail: () {
+                      onViewDetail(index);
+                    },
                     onDeleteItem: (item) {
                       _mainController.removeFile(item);
                     },

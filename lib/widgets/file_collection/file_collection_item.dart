@@ -44,7 +44,7 @@ class FileCollectionItem extends StatelessWidget {
           actions: [
             MyBottomSheetAction(
               id: 1,
-              icon: Icons.details,
+              icon: Icons.image_search,
               title: 'Xem chi tiết',
               onTap: (context, id) {
                 onViewDetail();

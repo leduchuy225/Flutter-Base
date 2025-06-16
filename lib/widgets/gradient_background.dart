@@ -5,12 +5,14 @@ import '../theme/styles.dart';
 
 class GradientBackground extends StatelessWidget {
   const GradientBackground({
-    required this.children,
-    this.colors = AppColors.defaultGradient,
     super.key,
+    required this.children,
+    this.sizeFraction = 0.1,
+    this.colors = AppColors.defaultGradient,
   });
 
   final List<Color> colors;
+  final double sizeFraction;
   final List<Widget> children;
 
   @override
@@ -21,7 +23,9 @@ class GradientBackground extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            SizedBox(height: context.heightFraction(sizeFraction: 0.1)),
+            SizedBox(
+              height: context.heightFraction(sizeFraction: sizeFraction),
+            ),
             ...children,
           ],
         ),

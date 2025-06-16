@@ -71,6 +71,14 @@ class AppTheme {
     colorSchemeSeed: AppColors.primary,
     scaffoldBackgroundColor: AppColors.bgColorScreen,
     appBarTheme: const AppBarTheme(foregroundColor: AppColors.textLight),
+    checkboxTheme: CheckboxThemeData(
+      fillColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return AppColors.primary;
+        }
+        return AppColors.white;
+      }),
+    ),
     // dialogTheme: const DialogThemeData(
     //   titleTextStyle: TextStyle(color: Colors.amber),
     //   contentTextStyle: TextStyle(color: Colors.amber),

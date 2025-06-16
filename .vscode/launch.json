@@ -9,6 +9,7 @@
       "request": "launch",
       "flutterMode": "debug",
       "name": "Flutter: Launch via FVM",
-    },
+      "args": ["--no-enable-impeller"]
+    }
   ]
 }

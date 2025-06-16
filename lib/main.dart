@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/app_binding.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
 import 'package:flutter_base/data/api_locator.dart';
+import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:get/get.dart';
 
-import 'routers/main_router.dart';
 import 'theme/app_theme.dart';
 
 Future<void> main() async {
@@ -31,8 +31,15 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: AppTheme.themeData,
-      initialRoute: '/',
       initialBinding: AppBinding(),
+      onGenerateRoute: (settings) {
+        return GetPageRoute(page: () => const LoginScreen());
+      },
+      builder: (context, child) {
+        return SafeArea(child: child!, top: false);
+      },
+
+      // initialRoute: MainRouter.LOGIN,
       // darkTheme: AppTheme.themeData.copyWith(
       //   brightness: Brightness.dark,
       //   textTheme: const TextTheme(
@@ -44,11 +51,8 @@ class _MainAppState extends State<MainApp> {
       //     color: Colors.green.shade100,
       //   ),
       // ),
-      defaultTransition: Transition.cupertino,
-      onGenerateRoute: MainRouter.generateRoute,
-      builder: (context, child) {
-        return SafeArea(child: child!, top: false);
-      },
+      // defaultTransition: Transition.cupertino,
+      // onGenerateRoute: MainRouter.generateRoute,
     );
   }
 }

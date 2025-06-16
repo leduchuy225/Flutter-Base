@@ -6,9 +6,14 @@ import 'package:flutter_base/widgets/file_collection/file_collection_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 
 class FileCollectionSlider extends StatelessWidget {
+  final int initialPage;
   final List<FileCollectionModel> data;
 
-  const FileCollectionSlider({super.key, required this.data});
+  const FileCollectionSlider({
+    super.key,
+    required this.data,
+    this.initialPage = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +28,7 @@ class FileCollectionSlider extends StatelessWidget {
               height: height,
               viewportFraction: 1.0,
               enlargeCenterPage: false,
+              initialPage: initialPage,
             ),
             items: data.map((item) {
               return FileCollectionItem.buildChild(context, item);

@@ -153,6 +153,8 @@ class AppColors {
 class AppStyles {
   AppStyles._();
 
+  static const horizontalPadding = EdgeInsets.symmetric(horizontal: 16.0);
+
   static const pdt2 = Padding(padding: EdgeInsets.only(top: 2));
   static const pdt4 = Padding(padding: EdgeInsets.only(top: 4));
   static const pdt6 = Padding(padding: EdgeInsets.only(top: 6));
@@ -168,7 +170,8 @@ class AppStyles {
   static const pdl5 = Padding(padding: EdgeInsets.only(left: 5));
   static const pdl15 = Padding(padding: EdgeInsets.only(left: 15));
   static const pdl20 = Padding(padding: EdgeInsets.only(left: 20));
-  static const pdh16 = Padding(padding: EdgeInsets.symmetric(horizontal: 16.0));
+
+  static const pdh16 = Padding(padding: horizontalPadding);
   static const pdv16 = Padding(padding: EdgeInsets.symmetric(vertical: 16.0));
 
   static const pd15 = Padding(padding: EdgeInsets.all(15));
