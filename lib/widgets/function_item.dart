@@ -18,23 +18,26 @@ class FunctionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text(title),
-        leading: Icon(icon),
-        trailing: Visibility(
-          visible: counter > 0,
-          child: Container(
-            width: 30,
-            height: 30,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.error,
-            ),
-            alignment: Alignment.center,
-            child: Text(
-              counter.toString(),
-              style: AppTextStyles.body1.copyWith(color: AppColors.textLight),
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        child: ListTile(
+          title: Text(title),
+          leading: Icon(icon),
+          trailing: Visibility(
+            visible: counter > 0,
+            child: Container(
+              width: 30,
+              height: 30,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.error,
+              ),
+              alignment: Alignment.center,
+              child: Text(
+                counter.toString(),
+                style: AppTextStyles.body1.copyWith(color: AppColors.textLight),
+              ),
             ),
           ),
         ),

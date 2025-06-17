@@ -6,6 +6,7 @@ import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:get/get.dart';
 
 import 'theme/app_theme.dart';
+import 'ui/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,8 @@ class _MainAppState extends State<MainApp> {
       theme: AppTheme.themeData,
       initialBinding: AppBinding(),
       onGenerateRoute: (settings) {
-        return GetPageRoute(page: () => const LoginScreen());
+        return GetPageRoute(page: () => const SplashScreen());
+        // return GetPageRoute(page: () => const LoginScreen());
       },
       builder: (context, child) {
         return SafeArea(child: child!, top: false);

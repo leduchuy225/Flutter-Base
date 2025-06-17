@@ -1,1 +1,3 @@
-class UserService {}
+class UserService {
+  void logOut() {}
+}

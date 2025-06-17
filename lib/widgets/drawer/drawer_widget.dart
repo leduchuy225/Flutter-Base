@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/ui/authentication/account_screen.dart';
+import 'package:flutter_base/ui/authentication/update_password_screen.dart';
+import 'package:flutter_base/widgets/function_item.dart';
+import 'package:get/get.dart';
+
+import '../../theme/styles.dart';
+import '../../ui/authentication/login_screen.dart';
+import '../dialog/dialog_widget.dart';
 
 // part 'drawer_inherited_widget.dart';
 
@@ -6,31 +14,73 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      // Add a ListView to the drawer. This ensures the user can scroll
-      // through the options in the drawer if there isn't enough vertical
-      // space to fit everything.
-      child: ListView(
-        // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
+      backgroundColor: AppColors.bgColorScreen,
+      child: Column(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
-            child: Text('Drawer Header'),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                SizedBox(
+                  height: 150,
+                  child: DrawerHeader(
+                    decoration: const BoxDecoration(color: AppColors.primary),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          'Họ và tên',
+                          style: AppTextStyles.h3.copyWith(
+                            color: AppColors.textLight,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsGeometry.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      FunctionItem(
+                        title: 'Tài khoản',
+                        icon: Icons.account_circle,
+                        onTap: () {
+                          Get.to(() => const AccountScreen());
+                        },
+                      ),
+                      FunctionItem(
+                        title: 'Đổi mật khẩu',
+                        icon: Icons.password_outlined,
+                        onTap: () {
+                          Get.to(() => const UpdatePasswordScreen());
+                        },
+                      ),
+                      FunctionItem(
+                        icon: Icons.logout,
+                        title: 'Đăng xuất',
+                        onTap: () {
+                          MyDialog.alertDialog(
+                            title: 'Xác nhận',
+                            message: 'Bạn muốn đăng xuất ứng dụng ?',
+                            okHandler: () {
+                              Get.offAll(() => const LoginScreen());
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          ListTile(
-            title: const Text('Item 1'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
+          const Padding(
+            child: Text('HELLO WORLD'),
+            padding: EdgeInsetsGeometry.all(12),
           ),
-          ListTile(
-            title: const Text('Item 2'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
+          // Align(child: Text('HELLO WORLD'), alignment: Alignment.bottomCenter),
         ],
       ),
     );

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../theme/styles.dart';
 import '../widgets/dialog/dialog_widget.dart';
+import '../widgets/drawer/scaffold_drawer_widget.dart';
 // import 'package:flutter_base/ui/home/home_screen.dart';
 // import 'package:flutter_base/ui/settings/settings_screen.dart';
 // import 'package:flutter_base/widgets/bottom_navigation/bottom_navigation_widget.dart';
@@ -25,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DrawerScaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -36,21 +37,30 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.account_box_rounded,
-                            size: 30,
-                            color: AppColors.textLight,
-                          ),
-                          AppStyles.pdl10,
-                          Text(
-                            'Họ và tên',
-                            style: AppTextStyles.h3.copyWith(
-                              color: AppColors.textLight,
+                      child: Builder(
+                        builder: (context) {
+                          return InkWell(
+                            onTap: () {
+                              InheritedDrawer.of(context)?.openDrawer();
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.account_box_rounded,
+                                  size: 30,
+                                  color: AppColors.textLight,
+                                ),
+                                AppStyles.pdl10,
+                                Text(
+                                  'Họ và tên',
+                                  style: AppTextStyles.h3.copyWith(
+                                    color: AppColors.textLight,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
                     ),
                     AppStyles.pdl10,
