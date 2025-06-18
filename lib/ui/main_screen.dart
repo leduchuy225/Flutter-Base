@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/authentication/login_screen.dart';
+import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/gradient_background.dart';
 import 'package:get/get.dart';
@@ -92,7 +93,9 @@ class _MainScreenState extends State<MainScreen> {
                     counter: 10,
                     title: 'Sửa chữa',
                     icon: Icons.home_repair_service_rounded,
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => const DevScreen());
+                    },
                   ),
                   FunctionItem(
                     title: 'Sửa chữa',

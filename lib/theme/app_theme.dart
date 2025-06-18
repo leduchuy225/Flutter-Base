@@ -83,19 +83,20 @@ class AppTheme {
     //   titleTextStyle: TextStyle(color: Colors.amber),
     //   contentTextStyle: TextStyle(color: Colors.amber),
     // ),
-    // textTheme: const TextTheme(
-    //   titleLarge: TextStyle(
-    //     fontWeight: FontWeight.bold,
-    //     color: Colors.white,
-    //     fontSize: 34,
-    //     letterSpacing: 0.5,
-    //   ),
-    //   bodySmall: TextStyle(
-    //     color: Colors.grey,
-    //     fontSize: 14,
-    //     letterSpacing: 0.5,
-    //   ),
-    // ),
+    textTheme: TextTheme(
+      bodyMedium: AppTextStyles.body2,
+      // titleLarge: TextStyle(
+      //   fontWeight: FontWeight.bold,
+      //   color: Colors.white,
+      //   fontSize: 34,
+      //   letterSpacing: 0.5,
+      // ),
+      // bodySmall: TextStyle(
+      //   color: Colors.grey,
+      //   fontSize: 14,
+      //   letterSpacing: 0.5,
+      // ),
+    ),
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
       fillColor: Colors.transparent,
