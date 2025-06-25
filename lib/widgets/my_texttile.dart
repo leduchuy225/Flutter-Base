@@ -3,67 +3,62 @@ import 'package:flutter_base/theme/styles.dart';
 
 enum MyTexttileOrientation { VERTICAL, HORIZONTAL }
 
+class MyTexttileItem {
+  final String? text;
+  final String titleText;
+
+  MyTexttileItem({this.text, required this.titleText});
+}
+
 class MyTexttile extends StatelessWidget {
   const MyTexttile({
     Key? key,
-    // this.query,
-    required this.titleText,
     this.text,
-    this.labelFlex = 2,
-    this.textFlex = 5,
-    // this.selectable = true,
-    this.hasDivider = true,
-    // this.maxLines = 2,
-    // this.minLines = 1,
-    // this.isPhoneNumber = false,
-    // this.size = OneTextSize.middle,
-    // this.state = OneTextState.normal,
-    // this.crossAxisAlignment = CrossAxisAlignment.start,
-    // this.mainAxisAlignment = MainAxisAlignment.start,
-    // this.textAlign,
-    // this.titleTextAlign,
-    // this.textColor = OneColors.textGreyDark,
-    this.padding = EdgeInsets.zero,
-    // this.orientation = OneOrientation.HORIZONTAL,
-    // this.dividerColor = OneColors.textGrey1,
-    // this.suffixIconAssetPath,
-    this.labelStyle,
+    this.maxLines,
     this.textStyle,
-    // this.onTapSuffixIcon,
+    this.labelStyle,
+    this.textFlex = 5,
+    this.labelFlex = 2,
+    this.hasDivider = true,
+    required this.titleText,
     this.isHideIfTextNull = false,
-    // this.onPressText,
-    // this.isShowCopyIcon = false,
+    this.padding = EdgeInsets.zero,
     this.orientation = MyTexttileOrientation.HORIZONTAL,
-    // this.titleChild,
   }) : super(key: key);
 
-  final String titleText;
   final String? text;
-  final int labelFlex;
   final int textFlex;
-  // final bool selectable;
+  final int labelFlex;
+  final int? maxLines;
   final bool hasDivider;
-  // final int maxLines;
-  // final int minLines;
-
-  // final CrossAxisAlignment crossAxisAlignment;
-  // final MainAxisAlignment mainAxisAlignment;
-  // final TextAlign? textAlign;
-  // final TextAlign? titleTextAlign;
-  // final Color textColor;
-  final EdgeInsetsGeometry padding;
-  final MyTexttileOrientation orientation;
-  // final Color dividerColor;
-  // final String? suffixIconAssetPath;
+  final String titleText;
   final TextStyle? textStyle;
   final TextStyle? labelStyle;
-  // final VoidCallback? onTapSuffixIcon;
-  // final bool isPhoneNumber;
-  // final String? query;
   final bool isHideIfTextNull;
-  // final void Function()? onPressText;
-  // final bool isShowCopyIcon;
-  // final Widget? titleChild;
+  final EdgeInsetsGeometry padding;
+  final MyTexttileOrientation orientation;
+
+  static Widget showList({
+    int? maxLines,
+    int textFlex = 2,
+    int labelFlex = 5,
+    required List<MyTexttileItem> items,
+  }) {
+    return Column(
+      children: items.map((element) {
+        return Padding(
+          padding: const EdgeInsetsGeometry.symmetric(vertical: 6),
+          child: MyTexttile(
+            textFlex: textFlex,
+            maxLines: maxLines,
+            text: element.text,
+            labelFlex: labelFlex,
+            titleText: element.titleText,
+          ),
+        );
+      }).toList(),
+    );
+  }
 
   String get textTrimed {
     return (text ?? '').trim();
@@ -82,7 +77,13 @@ class MyTexttile extends StatelessWidget {
             _buildVertical(context)
           else
             _buildHorizontal(context),
-          Visibility(visible: hasDivider, child: const Divider(height: 1.0)),
+          Visibility(
+            visible: hasDivider,
+            child: const Padding(
+              child: Divider(height: 1.0),
+              padding: EdgeInsetsGeometry.only(top: 10),
+            ),
+          ),
         ],
       ),
     );
@@ -98,62 +99,15 @@ class MyTexttile extends StatelessWidget {
   }
 
   Widget _buildText() {
-    return Text(
+    return SelectableText(
       textTrimed,
+      minLines: 1,
+      maxLines: maxLines,
       style:
           textStyle ??
           AppTextStyles.body2.copyWith(color: AppColors.textGreyDark),
     );
   }
-
-  // Widget _buildSelectableText() {
-  //   return Row(
-  //     mainAxisSize: MainAxisSize.min,
-  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //     children: [
-  //       Expanded(child: Text(textTrimed)),
-  //       // if (suffixIconAssetPath != null)
-  //       //   InkWell(
-  //       //     onTap: onTapSuffixIcon,
-  //       //     child: Padding(
-  //       //       padding: const EdgeInsets.symmetric(horizontal: 5),
-  //       //       child: SvgPicture.asset(
-  //       //         suffixIconAssetPath!,
-  //       //         color: OneColors.brandVNPT,
-  //       //       ),
-  //       //     ),
-  //       //   ),
-  //       // if (isPhoneNumber && textTrimed.isNotEmpty)
-  //       //   InkWell(
-  //       //     child: const Padding(
-  //       //       padding: EdgeInsets.symmetric(horizontal: 5),
-  //       //       child: Icon(Icons.phone, color: OneColors.brandVNPT),
-  //       //     ),
-  //       //     onTap: () {
-  //       //       final phoneNumber = textTrimed.replaceAll(RegExp(r'[^0-9]'), '');
-  //       //       launchUrlString('tel://$phoneNumber');
-  //       //     },
-  //       //   ),
-  //       // if (isShowCopyIcon && textTrimed.isNotEmpty)
-  //       //   InkWell(
-  //       //     child: const Padding(
-  //       //       padding: EdgeInsets.symmetric(horizontal: 5),
-  //       //       child: Icon(Icons.copy, color: OneColors.brandVNPT),
-  //       //     ),
-  //       //     onTap: () async {
-  //       //       await Clipboard.setData(ClipboardData(text: textTrimed)).then((
-  //       //         value,
-  //       //       ) {
-  //       //         OneToast.show(
-  //       //           msg: 'Đã sao chép vào clipboard',
-  //       //           type: OneToastType.SUCCESS,
-  //       //         );
-  //       //       });
-  //       //     },
-  //       //   ),
-  //     ],
-  //   );
-  // }
 
   Widget _buildHorizontal(BuildContext context) {
     return Row(

@@ -220,23 +220,23 @@ class AppTextStyles {
       h1.copyWith(fontSize: AppFontSizes.s18, letterSpacing: -.05, height: 1.2);
 
   static TextStyle get h4 =>
-      h1.copyWith(fontSize: AppFontSizes.s14, letterSpacing: -.05, height: 1.2);
+      h1.copyWith(fontSize: AppFontSizes.s16, letterSpacing: -.05, height: 1.2);
 
   static TextStyle get title1 => roboto.copyWith(
     fontWeight: FontWeight.w500,
-    fontSize: AppFontSizes.s16,
+    fontSize: AppFontSizes.s18,
     height: 1.3,
   );
 
   static TextStyle get title2 => title1.copyWith(
     fontWeight: FontWeight.w500,
-    fontSize: AppFontSizes.s14,
+    fontSize: AppFontSizes.s16,
     height: 1.2,
   );
 
   static TextStyle get body1 => roboto.copyWith(
     fontWeight: FontWeight.bold,
-    fontSize: AppFontSizes.s14,
+    fontSize: AppFontSizes.s16,
     height: 1.2,
   );
 
@@ -248,33 +248,33 @@ class AppTextStyles {
   );
 
   static TextStyle get body3 =>
-      body1.copyWith(fontSize: AppFontSizes.s12, height: 1.2);
+      body1.copyWith(fontSize: AppFontSizes.s14, height: 1.2);
 
   static TextStyle get callout1 => roboto.copyWith(
     fontWeight: FontWeight.w800,
-    fontSize: AppFontSizes.s12,
+    fontSize: AppFontSizes.s14,
     height: 1.2,
     letterSpacing: .5,
   );
 
   static TextStyle get callout2 => callout1.copyWith(
-    fontSize: AppFontSizes.s10,
+    fontSize: AppFontSizes.s12,
     height: 1,
     letterSpacing: .25,
   );
 
   static TextStyle get caption => roboto.copyWith(
     fontWeight: FontWeight.w500,
-    fontSize: AppFontSizes.s11,
+    fontSize: AppFontSizes.s12,
     height: 1.2,
   );
 
-  static TextStyle get error => roboto.copyWith(
-    fontWeight: FontWeight.w500,
-    fontSize: AppFontSizes.s16,
-    height: 1.2,
-    color: AppColors.error,
-  );
+  // static TextStyle get error => roboto.copyWith(
+  //   fontWeight: FontWeight.w500,
+  //   fontSize: AppFontSizes.s16,
+  //   height: 1.2,
+  //   color: AppColors.error,
+  // );
 }
 
 class AppRadius {

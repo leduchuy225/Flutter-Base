@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/app_binding.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
 import 'package:flutter_base/data/api_locator.dart';
-import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:get/get.dart';
 
 import 'theme/app_theme.dart';
