@@ -12,5 +12,8 @@ abstract class BaseResponseModel<T> with _$BaseResponseModel<T> {
     @JsonKey(name: 'previous') final String? previous,
   }) = _BaseResponseModel;
 
-  factory BaseResponseModel.fromJson(Map<String, dynamic> json, T Function(Object?) fromJsonT) => _$BaseResponseModelFromJson(json, fromJsonT);
+  factory BaseResponseModel.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object?) fromJsonT,
+  ) => _$BaseResponseModelFromJson(json, fromJsonT);
 }

@@ -32,11 +32,16 @@ class MyBottomSheet {
       useRootNavigator: true,
       isScrollControlled: true,
       backgroundColor: AppColors.bgColorScreen,
-      builder:
-          builder ??
-          (context) {
-            return MyBottomSheetWidget(actions: actions ?? []);
-          },
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: builder != null
+              ? builder(context)
+              : MyBottomSheetWidget(actions: actions ?? []),
+        );
+      },
     );
   }
 }

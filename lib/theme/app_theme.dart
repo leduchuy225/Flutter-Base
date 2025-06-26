@@ -99,7 +99,7 @@ class AppTheme {
     ),
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
-      fillColor: Colors.transparent,
+      fillColor: AppColors.textLight,
       // errorStyle: TextStyle(fontSize: 12),
       contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
       border: textFormFieldBorder,

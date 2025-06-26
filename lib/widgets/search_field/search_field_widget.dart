@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../theme/styles.dart';
 import 'search_deboucer.dart';
 
 class MySearchField extends StatefulWidget {
@@ -29,10 +30,11 @@ class _MySearchFieldState extends State<MySearchField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      decoration: const InputDecoration(
-        labelText: 'My Search Field',
-      ),
       onChanged: onSearchChanged,
+      decoration: const InputDecoration(
+        labelText: 'Nhập nội dung',
+        fillColor: AppColors.textLight,
+      ),
     );
   }
 }
