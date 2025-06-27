@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/diacritic/diacritic.dart';
 import '../../theme/styles.dart';
 import 'search_deboucer.dart';
 
@@ -10,6 +11,19 @@ class MySearchField extends StatefulWidget {
 
   @override
   State<MySearchField> createState() => _MySearchFieldState();
+
+  static bool isTextContainInList(String text, List<dynamic> list) {
+    if (text.trim().isEmpty) {
+      return true;
+    }
+    return list
+        .map((e) {
+          return _processText(e);
+        })
+        .any((element) {
+          return element.contains(_processText(text));
+        });
+  }
 }
 
 class _MySearchFieldState extends State<MySearchField> {
@@ -37,4 +51,11 @@ class _MySearchFieldState extends State<MySearchField> {
       ),
     );
   }
+}
+
+String _processText(dynamic text) {
+  if (text == null || (text is! String && text is! num)) {
+    return '';
+  }
+  return removeDiacritics(text.toString().trim()).toLowerCase();
 }

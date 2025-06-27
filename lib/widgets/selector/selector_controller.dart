@@ -1,7 +1,9 @@
 import 'package:collection/collection.dart';
+import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:get/get.dart';
 
 import '../../models/base_selector.dart';
+import '../search_field/search_field_widget.dart';
 import '../text_field/text_field_controller.dart';
 
 class MySelectorController extends MyTextFieldController {
@@ -26,9 +28,10 @@ class MySelectorController extends MyTextFieldController {
 }
 
 class MySelectorData extends GetxController {
+  final String? cacheKey;
   final Future<List<MySelectorModel>> Function() getFutureData;
 
-  MySelectorData({required this.getFutureData});
+  MySelectorData({required this.getFutureData, this.cacheKey});
 
   List<MySelectorModel> _dataListDefault = [];
 
@@ -38,8 +41,20 @@ class MySelectorData extends GetxController {
   Future<void> updateDataList() async {
     isLoading.value = true;
 
-    _dataListDefault = await getFutureData();
-    dataListShow.value = _dataListDefault;
+    if (cacheKey != null) {
+      final cacheService = CacheService();
+      final data = cacheService.read<List<MySelectorModel>>(key: cacheKey!);
+      if (data == null) {
+        _dataListDefault = await getFutureData();
+        cacheService.write(key: cacheKey!, value: _dataListDefault);
+      } else {
+        _dataListDefault = data;
+      }
+      dataListShow.value = _dataListDefault;
+    } else {
+      _dataListDefault = await getFutureData();
+      dataListShow.value = _dataListDefault;
+    }
 
     isLoading.value = false;
   }
@@ -50,7 +65,10 @@ class MySelectorData extends GetxController {
       return;
     }
     dataListShow.value = _dataListDefault.where((element) {
-      return '${element.name} ${element.description ?? ''}'.contains(text);
+      return MySearchField.isTextContainInList(text, [
+        element.name,
+        element.description,
+      ]);
     }).toList();
   }
 }
