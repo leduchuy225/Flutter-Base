@@ -26,6 +26,7 @@ class HttpService {
   BaseOptions get baseOptions {
     return BaseOptions(
       baseUrl: Strings.baseURL,
+      contentType: 'application/json',
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
     );

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
+import 'package:get/get.dart';
 
+import '../data/jsonplaceholder/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
 import '../widgets/my_appbar.dart';
 import '../widgets/my_texttile.dart';
@@ -21,7 +24,10 @@ class _DevScreenState extends State<DevScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((data) {});
+    WidgetsBinding.instance.addPostFrameCallback((data) async {
+      // final data = await Get.find<JsonPlaceholderApi>().getPostDetail();
+      // MyDialog.snackbar(data.data.toString());
+    });
   }
 
   @override
@@ -32,17 +38,30 @@ class _DevScreenState extends State<DevScreen> {
         padding: AppStyles.horizontalPadding,
         child: Column(
           children: [
+            AppStyles.pdt20,
             const MyTexttile(
               titleText: 'TEST',
               text: 'TEST',
               orientation: MyTexttileOrientation.VERTICAL,
             ),
+            AppStyles.pdt20,
             const MyTexttile(
               text: 'TEST',
               titleText: 'TEST',
               orientation: MyTexttileOrientation.HORIZONTAL,
             ),
-            AppStyles.pdt15,
+            AppStyles.pdt20,
+            ElevatedButton(
+              onPressed: () async {
+                final data = await Get.find<JsonPlaceholderApi>()
+                    .getPostDetail();
+                if (data.data != null) {
+                  MyDialog.snackbar(data.data.toString());
+                }
+              },
+              child: const Text('TEST API'),
+            ),
+            AppStyles.pdt20,
             MySelector(
               title: 'TEST',
               controller: _mySelectorController,

@@ -10,7 +10,7 @@ class MyDialog {
   static void snackbar(
     String? message, {
     Widget? icon,
-    String title = 'Notification',
+    String title = 'Thông báo',
     SnackbarType type = SnackbarType.INFORMATION,
   }) {
     if ((message ?? '').isEmpty) {
@@ -22,7 +22,7 @@ class MyDialog {
         title: title,
         message: message,
         backgroundColor: type.colors[0],
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 5),
       ),
     );
   }

@@ -4,15 +4,22 @@ import '../error_handler.dart';
 
 class ApiParameters {
   final bool iShowError;
-  final String? errorMessage;
 
-  ApiParameters({this.errorMessage, this.iShowError = false});
+  ApiParameters({this.iShowError = true});
 }
 
 extension FutureExtension<T> on Future<BaseResponseModel<T>> {
   Future<BaseResponseModel<T>> call({ApiParameters? apiParameters}) {
-    return catchError((error) {
-      return ErrorHandler.handleError(error, apiParameters: apiParameters);
+    return then((data) {
+      if (data.code == 404) {
+        throw MyError(message: 'Custom error', code: data.code);
+      }
+      return data;
+    }).onError((error, stackTrace) {
+      if (error != null) {
+        MyError.handleError(error, apiParameters: apiParameters);
+      }
+      return BaseResponseModel();
     });
   }
 }

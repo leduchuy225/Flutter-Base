@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/const/strings.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/selector/selector_controller.dart';
@@ -89,6 +90,18 @@ class _MyBottomsheetSelectorContentState
                       width: 60,
                       height: 60,
                       child: Center(child: CircularProgressIndicator()),
+                    );
+                  }
+                  if (widget.data.dataListShow.isEmpty) {
+                    return Padding(
+                      padding: AppStyles.horizontalPadding,
+                      child: Row(
+                        children: [
+                          const Icon(Icons.info_outline_rounded),
+                          AppStyles.pdl5,
+                          Text(Strings.noData),
+                        ],
+                      ),
                     );
                   }
                   return ListView.builder(

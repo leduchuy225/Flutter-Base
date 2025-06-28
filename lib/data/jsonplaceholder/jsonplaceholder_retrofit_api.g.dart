@@ -18,12 +18,12 @@ class _JsonPlaceholderRetrofitApi implements JsonPlaceholderRetrofitApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<BaseResponseModel<List<dynamic>>> getPostList() async {
+  Future<dynamic> getPostList() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<BaseResponseModel<List<dynamic>>>(
+    final _options = _setStreamType<dynamic>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -33,29 +33,18 @@ class _JsonPlaceholderRetrofitApi implements JsonPlaceholderRetrofitApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<List<dynamic>> _value;
-    try {
-      _value = BaseResponseModel<List<dynamic>>.fromJson(
-        _result.data!,
-        (json) => json is List<dynamic>
-            ? json.map<dynamic>((i) => i as Map<String, dynamic>).toList()
-            : List.empty(),
-      );
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
     return _value;
   }
 
   @override
-  Future<BaseResponseModel<dynamic>> getPostDetail() async {
+  Future<dynamic> getPostDetail() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<BaseResponseModel<dynamic>>(
+    final _options = _setStreamType<dynamic>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -65,17 +54,8 @@ class _JsonPlaceholderRetrofitApi implements JsonPlaceholderRetrofitApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<dynamic> _value;
-    try {
-      _value = BaseResponseModel<dynamic>.fromJson(
-        _result.data!,
-        (json) => json as dynamic,
-      );
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
     return _value;
   }
 
