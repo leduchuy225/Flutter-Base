@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../const/strings.dart';
 import '../interceptors/interceptor.dart';
 
 class HttpService {
@@ -24,7 +25,7 @@ class HttpService {
 
   BaseOptions get baseOptions {
     return BaseOptions(
-      baseUrl: 'https://pokeapi.co/api/v2',
+      baseUrl: Strings.baseURL,
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
     );
