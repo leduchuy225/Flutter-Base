@@ -1,4 +1,7 @@
 class CacheService {
+  static String retryCount = 'retryCount';
+  static String packageInfo = 'packageInfo';
+
   static final CacheService _singleton = CacheService._internal();
 
   factory CacheService() {
@@ -25,8 +28,8 @@ class CacheService {
     }
     return null;
   }
-}
 
-// class CacheServiceKey {
-//   static String ACCESS_TOKEN = 'accessToken';
-// }
+  void clear() {
+    _cache.clear();
+  }
+}

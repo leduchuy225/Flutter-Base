@@ -67,6 +67,17 @@ class _DevScreenState extends State<DevScreen> {
               controller: _mySelectorController,
               data: MySelectorData(
                 getFutureData: () {
+                  // return Get.find<JsonPlaceholderApi>().getPostList().then((
+                  //   value,
+                  // ) {
+                  //   return (value.data ?? []).map((element) {
+                  //     return MySelectorModel(
+                  //       id: element['id'],
+                  //       name: element['title'],
+                  //       // description: element['body'],
+                  //     );
+                  //   }).toList();
+                  // });
                   return Future.value([
                     MySelectorModel(id: 1, name: 'Option 1'),
                     MySelectorModel(

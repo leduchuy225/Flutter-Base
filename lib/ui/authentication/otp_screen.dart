@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/main_screen.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,12 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final _otpController = TextEditingController();
 
+  Future<void> _onCompleted(String value) async {
+    await UserService.saveTokens();
+
+    Get.offAll(() => MainScreen());
+  }
+
   @override
   Widget build(BuildContext context) {
     return AuthenticationScaffold(
@@ -30,8 +37,8 @@ class _OtpScreenState extends State<OtpScreen> {
             length: 6,
             autofocus: true,
             controller: _otpController,
-            onCompleted: (value) {
-              Get.offAll(() => MainScreen());
+            onCompleted: (value) async {
+              await _onCompleted(value);
             },
           ),
           AppStyles.pdt50,

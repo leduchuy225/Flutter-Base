@@ -3,6 +3,9 @@ import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:flutter_base/widgets/mobile_fiber.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+
+import '../core/services/cache_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +19,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((data) {
+    WidgetsBinding.instance.addPostFrameCallback((data) async {
+      final packageInfo = await PackageInfo.fromPlatform();
+      CacheService().write(key: CacheService.packageInfo, value: packageInfo);
+
       Future.delayed(const Duration(seconds: 1)).then((value) {
         Get.offAll(() => const LoginScreen());
       });

@@ -8,11 +8,11 @@ class JsonPlaceholderApi {
 
   final JsonPlaceholderRetrofitApi api;
 
-  Future<BaseResponseModel> getPostList({ApiParameters? apiParameters}) {
+  Future<BaseResponseModel<List>> getPostList({ApiParameters? apiParameters}) {
     return api
         .getPostList()
         .then((value) {
-          return BaseResponseModel(data: value);
+          return BaseResponseModel<List>(data: value, code: 404);
         })
         .call(apiParameters: apiParameters);
   }

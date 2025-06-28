@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/ui/authentication/account_screen.dart';
 import 'package:flutter_base/ui/authentication/update_password_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../theme/styles.dart';
 import '../../ui/authentication/login_screen.dart';
 import '../dialog/dialog_widget.dart';
 
-// part 'drawer_inherited_widget.dart';
-
 class MyDrawer extends StatelessWidget {
+  String get packageInfoText {
+    final packageInfo = CacheService().read<PackageInfo>(
+      key: CacheService.packageInfo,
+    );
+    if (packageInfo == null) {
+      return '';
+    }
+    return 'Phiên bản ${packageInfo.version} - ${packageInfo.buildNumber}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -76,11 +86,13 @@ class MyDrawer extends StatelessWidget {
               ],
             ),
           ),
-          const Padding(
-            child: Text('HELLO WORLD'),
-            padding: EdgeInsetsGeometry.all(12),
+          Padding(
+            child: Text(packageInfoText, style: AppTextStyles.body1),
+            padding: const EdgeInsetsGeometry.symmetric(
+              vertical: 20,
+              horizontal: 12,
+            ),
           ),
-          // Align(child: Text('HELLO WORLD'), alignment: Alignment.bottomCenter),
         ],
       ),
     );
