@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/app_binding.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
 import 'package:flutter_base/data/api_locator.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
 import 'theme/app_theme.dart';
@@ -32,6 +33,15 @@ class _MainAppState extends State<MainApp> {
     return GetMaterialApp(
       theme: AppTheme.themeData,
       initialBinding: AppBinding(),
+      localizationsDelegates: const [
+        GlobalWidgetsLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('vi', 'VI'),
+        Locale.fromSubtags(languageCode: 'vi'),
+      ],
       onGenerateRoute: (settings) {
         return GetPageRoute(page: () => const SplashScreen());
         // return GetPageRoute(page: () => const LoginScreen());

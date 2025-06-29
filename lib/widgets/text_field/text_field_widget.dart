@@ -85,12 +85,12 @@ class _MyTextFieldState extends State<MyTextField> {
             onChanged: widget.onChanged,
             obscureText: widget.obscureText,
             decoration: InputDecoration(
-              hintText: widget.hintText,
               suffixIcon: widget.suffixIcon,
               errorText: getErrorText(value.errorTexts),
+              hintText: widget.hintText ?? widget.labelText,
               floatingLabelBehavior: FloatingLabelBehavior.always,
               labelText: '${widget.labelText} ${widget.isRequired ? ' *' : ''}',
-              hintStyle: AppTextStyles.caption.copyWith(
+              hintStyle: AppTextStyles.body2.copyWith(
                 color: AppColors.textGrey2,
               ),
             ),

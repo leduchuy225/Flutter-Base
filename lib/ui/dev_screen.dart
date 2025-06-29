@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../data/jsonplaceholder/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
+import '../widgets/datetime_picker/datetime_picker_widget.dart';
 import '../widgets/my_appbar.dart';
 import '../widgets/my_texttile.dart';
 import '../widgets/selector/selector_controller.dart';
@@ -110,6 +111,25 @@ class _DevScreenState extends State<DevScreen> {
             ),
             AppStyles.pdt20,
             const TitleNumberIndicator(title: 'Tôi nhớ em', number: 1000),
+            AppStyles.pdt20,
+            const Row(
+              children: [
+                Expanded(flex: 2, child: DatetimePicker(title: 'Chọn ngày')),
+                AppStyles.pdl5,
+                Expanded(
+                  flex: 1,
+                  child: DatetimePicker(
+                    isTimePicker: true,
+                    title: 'Chọn thời gian',
+                  ),
+                ),
+              ],
+            ),
+
+            AppStyles.pdt20,
+            const DatetimePicker(title: 'Chọn khoảng', isDateRangePicker: true),
+            AppStyles.pdt20,
+            const DatetimePicker(title: 'Chọn thời gian', isTimePicker: true),
             AppStyles.pdt20,
           ],
         ),

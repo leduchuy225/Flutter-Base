@@ -16,10 +16,13 @@ enum MyDateFormatEnum {
 class DatetimeUtils {
   DatetimeUtils._();
 
-  static String convertFrom(
-    DateTime date, {
+  static String? convertFrom(
+    DateTime? date, {
     required MyDateFormatEnum toFormat,
   }) {
+    if (date == null) {
+      return null;
+    }
     return toFormat.fm.format(date);
   }
 
@@ -28,7 +31,9 @@ class DatetimeUtils {
     required MyDateFormatEnum toFm,
     required MyDateFormatEnum fromFm,
   }) {
-    if (dateStr == null) return null;
+    if (dateStr == null) {
+      return null;
+    }
     try {
       return toFm.fm.format(fromFm.fm.parse(dateStr));
     } catch (e) {

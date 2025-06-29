@@ -48,10 +48,10 @@ class AppCorners {
   static const Radius lgRadius = Radius.circular(lg);
 }
 
-class AppStrokes {
-  static const double thin = 1;
-  static const double thick = 4;
-}
+// class AppStrokes {
+//   static const double thin = 1;
+//   static const double thick = 4;
+// }
 
 // class AppShadows {
 //   static List<BoxShadow> get universal => [BoxShadow(color: const Color(0xff333333).withOpacity(.15), spreadRadius: 0, blurRadius: 10)];
