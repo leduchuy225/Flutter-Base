@@ -21,7 +21,7 @@ class _AccountScreenState extends State<AccountScreen> {
         child: Column(
           children: [
             AppStyles.pdt20,
-            MyTexttile.showList(
+            MyTexttile.list(
               textFlex: 2,
               maxLines: 5,
               labelFlex: 1,

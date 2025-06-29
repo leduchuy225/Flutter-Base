@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 enum MyTexttileOrientation { VERTICAL, HORIZONTAL }
 
 class MyTexttileItem {
   final String? text;
   final String titleText;
+  final bool isPhoneNumber;
 
-  MyTexttileItem({this.text, required this.titleText});
+  MyTexttileItem({
+    this.text,
+    required this.titleText,
+    this.isPhoneNumber = false,
+  });
 }
 
 class MyTexttile extends StatelessWidget {
@@ -21,6 +27,7 @@ class MyTexttile extends StatelessWidget {
     this.labelFlex = 2,
     this.hasDivider = true,
     required this.titleText,
+    this.isPhoneNumber = false,
     this.isHideIfTextNull = false,
     this.padding = EdgeInsets.zero,
     this.orientation = MyTexttileOrientation.HORIZONTAL,
@@ -32,16 +39,70 @@ class MyTexttile extends StatelessWidget {
   final int? maxLines;
   final bool hasDivider;
   final String titleText;
+  final bool isPhoneNumber;
   final TextStyle? textStyle;
   final TextStyle? labelStyle;
   final bool isHideIfTextNull;
   final EdgeInsetsGeometry padding;
   final MyTexttileOrientation orientation;
 
-  static Widget showList({
+  static Widget card({
     int? maxLines,
-    int textFlex = 2,
-    int labelFlex = 5,
+    String? title,
+    int textFlex = 5,
+    int labelFlex = 2,
+    Widget? suffixHeader,
+    EdgeInsets? paddingHeader,
+    required List<MyTexttileItem> items,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          padding:
+              paddingHeader ??
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+          decoration: const BoxDecoration(
+            color: AppColors.bgHeaderItem,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+            ),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: SelectableText(title ?? '', style: AppTextStyles.body1),
+              ),
+              AppStyles.pdl5,
+              ?suffixHeader,
+            ],
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: const BoxDecoration(
+            color: AppColors.bgChildItem,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+            ),
+          ),
+          child: MyTexttile.list(
+            items: items,
+            maxLines: maxLines,
+            textFlex: textFlex,
+            labelFlex: labelFlex,
+          ),
+        ),
+      ],
+    );
+  }
+
+  static Widget list({
+    int? maxLines,
+    int textFlex = 5,
+    int labelFlex = 2,
     required List<MyTexttileItem> items,
   }) {
     return Column(
@@ -54,19 +115,20 @@ class MyTexttile extends StatelessWidget {
             text: element.text,
             labelFlex: labelFlex,
             titleText: element.titleText,
+            isPhoneNumber: element.isPhoneNumber,
           ),
         );
       }).toList(),
     );
   }
 
-  String get textTrimed {
+  String get _textProcessed {
     return (text ?? '').trim();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (isHideIfTextNull && textTrimed.isEmpty) {
+    if (isHideIfTextNull && _textProcessed.isEmpty) {
       return const SizedBox.shrink();
     }
     return Padding(
@@ -99,13 +161,35 @@ class MyTexttile extends StatelessWidget {
   }
 
   Widget _buildText() {
-    return SelectableText(
-      textTrimed,
-      minLines: 1,
-      maxLines: maxLines,
-      style:
-          textStyle ??
-          AppTextStyles.body2.copyWith(color: AppColors.textGreyDark),
+    return Row(
+      children: [
+        Expanded(
+          child: SelectableText(
+            _textProcessed,
+            minLines: 1,
+            maxLines: maxLines,
+            style:
+                textStyle ??
+                AppTextStyles.body2.copyWith(color: AppColors.textGreyDark),
+          ),
+        ),
+        Visibility(
+          visible: isPhoneNumber && _textProcessed.isNotEmpty,
+          child: InkWell(
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Icon(Icons.phone, color: AppColors.primary),
+            ),
+            onTap: () {
+              final phoneNumber = _textProcessed.replaceAll(
+                RegExp(r'[^0-9]'),
+                '',
+              );
+              launchUrlString('tel://$phoneNumber');
+            },
+          ),
+        ),
+      ],
     );
   }
 

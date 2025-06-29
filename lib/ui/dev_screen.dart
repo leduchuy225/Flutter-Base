@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
+import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
 import '../data/jsonplaceholder/jsonplaceholder_api.dart';
@@ -89,6 +90,27 @@ class _DevScreenState extends State<DevScreen> {
                 },
               ),
             ),
+            AppStyles.pdt20,
+            MyTexttile.card(
+              title: 'My love',
+              paddingHeader: const EdgeInsets.symmetric(horizontal: 8),
+              suffixHeader: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.menu),
+              ),
+              items: [
+                MyTexttileItem(titleText: 'Họ và tên', text: 'Võ Thị Tố Quyên'),
+                MyTexttileItem(titleText: 'Ngày sinh', text: '02/01/2000'),
+                MyTexttileItem(
+                  titleText: 'SĐT',
+                  text: '+84944718451',
+                  isPhoneNumber: true,
+                ),
+              ],
+            ),
+            AppStyles.pdt20,
+            const TitleNumberIndicator(title: 'Tôi nhớ em', number: 1000),
+            AppStyles.pdt20,
           ],
         ),
       ),
