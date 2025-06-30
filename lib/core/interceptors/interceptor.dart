@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:get/get.dart' hide Response;
@@ -22,12 +23,15 @@ class MyInterceptor extends Interceptor {
       _clearRetryCount(err);
       return handler.next(err);
     }
+
     await Future.delayed(retryDelay);
+
     try {
       // Handle something here
       await UserService.getNewTokens();
 
       _addOneMoreRetry(err);
+
       final options = Options(
         method: err.requestOptions.method,
         headers: err.requestOptions.headers,
@@ -38,6 +42,7 @@ class MyInterceptor extends Interceptor {
         data: err.requestOptions.data,
         queryParameters: err.requestOptions.queryParameters,
       );
+
       _clearRetryCount(err);
       return handler.resolve(response);
     } catch (error) {
@@ -56,6 +61,11 @@ class MyInterceptor extends Interceptor {
       options.headers['Authorization'] = 'Bearer $accessToken';
     }
 
+    // Custom request payload
+    if (options.data is Map) {
+      options.data = {...options.data, 'isJson': true};
+    }
+
     handler.next(options);
   }
 
@@ -65,6 +75,10 @@ class MyInterceptor extends Interceptor {
   }
 
   bool _shouldRetry(DioException error) {
+    final data = error.requestOptions.data;
+    if (data is Map) {
+      return data['status'] == MyStatus.tokenTimeOut;
+    }
     return [
       HttpStatus.forbidden,
       HttpStatus.unauthorized,

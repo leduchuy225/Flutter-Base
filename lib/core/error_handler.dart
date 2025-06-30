@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_base/ui/splash_screen.dart';
+import 'package:get/get.dart';
 
 import '../theme/styles.dart';
 import '../widgets/dialog/dialog_widget.dart';
-import 'const/strings.dart';
+import 'const/constants.dart';
 import 'extensions/future_extension.dart';
 
 class MyError implements Exception {
@@ -30,18 +32,27 @@ class MyError implements Exception {
         final dioException = error as DioException;
         message = dioException.message;
         if (dioException.type == DioExceptionType.connectionError) {
-          message = Strings.connectionOff;
+          message = MyStrings.connectionOff;
         }
         break;
       case MyError:
         final myException = error as MyError;
-        message = myException.message;
+        message = myException.message != null
+            ? 'Lỗi [${myException.code}] - ${myException.message}'
+            : null;
+
+        if (myException.code == MyStatus.notAuthenticate2Fa) {
+          Get.offAll(() => const SplashScreen());
+        }
+        break;
       default:
         message = error.toString();
     }
 
+    print('Error message: $message');
+
     if (_apiParameters.iShowError) {
-      MyError.showErrorDialog(message ?? Strings.systemError);
+      MyError.showErrorDialog(message ?? MyStrings.systemError);
     }
   }
 }

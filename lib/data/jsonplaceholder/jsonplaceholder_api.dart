@@ -12,7 +12,7 @@ class JsonPlaceholderApi {
     return api
         .getPostList()
         .then((value) {
-          return BaseResponseModel<List>(data: value, code: 404);
+          return BaseResponseModel<List>(data: value, code: 3);
         })
         .call(apiParameters: apiParameters);
   }
@@ -21,7 +21,7 @@ class JsonPlaceholderApi {
     return api
         .getPostDetail()
         .then((value) {
-          return BaseResponseModel(data: value, code: 404);
+          return BaseResponseModel(data: value, code: 3);
         })
         .call(apiParameters: apiParameters);
   }

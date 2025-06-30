@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../const/strings.dart';
+import '../const/constants.dart';
 import '../interceptors/interceptor.dart';
 
 class HttpService {
@@ -25,7 +25,7 @@ class HttpService {
 
   BaseOptions get baseOptions {
     return BaseOptions(
-      baseUrl: Strings.baseURL,
+      baseUrl: MyStrings.baseURL,
       contentType: 'application/json',
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),

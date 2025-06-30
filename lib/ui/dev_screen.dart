@@ -69,25 +69,24 @@ class _DevScreenState extends State<DevScreen> {
               controller: _mySelectorController,
               data: MySelectorData(
                 getFutureData: () {
-                  // return Get.find<JsonPlaceholderApi>().getPostList().then((
-                  //   value,
-                  // ) {
-                  //   return (value.data ?? []).map((element) {
-                  //     return MySelectorModel(
-                  //       id: element['id'],
-                  //       name: element['title'],
-                  //       // description: element['body'],
-                  //     );
-                  //   }).toList();
-                  // });
-                  return Future.value([
-                    MySelectorModel(id: 1, name: 'Option 1'),
-                    MySelectorModel(
-                      id: 2,
-                      name:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                    ),
-                  ]);
+                  return Get.find<JsonPlaceholderApi>().getPostList().then((
+                    value,
+                  ) {
+                    return (value.data ?? []).map((element) {
+                      return MySelectorModel(
+                        id: element['id'],
+                        name: element['title'],
+                      );
+                    }).toList();
+                  });
+                  // return Future.value([
+                  //   MySelectorModel(id: 1, name: 'Option 1'),
+                  //   MySelectorModel(
+                  //     id: 2,
+                  //     name:
+                  //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                  //   ),
+                  // ]);
                 },
               ),
             ),
@@ -100,7 +99,7 @@ class _DevScreenState extends State<DevScreen> {
                 icon: const Icon(Icons.menu),
               ),
               items: [
-                MyTexttileItem(titleText: 'Họ và tên', text: 'Võ Thị Tố Quyên'),
+                MyTexttileItem(titleText: 'Họ và tên', text: 'Sủi'),
                 MyTexttileItem(titleText: 'Ngày sinh', text: '02/01/2000'),
                 MyTexttileItem(
                   titleText: 'SĐT',

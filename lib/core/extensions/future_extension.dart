@@ -1,5 +1,6 @@
 import 'package:flutter_base/models/base_response.dart';
 
+import '../const/constants.dart';
 import '../error_handler.dart';
 
 class ApiParameters {
@@ -11,8 +12,8 @@ class ApiParameters {
 extension FutureExtension<T> on Future<BaseResponseModel<T>> {
   Future<BaseResponseModel<T>> call({ApiParameters? apiParameters}) {
     return then((data) {
-      if (data.code == 404) {
-        throw MyError(message: 'Custom error', code: data.code);
+      if (data.code != MyStatus.success) {
+        throw MyError(message: data.message, code: data.code);
       }
       return data;
     }).onError((error, stackTrace) {
