@@ -8,16 +8,16 @@
 
 //   final PokemonRetrofitApi api;
 
-//   Future<BaseResponseModel<List>> getPokemonsList({ApiParameters? apiParameters}) {
+//   Future<BaseResponse<List>> getPokemonsList({ApiParameters? apiParameters}) {
 //     print('API getPokemonsList');
 //     return api.getPokemonsList().call(apiParameters: apiParameters);
 //   }
 
-//   Future<BaseResponseModel> getButterFreePokemon({ApiParameters? apiParameters}) {
+//   Future<BaseResponse> getButterFreePokemon({ApiParameters? apiParameters}) {
 //     return api.getButterFreePokemon().call(apiParameters: apiParameters);
 //   }
 
-//   Future<BaseResponseModel> getPokemonFail() {
+//   Future<BaseResponse> getPokemonFail() {
 //     return api.getPokemonFail().call();
 //   }
 // }

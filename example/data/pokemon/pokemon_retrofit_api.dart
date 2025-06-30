@@ -10,11 +10,11 @@
 //   factory PokemonRetrofitApi(Dio dio, {String baseUrl}) = _PokemonRetrofitApi;
 
 //   @GET('/pokemon/')
-//   Future<BaseResponseModel<List>> getPokemonsList();
+//   Future<BaseResponse<List>> getPokemonsList();
 
 //   @GET('/pokemon/12/')
-//   Future<BaseResponseModel> getButterFreePokemon();
+//   Future<BaseResponse> getButterFreePokemon();
 
 //   @GET('/pokemon/huy')
-//   Future<BaseResponseModel> getPokemonFail();
+//   Future<BaseResponse> getPokemonFail();
 // }

@@ -18,7 +18,7 @@ class _AuthenticationApi implements AuthenticationApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<BaseResponseModel<SecondFaStatusResponse>> switch2FaStatus(
+  Future<BaseResponse<SecondFaStatusResponse>> switch2FaStatus(
     SmsVertificationPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -26,7 +26,7 @@ class _AuthenticationApi implements AuthenticationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponseModel<SecondFaStatusResponse>>(
+    final _options = _setStreamType<BaseResponse<SecondFaStatusResponse>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -37,9 +37,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<SecondFaStatusResponse> _value;
+    late BaseResponse<SecondFaStatusResponse> _value;
     try {
-      _value = BaseResponseModel<SecondFaStatusResponse>.fromJson(
+      _value = BaseResponse<SecondFaStatusResponse>.fromJson(
         _result.data!,
         (json) => SecondFaStatusResponse.fromJson(json as Map<String, dynamic>),
       );
@@ -51,13 +51,13 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<LoginResponse>> login(LoginPayload body) async {
+  Future<BaseResponse<LoginResponse>> login(LoginPayload body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponseModel<LoginResponse>>(
+    final _options = _setStreamType<BaseResponse<LoginResponse>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -68,9 +68,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<LoginResponse> _value;
+    late BaseResponse<LoginResponse> _value;
     try {
-      _value = BaseResponseModel<LoginResponse>.fromJson(
+      _value = BaseResponse<LoginResponse>.fromJson(
         _result.data!,
         (json) => LoginResponse.fromJson(json as Map<String, dynamic>),
       );
@@ -82,7 +82,7 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<dynamic>> changePassword(
+  Future<BaseResponse<dynamic>> changePassword(
     ChangePasswordPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -90,7 +90,7 @@ class _AuthenticationApi implements AuthenticationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponseModel<dynamic>>(
+    final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -101,9 +101,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<dynamic> _value;
+    late BaseResponse<dynamic> _value;
     try {
-      _value = BaseResponseModel<dynamic>.fromJson(
+      _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
         (json) => json as dynamic,
       );
@@ -115,7 +115,7 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<NewTokenResponse>> getNewToken(
+  Future<BaseResponse<NewTokenResponse>> getNewToken(
     NewTokenPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -123,7 +123,7 @@ class _AuthenticationApi implements AuthenticationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponseModel<NewTokenResponse>>(
+    final _options = _setStreamType<BaseResponse<NewTokenResponse>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -134,9 +134,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<NewTokenResponse> _value;
+    late BaseResponse<NewTokenResponse> _value;
     try {
-      _value = BaseResponseModel<NewTokenResponse>.fromJson(
+      _value = BaseResponse<NewTokenResponse>.fromJson(
         _result.data!,
         (json) => NewTokenResponse.fromJson(json as Map<String, dynamic>),
       );
@@ -148,12 +148,12 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<SecondFaStatusResponse>> get2FaStatus() async {
+  Future<BaseResponse<SecondFaStatusResponse>> get2FaStatus() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<BaseResponseModel<SecondFaStatusResponse>>(
+    final _options = _setStreamType<BaseResponse<SecondFaStatusResponse>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -164,9 +164,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<SecondFaStatusResponse> _value;
+    late BaseResponse<SecondFaStatusResponse> _value;
     try {
-      _value = BaseResponseModel<SecondFaStatusResponse>.fromJson(
+      _value = BaseResponse<SecondFaStatusResponse>.fromJson(
         _result.data!,
         (json) => SecondFaStatusResponse.fromJson(json as Map<String, dynamic>),
       );
@@ -178,7 +178,7 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<dynamic>> forgotPassword(
+  Future<BaseResponse<dynamic>> forgotPassword(
     ForgotPasswordPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -186,7 +186,7 @@ class _AuthenticationApi implements AuthenticationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponseModel<dynamic>>(
+    final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -197,9 +197,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<dynamic> _value;
+    late BaseResponse<dynamic> _value;
     try {
-      _value = BaseResponseModel<dynamic>.fromJson(
+      _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
         (json) => json as dynamic,
       );
@@ -211,7 +211,7 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<dynamic>> changeAccountInfor(
+  Future<BaseResponse<dynamic>> changeAccountInfor(
     ChangeAccountInforPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -219,7 +219,7 @@ class _AuthenticationApi implements AuthenticationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponseModel<dynamic>>(
+    final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -230,9 +230,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<dynamic> _value;
+    late BaseResponse<dynamic> _value;
     try {
-      _value = BaseResponseModel<dynamic>.fromJson(
+      _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
         (json) => json as dynamic,
       );
@@ -244,12 +244,12 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<AccountInforResponse>> getAccountInfor() async {
+  Future<BaseResponse<AccountInforResponse>> getAccountInfor() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<BaseResponseModel<AccountInforResponse>>(
+    final _options = _setStreamType<BaseResponse<AccountInforResponse>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -260,9 +260,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<AccountInforResponse> _value;
+    late BaseResponse<AccountInforResponse> _value;
     try {
-      _value = BaseResponseModel<AccountInforResponse>.fromJson(
+      _value = BaseResponse<AccountInforResponse>.fromJson(
         _result.data!,
         (json) => AccountInforResponse.fromJson(json as Map<String, dynamic>),
       );
@@ -274,7 +274,7 @@ class _AuthenticationApi implements AuthenticationApi {
   }
 
   @override
-  Future<BaseResponseModel<dynamic>> checkSmsVertification(
+  Future<BaseResponse<dynamic>> checkSmsVertification(
     SmsVertificationPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -282,7 +282,7 @@ class _AuthenticationApi implements AuthenticationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponseModel<dynamic>>(
+    final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -293,9 +293,9 @@ class _AuthenticationApi implements AuthenticationApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponseModel<dynamic> _value;
+    late BaseResponse<dynamic> _value;
     try {
-      _value = BaseResponseModel<dynamic>.fromJson(
+      _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
         (json) => json as dynamic,
       );

@@ -4,15 +4,15 @@ part 'base_response.freezed.dart';
 part 'base_response.g.dart';
 
 @Freezed(genericArgumentFactories: true)
-abstract class BaseResponseModel<T> with _$BaseResponseModel<T> {
-  factory BaseResponseModel({
+abstract class BaseResponse<T> with _$BaseResponse<T> {
+  factory BaseResponse({
     @JsonKey(name: 'data') final T? data,
     @JsonKey(name: 'status') final int? code,
     @JsonKey(name: 'msg') final String? message,
-  }) = _BaseResponseModel;
+  }) = _BaseResponse;
 
-  factory BaseResponseModel.fromJson(
+  factory BaseResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object?) fromJsonT,
-  ) => _$BaseResponseModelFromJson(json, fromJsonT);
+  ) => _$BaseResponseFromJson(json, fromJsonT);
 }

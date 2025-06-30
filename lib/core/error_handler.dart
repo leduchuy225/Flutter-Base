@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../theme/styles.dart';
 import '../widgets/dialog/dialog_widget.dart';
 import 'const/constants.dart';
-import 'extensions/future_extension.dart';
 
 class MyError implements Exception {
   final int? code;
@@ -22,9 +21,7 @@ class MyError implements Exception {
     );
   }
 
-  static void handleError(Object error, {ApiParameters? apiParameters}) {
-    final _apiParameters = apiParameters ?? ApiParameters();
-
+  static void handleError(Object error, {bool iShowError = true}) {
     String? message;
 
     switch (error.runtimeType) {
@@ -51,7 +48,7 @@ class MyError implements Exception {
 
     print('Error message: $message');
 
-    if (_apiParameters.iShowError) {
+    if (iShowError) {
       MyError.showErrorDialog(message ?? MyStrings.systemError);
     }
   }

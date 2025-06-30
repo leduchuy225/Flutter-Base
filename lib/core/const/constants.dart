@@ -6,7 +6,7 @@ class MyStrings {
       'Mất kết nối internet. Vui lòng kiểm tra lại mạng';
   static String noData = 'Không có dữ liệu hiển thị';
 
-  static String baseURL = 'https://jsonplaceholder.typicode.com';
+  static String baseURL = ''; // 'https://jsonplaceholder.typicode.com';
 }
 
 class MyStatus {

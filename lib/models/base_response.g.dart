@@ -6,17 +6,17 @@ part of 'base_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_BaseResponseModel<T> _$BaseResponseModelFromJson<T>(
+_BaseResponse<T> _$BaseResponseFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
-) => _BaseResponseModel<T>(
+) => _BaseResponse<T>(
   data: _$nullableGenericFromJson(json['data'], fromJsonT),
   code: (json['status'] as num?)?.toInt(),
   message: json['msg'] as String?,
 );
 
-Map<String, dynamic> _$BaseResponseModelToJson<T>(
-  _BaseResponseModel<T> instance,
+Map<String, dynamic> _$BaseResponseToJson<T>(
+  _BaseResponse<T> instance,
   Object? Function(T value) toJsonT,
 ) => <String, dynamic>{
   'data': _$nullableGenericToJson(instance.data, toJsonT),

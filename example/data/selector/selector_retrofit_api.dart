@@ -10,5 +10,5 @@
 //   factory SelectorRetrofitApi(Dio dio, {String baseUrl}) = _SelectorRetrofitApi;
 
 //   @GET('/pokemon/')
-//   Future<BaseResponseModel<List>> getPokemonsList();
+//   Future<BaseResponse<List>> getPokemonsList();
 // }

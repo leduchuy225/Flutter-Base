@@ -17,40 +17,40 @@ part 'authentication_api.g.dart';
 
 @RestApi()
 abstract class AuthenticationApi {
-  factory AuthenticationApi(Dio dio, {String? baseUrl}) = _AuthenticationApi;
+  factory AuthenticationApi(Dio dio) = _AuthenticationApi;
 
   @POST('/GAuthAuthenticator')
-  Future<BaseResponseModel<SecondFaStatusResponse>> switch2FaStatus(
+  Future<BaseResponse<SecondFaStatusResponse>> switch2FaStatus(
     @Body() SmsVertificationPayload body,
   );
 
   @POST('/login')
-  Future<BaseResponseModel<LoginResponse>> login(@Body() LoginPayload body);
+  Future<BaseResponse<LoginResponse>> login(@Body() LoginPayload body);
 
   @POST('/Setting/APIChangePassword')
-  Future<BaseResponseModel> changePassword(@Body() ChangePasswordPayload body);
+  Future<BaseResponse> changePassword(@Body() ChangePasswordPayload body);
 
   @POST('/login/GetAccessToken')
-  Future<BaseResponseModel<NewTokenResponse>> getNewToken(
+  Future<BaseResponse<NewTokenResponse>> getNewToken(
     @Body() NewTokenPayload body,
   );
 
   @POST('/GAuthAuthenticator/LoadData')
-  Future<BaseResponseModel<SecondFaStatusResponse>> get2FaStatus();
+  Future<BaseResponse<SecondFaStatusResponse>> get2FaStatus();
 
   @POST('/login/ForgotPassword')
-  Future<BaseResponseModel> forgotPassword(@Body() ForgotPasswordPayload body);
+  Future<BaseResponse> forgotPassword(@Body() ForgotPasswordPayload body);
 
   @POST('/Setting/UpdateUserInfo')
-  Future<BaseResponseModel> changeAccountInfor(
+  Future<BaseResponse> changeAccountInfor(
     @Body() ChangeAccountInforPayload body,
   );
 
   @POST('/Setting/GetUserInfo')
-  Future<BaseResponseModel<AccountInforResponse>> getAccountInfor();
+  Future<BaseResponse<AccountInforResponse>> getAccountInfor();
 
   @POST('/gauthauthenticator/check')
-  Future<BaseResponseModel> checkSmsVertification(
+  Future<BaseResponse> checkSmsVertification(
     @Body() SmsVertificationPayload body,
   );
 }

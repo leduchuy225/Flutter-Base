@@ -14,22 +14,22 @@ part of 'base_response.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$BaseResponseModel<T> {
+mixin _$BaseResponse<T> {
 
 @JsonKey(name: 'data') T? get data;@JsonKey(name: 'status') int? get code;@JsonKey(name: 'msg') String? get message;
-/// Create a copy of BaseResponseModel
+/// Create a copy of BaseResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$BaseResponseModelCopyWith<T, BaseResponseModel<T>> get copyWith => _$BaseResponseModelCopyWithImpl<T, BaseResponseModel<T>>(this as BaseResponseModel<T>, _$identity);
+$BaseResponseCopyWith<T, BaseResponse<T>> get copyWith => _$BaseResponseCopyWithImpl<T, BaseResponse<T>>(this as BaseResponse<T>, _$identity);
 
-  /// Serializes this BaseResponseModel to a JSON map.
+  /// Serializes this BaseResponse to a JSON map.
   Map<String, dynamic> toJson(Object? Function(T) toJsonT);
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BaseResponseModel<T>&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BaseResponse<T>&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,15 +38,15 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'BaseResponseModel<$T>(data: $data, code: $code, message: $message)';
+  return 'BaseResponse<$T>(data: $data, code: $code, message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $BaseResponseModelCopyWith<T,$Res>  {
-  factory $BaseResponseModelCopyWith(BaseResponseModel<T> value, $Res Function(BaseResponseModel<T>) _then) = _$BaseResponseModelCopyWithImpl;
+abstract mixin class $BaseResponseCopyWith<T,$Res>  {
+  factory $BaseResponseCopyWith(BaseResponse<T> value, $Res Function(BaseResponse<T>) _then) = _$BaseResponseCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'data') T? data,@JsonKey(name: 'status') int? code,@JsonKey(name: 'msg') String? message
@@ -57,14 +57,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$BaseResponseModelCopyWithImpl<T,$Res>
-    implements $BaseResponseModelCopyWith<T, $Res> {
-  _$BaseResponseModelCopyWithImpl(this._self, this._then);
+class _$BaseResponseCopyWithImpl<T,$Res>
+    implements $BaseResponseCopyWith<T, $Res> {
+  _$BaseResponseCopyWithImpl(this._self, this._then);
 
-  final BaseResponseModel<T> _self;
-  final $Res Function(BaseResponseModel<T>) _then;
+  final BaseResponse<T> _self;
+  final $Res Function(BaseResponse<T>) _then;
 
-/// Create a copy of BaseResponseModel
+/// Create a copy of BaseResponse
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? data = freezed,Object? code = freezed,Object? message = freezed,}) {
   return _then(_self.copyWith(
@@ -81,28 +81,28 @@ as String?,
 /// @nodoc
 @JsonSerializable(genericArgumentFactories: true)
 
-class _BaseResponseModel<T> implements BaseResponseModel<T> {
-   _BaseResponseModel({@JsonKey(name: 'data') this.data, @JsonKey(name: 'status') this.code, @JsonKey(name: 'msg') this.message});
-  factory _BaseResponseModel.fromJson(Map<String, dynamic> json,T Function(Object?) fromJsonT) => _$BaseResponseModelFromJson(json,fromJsonT);
+class _BaseResponse<T> implements BaseResponse<T> {
+   _BaseResponse({@JsonKey(name: 'data') this.data, @JsonKey(name: 'status') this.code, @JsonKey(name: 'msg') this.message});
+  factory _BaseResponse.fromJson(Map<String, dynamic> json,T Function(Object?) fromJsonT) => _$BaseResponseFromJson(json,fromJsonT);
 
 @override@JsonKey(name: 'data') final  T? data;
 @override@JsonKey(name: 'status') final  int? code;
 @override@JsonKey(name: 'msg') final  String? message;
 
-/// Create a copy of BaseResponseModel
+/// Create a copy of BaseResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$BaseResponseModelCopyWith<T, _BaseResponseModel<T>> get copyWith => __$BaseResponseModelCopyWithImpl<T, _BaseResponseModel<T>>(this, _$identity);
+_$BaseResponseCopyWith<T, _BaseResponse<T>> get copyWith => __$BaseResponseCopyWithImpl<T, _BaseResponse<T>>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
-  return _$BaseResponseModelToJson<T>(this, toJsonT);
+  return _$BaseResponseToJson<T>(this, toJsonT);
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BaseResponseModel<T>&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BaseResponse<T>&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.code, code) || other.code == code)&&(identical(other.message, message) || other.message == message));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -111,15 +111,15 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'BaseResponseModel<$T>(data: $data, code: $code, message: $message)';
+  return 'BaseResponse<$T>(data: $data, code: $code, message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$BaseResponseModelCopyWith<T,$Res> implements $BaseResponseModelCopyWith<T, $Res> {
-  factory _$BaseResponseModelCopyWith(_BaseResponseModel<T> value, $Res Function(_BaseResponseModel<T>) _then) = __$BaseResponseModelCopyWithImpl;
+abstract mixin class _$BaseResponseCopyWith<T,$Res> implements $BaseResponseCopyWith<T, $Res> {
+  factory _$BaseResponseCopyWith(_BaseResponse<T> value, $Res Function(_BaseResponse<T>) _then) = __$BaseResponseCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'data') T? data,@JsonKey(name: 'status') int? code,@JsonKey(name: 'msg') String? message
@@ -130,17 +130,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$BaseResponseModelCopyWithImpl<T,$Res>
-    implements _$BaseResponseModelCopyWith<T, $Res> {
-  __$BaseResponseModelCopyWithImpl(this._self, this._then);
+class __$BaseResponseCopyWithImpl<T,$Res>
+    implements _$BaseResponseCopyWith<T, $Res> {
+  __$BaseResponseCopyWithImpl(this._self, this._then);
 
-  final _BaseResponseModel<T> _self;
-  final $Res Function(_BaseResponseModel<T>) _then;
+  final _BaseResponse<T> _self;
+  final $Res Function(_BaseResponse<T>) _then;
 
-/// Create a copy of BaseResponseModel
+/// Create a copy of BaseResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? data = freezed,Object? code = freezed,Object? message = freezed,}) {
-  return _then(_BaseResponseModel<T>(
+  return _then(_BaseResponse<T>(
 data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as T?,code: freezed == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
 as int?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable

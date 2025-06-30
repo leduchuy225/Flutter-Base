@@ -5,7 +5,7 @@ part 'jsonplaceholder_api.g.dart';
 
 @RestApi()
 abstract class JsonPlaceholderApi {
-  factory JsonPlaceholderApi(Dio dio, {String? baseUrl}) = _JsonPlaceholderApi;
+  factory JsonPlaceholderApi(Dio dio) = _JsonPlaceholderApi;
 
   @GET('/posts')
   Future getPostList();

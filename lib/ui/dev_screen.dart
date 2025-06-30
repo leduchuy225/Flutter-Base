@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/const/constants.dart';
+import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
 import '../data/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
 import '../widgets/datetime_picker/datetime_picker_widget.dart';
+import '../widgets/dialog/dialog_widget.dart';
 import '../widgets/my_appbar.dart';
 import '../widgets/my_texttile.dart';
 import '../widgets/selector/selector_controller.dart';
@@ -55,11 +58,20 @@ class _DevScreenState extends State<DevScreen> {
             AppStyles.pdt20,
             ElevatedButton(
               onPressed: () async {
-                // final data = await Get.find<JsonPlaceholderApi>()
-                //     .getPostDetail();
-                // if (data.data != null) {
-                //   MyDialog.snackbar(data.data.toString());
-                // }
+                final data = await Get.find<JsonPlaceholderApi>()
+                    .getPostDetail()
+                    .then((value) {
+                      return BaseResponse();
+                    })
+                    .callApi(
+                      mockData: BaseResponse(
+                        data: 'AHIHI',
+                        code: MyStatus.success,
+                      ),
+                    );
+                if (data.data != null) {
+                  MyDialog.snackbar(data.data.toString());
+                }
               },
               child: const Text('TEST API'),
             ),

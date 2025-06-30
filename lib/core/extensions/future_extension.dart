@@ -3,14 +3,14 @@ import 'package:flutter_base/models/base_response.dart';
 import '../const/constants.dart';
 import '../error_handler.dart';
 
-class ApiParameters {
-  final bool iShowError;
-
-  ApiParameters({this.iShowError = true});
-}
-
-extension FutureExtension<T> on Future<BaseResponseModel<T>> {
-  Future<BaseResponseModel<T>> callApi({ApiParameters? apiParameters}) {
+extension FutureExtension<T> on Future<BaseResponse<T>> {
+  Future<BaseResponse<T>> callApi({
+    bool iShowError = true,
+    BaseResponse<T>? mockData,
+  }) {
+    if (mockData != null) {
+      return Future.value(mockData).callApi(iShowError: iShowError);
+    }
     return then((data) {
       if (data.code != MyStatus.success) {
         throw MyError(message: data.message, code: data.code);
@@ -18,9 +18,9 @@ extension FutureExtension<T> on Future<BaseResponseModel<T>> {
       return data;
     }).onError((error, stackTrace) {
       if (error != null) {
-        MyError.handleError(error, apiParameters: apiParameters);
+        MyError.handleError(error, iShowError: iShowError);
       }
-      return BaseResponseModel();
+      return BaseResponse();
     });
   }
 }
