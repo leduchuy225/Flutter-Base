@@ -7,8 +7,8 @@ part 'base_response.g.dart';
 abstract class BaseResponseModel<T> with _$BaseResponseModel<T> {
   factory BaseResponseModel({
     @JsonKey(name: 'data') final T? data,
-    @JsonKey(name: 'code') final int? code,
-    @JsonKey(name: 'message') final String? message,
+    @JsonKey(name: 'status') final int? code,
+    @JsonKey(name: 'msg') final String? message,
   }) = _BaseResponseModel;
 
   factory BaseResponseModel.fromJson(

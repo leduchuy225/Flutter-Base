@@ -4,9 +4,7 @@ class MyDebouncer {
   final Duration delay;
   Timer? _timer;
 
-  MyDebouncer({
-    this.delay = const Duration(milliseconds: 500),
-  });
+  MyDebouncer({this.delay = const Duration(milliseconds: 500)});
 
   void call(void Function() action) {
     _timer?.cancel();

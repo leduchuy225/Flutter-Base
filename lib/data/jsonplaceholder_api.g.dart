@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'jsonplaceholder_retrofit_api.dart';
+part of 'jsonplaceholder_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'jsonplaceholder_retrofit_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _JsonPlaceholderRetrofitApi implements JsonPlaceholderRetrofitApi {
-  _JsonPlaceholderRetrofitApi(this._dio, {this.baseUrl, this.errorLogger});
+class _JsonPlaceholderApi implements JsonPlaceholderApi {
+  _JsonPlaceholderApi(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 

@@ -4,7 +4,7 @@ import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
-import '../data/jsonplaceholder/jsonplaceholder_api.dart';
+import '../data/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
 import '../widgets/datetime_picker/datetime_picker_widget.dart';
 import '../widgets/my_appbar.dart';
@@ -55,11 +55,11 @@ class _DevScreenState extends State<DevScreen> {
             AppStyles.pdt20,
             ElevatedButton(
               onPressed: () async {
-                final data = await Get.find<JsonPlaceholderApi>()
-                    .getPostDetail();
-                if (data.data != null) {
-                  MyDialog.snackbar(data.data.toString());
-                }
+                // final data = await Get.find<JsonPlaceholderApi>()
+                //     .getPostDetail();
+                // if (data.data != null) {
+                //   MyDialog.snackbar(data.data.toString());
+                // }
               },
               child: const Text('TEST API'),
             ),
@@ -69,24 +69,25 @@ class _DevScreenState extends State<DevScreen> {
               controller: _mySelectorController,
               data: MySelectorData(
                 getFutureData: () {
-                  return Get.find<JsonPlaceholderApi>().getPostList().then((
-                    value,
-                  ) {
-                    return (value.data ?? []).map((element) {
-                      return MySelectorModel(
-                        id: element['id'],
-                        name: element['title'],
-                      );
-                    }).toList();
-                  });
-                  // return Future.value([
-                  //   MySelectorModel(id: 1, name: 'Option 1'),
-                  //   MySelectorModel(
-                  //     id: 2,
-                  //     name:
-                  //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                  //   ),
-                  // ]);
+                  // return Get.find<JsonPlaceholderApi>()
+                  //     .getPostList()
+                  //     .callApi()
+                  //     .then((value) {
+                  //       return (value.data ?? []).map((element) {
+                  //         return MySelectorModel(
+                  //           id: element['id'],
+                  //           name: element['title'],
+                  //         );
+                  //       }).toList();
+                  //     });
+                  return Future.value([
+                    MySelectorModel(id: 1, name: 'Option 1'),
+                    MySelectorModel(
+                      id: 2,
+                      name:
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                    ),
+                  ]);
                 },
               ),
             ),

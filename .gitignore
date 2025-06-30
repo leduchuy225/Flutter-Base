@@ -48,3 +48,7 @@ app.*.map.json
 # *.freezed.dart
 
 pubspec.lock
+
+# "JSON to Dart Model" generator tracker files locations.
+/.json_models/
+models.jsonc

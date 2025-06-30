@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BaseResponseModel<T> {
 
-@JsonKey(name: 'data') T? get data;@JsonKey(name: 'code') int? get code;@JsonKey(name: 'message') String? get message;
+@JsonKey(name: 'data') T? get data;@JsonKey(name: 'status') int? get code;@JsonKey(name: 'msg') String? get message;
 /// Create a copy of BaseResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $BaseResponseModelCopyWith<T,$Res>  {
   factory $BaseResponseModelCopyWith(BaseResponseModel<T> value, $Res Function(BaseResponseModel<T>) _then) = _$BaseResponseModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'data') T? data,@JsonKey(name: 'code') int? code,@JsonKey(name: 'message') String? message
+@JsonKey(name: 'data') T? data,@JsonKey(name: 'status') int? code,@JsonKey(name: 'msg') String? message
 });
 
 
@@ -82,12 +82,12 @@ as String?,
 @JsonSerializable(genericArgumentFactories: true)
 
 class _BaseResponseModel<T> implements BaseResponseModel<T> {
-   _BaseResponseModel({@JsonKey(name: 'data') this.data, @JsonKey(name: 'code') this.code, @JsonKey(name: 'message') this.message});
+   _BaseResponseModel({@JsonKey(name: 'data') this.data, @JsonKey(name: 'status') this.code, @JsonKey(name: 'msg') this.message});
   factory _BaseResponseModel.fromJson(Map<String, dynamic> json,T Function(Object?) fromJsonT) => _$BaseResponseModelFromJson(json,fromJsonT);
 
 @override@JsonKey(name: 'data') final  T? data;
-@override@JsonKey(name: 'code') final  int? code;
-@override@JsonKey(name: 'message') final  String? message;
+@override@JsonKey(name: 'status') final  int? code;
+@override@JsonKey(name: 'msg') final  String? message;
 
 /// Create a copy of BaseResponseModel
 /// with the given fields replaced by the non-null parameter values.
@@ -122,7 +122,7 @@ abstract mixin class _$BaseResponseModelCopyWith<T,$Res> implements $BaseRespons
   factory _$BaseResponseModelCopyWith(_BaseResponseModel<T> value, $Res Function(_BaseResponseModel<T>) _then) = __$BaseResponseModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'data') T? data,@JsonKey(name: 'code') int? code,@JsonKey(name: 'message') String? message
+@JsonKey(name: 'data') T? data,@JsonKey(name: 'status') int? code,@JsonKey(name: 'msg') String? message
 });
 
 

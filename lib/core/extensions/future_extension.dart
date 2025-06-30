@@ -10,7 +10,7 @@ class ApiParameters {
 }
 
 extension FutureExtension<T> on Future<BaseResponseModel<T>> {
-  Future<BaseResponseModel<T>> call({ApiParameters? apiParameters}) {
+  Future<BaseResponseModel<T>> callApi({ApiParameters? apiParameters}) {
     return then((data) {
       if (data.code != MyStatus.success) {
         throw MyError(message: data.message, code: data.code);
