@@ -93,11 +93,11 @@ class _MyBottomsheetSelectorContentState
                     );
                   }
                   if (widget.data.dataListShow.isEmpty) {
-                    return Padding(
+                    return const Padding(
                       padding: AppStyles.horizontalPadding,
                       child: Row(
                         children: [
-                          const Icon(Icons.info_outline_rounded),
+                          Icon(Icons.info_outline_rounded),
                           AppStyles.pdl5,
                           Text(MyStrings.noData),
                         ],

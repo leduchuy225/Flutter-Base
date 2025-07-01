@@ -2,23 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:get/get.dart';
 
+import '../core/services/cache_service.dart';
+
 class MyLoading extends StatelessWidget {
+  static int get loadingCount {
+    return CacheService().read<int>(key: CacheService.loadingCount) ?? 0;
+  }
+
+  static void setLoadingCount(int value) {
+    CacheService().write<int>(key: CacheService.loadingCount, value: value);
+  }
+
   static void show() {
+    setLoadingCount(loadingCount + 1);
     if (Get.isDialogOpen == true) {
       return;
     }
+    setLoadingCount(1);
     Get.dialog(
       MyLoading(),
       barrierDismissible: true,
-      barrierColor: Colors.black54, //.withOpacity(0.5),
+      barrierColor: Colors.black54,
     );
   }
 
   static void hide() {
+    setLoadingCount(loadingCount - 1);
     if (Get.isDialogOpen == false) {
       return;
     }
-    Get.back();
+    if (loadingCount <= 0) {
+      setLoadingCount(0);
+      Get.back();
+    }
   }
 
   @override

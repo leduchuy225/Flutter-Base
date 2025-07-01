@@ -1,6 +1,7 @@
 class CacheService {
   static String retryCount = 'retryCount';
   static String packageInfo = 'packageInfo';
+  static String loadingCount = 'loadingCount';
 
   static final CacheService _singleton = CacheService._internal();
 
