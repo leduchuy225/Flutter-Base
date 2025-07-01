@@ -49,7 +49,7 @@
 //               child: const Text('Settings Screen'),
 //               onTap: () async {
 //                 await Get.find<PokemonApi>().getButterFreePokemon(
-//                   apiParameters: ApiParameters(iShowError: true),
+//                   apiParameters: ApiParameters(isShowMessage: true),
 //                 );
 //                 // print(data);
 //               },

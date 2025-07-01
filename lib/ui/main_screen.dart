@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/services/user_service.dart';
+import 'package:flutter_base/models/authentication/account_infor_response.dart';
 import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
@@ -8,11 +10,6 @@ import 'package:get/get.dart';
 import '../theme/styles.dart';
 import '../widgets/dialog/dialog_widget.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
-// import 'package:flutter_base/ui/home/home_screen.dart';
-// import 'package:flutter_base/ui/settings/settings_screen.dart';
-// import 'package:flutter_base/widgets/bottom_navigation/bottom_navigation_widget.dart';
-
-// import '../../widgets/bottom_navigation/bottom_navigation_tab.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -20,10 +17,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  // List<GlobalKey<NavigatorState>> tabKeys = [
-  //   GlobalKey<NavigatorState>(),
-  //   GlobalKey<NavigatorState>(),
-  // ];
+  final userController = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +46,14 @@ class _MainScreenState extends State<MainScreen> {
                                   color: AppColors.textLight,
                                 ),
                                 AppStyles.pdl10,
-                                Text(
-                                  'Họ và tên',
-                                  style: AppTextStyles.h3.copyWith(
-                                    color: AppColors.textLight,
-                                  ),
-                                ),
+                                Obx(() {
+                                  return Text(
+                                    userController.userInformation?.email ?? '',
+                                    style: AppTextStyles.h3.copyWith(
+                                      color: AppColors.textLight,
+                                    ),
+                                  );
+                                }),
                               ],
                             ),
                           );
@@ -71,6 +67,10 @@ class _MainScreenState extends State<MainScreen> {
                         color: AppColors.textLight,
                       ),
                       onPressed: () {
+                        userController.updateUserInformation(
+                          AccountInforResponse(email: 'Le Duc Huy'),
+                        );
+
                         MyDialog.alertDialog(
                           title: 'Xác nhận',
                           message: 'Bạn muốn đăng xuất ứng dụng ?',
@@ -114,23 +114,5 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
     );
-
-    // return const Placeholder();
-    // return MyBottomNavigation(
-    //   pages: [
-    //     BottomNavigationTab(
-    //       label: 'Home',
-    //       key: tabKeys[0],
-    //       page: HomeScreen(),
-    //       icon: const Icon(Icons.home),
-    //     ),
-    //     BottomNavigationTab(
-    //       label: 'Setting',
-    //       key: tabKeys[1],
-    //       page: SettingsScreen(),
-    //       icon: const Icon(Icons.settings),
-    //     ),
-    //   ],
-    // );
   }
 }

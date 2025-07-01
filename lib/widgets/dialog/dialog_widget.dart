@@ -22,7 +22,7 @@ class MyDialog {
         title: title,
         message: message,
         backgroundColor: type.colors[0],
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 4),
       ),
     );
   }

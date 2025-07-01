@@ -27,8 +27,10 @@ class MyInterceptor extends Interceptor {
     await Future.delayed(retryDelay);
 
     try {
-      // Handle something here
-      await UserService.getNewTokens();
+      final data = await UserService.getNewTokens();
+      if (!data) {
+        throw err;
+      }
 
       _addOneMoreRetry(err);
 
@@ -61,7 +63,6 @@ class MyInterceptor extends Interceptor {
       options.headers['Authorization'] = 'Bearer $accessToken';
     }
 
-    // Custom request payload
     if (options.data is Map) {
       options.data = {...options.data, 'isJson': true};
     }

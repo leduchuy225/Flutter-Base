@@ -23,10 +23,10 @@ import 'package:flutter_base/models/base_response.dart';
 
 import '../authentication_api.dart';
 
-class MockAuthenticationApi extends AuthenticationApi {
-  factory MockAuthenticationApi(Dio dio) {
-    return MockAuthenticationApi(dio);
-  }
+class MockAuthenticationApi implements AuthenticationApi {
+  final Dio dio;
+
+  MockAuthenticationApi(this.dio);
 
   @override
   Future<BaseResponse> changeAccountInfor(
@@ -37,19 +37,19 @@ class MockAuthenticationApi extends AuthenticationApi {
 
   @override
   Future<BaseResponse> changePassword(ChangePasswordPayload body) async {
-    return BaseResponse();
+    return BaseResponse(code: 1, message: 'Thành công');
   }
 
   @override
   Future<BaseResponse> checkSmsVertification(
     SmsVertificationPayload body,
   ) async {
-    return BaseResponse();
+    return BaseResponse(code: 1, message: 'Mã OTP đúng');
   }
 
   @override
   Future<BaseResponse> forgotPassword(ForgotPasswordPayload body) async {
-    return BaseResponse();
+    return BaseResponse(code: 1, message: 'Cấp mật khẩu mới thành công');
   }
 
   @override
@@ -107,6 +107,7 @@ class MockAuthenticationApi extends AuthenticationApi {
   @override
   Future<BaseResponse<LoginResponse>> login(LoginPayload body) async {
     return BaseResponse(
+      code: 1,
       data: LoginResponse(accessToken: '1', refreshToken: '1'),
     );
   }

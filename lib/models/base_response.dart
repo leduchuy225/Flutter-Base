@@ -12,9 +12,18 @@ abstract class BaseResponse<T> with _$BaseResponse<T> {
     @JsonKey(name: 'msg') final String? message,
     @JsonKey(name: 'status', defaultValue: MyStatus.success) final int? code,
   }) = _BaseResponse;
+  const BaseResponse._();
 
   factory BaseResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object?) fromJsonT,
   ) => _$BaseResponseFromJson(json, fromJsonT);
+
+  bool get isSuccess {
+    return code == MyStatus.success;
+  }
+
+  bool get isError {
+    return !isSuccess;
+  }
 }

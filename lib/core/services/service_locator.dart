@@ -1,3 +1,4 @@
+import 'package:flutter_base/core/services/user_service.dart';
 import 'package:get/get.dart';
 
 import 'http_service.dart';
@@ -16,4 +17,5 @@ class DI {
 
 void setupServiceLocator() {
   DI.putPermanent(HttpService());
+  DI.putPermanent(UserService());
 }

@@ -96,7 +96,7 @@ class AppColors {
 
   static const Color error = Color.fromRGBO(207, 19, 34, 1.0);
 
-  static const Color success = Color.fromRGBO(45, 206, 137, 1.0);
+  static const Color success = Color(0xFF4CAF50);
 
   static const Color warning = Color.fromRGBO(251, 99, 64, 1.0);
 

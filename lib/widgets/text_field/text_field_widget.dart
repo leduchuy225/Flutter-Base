@@ -63,12 +63,6 @@ class _MyTextFieldState extends State<MyTextField> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _mainController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
       valueListenable: _mainController.state,

@@ -6,15 +6,17 @@ import 'checkbox_controller.dart';
 class MyCheckbox extends StatefulWidget {
   final String title;
   final bool isSelected;
-  final void Function(bool?) onChanged;
+  final void Function(bool?)? onChanged;
   final MyCheckboxController? controller;
+  final ListTileControlAffinity controlAffinity;
 
   const MyCheckbox({
     Key? key,
     this.controller,
     this.title = '',
+    this.onChanged,
     this.isSelected = false,
-    required this.onChanged,
+    this.controlAffinity = ListTileControlAffinity.leading,
   }) : super(key: key);
 
   @override
@@ -48,11 +50,15 @@ class _MyCheckboxState extends State<MyCheckbox> {
   Widget build(BuildContext context) {
     return Obx(() {
       return CheckboxListTile(
+        contentPadding: EdgeInsets.zero,
+        controlAffinity: widget.controlAffinity,
         value: _mainController.isSelected.value,
         enabled: _mainController.isEnable.value,
         title: Text(_mainController.title.value),
         onChanged: (value) {
-          widget.onChanged(value);
+          if (widget.onChanged != null) {
+            widget.onChanged!(value);
+          }
           _mainController.isSelected.value = value;
         },
       );

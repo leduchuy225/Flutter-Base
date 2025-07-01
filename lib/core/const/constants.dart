@@ -6,6 +6,8 @@ class MyStrings {
       'Mất kết nối internet. Vui lòng kiểm tra lại mạng';
   static const String noData = 'Không có dữ liệu hiển thị';
 
+  static const String noInput = 'Thông tin không được để trống';
+
   static const String baseURL = ''; // 'https://jsonplaceholder.typicode.com';
 }
 

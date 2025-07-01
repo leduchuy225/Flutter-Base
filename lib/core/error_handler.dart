@@ -21,7 +21,7 @@ class MyError implements Exception {
     );
   }
 
-  static void handleError(Object error, {bool iShowError = true}) {
+  static void handleError(Object error, {bool isShowMessage = true}) {
     String? message;
 
     switch (error.runtimeType) {
@@ -48,7 +48,7 @@ class MyError implements Exception {
 
     print('Error message: $message');
 
-    if (iShowError) {
+    if (isShowMessage) {
       MyError.showErrorDialog(message ?? MyStrings.systemError);
     }
   }
