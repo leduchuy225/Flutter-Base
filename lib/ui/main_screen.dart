@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/services/user_service.dart';
-import 'package:flutter_base/models/authentication/account_infor_response.dart';
-import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/gradient_background.dart';
 import 'package:get/get.dart';
 
 import '../theme/styles.dart';
-import '../widgets/dialog/dialog_widget.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,7 +14,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final userController = Get.find<UserService>();
+  final _userService = Get.find<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
                                 AppStyles.pdl10,
                                 Obx(() {
                                   return Text(
-                                    userController.userInformation?.email ?? '',
+                                    _userService.userInfor?.email ?? '',
                                     style: AppTextStyles.h3.copyWith(
                                       color: AppColors.textLight,
                                     ),
@@ -67,17 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                         color: AppColors.textLight,
                       ),
                       onPressed: () {
-                        userController.updateUserInformation(
-                          AccountInforResponse(email: 'Le Duc Huy'),
-                        );
-
-                        MyDialog.alertDialog(
-                          title: 'Xác nhận',
-                          message: 'Bạn muốn đăng xuất ứng dụng ?',
-                          okHandler: () {
-                            Get.offAll(() => const LoginScreen());
-                          },
-                        );
+                        _userService.logOut();
                       },
                     ),
                   ],

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/ui/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -21,35 +22,50 @@ class MyError implements Exception {
     );
   }
 
-  static void handleError(Object error, {bool isShowMessage = true}) {
-    String? message;
+  static BaseResponse handleError(Object? error, {bool isShowMessage = true}) {
+    BaseResponse _baseResponse = BaseResponse(
+      code: MyStatus.error,
+      message: MyStrings.systemError,
+    );
+
+    if (error == null) {
+      return _baseResponse;
+    }
 
     switch (error.runtimeType) {
       case DioException:
         final dioException = error as DioException;
-        message = dioException.message;
+        _baseResponse = _baseResponse.copyWith(message: dioException.message);
         if (dioException.type == DioExceptionType.connectionError) {
-          message = MyStrings.connectionOff;
+          _baseResponse = _baseResponse.copyWith(
+            message: MyStrings.connectionOff,
+          );
         }
         break;
       case MyError:
         final myException = error as MyError;
-        message = myException.message != null
+        final message = myException.message != null
             ? 'Lỗi [${myException.code}] - ${myException.message}'
             : null;
 
         if (myException.code == MyStatus.notAuthenticate2Fa) {
           Get.offAll(() => const SplashScreen());
         }
+        _baseResponse = _baseResponse.copyWith(
+          message: message,
+          code: myException.code,
+        );
         break;
       default:
-        message = error.toString();
+        _baseResponse = _baseResponse.copyWith(message: error.toString());
     }
 
-    print('Error message: $message');
+    print('Error message: ${_baseResponse.message}');
 
     if (isShowMessage) {
-      MyError.showErrorDialog(message ?? MyStrings.systemError);
+      MyError.showErrorDialog(_baseResponse.message);
     }
+
+    return _baseResponse;
   }
 }

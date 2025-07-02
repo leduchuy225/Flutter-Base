@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/ui/main_screen.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
@@ -17,6 +17,8 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  final _userService = Get.find<UserService>();
+
   final _otpController = TextEditingController();
 
   Future<void> _onCompleted(String value) async {
@@ -24,12 +26,15 @@ class _OtpScreenState extends State<OtpScreen> {
         .checkSmsVertification(SmsVertificationPayload(codeKey: value))
         .callApi(isShowSuccessMessage: false);
 
-    if (data.isSuccess) {
-      Get.offAll(() => MainScreen());
+    if (data.isError) {
+      _otpController.clear();
       return;
     }
 
-    _otpController.clear();
+    await _userService.updateUserInforFromAPI(
+      isNavigateToMain: true,
+      isShowErrorMessage: true,
+    );
   }
 
   @override

@@ -4,7 +4,6 @@ import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/loading_widget.dart';
 
 import '../../theme/styles.dart';
-import '../const/constants.dart';
 import '../error_handler.dart';
 
 extension FutureExtension<T> on Future<BaseResponse<T>> {
@@ -27,11 +26,9 @@ extension FutureExtension<T> on Future<BaseResponse<T>> {
     if (isShowLoading) {
       MyLoading.show();
     }
-
     if (delay != null) {
       await Future.delayed(delay);
     }
-
     return then((data) {
       if (isShowLoading) {
         MyLoading.hide();
@@ -54,10 +51,11 @@ extension FutureExtension<T> on Future<BaseResponse<T>> {
       if (isShowLoading) {
         MyLoading.hide();
       }
-      if (error != null) {
-        MyError.handleError(error, isShowMessage: isShowErrorMessage);
-      }
-      return BaseResponse(code: MyStatus.error);
+      final data = MyError.handleError(
+        error,
+        isShowMessage: isShowErrorMessage,
+      );
+      return BaseResponse(code: data.code, message: data.message);
     });
   }
 }

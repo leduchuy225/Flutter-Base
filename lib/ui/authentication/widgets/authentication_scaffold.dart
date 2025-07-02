@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../theme/styles.dart';
 import '../../../widgets/gradient_background.dart';
 import '../../../widgets/mobile_fiber.dart';
+import '../../../widgets/scrollview_with_bottom_widget.dart';
 
 class AuthenticationScaffold extends StatelessWidget {
   final String title;
@@ -21,31 +22,23 @@ class AuthenticationScaffold extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(backgroundColor: Colors.transparent),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
+      body: ScrollViewWithBottom(
+        bottomChild: bottomChild,
+        bodyChild: Column(
+          children: [
+            GradientBackground(
               children: [
-                GradientBackground(
-                  children: [
-                    MobileFiber(style: AppTextStyles.h1),
-                    AppStyles.pdt15,
-                    Text(
-                      title,
-                      style: AppTextStyles.h2.copyWith(
-                        color: AppColors.textLight,
-                      ),
-                    ),
-                  ],
+                MobileFiber(style: AppTextStyles.h1),
+                AppStyles.pdt15,
+                Text(
+                  title,
+                  style: AppTextStyles.h2.copyWith(color: AppColors.textLight),
                 ),
-                Padding(padding: const EdgeInsets.all(20), child: child),
               ],
             ),
-          ),
-          if (bottomChild != null)
-            Padding(padding: const EdgeInsets.all(20), child: bottomChild),
-        ],
+            Padding(padding: const EdgeInsets.all(20), child: child),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:flutter_base/widgets/mobile_fiber.dart';
@@ -15,6 +16,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final _userService = Get.find<UserService>();
+
   @override
   void initState() {
     super.initState();
@@ -23,9 +26,20 @@ class _SplashScreenState extends State<SplashScreen> {
       final packageInfo = await PackageInfo.fromPlatform();
       CacheService().write(key: CacheService.packageInfo, value: packageInfo);
 
-      Future.delayed(const Duration(seconds: 1)).then((value) {
+      final refreshToken = await UserService.refreshToken;
+
+      if (refreshToken.isEmpty) {
         Get.offAll(() => const LoginScreen());
-      });
+        return;
+      }
+
+      final updateUserResult = await _userService.updateUserInforFromAPI(
+        isNavigateToMain: true,
+      );
+      if (updateUserResult == false) {
+        Get.offAll(() => const LoginScreen());
+        return;
+      }
     });
   }
 

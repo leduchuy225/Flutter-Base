@@ -14,7 +14,7 @@ class SharedPreference {
   static String username = 'username';
   static String accessToken = 'accessToken';
   static String refreshToken = 'refreshToken';
-  // static String userInformation = 'userInformation';
+  // static String userInfor = 'userInfor';
 
   // static String dataListKey = 'dataListKey';
 
