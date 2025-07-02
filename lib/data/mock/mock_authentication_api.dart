@@ -55,6 +55,7 @@ class MockAuthenticationApi implements AuthenticationApi {
   @override
   Future<BaseResponse<SecondFaStatusResponse>> get2FaStatus() async {
     return BaseResponse(
+      code: 1,
       data: SecondFaStatusResponse(
         status: true,
         barcodeImageUrl:
@@ -66,7 +67,9 @@ class MockAuthenticationApi implements AuthenticationApi {
 
   @override
   Future<BaseResponse<AccountInforResponse>> getAccountInfor() async {
+    print('CALL getAccountInfor');
     return BaseResponse(
+      code: 1,
       data: AccountInforResponse(
         email: 'aphonghp7@gmail.com',
         phoneNumber: '',
@@ -108,6 +111,7 @@ class MockAuthenticationApi implements AuthenticationApi {
   Future<BaseResponse<LoginResponse>> login(LoginPayload body) async {
     return BaseResponse(
       code: 1,
+      message: 'Chờ xác thực bảo mật 2 lớp',
       data: LoginResponse(accessToken: '1', refreshToken: '1'),
     );
   }
@@ -117,6 +121,7 @@ class MockAuthenticationApi implements AuthenticationApi {
     SmsVertificationPayload body,
   ) async {
     return BaseResponse(
+      code: 1,
       data: SecondFaStatusResponse(
         status: true,
         barcodeImageUrl:

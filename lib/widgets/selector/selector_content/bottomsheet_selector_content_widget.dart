@@ -30,7 +30,7 @@ class _MyBottomsheetSelectorContentState
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((data) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await widget.data.updateDataList();
     });
   }

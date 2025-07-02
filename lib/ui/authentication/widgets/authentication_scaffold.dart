@@ -25,6 +25,7 @@ class AuthenticationScaffold extends StatelessWidget {
       body: ScrollViewWithBottom(
         bottomChild: bottomChild,
         bodyChild: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             GradientBackground(
               children: [

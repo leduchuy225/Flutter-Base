@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/models/base_response.dart';
+import 'package:flutter_base/ui/authentication/otp_screen.dart';
 import 'package:flutter_base/ui/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -9,10 +12,9 @@ import '../widgets/dialog/dialog_widget.dart';
 import 'const/constants.dart';
 
 class MyError implements Exception {
-  final int? code;
-  final String? message;
+  final BaseResponse? response;
 
-  MyError({this.code, this.message});
+  MyError({this.response});
 
   static void showErrorDialog(String? message) {
     MyDialog.snackbar(
@@ -41,19 +43,30 @@ class MyError implements Exception {
             message: MyStrings.connectionOff,
           );
         }
+        if ([
+          HttpStatus.forbidden,
+          HttpStatus.unauthorized,
+        ].contains(dioException.response?.statusCode)) {
+          Get.offAll(() => const SplashScreen());
+        }
+
         break;
       case MyError:
         final myException = error as MyError;
-        final message = myException.message != null
-            ? 'Lỗi [${myException.code}] - ${myException.message}'
-            : null;
+        final message = myException.response?.message != null
+            ? 'Lỗi [${myException.response?.code}] - ${myException.response?.message}'
+            : MyStrings.systemError;
 
-        if (myException.code == MyStatus.notAuthenticate2Fa) {
+        if (myException.response?.code == MyStatus.notAuthenticate2Fa) {
+          Get.offAll(() => const OtpScreen());
+        } else if (myException.response?.code == MyStatus.tokenTimeOut) {
           Get.offAll(() => const SplashScreen());
         }
+
         _baseResponse = _baseResponse.copyWith(
           message: message,
-          code: myException.code,
+          code: myException.response?.code,
+          data: myException.response?.data,
         );
         break;
       default:

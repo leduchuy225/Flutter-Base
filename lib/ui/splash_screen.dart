@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((data) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final packageInfo = await PackageInfo.fromPlatform();
       CacheService().write(key: CacheService.packageInfo, value: packageInfo);
 
@@ -34,6 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       }
 
       final updateUserResult = await _userService.updateUserInforFromAPI(
+        isShowLoading: false,
         isNavigateToMain: true,
       );
       if (updateUserResult == false) {

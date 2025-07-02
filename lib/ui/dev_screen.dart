@@ -29,7 +29,7 @@ class _DevScreenState extends State<DevScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((data) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       // final data = await Get.find<JsonPlaceholderApi>().getPostDetail();
       // MyDialog.snackbar(data.data.toString());
     });

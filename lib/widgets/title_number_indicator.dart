@@ -11,13 +11,19 @@ class TitleNumberIndicator extends StatelessWidget {
     required this.number,
   });
 
-  static Widget getnumber(dynamic number) {
+  static Widget getnumber(
+    dynamic number, {
+    double? radius,
+    EdgeInsets? padding,
+    Color color = AppColors.error,
+  }) {
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.error,
-        borderRadius: BorderRadius.all(Radius.circular(16)),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(radius ?? 16)),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
+      padding:
+          padding ?? const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
       child: Text(
         number.toString(),
         style: const TextStyle(color: AppColors.textLight),

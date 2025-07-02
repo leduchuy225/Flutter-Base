@@ -35,7 +35,7 @@ class _MyAnimateWidgetState extends State<MyAnimateWidget>
   void initState() {
     super.initState();
     _myAnimateController = AnimationController(vsync: this);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.controller.animate = animate;
     });
   }

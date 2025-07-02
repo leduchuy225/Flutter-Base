@@ -3,7 +3,6 @@ import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/models/authentication/account_infor_response.dart';
 import 'package:flutter_base/models/authentication/login_payload.dart';
-import 'package:flutter_base/ui/authentication/otp_screen.dart';
 import 'package:flutter_base/ui/main_screen.dart';
 import 'package:flutter_base/ui/splash_screen.dart';
 import 'package:get/get.dart';
@@ -25,11 +24,13 @@ class UserService extends GetxController {
   }
 
   Future<bool> updateUserInforFromAPI({
+    bool isShowLoading = true,
     bool isNavigateToMain = false,
     bool isShowErrorMessage = false,
   }) async {
     final data = await Get.find<AuthenticationApi>().getAccountInfor().callApi(
       isShowSuccessMessage: false,
+      isShowLoading: isShowLoading,
       isShowErrorMessage: isShowErrorMessage,
     );
     if (data.data == null) {
@@ -55,16 +56,17 @@ class UserService extends GetxController {
         .login(payload)
         .callApi(isShowSuccessMessage: false);
 
-    if (data.isError) {
-      return;
+    if (data.data != null) {
+      await UserService.saveTokens(
+        accessToken: data.data?.accessToken,
+        refreshToken: data.data?.refreshToken,
+      );
     }
-
-    await UserService.saveTokens(
-      accessToken: data.data?.accessToken,
-      refreshToken: data.data?.refreshToken,
-    );
-
-    Get.to(() => const OtpScreen());
+    if (data.isSuccess) {
+      await Get.find<UserService>().updateUserInforFromAPI(
+        isNavigateToMain: true,
+      );
+    }
   }
 
   static Future<void> saveTokens({
@@ -85,8 +87,8 @@ class UserService extends GetxController {
     }
   }
 
-  static Future<bool> getNewTokens() async {
-    final deviceToken = await Config().deviceToken;
+  Future<bool> getNewTokens() async {
+    final deviceId = await Config().deviceToken;
     final refreshToken = await UserService.refreshToken;
 
     if (refreshToken.isEmpty) {
@@ -95,11 +97,12 @@ class UserService extends GetxController {
 
     final data = await Get.find<AuthenticationApi>()
         .getNewToken(
-          NewTokenPayload(deviceId: deviceToken, refreshToken: refreshToken),
+          NewTokenPayload(deviceId: deviceId, refreshToken: refreshToken),
         )
         .callApi();
 
     if (data.isError) {
+      await clearLocalData();
       return false;
     }
 
@@ -107,7 +110,6 @@ class UserService extends GetxController {
       accessToken: data.data?.accessToken,
       refreshToken: data.data?.refreshToken,
     );
-
     return true;
   }
 
@@ -123,5 +125,11 @@ class UserService extends GetxController {
         Get.offAll(() => const SplashScreen());
       },
     );
+  }
+
+  Future<void> clearLocalData() async {
+    updateUserInfor(null);
+    CacheService().clear();
+    await SharedPreference.removePrefs();
   }
 }

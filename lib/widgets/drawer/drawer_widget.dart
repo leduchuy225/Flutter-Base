@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
+import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/ui/authentication/account_screen.dart';
 import 'package:flutter_base/ui/authentication/update_password_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
@@ -7,10 +8,11 @@ import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../theme/styles.dart';
-import '../../ui/authentication/login_screen.dart';
-import '../dialog/dialog_widget.dart';
+import '../../ui/authentication/2fa_status_screen.dart';
 
 class MyDrawer extends StatelessWidget {
+  final _userService = Get.find<UserService>();
+
   String get packageInfoText {
     final packageInfo = CacheService().read<PackageInfo>(
       key: CacheService.packageInfo,
@@ -68,16 +70,17 @@ class MyDrawer extends StatelessWidget {
                         },
                       ),
                       FunctionItem(
+                        title: 'Cài đặt 2FA',
+                        icon: Icons.settings,
+                        onTap: () {
+                          Get.to(() => const SecondFaStatusScreen());
+                        },
+                      ),
+                      FunctionItem(
                         icon: Icons.logout,
                         title: 'Đăng xuất',
                         onTap: () {
-                          MyDialog.alertDialog(
-                            title: 'Xác nhận',
-                            message: 'Bạn muốn đăng xuất ứng dụng ?',
-                            okHandler: () {
-                              Get.offAll(() => const LoginScreen());
-                            },
-                          );
+                          _userService.logOut();
                         },
                       ),
                     ],

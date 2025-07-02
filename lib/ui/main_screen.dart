@@ -25,49 +25,37 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             GradientBackground(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Builder(
-                        builder: (context) {
-                          return InkWell(
-                            onTap: () {
-                              InheritedDrawer.of(context)?.openDrawer();
-                            },
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.account_box_rounded,
-                                  size: 30,
-                                  color: AppColors.textLight,
-                                ),
-                                AppStyles.pdl10,
-                                Obx(() {
-                                  return Text(
-                                    _userService.userInfor?.email ?? '',
-                                    style: AppTextStyles.h3.copyWith(
-                                      color: AppColors.textLight,
-                                    ),
-                                  );
-                                }),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    AppStyles.pdl10,
-                    IconButton(
-                      icon: const Icon(
-                        Icons.logout,
-                        color: AppColors.textLight,
-                      ),
-                      onPressed: () {
-                        _userService.logOut();
+                Builder(
+                  builder: (context) {
+                    return InkWell(
+                      onTap: () {
+                        InheritedDrawer.of(context)?.openDrawer();
                       },
-                    ),
-                  ],
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.account_box_rounded,
+                            size: 30,
+                            color: AppColors.textLight,
+                          ),
+                          AppStyles.pdl10,
+                          Expanded(
+                            child: GetBuilder(
+                              init: _userService,
+                              builder: (value) {
+                                return Text(
+                                  _userService.userInfor?.email ?? '',
+                                  style: AppTextStyles.h3.copyWith(
+                                    color: AppColors.textLight,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

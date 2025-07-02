@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 enum MyTexttileOrientation { VERTICAL, HORIZONTAL }
 
 class MyTexttileItem {
   final String? text;
-  final String titleText;
+  final String? titleText;
   final bool isPhoneNumber;
 
-  MyTexttileItem({
-    this.text,
-    required this.titleText,
-    this.isPhoneNumber = false,
-  });
+  MyTexttileItem({this.text, this.titleText, this.isPhoneNumber = false});
 }
 
 class MyTexttile extends StatelessWidget {
@@ -22,12 +20,14 @@ class MyTexttile extends StatelessWidget {
     this.text,
     this.maxLines,
     this.textStyle,
+    this.titleText,
     this.labelStyle,
     this.textFlex = 5,
     this.labelFlex = 2,
     this.hasDivider = true,
-    required this.titleText,
     this.isPhoneNumber = false,
+    this.isShowCopyIcon = false,
+    this.isWithoutTitle = false,
     this.isHideIfTextNull = false,
     this.padding = EdgeInsets.zero,
     this.orientation = MyTexttileOrientation.HORIZONTAL,
@@ -38,8 +38,10 @@ class MyTexttile extends StatelessWidget {
   final int labelFlex;
   final int? maxLines;
   final bool hasDivider;
-  final String titleText;
+  final String? titleText;
   final bool isPhoneNumber;
+  final bool isShowCopyIcon;
+  final bool isWithoutTitle;
   final TextStyle? textStyle;
   final TextStyle? labelStyle;
   final bool isHideIfTextNull;
@@ -135,7 +137,9 @@ class MyTexttile extends StatelessWidget {
       padding: padding,
       child: Column(
         children: [
-          if (orientation == MyTexttileOrientation.VERTICAL)
+          if (titleText == null)
+            _buildText()
+          else if (orientation == MyTexttileOrientation.VERTICAL)
             _buildVertical(context)
           else
             _buildHorizontal(context),
@@ -153,7 +157,7 @@ class MyTexttile extends StatelessWidget {
 
   Widget _buildTitle() {
     return Text(
-      titleText,
+      titleText ?? '',
       style:
           labelStyle ??
           AppTextStyles.body2.copyWith(color: AppColors.textGrey2),
@@ -186,6 +190,22 @@ class MyTexttile extends StatelessWidget {
                 '',
               );
               launchUrlString('tel://$phoneNumber');
+            },
+          ),
+        ),
+        Visibility(
+          visible: isShowCopyIcon && _textProcessed.isNotEmpty,
+          child: InkWell(
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Icon(Icons.copy, color: AppColors.primary),
+            ),
+            onTap: () async {
+              await Clipboard.setData(ClipboardData(text: _textProcessed));
+              MyDialog.snackbar(
+                'Đã sao chép nội dung',
+                type: SnackbarType.SUCCESS,
+              );
             },
           ),
         ),

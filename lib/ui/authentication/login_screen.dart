@@ -3,8 +3,6 @@ import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/models/authentication/login_payload.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/authentication/reset_password_screen.dart';
-import 'package:flutter_base/widgets/button/button_controller.dart';
-import 'package:flutter_base/widgets/button/button_widget.dart';
 import 'package:get/get.dart';
 
 import '../../core/const/config.dart';
@@ -26,13 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _useNameController = MyTextFieldController();
   final _passwordController = MyTextFieldController();
 
-  final _loginButtonController = MyButtonController();
-
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((data) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       _useNameController.text = await SharedPreference.getStringValuesSF(
         SharedPreference.username,
       );
@@ -88,31 +84,28 @@ class _LoginScreenState extends State<LoginScreen> {
           AppStyles.pdt20,
         ],
       ),
-      bottomChild: MyButton(
-        controller: _loginButtonController,
-        buttonChild: ElevatedButton(
-          child: const Text('Đăng nhập'),
-          onPressed: () async {
-            if (!_useNameController.checkIsNotEmpty() ||
-                !_passwordController.checkIsNotEmpty()) {
-              return;
-            }
+      bottomChild: ElevatedButton(
+        child: const Text('Đăng nhập'),
+        onPressed: () async {
+          if (!_useNameController.checkIsNotEmpty() ||
+              !_passwordController.checkIsNotEmpty()) {
+            return;
+          }
 
-            await SharedPreference.addStringToSF(
-              SharedPreference.username,
-              _useNameController.text,
-            );
+          await SharedPreference.addStringToSF(
+            SharedPreference.username,
+            _useNameController.text,
+          );
 
-            final deviceToken = await Config().deviceToken;
-            await UserService.login(
-              LoginPayload(
-                deviceId: deviceToken,
-                taiKhoan: _useNameController.textTrim,
-                password: _passwordController.textTrim,
-              ),
-            );
-          },
-        ),
+          final deviceToken = await Config().deviceToken;
+          await UserService.login(
+            LoginPayload(
+              deviceId: deviceToken,
+              taiKhoan: _useNameController.textTrim,
+              password: _passwordController.textTrim,
+            ),
+          );
+        },
       ),
     );
   }

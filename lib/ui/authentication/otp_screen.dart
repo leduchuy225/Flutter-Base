@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/ui/authentication/login_screen.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
@@ -56,23 +57,19 @@ class _OtpScreenState extends State<OtpScreen> {
               await _onCompleted(value);
             },
           ),
-          const SizedBox(height: 100),
+          AppStyles.pdt50,
           Center(
-            child: Column(
-              children: [
-                const Text('Không nhận được mã OTP ?'),
-                AppStyles.pdt4,
-                TextButton(
-                  child: Text(
-                    'Gửi lại mã OTP',
-                    style: AppTextStyles.body1.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onPressed: () {},
+            child: TextButton(
+              child: Text(
+                'Trở lại màn đăng nhập',
+                style: AppTextStyles.body1.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
+              ),
+              onPressed: () {
+                Get.offAll(() => const LoginScreen());
+              },
             ),
           ),
         ],

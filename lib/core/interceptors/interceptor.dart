@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:get/get.dart' hide Response;
@@ -27,7 +26,7 @@ class MyInterceptor extends Interceptor {
     await Future.delayed(retryDelay);
 
     try {
-      final data = await UserService.getNewTokens();
+      final data = await Get.find<UserService>().getNewTokens();
       if (!data) {
         throw err;
       }
@@ -76,10 +75,6 @@ class MyInterceptor extends Interceptor {
   }
 
   bool _shouldRetry(DioException error) {
-    final data = error.requestOptions.data;
-    if (data is Map) {
-      return data['status'] == MyStatus.tokenTimeOut;
-    }
     return [
       HttpStatus.forbidden,
       HttpStatus.unauthorized,

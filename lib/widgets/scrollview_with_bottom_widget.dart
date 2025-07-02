@@ -16,7 +16,9 @@ class ScrollViewWithBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SingleChildScrollView(padding: padding, child: bodyChild),
+        Expanded(
+          child: SingleChildScrollView(padding: padding, child: bodyChild),
+        ),
         if (bottomChild != null)
           Padding(padding: const EdgeInsets.all(20), child: bottomChild),
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/utils/utils.dart';
 import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/loading_widget.dart';
@@ -34,9 +35,9 @@ extension FutureExtension<T> on Future<BaseResponse<T>> {
         MyLoading.hide();
       }
       if (!data.isSuccess) {
-        throw MyError(message: data.message, code: data.code);
+        throw MyError(response: data);
       }
-      if (isShowSuccessMessage && (data.message ?? '').isNotEmpty) {
+      if (isShowSuccessMessage && isNotNullOrEmpty(data.message)) {
         MyDialog.snackbar(
           data.message,
           type: SnackbarType.SUCCESS,
@@ -55,7 +56,11 @@ extension FutureExtension<T> on Future<BaseResponse<T>> {
         error,
         isShowMessage: isShowErrorMessage,
       );
-      return BaseResponse(code: data.code, message: data.message);
+      return BaseResponse(
+        code: data.code,
+        data: data.data,
+        message: data.message,
+      );
     });
   }
 }

@@ -61,6 +61,8 @@ class AppCorners {
 /// Font Sizes
 /// You can use these directly if you need, but usually there should be a predefined style in TextStyles.
 class AppFontSizes {
+  AppFontSizes._();
+
   /// Provides the ability to nudge the app-wide font scale in either direction
   static double get scale => 1;
   static double get s10 => 10 * scale;
@@ -69,6 +71,7 @@ class AppFontSizes {
   static double get s14 => 14 * scale;
   static double get s16 => 16 * scale;
   static double get s18 => 18 * scale;
+  static double get s20 => 20 * scale;
   static double get s24 => 24 * scale;
   static double get s48 => 48 * scale;
 }

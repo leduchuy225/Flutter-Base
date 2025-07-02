@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/utils/utils.dart';
 import 'package:flutter_base/theme/app_theme.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +14,7 @@ class MyDialog {
     String title = 'Thông báo',
     SnackbarType type = SnackbarType.INFORMATION,
   }) {
-    if ((message ?? '').isEmpty) {
+    if (isNullOrEmpty(message)) {
       return;
     }
     Get.showSnackbar(
