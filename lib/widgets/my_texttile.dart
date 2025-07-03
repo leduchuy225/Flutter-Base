@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+
+import '../core/utils/utils.dart';
 
 enum MyTexttileOrientation { VERTICAL, HORIZONTAL }
 
@@ -184,12 +185,8 @@ class MyTexttile extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: Icon(Icons.phone, color: AppColors.primary),
             ),
-            onTap: () {
-              final phoneNumber = _textProcessed.replaceAll(
-                RegExp(r'[^0-9]'),
-                '',
-              );
-              launchUrlString('tel://$phoneNumber');
+            onTap: () async {
+              await launchMyURL('tel://${getNumericOnly(_textProcessed)}');
             },
           ),
         ),

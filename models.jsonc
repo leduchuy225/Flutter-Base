@@ -10,7 +10,6 @@
   // Note that you add class names to each object with key "__className":
   // And avoid duplicate class names in this list for best results.
   // FOR EXAMPLE:
-
   // Uncomment this to test and run builder with Shift + Ctrl + Alt + B
   {
     // To add enhancemed name to all generated files add new name after dot.
@@ -122,7 +121,8 @@
     "__path": "/lib/models/authentication", // <- this is not required.
     "Status": true,
     "SetupCode": "GYYTKNJWGM4DQNRYG44TANZRGAYDAMBQGAYA",
-    "BarcodeImageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKsAAACrAQAAAAAxk1G0AAACwUlEQVR4nOWXMa6kMAyGjVKkgwtEyjXociW4ABkuwFwpXa4RKReAjiKK9w/M03vFFmu01S6imW+kgO3fvw3x765E/zfeieaY5ph3Kv60R6BOjg/GL1VHPkLeKHURRI6DWZx9s32fah95jTQ/wj6mLlhm8sG+n+I5UK8TafJn5meYC/J0RPLR+JD8d/ACfOXbfN8/y/DHGFcdjT8RK45P87cgBLgSDTFXZ0gbInWg+HLMUW06+ZM8m5ntps0sx9WVhdQ7qteoVk69vqOUYQ7qiKUfy6LLMqqqPy8owyeRUy+ntpGG074gwyc4r1EdrDiWgTPOZjnex1bwiXIlu6Mtgl3luOq8BmgwdWy6aKt7hEcipCemISYfiCjNcsyIj01PaeDSwSp08Q9wkzAsyrZ8oxvwmnJcKaPU3QmXymvrUViOGO+uEKHaOD7X0W5UZjm+agX9NvnAepF+lmMYNrlE1J6wEU10F02G29lI9omKlS6Wjr+Cl+DmmmBnU6IPUNBnksgw42zjm3lTP6ItaJBjGHYX0BPwb7QC7OqOUojZrlAxnuCunDl+y3HVZnJlCKZ3edNE4z1JZBiu+SJUu41EjCOo4AHedVocH1GtZ0Jj9fruBilGbmDhbZQtDmffhifDqHzfFGQrwciRtnzIcR3RSWU425GesS+kTo45FIzEhVB/yBnvS0/wFeILT9BQH8bIZwiIMFTcnXlDypnfQb301yonw7CWZpbYXIZrHXuAq0OtoN+2DIK99MchZBh1O7Ej0NQS3zz4Ad41rAUWjo3jipLMIMe4sIj1GCAhvxkOYVmOsYVNrk37OZa5eZVa5fjaB9OEjRKTBP98uaYMBzNh/9IF99C86o5SjPFq2OO62IS8woAfYUwPhnAIW7ZZsDs8wFwmnbf23QCry7dVSDHyvTSnNL1u8sHPTo7/ypfXP4V/AT6VQSmd+ND7AAAAAElFTkSuQmCC"
+    "BarcodeImageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKsAAACrAQAAAAAxk1G0AAACwUlEQVR4nOWXMa6kMAyGjVKkgwtEyjXociW4ABkuwFwpXa4RKReAjiKK9w/M03vFFmu01S6imW+kgO3fvw3x765E/zfeieaY5ph3Kv60R6BOjg/GL1VHPkLeKHURRI6DWZx9s32fah95jTQ/wj6mLlhm8sG+n+I5UK8TafJn5meYC/J0RPLR+JD8d/ACfOXbfN8/y/DHGFcdjT8RK45P87cgBLgSDTFXZ0gbInWg+HLMUW06+ZM8m5ntps0sx9WVhdQ7qteoVk69vqOUYQ7qiKUfy6LLMqqqPy8owyeRUy+ntpGG074gwyc4r1EdrDiWgTPOZjnex1bwiXIlu6Mtgl3luOq8BmgwdWy6aKt7hEcipCemISYfiCjNcsyIj01PaeDSwSp08Q9wkzAsyrZ8oxvwmnJcKaPU3QmXymvrUViOGO+uEKHaOD7X0W5UZjm+agX9NvnAepF+lmMYNrlE1J6wEU10F02G29lI9omKlS6Wjr+Cl+DmmmBnU6IPUNBnksgw42zjm3lTP6ItaJBjGHYX0BPwb7QC7OqOUojZrlAxnuCunDl+y3HVZnJlCKZ3edNE4z1JZBiu+SJUu41EjCOo4AHedVocH1GtZ0Jj9fruBilGbmDhbZQtDmffhifDqHzfFGQrwciRtnzIcR3RSWU425GesS+kTo45FIzEhVB/yBnvS0/wFeILT9BQH8bIZwiIMFTcnXlDypnfQb301yonw7CWZpbYXIZrHXuAq0OtoN+2DIK99MchZBh1O7Ej0NQS3zz4Ad41rAUWjo3jipLMIMe4sIj1GCAhvxkOYVmOsYVNrk37OZa5eZVa5fjaB9OEjRKTBP98uaYMBzNh/9IF99C86o5SjPFq2OO62IS8woAfYUwPhnAIW7ZZsDs8wFwmnbf23QCry7dVSDHyvTSnNL1u8sHPTo7/ypfXP4V/AT6VQSmd+ND7AAAAAElFTkSuQmCC",
+    "SecondFaLink": "123"
     // Force new type by adding new one after dot.
     // Note: it works only with not primitive values.
     // "type": {...} // <- Example: "type.post_type". Result: PostType type;

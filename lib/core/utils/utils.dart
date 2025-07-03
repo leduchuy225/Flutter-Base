@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 T? getAtIndex<T>(List<T>? data, int index) {
   if (data == null) {
@@ -55,4 +57,22 @@ bool isNullOrEmpty(String? value) {
 
 bool isNotNullOrEmpty(String? value) {
   return value != null && value.isNotEmpty;
+}
+
+Future<void> launchMyURL(
+  String? data, {
+  LaunchMode mode = LaunchMode.platformDefault,
+}) async {
+  if (data == null) {
+    return;
+  }
+  try {
+    await launchUrlString(data, mode: mode);
+  } catch (error) {
+    MyDialog.snackbar(error.toString(), type: SnackbarType.WARNING);
+  }
+}
+
+String getNumericOnly(String data) {
+  return data.replaceAll(RegExp(r'[^0-9]'), '');
 }

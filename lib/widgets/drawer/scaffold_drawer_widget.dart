@@ -23,10 +23,16 @@ class InheritedDrawer extends InheritedWidget {
 class DrawerScaffold extends StatelessWidget {
   final Widget? body;
   final PreferredSizeWidget? appBar;
+  final Widget? floatingActionButton;
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
-  DrawerScaffold({super.key, this.body, this.appBar});
+  DrawerScaffold({
+    super.key,
+    this.body,
+    this.appBar,
+    this.floatingActionButton,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +42,7 @@ class DrawerScaffold extends StatelessWidget {
         body: body,
         appBar: appBar,
         key: scaffoldKey,
+        floatingActionButton: floatingActionButton,
         drawer: MyDrawer(),
       ),
     );

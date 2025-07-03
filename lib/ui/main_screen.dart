@@ -19,43 +19,46 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return DrawerScaffold(
+      floatingActionButton: Builder(
+        builder: (context) {
+          return FloatingActionButton(
+            foregroundColor: AppColors.white,
+            backgroundColor: AppColors.primary,
+            child: const Icon(Icons.menu),
+            onPressed: () {
+              InheritedDrawer.of(context)?.openDrawer();
+            },
+          );
+        },
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             GradientBackground(
               children: [
-                Builder(
-                  builder: (context) {
-                    return InkWell(
-                      onTap: () {
-                        InheritedDrawer.of(context)?.openDrawer();
-                      },
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.account_box_rounded,
-                            size: 30,
-                            color: AppColors.textLight,
-                          ),
-                          AppStyles.pdl10,
-                          Expanded(
-                            child: GetBuilder(
-                              init: _userService,
-                              builder: (value) {
-                                return Text(
-                                  _userService.userInfor?.email ?? '',
-                                  style: AppTextStyles.h3.copyWith(
-                                    color: AppColors.textLight,
-                                  ),
-                                );
-                              },
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.account_box_rounded,
+                      size: 30,
+                      color: AppColors.textLight,
+                    ),
+                    AppStyles.pdl10,
+                    Expanded(
+                      child: GetBuilder(
+                        init: _userService,
+                        builder: (value) {
+                          return Text(
+                            _userService.userInfor?.email ?? '',
+                            style: AppTextStyles.h3.copyWith(
+                              color: AppColors.textLight,
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
               ],
             ),

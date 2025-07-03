@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/authentication_api.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_base/widgets/scrollview_with_bottom_widget.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/utils/utils.dart';
 import '../../models/authentication/second_fa_status_response.dart';
@@ -53,11 +55,38 @@ class _SecondFaStatusScreenState extends State<SecondFaStatusScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Quét QR Code hoặc nhập mã dưới đây'),
-            AppStyles.pdt20,
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Bấm vào đường dẫn',
+                    style: AppTextStyles.body2.copyWith(
+                      color: AppColors.primary,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        await launchMyURL(
+                          _secondFaStatusState?.secondFaLink,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      },
+                  ),
+                  TextSpan(
+                    text: ' hoặc nhập mã dưới đây',
+                    style: AppTextStyles.body2.copyWith(
+                      color: AppColors.textGreyDark,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            AppStyles.pdt15,
             MyTexttile(
               isShowCopyIcon: true,
               text: _secondFaStatusState?.setupCode,
+              textStyle: AppTextStyles.body2.copyWith(
+                color: AppColors.textGrey3,
+              ),
             ),
           ],
         ),
@@ -118,15 +147,6 @@ class _SecondFaStatusScreenState extends State<SecondFaStatusScreen> {
               ],
             ),
             AppStyles.pdt30,
-            if (_secondFaStatusState?.barcodeImageUrl != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: imageFromBase64String(
-                  _secondFaStatusState!.barcodeImageUrl!,
-                  width: 100,
-                  height: 100,
-                ),
-              ),
             ...get2FaStepWidgets().mapIndexed((index, element) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 30),
