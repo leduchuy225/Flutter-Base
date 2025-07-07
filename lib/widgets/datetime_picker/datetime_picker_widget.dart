@@ -72,6 +72,7 @@ class _DatetimePickerState extends State<DatetimePicker> {
   @override
   Widget build(BuildContext context) {
     return MyTextField(
+      maxLines: 1,
       onTap: _onTap,
       readOnly: true,
       labelText: widget.title,

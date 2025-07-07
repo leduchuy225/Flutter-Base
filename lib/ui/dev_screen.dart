@@ -8,8 +8,11 @@ import 'package:get/get.dart';
 
 import '../data/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
+import '../models/file_collection_model.dart';
 import '../widgets/datetime_picker/datetime_picker_widget.dart';
 import '../widgets/dialog/dialog_widget.dart';
+import '../widgets/file_collection/file_collection_controller.dart';
+import '../widgets/file_collection/file_collection_widget.dart';
 import '../widgets/my_appbar.dart';
 import '../widgets/my_texttile.dart';
 import '../widgets/selector/selector_controller.dart';
@@ -24,10 +27,25 @@ class DevScreen extends StatefulWidget {
 
 class _DevScreenState extends State<DevScreen> {
   final _mySelectorController = MySelectorController();
+  final _fileCollectionController = FileCollectionController();
 
   @override
   void initState() {
     super.initState();
+
+    _fileCollectionController.files.value = [
+      const FileCollectionModel(
+        fileName: 'TEST',
+        isLocal: false,
+        filePath:
+            'https://bowseat.org/wp-content/uploads/2023/07/chihiro045.jpeg',
+      ),
+      const FileCollectionModel(
+        fileName: 'TEST2',
+        isLocal: false,
+        filePath: '',
+      ),
+    ];
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // final data = await Get.find<JsonPlaceholderApi>().getPostDetail();
@@ -142,6 +160,8 @@ class _DevScreenState extends State<DevScreen> {
             const DatetimePicker(title: 'Chọn khoảng', isDateRangePicker: true),
             AppStyles.pdt20,
             const DatetimePicker(title: 'Chọn thời gian', isTimePicker: true),
+            AppStyles.pdt20,
+            FileCollectionWidget(controller: _fileCollectionController),
             AppStyles.pdt20,
           ],
         ),

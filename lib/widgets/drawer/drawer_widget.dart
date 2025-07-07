@@ -41,11 +41,49 @@ class MyDrawer extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       child: Align(
                         alignment: Alignment.bottomLeft,
-                        child: Text(
-                          'Họ và tên',
-                          style: AppTextStyles.h3.copyWith(
-                            color: AppColors.textLight,
-                          ),
+                        child: GetBuilder(
+                          init: _userService,
+                          builder: (value) {
+                            return Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.account_box_rounded,
+                                      color: AppColors.textLight,
+                                    ),
+                                    AppStyles.pdl10,
+                                    Expanded(
+                                      child: Text(
+                                        _userService.userInfor?.fullName ?? '',
+                                        style: AppTextStyles.h4.copyWith(
+                                          color: AppColors.textLight,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                AppStyles.pdt10,
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.email,
+                                      color: AppColors.textLight,
+                                    ),
+                                    AppStyles.pdl10,
+                                    Expanded(
+                                      child: Text(
+                                        _userService.userInfor?.email ?? '',
+                                        style: AppTextStyles.h4.copyWith(
+                                          color: AppColors.textLight,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                     ),

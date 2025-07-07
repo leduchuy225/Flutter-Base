@@ -19,15 +19,19 @@ class FileCollectionItem extends StatelessWidget {
     required this.onViewDetail,
   });
 
-  static Widget buildChild(BuildContext context, FileCollectionModel item) {
+  static Widget buildChild(
+    BuildContext context,
+    FileCollectionModel item, {
+    Widget Function(BuildContext, ImageProvider<Object>)? imageBuilder,
+  }) {
     if (item.isLocal) {
       return Image.file(File(item.filePath));
     }
     return CachedNetworkImage(
       imageUrl: item.filePath,
-      // filterQuality: FilterQuality.none,
+      imageBuilder: imageBuilder,
       errorWidget: (context, url, error) {
-        return const Icon(Icons.error);
+        return const Icon(Icons.image_not_supported_rounded);
       },
       placeholder: (context, url) {
         return const CircularProgressIndicator(padding: EdgeInsets.all(24));

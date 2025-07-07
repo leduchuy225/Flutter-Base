@@ -168,6 +168,7 @@ class AppStyles {
   static const pdt12 = Padding(padding: EdgeInsets.only(top: 12));
   static const pdt15 = Padding(padding: EdgeInsets.only(top: 15));
   static const pdt20 = Padding(padding: EdgeInsets.only(top: 20));
+  static const pdt25 = Padding(padding: EdgeInsets.only(top: 25));
   static const pdt30 = Padding(padding: EdgeInsets.only(top: 30));
   static const pdt40 = Padding(padding: EdgeInsets.only(top: 40));
   static const pdt50 = Padding(padding: EdgeInsets.only(top: 50));

@@ -9,7 +9,7 @@ import '../animate/animate_widget.dart';
 class MyTextField extends StatefulWidget {
   final bool? enable;
   final bool readOnly;
-  final int maxLines;
+  final int? maxLines;
   final bool isRequired;
   final String? hintText;
   final String? labelText;
@@ -31,7 +31,7 @@ class MyTextField extends StatefulWidget {
     this.isRequired = false,
     this.obscureText = false,
     this.onChanged,
-    this.maxLines = 1,
+    this.maxLines,
   });
 
   @override
@@ -74,10 +74,10 @@ class _MyTextFieldState extends State<MyTextField> {
             onTap: widget.onTap,
             enabled: value.isEnable,
             readOnly: widget.readOnly,
-            maxLines: widget.maxLines,
             controller: _mainController,
             onChanged: widget.onChanged,
             obscureText: widget.obscureText,
+            maxLines: widget.obscureText ? 1 : widget.maxLines,
             decoration: InputDecoration(
               suffixIcon: widget.suffixIcon,
               errorText: getErrorText(value.errorTexts),

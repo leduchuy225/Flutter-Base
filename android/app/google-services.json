@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "832593049919",
+    "project_id": "flutter-base-test-noti",
+    "storage_bucket": "flutter-base-test-noti.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832593049919:android:23654c02d76a65ce45fb8a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_base"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnUOtCiseKazielEVWACZKqbHsB08bChI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
