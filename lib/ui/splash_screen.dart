@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/theme/styles.dart';
@@ -23,6 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // Request permission
+      await FirebaseMessaging.instance.requestPermission();
+
       final packageInfo = await PackageInfo.fromPlatform();
       CacheService().write(key: CacheService.packageInfo, value: packageInfo);
 

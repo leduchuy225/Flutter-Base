@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/config.dart';
 import 'package:flutter_base/ui/dev_screen.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get.dart';
 
+import '../core/services/notification_service.dart';
 import '../theme/styles.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
 
@@ -15,6 +17,27 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await NotificationService.initializeFBMessaging((message) {
+        NotificationService.navigateFromNotification(context, message: message);
+      });
+
+      final initialMessage = await FirebaseMessaging.instance
+          .getInitialMessage();
+
+      if (initialMessage != null) {
+        NotificationService.navigateFromNotification(
+          context,
+          message: initialMessage,
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DrawerScaffold(
@@ -46,6 +69,7 @@ class _MainScreenState extends State<MainScreen> {
                     icon: Icons.home_repair_service_rounded,
                     onTap: () {},
                   ),
+                  AppStyles.pdt30,
                   FutureBuilder(
                     future: Config().deviceToken,
                     builder: (context, asyncSnapshot) {

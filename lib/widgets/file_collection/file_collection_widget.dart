@@ -1,26 +1,31 @@
-import 'dart:io';
-
 import 'package:collection/collection.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_item.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../models/file_collection_model.dart';
 import 'file_collection_controller.dart';
 import 'file_collection_slider.dart';
 
 class FileCollectionWidget extends StatefulWidget {
+  final int? imageQuality;
   final FileCollectionController? controller;
 
-  const FileCollectionWidget({super.key, this.controller});
+  const FileCollectionWidget({
+    super.key,
+    this.controller,
+    this.imageQuality = 50,
+  });
 
   @override
   State<FileCollectionWidget> createState() => _FileCollectionWidgetState();
 }
 
 class _FileCollectionWidgetState extends State<FileCollectionWidget> {
+  final picker = ImagePicker();
+
   late final FileCollectionController _controller;
 
   FileCollectionController get _mainController =>
@@ -41,21 +46,36 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
     _mainController.dispose();
   }
 
-  Future<void> onPickImage() async {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-    );
-    if (result == null) {
+  Future<void> onPickImage({bool isTakeFromCamera = false}) async {
+    List<XFile> results = [];
+
+    if (isTakeFromCamera) {
+      final file = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: widget.imageQuality,
+      );
+      if (file != null) {
+        results = [file];
+      }
+    } else {
+      results = await picker.pickMultiImage(imageQuality: widget.imageQuality);
+    }
+
+    if (results.isEmpty) {
       return;
     }
-    final File file = File(result.files.single.path!);
-    _mainController.addFiles([
-      FileCollectionModel(
-        isLocal: true,
-        filePath: file.path,
-        fileName: file.path,
-      ),
-    ]);
+
+    _mainController.addFiles(
+      results.map((element) {
+        print(element.name);
+
+        return FileCollectionModel(
+          isLocal: true,
+          fileName: element.name,
+          filePath: element.path,
+        );
+      }).toList(),
+    );
   }
 
   void onViewDetail(int index) {
@@ -89,7 +109,9 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () async {},
+                        onPressed: () async {
+                          await onPickImage(isTakeFromCamera: true);
+                        },
                         icon: const Icon(
                           size: 30,
                           Icons.camera_alt_rounded,

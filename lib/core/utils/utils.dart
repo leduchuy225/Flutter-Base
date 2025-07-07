@@ -76,3 +76,14 @@ Future<void> launchMyURL(
 String getNumericOnly(String data) {
   return data.replaceAll(RegExp(r'[^0-9]'), '');
 }
+
+Map<String, dynamic> convertStringToMap(String? data) {
+  if (isNullOrEmpty(data)) {
+    return {};
+  }
+  try {
+    return jsonDecode(data!);
+  } catch (error) {
+    return {};
+  }
+}

@@ -6,7 +6,6 @@ import 'package:flutter_base/data/api_locator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
-import 'core/services/notification_service.dart';
 import 'theme/app_theme.dart';
 import 'ui/splash_screen.dart';
 
@@ -14,9 +13,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
-  await NotificationService.setupLocalNotificationPlugin();
-  await NotificationService.initialize();
 
   runApp(const MainApp());
 }
