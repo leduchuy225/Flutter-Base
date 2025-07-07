@@ -1,3 +1,5 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 class Config {
   static final Config _singleton = Config._internal();
 
@@ -10,14 +12,12 @@ class Config {
   String? _deviceToken;
 
   Future<String?> get deviceToken async {
-    return _deviceToken ?? '1';
+    if (_deviceToken != null) {
+      return _deviceToken;
+    }
+    final token = await FirebaseMessaging.instance.getToken();
+    _deviceToken = token;
 
-    // if (_deviceToken != null) {
-    //   return _deviceToken;
-    // }
-    // final token = await FirebaseMessaging.instance.getToken();
-    // _deviceToken = token;
-
-    // return _deviceToken;
+    return _deviceToken;
   }
 }

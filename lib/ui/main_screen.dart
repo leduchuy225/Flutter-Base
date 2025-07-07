@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/const/config.dart';
 import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
+import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get.dart';
 
 import '../theme/styles.dart';
@@ -43,6 +45,15 @@ class _MainScreenState extends State<MainScreen> {
                     title: 'Sửa chữa',
                     icon: Icons.home_repair_service_rounded,
                     onTap: () {},
+                  ),
+                  FutureBuilder(
+                    future: Config().deviceToken,
+                    builder: (context, asyncSnapshot) {
+                      return MyTexttile(
+                        isShowCopyIcon: true,
+                        text: asyncSnapshot.data,
+                      );
+                    },
                   ),
                 ],
               ),

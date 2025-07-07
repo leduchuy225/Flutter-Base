@@ -15,6 +15,8 @@ dependencies {
   implementation("com.google.firebase:firebase-analytics")
   // Add the dependencies for any other desired Firebase products
   // https://firebase.google.com/docs/android/setup#available-libraries
+
+  coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
 android {
@@ -23,6 +25,8 @@ android {
     ndkVersion = "27.0.12077973" // flutter.ndkVersion //
 
     compileOptions {
+        // Flag to enable support for the new language APIs
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }

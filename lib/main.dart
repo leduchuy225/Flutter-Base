@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/app_binding.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
@@ -5,13 +6,17 @@ import 'package:flutter_base/data/api_locator.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
+import 'core/services/notification_service.dart';
 import 'theme/app_theme.dart';
 import 'ui/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
+
+  await NotificationService.setupLocalNotificationPlugin();
+  await NotificationService.initialize();
 
   runApp(const MainApp());
 }
