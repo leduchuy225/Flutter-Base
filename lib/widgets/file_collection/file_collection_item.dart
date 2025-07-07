@@ -22,6 +22,7 @@ class FileCollectionItem extends StatelessWidget {
   static Widget buildChild(
     BuildContext context,
     FileCollectionModel item, {
+    Color? errorIconColor,
     Widget Function(BuildContext, ImageProvider<Object>)? imageBuilder,
   }) {
     if (item.isLocal) {
@@ -31,7 +32,7 @@ class FileCollectionItem extends StatelessWidget {
       imageUrl: item.filePath,
       imageBuilder: imageBuilder,
       errorWidget: (context, url, error) {
-        return const Icon(Icons.image_not_supported_rounded);
+        return Icon(Icons.image_not_supported_rounded, color: errorIconColor);
       },
       placeholder: (context, url) {
         return const CircularProgressIndicator(padding: EdgeInsets.all(24));

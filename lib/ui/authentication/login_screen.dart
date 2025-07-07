@@ -70,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               );
             },
           ),
+          AppStyles.pdt10,
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
