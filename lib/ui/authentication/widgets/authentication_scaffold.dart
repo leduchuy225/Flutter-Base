@@ -29,7 +29,9 @@ class AuthenticationScaffold extends StatelessWidget {
           children: [
             GradientBackground(
               children: [
-                MobileFiber(style: AppTextStyles.h1),
+                MobileFiber(
+                  style: AppTextStyles.h1.copyWith(fontWeight: FontWeight.w400),
+                ),
                 AppStyles.pdt15,
                 Text(
                   title,

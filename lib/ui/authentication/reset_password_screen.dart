@@ -28,8 +28,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppStyles.pdt20,
+          const Text('Mật khẩu mới sẽ được gửi qua email'),
+          AppStyles.pdt30,
           MyTextField(labelText: 'Email', controller: _usernameController),
-          AppStyles.pdt20,
         ],
       ),
       bottomChild: ElevatedButton(

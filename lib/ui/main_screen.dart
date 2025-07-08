@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/config.dart';
 import 'package:flutter_base/ui/dev_screen.dart';
@@ -22,19 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await NotificationService.initializeFBMessaging((message) {
-        NotificationService.navigateFromNotification(context, message: message);
-      });
-
-      final initialMessage = await FirebaseMessaging.instance
-          .getInitialMessage();
-
-      if (initialMessage != null) {
-        NotificationService.navigateFromNotification(
-          context,
-          message: initialMessage,
-        );
-      }
+      await NotificationService.initializeFBMessaging(context);
     });
   }
 

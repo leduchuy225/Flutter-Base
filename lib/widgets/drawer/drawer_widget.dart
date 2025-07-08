@@ -50,7 +50,7 @@ class MyDrawer extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   value.userInfor?.fullName ?? '',
-                                  style: AppTextStyles.h4.copyWith(
+                                  style: AppTextStyles.body2.copyWith(
                                     color: AppColors.textLight,
                                   ),
                                 ),
@@ -68,7 +68,7 @@ class MyDrawer extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   value.userInfor?.email ?? '',
-                                  style: AppTextStyles.h4.copyWith(
+                                  style: AppTextStyles.body2.copyWith(
                                     color: AppColors.textLight,
                                   ),
                                 ),

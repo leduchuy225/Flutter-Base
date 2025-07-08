@@ -103,7 +103,7 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
                     children: [
                       const Icon(Icons.file_copy_outlined),
                       AppStyles.pdl5,
-                      Text('Tệp đính kèm', style: AppTextStyles.title1),
+                      Text('Tệp đính kèm', style: AppTextStyles.title2),
                     ],
                   ),
                   Row(

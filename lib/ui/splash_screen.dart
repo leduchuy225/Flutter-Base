@@ -63,7 +63,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 top: 200,
                 child: Align(
                   child: MobileFiber(
-                    style: AppTextStyles.h1.copyWith(fontSize: 50),
+                    style: AppTextStyles.h1.copyWith(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                   alignment: Alignment.topCenter,
                 ),

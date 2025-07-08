@@ -62,7 +62,9 @@ class MyLoading extends StatelessWidget {
                       'Đang xử lý yêu cầu...',
                       textAlign: TextAlign.center,
                       style: AppTextStyles.title2.copyWith(
+                        fontFamily: 'Roboto',
                         color: AppColors.primary,
+                        fontWeight: FontWeight.w400,
                         decoration: TextDecoration.none,
                       ),
                     ),

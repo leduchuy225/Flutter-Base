@@ -8,7 +8,8 @@ class MobileFiber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _textStyle = style ?? AppTextStyles.h1;
+    final _textStyle =
+        style ?? AppTextStyles.h1.copyWith(fontWeight: FontWeight.w400);
     return Container(
       decoration: const BoxDecoration(
         color: AppColors.textLight,

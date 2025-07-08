@@ -198,9 +198,9 @@ class AppStyles {
   // }
 }
 
-class AppFonts {
-  static const String roboto = 'Roboto';
-}
+// class AppFonts {
+//   static const String roboto = 'Roboto';
+// }
 
 class AppTextStyles {
   AppTextStyles._();
@@ -208,7 +208,7 @@ class AppTextStyles {
   static const TextStyle fw500 = TextStyle(fontWeight: FontWeight.w500);
 
   static const TextStyle roboto = TextStyle(
-    fontFamily: AppFonts.roboto,
+    // fontFamily: 'Roboto',
     fontWeight: FontWeight.w400,
     height: 1.2,
   );
@@ -251,7 +251,7 @@ class AppTextStyles {
     // fontSize: AppFontSizes.s12,
     height: 1.2,
     letterSpacing: .2,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
   );
 
   static TextStyle get body3 =>
