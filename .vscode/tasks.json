@@ -1,0 +1,19 @@
+{
+  "tasks": [
+    {
+      "label": "Build and Move Flutter APK",
+      "type": "shell",
+      "command": "sh",
+      "args": [
+        "-c",
+        "flutter build apk && cp build/app/outputs/flutter-apk/app-release.apk ./app-release.apk"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Builds the APK and moves it to project root"
+    }
+  ]
+}
