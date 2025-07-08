@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,22 +8,27 @@ import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
+import 'user_service.dart';
+
 class NotificationService {
+  static late StreamSubscription<RemoteMessage> messageSubscription;
+  static late StreamSubscription<RemoteMessage> messageOpenedAppSubscription;
+
   static final _localNotifications = FlutterLocalNotificationsPlugin();
 
   static Future<void> initializeFBMessaging(BuildContext context) async {
     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      NotificationService.navigateFromNotification(
+      await NotificationService.navigateFromNotification(
         context,
         message: initialMessage,
       );
     }
 
     await NotificationService.setupLocalNotificationPlugin(
-      onDidReceiveNotificationResponse: (notificaiton) {
-        NotificationService.navigateFromNotification(
+      onDidReceiveNotificationResponse: (notificaiton) async {
+        await NotificationService.navigateFromNotification(
           context,
           message: RemoteMessage.fromMap(
             convertStringToMap(notificaiton.payload),
@@ -32,22 +38,40 @@ class NotificationService {
     );
 
     // Foreground message listener
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    messageSubscription = FirebaseMessaging.onMessage.listen((
+      RemoteMessage message,
+    ) {
       print('Foreground message: ${message.notification?.title}');
       _showLocalNotification(message);
     });
 
     // App opened from background
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    messageOpenedAppSubscription = FirebaseMessaging.onMessageOpenedApp.listen((
+      RemoteMessage message,
+    ) async {
       print('Notification tapped');
-      NotificationService.navigateFromNotification(context, message: message);
+      await NotificationService.navigateFromNotification(
+        context,
+        message: message,
+      );
     });
   }
 
-  static void navigateFromNotification(
+  static void cancel() {
+    messageSubscription.cancel();
+    messageOpenedAppSubscription.cancel();
+  }
+
+  static Future navigateFromNotification(
     BuildContext context, {
     required RemoteMessage message,
-  }) {
+  }) async {
+    final accessToken = await UserService.accessToken;
+    if (accessToken.isEmpty) {
+      return;
+    }
+
+    // Handle navigation here
     Get.to(() => const DevScreen());
   }
 

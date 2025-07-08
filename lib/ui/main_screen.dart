@@ -26,6 +26,12 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    NotificationService.cancel();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DrawerScaffold(
       appBar: MyAppbar.appBar('Màn hình chính'),

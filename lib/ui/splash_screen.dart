@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/theme/styles.dart';
@@ -8,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../core/services/cache_service.dart';
+import '../core/services/permission_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // Request permission
-      await FirebaseMessaging.instance.requestPermission();
+      await PermissionService.requestNotificationPermission();
 
       final packageInfo = await PackageInfo.fromPlatform();
       CacheService().write(key: CacheService.packageInfo, value: packageInfo);

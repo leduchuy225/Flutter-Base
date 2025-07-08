@@ -44,7 +44,7 @@ class MyTextFieldController extends TextEditingController {
     if (value) {
       return true;
     }
-    errorTexts = ['Chuỗi chứa ký tự không phải số'];
+    shake(errorTexts: ['Chuỗi chứa ký tự không phải số']);
     return false;
   }
 
