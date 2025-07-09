@@ -27,6 +27,9 @@ abstract class AuthenticationApi {
   @POST('/login')
   Future<BaseResponse<LoginResponse>> login(@Body() LoginPayload body);
 
+  @POST('/Login/_LogOff')
+  Future<BaseResponse> logout();
+
   @POST('/Setting/APIChangePassword')
   Future<BaseResponse> changePassword(@Body() ChangePasswordPayload body);
 

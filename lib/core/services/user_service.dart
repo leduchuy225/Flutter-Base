@@ -118,11 +118,14 @@ class UserService extends GetxController {
       title: 'Xác nhận',
       message: 'Bạn muốn đăng xuất ứng dụng ?',
       okHandler: () async {
-        updateUserInfor(null);
-        CacheService().clear();
-        await SharedPreference.removePrefs();
+        final data = await Get.find<AuthenticationApi>().logout().callApi();
+        if (data.isSuccess) {
+          await clearLocalData();
+          Get.offAll(() => const SplashScreen());
 
-        Get.offAll(() => const SplashScreen());
+          return;
+        }
+        Get.back();
       },
     );
   }

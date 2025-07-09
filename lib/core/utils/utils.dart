@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -86,4 +87,11 @@ Map<String, dynamic> convertStringToMap(String? data) {
   } catch (error) {
     return {};
   }
+}
+
+String? getImageLink(String? data) {
+  if (isNullOrEmpty(data)) {
+    return null;
+  }
+  return '${MyStrings.baseURL}$data';
 }

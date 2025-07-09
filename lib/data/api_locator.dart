@@ -4,11 +4,13 @@ import 'package:get/instance_manager.dart';
 
 import '../core/services/service_locator.dart';
 import 'authentication_api.dart';
+import 'installation_api.dart';
 import 'jsonplaceholder_api.dart';
 
 void setupApiLocator() {
   final dio = Get.find<HttpService>().dio;
 
   DI.lazyPut(() => JsonPlaceholderApi(dio));
+  DI.lazyPut<InstallationApi>(() => InstallationApi(dio));
   DI.lazyPut<AuthenticationApi>(() => MockAuthenticationApi(dio));
 }

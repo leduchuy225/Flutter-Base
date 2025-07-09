@@ -130,4 +130,9 @@ class MockAuthenticationApi implements AuthenticationApi {
       ),
     );
   }
+
+  @override
+  Future<BaseResponse> logout() async {
+    return BaseResponse(code: 1);
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_base/core/utils/utils.dart';
 import 'package:intl/intl.dart';
 
 enum MyDateFormatEnum {
@@ -15,6 +16,23 @@ enum MyDateFormatEnum {
 
 class DatetimeUtils {
   DatetimeUtils._();
+
+  int _extractMilliseconds(String dateString) {
+    final numericString = dateString.replaceAll(RegExp(r'\D'), '');
+    return int.parse(numericString);
+  }
+
+  DateTime? convertDateFromAPI(String? data) {
+    if (isNullOrEmpty(data)) {
+      return null;
+    }
+    try {
+      final millisecond = _extractMilliseconds(data!);
+      return DateTime.fromMillisecondsSinceEpoch(millisecond);
+    } catch (error) {
+      return null;
+    }
+  }
 
   static String? convertFrom(
     DateTime? date, {
