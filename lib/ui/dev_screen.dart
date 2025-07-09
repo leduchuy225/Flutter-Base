@@ -6,6 +6,8 @@ import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
+import '../core/const/config.dart';
+import '../core/utils/jsonc_reader.dart';
 import '../data/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
 import '../models/file_collection_model.dart';
@@ -50,6 +52,8 @@ class _DevScreenState extends State<DevScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // final data = await Get.find<JsonPlaceholderApi>().getPostDetail();
       // MyDialog.snackbar(data.data.toString());
+
+      await readJsoncFile('.json_models/installation_models.jsonc');
     });
   }
 
@@ -61,6 +65,16 @@ class _DevScreenState extends State<DevScreen> {
         padding: AppStyles.horizontalPadding,
         child: Column(
           children: [
+            AppStyles.pdt20,
+            FutureBuilder(
+              future: Config().deviceToken,
+              builder: (context, asyncSnapshot) {
+                return MyTexttile(
+                  isShowCopyIcon: true,
+                  text: asyncSnapshot.data,
+                );
+              },
+            ),
             AppStyles.pdt20,
             const MyTexttile(
               titleText: 'TEST',

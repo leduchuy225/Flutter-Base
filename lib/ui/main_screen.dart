@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/core/const/config.dart';
 import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
-import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get.dart';
 
 import '../core/services/notification_service.dart';
 import '../theme/styles.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
+import 'new_installation/new_installation_list/new_installation_list.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -45,31 +44,18 @@ class _MainScreenState extends State<MainScreen> {
               child: Column(
                 children: [
                   FunctionItem(
-                    counter: 10,
-                    title: 'Sửa chữa',
+                    title: 'Yêu cầu lắp mới',
                     icon: Icons.home_repair_service_rounded,
                     onTap: () {
-                      Get.to(() => const DevScreen());
+                      Get.to(() => const NewInstallationListScreen());
                     },
                   ),
                   FunctionItem(
-                    title: 'Sửa chữa',
-                    icon: Icons.home_repair_service_rounded,
-                    onTap: () {},
-                  ),
-                  FunctionItem(
-                    title: 'Sửa chữa',
-                    icon: Icons.home_repair_service_rounded,
-                    onTap: () {},
-                  ),
-                  AppStyles.pdt30,
-                  FutureBuilder(
-                    future: Config().deviceToken,
-                    builder: (context, asyncSnapshot) {
-                      return MyTexttile(
-                        isShowCopyIcon: true,
-                        text: asyncSnapshot.data,
-                      );
+                    counter: 10,
+                    title: 'DEV',
+                    icon: Icons.developer_board,
+                    onTap: () {
+                      Get.to(() => const DevScreen());
                     },
                   ),
                 ],

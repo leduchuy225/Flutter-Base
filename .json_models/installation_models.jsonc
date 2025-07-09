@@ -33,7 +33,8 @@
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.
     "__path": "/lib/models/installation", // <- this is not required.
-    "model.installation_list_model_response": [
+    // "model.installation_list_model_response"
+    "model": [
       {
         "ID": 5,
         "IDLong": 505872634624,
@@ -306,7 +307,8 @@
       }
     ],
     "totalItems": 5,
-    "role.role_response": {
+    // "role.role_response"
+    "role": {
       "IsResetPage": null,
       "IDLong": null,
       "Orders": null,
@@ -570,7 +572,8 @@
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.
     "__path": "/lib/models/installation", // <- this is not required.
-    "model.installation_detail_model_response": {
+    // "model.installation_detail_model_response"
+    "model": {
       "ID": 2,
       "IDLong": 715157089881,
       "CurrentStep": 1,
@@ -604,7 +607,8 @@
       "GoogleMap": null,
       "Device_ACC": null,
       "Device_SLID": null,
-      "MB_CustomerViewModel.customer_viewmodel_response": {
+      // "MB_CustomerViewModel.customer_viewmodel_response"
+      "MB_CustomerViewModel": {
         "ID": 1,
         "IDLong": 564419443336,
         "FullName": "Nguyễn Văn A",
@@ -631,7 +635,8 @@
       "MB_ConnectionRequestNoteViewModel": null,
       "ListMB_ConnectionRequestNoteViewModel": null,
       "ListMB_ConnectionRequestNoteViewModel2": null,
-      "ListTechnicalLeader.technical_leader_response": [
+      // "ListTechnicalLeader.technical_leader_response"
+      "ListTechnicalLeader": [
         {
           "Id": "7c9cd909-08aa-4708-8346-805c1a4d47fa",
           "IDNew": 6155,
