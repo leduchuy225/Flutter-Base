@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -22,4 +24,26 @@ abstract class InstallationApi {
   Future<BaseResponse<InstallationDetailResponse>> getNewInstallationDetail(
     @Body() InstallationDetailPayload body,
   );
+
+  @POST('/NewConnectionRequest/UpdateCurrentStep_2_1')
+  Future<BaseResponse> confirmNewInstallation(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/NewConnectionRequest/UpdateCurrentStep_3')
+  Future<BaseResponse> updateCustomerNewInstallationNote(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @MultiPart()
+  @POST('/NewConnectionRequest/UpdateCurrentStep_4')
+  Future<HttpResponse> uploadNewInstallationFile({
+    @Part(name: 'id') required String id,
+    @Part(name: 'note') required String note,
+    @Part(name: 'technicalStaffModuleImage[0]')
+    required File technicalStaffModuleImage,
+    @Part(name: 'technicalStaffTestImage[0]')
+    required File technicalStaffTestImage,
+    @Part(name: 'technicalStaffImage[0]') required File technicalStaffImage,
+  });
 }

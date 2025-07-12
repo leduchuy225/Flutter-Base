@@ -4,15 +4,23 @@ import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 
 import '../core/utils/utils.dart';
+import 'my_tag_widget.dart';
 
 enum MyTexttileOrientation { VERTICAL, HORIZONTAL }
 
 class MyTexttileItem {
-  final String? text;
+  final dynamic text;
   final String? titleText;
+
+  final bool isCopy;
   final bool isPhoneNumber;
 
-  MyTexttileItem({this.text, this.titleText, this.isPhoneNumber = false});
+  MyTexttileItem({
+    this.text,
+    this.titleText,
+    this.isCopy = false,
+    this.isPhoneNumber = false,
+  });
 }
 
 class MyTexttile extends StatelessWidget {
@@ -29,12 +37,12 @@ class MyTexttile extends StatelessWidget {
     this.isPhoneNumber = false,
     this.isShowCopyIcon = false,
     this.isWithoutTitle = false,
-    this.isHideIfTextNull = false,
+    this.isHideIfTextNull = true,
     this.padding = EdgeInsets.zero,
     this.orientation = MyTexttileOrientation.HORIZONTAL,
   }) : super(key: key);
 
-  final String? text;
+  final dynamic text;
   final int textFlex;
   final int labelFlex;
   final int? maxLines;
@@ -50,12 +58,16 @@ class MyTexttile extends StatelessWidget {
   final MyTexttileOrientation orientation;
 
   static Widget card({
+    String? tag,
     int? maxLines,
     String? title,
+    Color? tagColor,
     int textFlex = 5,
     int labelFlex = 2,
     Widget? suffixHeader,
+    bool isViewDetail = false,
     EdgeInsets? paddingHeader,
+    void Function()? onTapViewDetail,
     required List<MyTexttileItem> items,
   }) {
     return Column(
@@ -77,8 +89,21 @@ class MyTexttile extends StatelessWidget {
               Expanded(
                 child: SelectableText(title ?? '', style: AppTextStyles.body1),
               ),
-              AppStyles.pdl5,
+              AppStyles.pdl10,
               ?suffixHeader,
+              if (tag != null)
+                Padding(
+                  padding: const EdgeInsetsGeometry.only(left: 10),
+                  child: MyTag(text: tag, foregroundColor: tagColor),
+                ),
+              if (isViewDetail)
+                Padding(
+                  padding: const EdgeInsetsGeometry.only(left: 10),
+                  child: InkWell(
+                    onTap: onTapViewDetail,
+                    child: const MyTag(icon: Icons.menu),
+                  ),
+                ),
             ],
           ),
         ),
@@ -110,23 +135,23 @@ class MyTexttile extends StatelessWidget {
   }) {
     return Column(
       children: items.map((element) {
-        return Padding(
+        return MyTexttile(
+          textFlex: textFlex,
+          maxLines: maxLines,
+          text: element.text,
+          labelFlex: labelFlex,
+          titleText: element.titleText,
+          isShowCopyIcon: element.isCopy,
+          isPhoneNumber: element.isPhoneNumber,
           padding: const EdgeInsetsGeometry.symmetric(vertical: 6),
-          child: MyTexttile(
-            textFlex: textFlex,
-            maxLines: maxLines,
-            text: element.text,
-            labelFlex: labelFlex,
-            titleText: element.titleText,
-            isPhoneNumber: element.isPhoneNumber,
-          ),
         );
       }).toList(),
     );
   }
 
   String get _textProcessed {
-    return (text ?? '').trim();
+    final textProcessed = (text ?? '').toString().trim();
+    return textProcessed;
   }
 
   @override

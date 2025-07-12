@@ -17,12 +17,12 @@ enum MyDateFormatEnum {
 class DatetimeUtils {
   DatetimeUtils._();
 
-  int _extractMilliseconds(String dateString) {
+  static int _extractMilliseconds(String dateString) {
     final numericString = dateString.replaceAll(RegExp(r'\D'), '');
     return int.parse(numericString);
   }
 
-  DateTime? convertDateFromAPI(String? data) {
+  static DateTime? convertDateFromAPI(String? data) {
     if (isNullOrEmpty(data)) {
       return null;
     }
@@ -34,9 +34,22 @@ class DatetimeUtils {
     }
   }
 
-  static String? convertFrom(
+  static String? formatDateFromAPI(
+    String? date, {
+    MyDateFormatEnum toFormat = MyDateFormatEnum.DATE,
+  }) {
+    if (date == null) {
+      return null;
+    }
+    return DatetimeUtils.formatDate(
+      DatetimeUtils.convertDateFromAPI(date),
+      toFormat: toFormat,
+    );
+  }
+
+  static String? formatDate(
     DateTime? date, {
-    required MyDateFormatEnum toFormat,
+    MyDateFormatEnum toFormat = MyDateFormatEnum.DATE,
   }) {
     if (date == null) {
       return null;
@@ -44,7 +57,7 @@ class DatetimeUtils {
     return toFormat.fm.format(date);
   }
 
-  static String? convertFromStrTo(
+  static String? formatDateFromEnum(
     String? dateStr, {
     required MyDateFormatEnum toFm,
     required MyDateFormatEnum fromFm,
@@ -59,7 +72,7 @@ class DatetimeUtils {
     }
   }
 
-  static DateTime? convertToDateFrom(
+  static DateTime? convertToDate(
     String? dateStr, {
     required MyDateFormatEnum fromFormat,
   }) {

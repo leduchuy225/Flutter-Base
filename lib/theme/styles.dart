@@ -159,7 +159,11 @@ class AppColors {
 class AppStyles {
   AppStyles._();
 
-  static const horizontalPadding = EdgeInsets.symmetric(horizontal: 16.0);
+  static const horizontalPaddingValue = 16.0;
+
+  static const horizontalPadding = EdgeInsets.symmetric(
+    horizontal: horizontalPaddingValue,
+  );
 
   static const pdt2 = Padding(padding: EdgeInsets.only(top: 2));
   static const pdt4 = Padding(padding: EdgeInsets.only(top: 4));

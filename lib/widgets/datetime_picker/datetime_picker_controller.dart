@@ -20,7 +20,7 @@ class DatetimePickerController extends MyTextFieldController {
 
   set dateTime(DateTime? data) {
     _dateTime = data;
-    text = DatetimeUtils.convertFrom(data, toFormat: dateFormat) ?? '';
+    text = DatetimeUtils.formatDate(data, toFormat: dateFormat) ?? '';
   }
 
   DateTime? get dateTime {
@@ -33,7 +33,7 @@ class DatetimePickerController extends MyTextFieldController {
       text = '';
     }
     text =
-        '${DatetimeUtils.convertFrom(data?.start, toFormat: dateFormat) ?? ''} - ${DatetimeUtils.convertFrom(data?.end, toFormat: dateFormat) ?? ''}';
+        '${DatetimeUtils.formatDate(data?.start, toFormat: dateFormat) ?? ''} - ${DatetimeUtils.formatDate(data?.end, toFormat: dateFormat) ?? ''}';
   }
 
   DateTimeRange<DateTime>? get dateTimeRange {

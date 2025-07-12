@@ -37,7 +37,7 @@ class MyDrawer extends StatelessWidget {
                   decoration: const BoxDecoration(color: AppColors.primary),
                   child: GetBuilder(
                     init: _userService,
-                    builder: (value) {
+                    builder: (service) {
                       return Column(
                         children: [
                           Row(
@@ -49,7 +49,7 @@ class MyDrawer extends StatelessWidget {
                               AppStyles.pdl10,
                               Expanded(
                                 child: Text(
-                                  value.userInfor?.fullName ?? '',
+                                  service.userInfor?.fullName ?? '',
                                   style: AppTextStyles.body2.copyWith(
                                     color: AppColors.textLight,
                                   ),
@@ -67,7 +67,7 @@ class MyDrawer extends StatelessWidget {
                               AppStyles.pdl10,
                               Expanded(
                                 child: Text(
-                                  value.userInfor?.email ?? '',
+                                  service.userInfor?.email ?? '',
                                   style: AppTextStyles.body2.copyWith(
                                     color: AppColors.textLight,
                                   ),

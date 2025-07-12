@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'installation_api.dart';
+part of 'repair_request_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'installation_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _InstallationApi implements InstallationApi {
-  _InstallationApi(this._dio, {this.baseUrl, this.errorLogger});
+class _RepairRequestApi implements RepairRequestApi {
+  _RepairRequestApi(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -18,7 +18,40 @@ class _InstallationApi implements InstallationApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<BaseResponse<InstallationListResponse>> getNewInstallationList(
+  Future<BaseResponse<CustomerSearchResponse>> searchCustomer(
+    Map<String, dynamic> body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _options = _setStreamType<BaseResponse<CustomerSearchResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/apiv1/data/findcustomers',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<CustomerSearchResponse> _value;
+    try {
+      _value = BaseResponse<CustomerSearchResponse>.fromJson(
+        _result.data!,
+        (json) => CustomerSearchResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<RepairRequestListResponse>> getRepairRequestList(
     InstallationListPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -26,23 +59,23 @@ class _InstallationApi implements InstallationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponse<InstallationListResponse>>(
+    final _options = _setStreamType<BaseResponse<RepairRequestListResponse>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/NewConnectionRequest/LoadData',
+            '/repairrequest/loaddata',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<InstallationListResponse> _value;
+    late BaseResponse<RepairRequestListResponse> _value;
     try {
-      _value = BaseResponse<InstallationListResponse>.fromJson(
+      _value = BaseResponse<RepairRequestListResponse>.fromJson(
         _result.data!,
         (json) =>
-            InstallationListResponse.fromJson(json as Map<String, dynamic>),
+            RepairRequestListResponse.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -52,7 +85,7 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse<InstallationDetailResponse>> getNewInstallationDetail(
+  Future<BaseResponse<RepairRequestDetailResponse>> getRepairRequestDetail(
     InstallationDetailPayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -60,23 +93,23 @@ class _InstallationApi implements InstallationApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<BaseResponse<InstallationDetailResponse>>(
+    final _options = _setStreamType<BaseResponse<RepairRequestDetailResponse>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/NewConnectionRequest/editjson',
+            '/repairrequest/editjson',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<InstallationDetailResponse> _value;
+    late BaseResponse<RepairRequestDetailResponse> _value;
     try {
-      _value = BaseResponse<InstallationDetailResponse>.fromJson(
+      _value = BaseResponse<RepairRequestDetailResponse>.fromJson(
         _result.data!,
         (json) =>
-            InstallationDetailResponse.fromJson(json as Map<String, dynamic>),
+            RepairRequestDetailResponse.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -86,7 +119,7 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> confirmNewInstallation(
+  Future<BaseResponse<dynamic>> confirmRepairRequest(
     Map<String, dynamic> body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -98,7 +131,7 @@ class _InstallationApi implements InstallationApi {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/NewConnectionRequest/UpdateCurrentStep_2_1',
+            '/RepairRequest/UpdateCurrentStep_2_1',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -119,7 +152,7 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> updateCustomerNewInstallationNote(
+  Future<BaseResponse<dynamic>> updateCustomerRepairRequestNote(
     Map<String, dynamic> body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -131,7 +164,7 @@ class _InstallationApi implements InstallationApi {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/NewConnectionRequest/UpdateCurrentStep_3',
+            '/RepairRequest/UpdateCurrentStep_3',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -152,7 +185,7 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<HttpResponse<dynamic>> uploadNewInstallationFile({
+  Future<HttpResponse<dynamic>> uploadRepairRequestFile({
     required String id,
     required String note,
     required File technicalStaffModuleImage,
@@ -205,7 +238,7 @@ class _InstallationApi implements InstallationApi {
           )
           .compose(
             _dio.options,
-            '/NewConnectionRequest/UpdateCurrentStep_4',
+            '/RepairRequest/UpdateCurrentStep_4',
             queryParameters: queryParameters,
             data: _data,
           )
