@@ -1,15 +1,14 @@
-import '../customer/customer_viewmodel_response.dart';
-import 'technical_leader_response.dart';
-
-class InstallationDetailModelResponse {
+class RepairRequestListModelResponse {
   int? id;
   int? idLong;
+  int? parent;
+  int? parentLong;
   int? currentStep;
   int? customersId;
   int? serviceId;
-  int? type;
-  String? contractCode;
-  int? surveyStatus;
+  dynamic type;
+  dynamic contractCode;
+  dynamic surveyStatus;
   int? countryId;
   int? provinceId;
   int? districtId;
@@ -24,7 +23,7 @@ class InstallationDetailModelResponse {
   dynamic closedBy;
   dynamic closedDate;
   dynamic closedNote;
-  String? technicalLeader;
+  dynamic technicalLeader;
   dynamic technicalStaff;
   dynamic technicalStaffDate;
   dynamic technicalStaffReception;
@@ -33,31 +32,30 @@ class InstallationDetailModelResponse {
   dynamic technicalStaffImage;
   dynamic technicalStaffRating;
   dynamic googleMap;
-  dynamic deviceAcc;
-  dynamic deviceSlid;
-  CustomerViewmodelResponse? mbCustomerViewModel;
-  dynamic mbConnectionRequestNoteViewModel;
-  dynamic listMbConnectionRequestNoteViewModel;
-  dynamic listMbConnectionRequestNoteViewModel2;
-  List<TechnicalLeaderResponse>? listTechnicalLeader;
+  dynamic mbCustomerViewModel;
+  dynamic mbRepairRequestNoteViewModel;
+  dynamic listMbRepairRequestNoteViewModel;
+  dynamic listTechnicalLeader;
   dynamic listTechnicalStaff;
   String? address2;
-  dynamic countryIdTitle;
-  dynamic provinceIdTitle;
-  dynamic districtIdTitle;
-  dynamic wardIdTitle;
+  String? countryIdTitle;
+  String? provinceIdTitle;
+  String? districtIdTitle;
+  String? wardIdTitle;
   dynamic closedByEmail;
   dynamic closedByUserName;
-  dynamic customersIdIdLong;
-  dynamic customersIdFullName;
-  dynamic customersIdCccd;
-  dynamic serviceIdTitle;
-  dynamic createdByEmail;
-  dynamic createdByUserName;
+  int? customersIdIdLong;
+  String? customersIdFullName;
+  String? customersIdCccd;
+  String? serviceIdTitle;
+  String? createdByEmail;
+  String? createdByUserName;
 
-  InstallationDetailModelResponse({
+  RepairRequestListModelResponse({
     this.id,
     this.idLong,
+    this.parent,
+    this.parentLong,
     this.currentStep,
     this.customersId,
     this.serviceId,
@@ -87,12 +85,9 @@ class InstallationDetailModelResponse {
     this.technicalStaffImage,
     this.technicalStaffRating,
     this.googleMap,
-    this.deviceAcc,
-    this.deviceSlid,
     this.mbCustomerViewModel,
-    this.mbConnectionRequestNoteViewModel,
-    this.listMbConnectionRequestNoteViewModel,
-    this.listMbConnectionRequestNoteViewModel2,
+    this.mbRepairRequestNoteViewModel,
+    this.listMbRepairRequestNoteViewModel,
     this.listTechnicalLeader,
     this.listTechnicalStaff,
     this.address2,
@@ -110,16 +105,18 @@ class InstallationDetailModelResponse {
     this.createdByUserName,
   });
 
-  factory InstallationDetailModelResponse.fromJson(Map<String, dynamic> json) {
-    return InstallationDetailModelResponse(
+  factory RepairRequestListModelResponse.fromJson(Map<String, dynamic> json) {
+    return RepairRequestListModelResponse(
       id: json['ID'] as int?,
       idLong: json['IDLong'] as int?,
+      parent: json['Parent'] as int?,
+      parentLong: json['ParentLong'] as int?,
       currentStep: json['CurrentStep'] as int?,
       customersId: json['CustomersID'] as int?,
       serviceId: json['ServiceID'] as int?,
-      type: json['Type'] as int?,
-      contractCode: json['ContractCode'] as String?,
-      surveyStatus: json['SurveyStatus'] as int?,
+      type: json['Type'] as dynamic,
+      contractCode: json['ContractCode'] as dynamic,
+      surveyStatus: json['SurveyStatus'] as dynamic,
       countryId: json['CountryID'] as int?,
       provinceId: json['ProvinceID'] as int?,
       districtId: json['DistrictID'] as int?,
@@ -134,7 +131,7 @@ class InstallationDetailModelResponse {
       closedBy: json['ClosedBy'] as dynamic,
       closedDate: json['ClosedDate'] as dynamic,
       closedNote: json['ClosedNote'] as dynamic,
-      technicalLeader: json['TechnicalLeader'] as String?,
+      technicalLeader: json['TechnicalLeader'] as dynamic,
       technicalStaff: json['TechnicalStaff'] as dynamic,
       technicalStaffDate: json['TechnicalStaffDate'] as dynamic,
       technicalStaffReception: json['TechnicalStaffReception'] as dynamic,
@@ -143,44 +140,34 @@ class InstallationDetailModelResponse {
       technicalStaffImage: json['TechnicalStaffImage'] as dynamic,
       technicalStaffRating: json['TechnicalStaffRating'] as dynamic,
       googleMap: json['GoogleMap'] as dynamic,
-      deviceAcc: json['Device_ACC'] as dynamic,
-      deviceSlid: json['Device_SLID'] as dynamic,
-      mbCustomerViewModel: json['MB_CustomerViewModel'] == null
-          ? null
-          : CustomerViewmodelResponse.fromJson(
-              json['MB_CustomerViewModel'] as Map<String, dynamic>,
-            ),
-      mbConnectionRequestNoteViewModel:
-          json['MB_ConnectionRequestNoteViewModel'] as dynamic,
-      listMbConnectionRequestNoteViewModel:
-          json['ListMB_ConnectionRequestNoteViewModel'] as dynamic,
-      listMbConnectionRequestNoteViewModel2:
-          json['ListMB_ConnectionRequestNoteViewModel2'] as dynamic,
-      listTechnicalLeader: (json['ListTechnicalLeader'] as List<dynamic>?)
-          ?.map(
-            (e) => TechnicalLeaderResponse.fromJson(e as Map<String, dynamic>),
-          )
-          .toList(),
+      mbCustomerViewModel: json['MB_CustomerViewModel'] as dynamic,
+      mbRepairRequestNoteViewModel:
+          json['MB_RepairRequestNoteViewModel'] as dynamic,
+      listMbRepairRequestNoteViewModel:
+          json['ListMB_RepairRequestNoteViewModel'] as dynamic,
+      listTechnicalLeader: json['ListTechnicalLeader'] as dynamic,
       listTechnicalStaff: json['ListTechnicalStaff'] as dynamic,
       address2: json['Address2'] as String?,
-      countryIdTitle: json['CountryID_Title'] as dynamic,
-      provinceIdTitle: json['ProvinceID_Title'] as dynamic,
-      districtIdTitle: json['DistrictID_Title'] as dynamic,
-      wardIdTitle: json['WardID_Title'] as dynamic,
+      countryIdTitle: json['CountryID_Title'] as String?,
+      provinceIdTitle: json['ProvinceID_Title'] as String?,
+      districtIdTitle: json['DistrictID_Title'] as String?,
+      wardIdTitle: json['WardID_Title'] as String?,
       closedByEmail: json['ClosedBy_Email'] as dynamic,
       closedByUserName: json['ClosedBy_UserName'] as dynamic,
-      customersIdIdLong: json['CustomersID_IDLong'] as dynamic,
-      customersIdFullName: json['CustomersID_FullName'] as dynamic,
-      customersIdCccd: json['CustomersID_CCCD'] as dynamic,
-      serviceIdTitle: json['ServiceID_Title'] as dynamic,
-      createdByEmail: json['CreatedBy_Email'] as dynamic,
-      createdByUserName: json['CreatedBy_UserName'] as dynamic,
+      customersIdIdLong: json['CustomersID_IDLong'] as int?,
+      customersIdFullName: json['CustomersID_FullName'] as String?,
+      customersIdCccd: json['CustomersID_CCCD'] as String?,
+      serviceIdTitle: json['ServiceID_Title'] as String?,
+      createdByEmail: json['CreatedBy_Email'] as String?,
+      createdByUserName: json['CreatedBy_UserName'] as String?,
     );
   }
 
   Map<String, dynamic> toJson() => {
     'ID': id,
     'IDLong': idLong,
+    'Parent': parent,
+    'ParentLong': parentLong,
     'CurrentStep': currentStep,
     'CustomersID': customersId,
     'ServiceID': serviceId,
@@ -210,15 +197,10 @@ class InstallationDetailModelResponse {
     'TechnicalStaffImage': technicalStaffImage,
     'TechnicalStaffRating': technicalStaffRating,
     'GoogleMap': googleMap,
-    'Device_ACC': deviceAcc,
-    'Device_SLID': deviceSlid,
-    'MB_CustomerViewModel': mbCustomerViewModel?.toJson(),
-    'MB_ConnectionRequestNoteViewModel': mbConnectionRequestNoteViewModel,
-    'ListMB_ConnectionRequestNoteViewModel':
-        listMbConnectionRequestNoteViewModel,
-    'ListMB_ConnectionRequestNoteViewModel2':
-        listMbConnectionRequestNoteViewModel2,
-    'ListTechnicalLeader': listTechnicalLeader?.map((e) => e.toJson()).toList(),
+    'MB_CustomerViewModel': mbCustomerViewModel,
+    'MB_RepairRequestNoteViewModel': mbRepairRequestNoteViewModel,
+    'ListMB_RepairRequestNoteViewModel': listMbRepairRequestNoteViewModel,
+    'ListTechnicalLeader': listTechnicalLeader,
     'ListTechnicalStaff': listTechnicalStaff,
     'Address2': address2,
     'CountryID_Title': countryIdTitle,

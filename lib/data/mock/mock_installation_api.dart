@@ -10,8 +10,6 @@ import 'package:flutter_base/models/installation/installation_list_payload.dart'
 import 'package:flutter_base/models/installation/installation_list_response.dart';
 
 import '../../core/utils/jsonc_reader.dart';
-import '../../models/installation/installation_list_model_response.dart';
-import '../../models/installation/role_response.dart';
 import '../installation_api.dart';
 
 class MockInstallationApi implements InstallationApi {
