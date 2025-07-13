@@ -15,6 +15,10 @@ class FileCollectionController extends GetxController {
     files.remove(data);
   }
 
+  File? get firstFile {
+    return files.first.file;
+  }
+
   List<File> getLocalFiles() {
     return files
         .where((file) {

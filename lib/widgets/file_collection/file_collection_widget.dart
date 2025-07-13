@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_item.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,13 +11,17 @@ import 'file_collection_controller.dart';
 import 'file_collection_slider.dart';
 
 class FileCollectionWidget extends StatefulWidget {
+  final int? limit;
+  final String title;
   final int? imageQuality;
   final FileCollectionController? controller;
 
   const FileCollectionWidget({
     super.key,
+    this.limit,
     this.controller,
     this.imageQuality = 50,
+    this.title = 'Tệp đính kèm',
   });
 
   @override
@@ -47,6 +52,14 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
   }
 
   Future<void> onPickImage({bool isTakeFromCamera = false}) async {
+    if (widget.limit != null && _mainController.files.length >= widget.limit!) {
+      MyDialog.snackbar(
+        'Giới hạn tối đa ${widget.limit} tệp tin',
+        type: SnackbarType.WARNING,
+      );
+      return;
+    }
+
     List<XFile> results = [];
 
     if (isTakeFromCamera) {
@@ -82,6 +95,7 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
     Get.to(() {
       return FileCollectionSlider(
         initialPage: index,
+        title: widget.title,
         data: _mainController.files,
       );
     });
@@ -99,12 +113,19 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.file_copy_outlined),
-                      AppStyles.pdl5,
-                      Text('Tệp đính kèm', style: AppTextStyles.title2),
-                    ],
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Icon(Icons.file_copy_outlined),
+                        AppStyles.pdl5,
+                        Expanded(
+                          child: Text(
+                            widget.title,
+                            style: AppTextStyles.title2,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Row(
                     children: [
@@ -136,6 +157,7 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
               GridView.count(
                 shrinkWrap: true,
                 crossAxisCount: 3,
+                physics: const NeverScrollableScrollPhysics(),
                 children: _mainController.files.mapIndexed((index, file) {
                   return FileCollectionItem(
                     item: file,

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 class FileCollectionModel extends Equatable {
@@ -11,6 +13,8 @@ class FileCollectionModel extends Equatable {
     required this.filePath,
     required this.isLocal,
   });
+
+  File? get file => isLocal == true ? File(filePath) : null;
 
   @override
   List<Object?> get props => [fileName];

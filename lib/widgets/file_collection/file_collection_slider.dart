@@ -6,6 +6,7 @@ import 'package:flutter_base/widgets/file_collection/file_collection_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 
 class FileCollectionSlider extends StatelessWidget {
+  final String title;
   final int initialPage;
   final List<FileCollectionModel> data;
 
@@ -13,13 +14,14 @@ class FileCollectionSlider extends StatelessWidget {
     super.key,
     required this.data,
     this.initialPage = 0,
+    required this.title,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgRandom1,
-      appBar: MyAppbar.appBar('Fullscreen sliding carousel demo'),
+      backgroundColor: AppColors.textGrey2,
+      appBar: MyAppbar.appBar(title),
       body: Builder(
         builder: (context) {
           final double height = MediaQuery.of(context).size.height;

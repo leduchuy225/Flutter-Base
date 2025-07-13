@@ -37,13 +37,11 @@ abstract class InstallationApi {
 
   @MultiPart()
   @POST('/NewConnectionRequest/UpdateCurrentStep_4')
-  Future<HttpResponse> uploadNewInstallationFile({
+  Future<BaseResponse> uploadNewInstallationFile({
     @Part(name: 'id') required String id,
     @Part(name: 'note') required String note,
-    @Part(name: 'technicalStaffModuleImage[0]')
-    required File technicalStaffModuleImage,
-    @Part(name: 'technicalStaffTestImage[0]')
-    required File technicalStaffTestImage,
-    @Part(name: 'technicalStaffImage[0]') required File technicalStaffImage,
+    @Part(name: 'technicalStaffModuleImage[0]') File? technicalStaffModuleImage,
+    @Part(name: 'technicalStaffTestImage[0]') File? technicalStaffTestImage,
+    @Part(name: 'technicalStaffImage[0]') File? technicalStaffImage,
   });
 }

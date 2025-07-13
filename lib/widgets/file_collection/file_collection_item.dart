@@ -70,7 +70,7 @@ class FileCollectionItem extends StatelessWidget {
         child: FileCollectionItem.buildChild(context, item),
         margin: const EdgeInsets.all(3),
         decoration: const BoxDecoration(
-          color: AppColors.bgRandom1,
+          color: AppColors.textGrey2,
           borderRadius: AppCorners.mdBorder,
         ),
       ),

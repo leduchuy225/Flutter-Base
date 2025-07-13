@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/utils/datetime_utils.dart';
+import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get.dart';
 
 import '../../../models/installation/installation_list_model_response.dart';
-import '../new_installation_detail/new_installation_detail.dart';
 import '../new_installation_detail/new_installation_detail_controller.dart';
+import '../new_installation_detail/new_installation_detail_screen.dart';
 
 class NewInstallationItem extends StatelessWidget {
   final InstallationListModelResponse item;
@@ -15,8 +16,9 @@ class NewInstallationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyTexttile.card(
-      tag: 'AHIHI',
       isViewDetail: true,
+      tagColor: AppColors.primary,
+      tag: 'Bước ${item.currentStep}',
       title: (item.idLong ?? '').toString(),
       onTapViewDetail: () {
         Get.to(

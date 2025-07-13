@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import '../core/services/notification_service.dart';
 import '../theme/styles.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
-import 'new_installation/new_installation_list/new_installation_list.dart';
+import 'customer_search_screen.dart';
+import 'new_installation/new_installation_list/new_installation_list_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -48,6 +49,13 @@ class _MainScreenState extends State<MainScreen> {
                     icon: Icons.home_repair_service_rounded,
                     onTap: () {
                       Get.to(() => const NewInstallationListScreen());
+                    },
+                  ),
+                  FunctionItem(
+                    icon: Icons.search,
+                    title: 'Tra cứu khách hàng',
+                    onTap: () {
+                      Get.to(() => const CustomerSearchScreen());
                     },
                   ),
                   FunctionItem(

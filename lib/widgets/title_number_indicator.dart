@@ -36,7 +36,7 @@ class TitleNumberIndicator extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(child: Text(title, style: AppTextStyles.body1)),
+        Expanded(child: Text(title, style: AppTextStyles.title1)),
         TitleNumberIndicator.getnumber(number),
       ],
     );

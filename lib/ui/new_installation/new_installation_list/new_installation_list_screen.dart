@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
+import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
 import '../../../data/installation_api.dart';
@@ -32,10 +33,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
 
       final data = response.data?.model;
 
-      print(data);
-
       if (data != null) {
-        print(data.length);
         setState(() {
           _data = data;
         });
@@ -49,6 +47,18 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
       appBar: MyAppbar.appBar('Danh sách lắp mới'),
       body: CustomScrollView(
         slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 16,
+                horizontal: AppStyles.horizontalPaddingValue,
+              ),
+              child: TitleNumberIndicator(
+                number: _data.length,
+                title: 'Yêu cầu lắp mới',
+              ),
+            ),
+          ),
           SliverToBoxAdapter(
             child: Visibility(
               visible: _data.isEmpty,

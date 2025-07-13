@@ -185,51 +185,66 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<HttpResponse<dynamic>> uploadRepairRequestFile({
+  Future<BaseResponse<dynamic>> uploadRepairRequestFile({
     required String id,
     required String note,
-    required File technicalStaffModuleImage,
-    required File technicalStaffTestImage,
-    required File technicalStaffImage,
+    File? technicalStaffModuleImage,
+    File? technicalStaffTestImage,
+    File? technicalStaffImage,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry('id', id));
     _data.fields.add(MapEntry('note', note));
-    _data.files.add(
-      MapEntry(
-        'technicalStaffModuleImage[0]',
-        MultipartFile.fromFileSync(
-          technicalStaffModuleImage.path,
-          filename: technicalStaffModuleImage.path
-              .split(Platform.pathSeparator)
-              .last,
-        ),
-      ),
-    );
-    _data.files.add(
-      MapEntry(
-        'technicalStaffTestImage[0]',
-        MultipartFile.fromFileSync(
-          technicalStaffTestImage.path,
-          filename: technicalStaffTestImage.path
-              .split(Platform.pathSeparator)
-              .last,
-        ),
-      ),
-    );
-    _data.files.add(
-      MapEntry(
-        'technicalStaffImage[0]',
-        MultipartFile.fromFileSync(
-          technicalStaffImage.path,
-          filename: technicalStaffImage.path.split(Platform.pathSeparator).last,
-        ),
-      ),
-    );
-    final _options = _setStreamType<HttpResponse<dynamic>>(
+    if (technicalStaffModuleImage != null) {
+      if (technicalStaffModuleImage != null) {
+        _data.files.add(
+          MapEntry(
+            'technicalStaffModuleImage[0]',
+            MultipartFile.fromFileSync(
+              technicalStaffModuleImage.path,
+              filename: technicalStaffModuleImage.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    if (technicalStaffTestImage != null) {
+      if (technicalStaffTestImage != null) {
+        _data.files.add(
+          MapEntry(
+            'technicalStaffTestImage[0]',
+            MultipartFile.fromFileSync(
+              technicalStaffTestImage.path,
+              filename: technicalStaffTestImage.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    if (technicalStaffImage != null) {
+      if (technicalStaffImage != null) {
+        _data.files.add(
+          MapEntry(
+            'technicalStaffImage[0]',
+            MultipartFile.fromFileSync(
+              technicalStaffImage.path,
+              filename: technicalStaffImage.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(
             method: 'POST',
             headers: _headers,
@@ -244,10 +259,18 @@ class _RepairRequestApi implements RepairRequestApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
-    final httpResponse = HttpResponse(_value, _result);
-    return httpResponse;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<dynamic> _value;
+    try {
+      _value = BaseResponse<dynamic>.fromJson(
+        _result.data!,
+        (json) => json as dynamic,
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

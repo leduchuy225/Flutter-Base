@@ -80,12 +80,27 @@ class _MyTextFieldState extends State<MyTextField> {
             maxLines: widget.obscureText ? 1 : widget.maxLines,
             decoration: InputDecoration(
               suffixIcon: widget.suffixIcon,
+
               errorText: getErrorText(value.errorTexts),
               hintText: widget.hintText ?? widget.labelText,
               floatingLabelBehavior: FloatingLabelBehavior.always,
-              labelText: '${widget.labelText} ${widget.isRequired ? ' *' : ''}',
               hintStyle: AppTextStyles.body2.copyWith(
                 color: AppColors.textGrey2,
+              ),
+              label: RichText(
+                text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(text: '${widget.labelText}'),
+                    if (widget.isRequired)
+                      TextSpan(
+                        text: ' * ',
+                        style: AppTextStyles.title1.copyWith(
+                          color: AppColors.error,
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
