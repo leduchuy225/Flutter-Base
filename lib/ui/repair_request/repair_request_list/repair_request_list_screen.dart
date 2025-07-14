@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:flutter_base/data/repair_request_api.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
-import '../../../data/installation_api.dart';
-import '../../../models/installation/installation_list_model_response.dart';
 import '../../../models/installation/installation_list_payload.dart';
+import '../../../models/repair_request/repair_request_list_model_response.dart';
 import '../../../widgets/data_state_widget.dart';
-import 'new_installation_item.dart';
+import 'repair_request_item.dart';
 
-class NewInstallationListScreen extends StatefulWidget {
-  const NewInstallationListScreen({super.key});
+class RepairRequestListScreen extends StatefulWidget {
+  const RepairRequestListScreen({super.key});
 
   @override
-  State<NewInstallationListScreen> createState() =>
+  State<RepairRequestListScreen> createState() =>
       _NewInstallationListScreenState();
 }
 
-class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
-  List<InstallationListModelResponse> _data = [];
+class _NewInstallationListScreenState extends State<RepairRequestListScreen> {
+  List<RepairRequestListModelResponse> _data = [];
 
   @override
   void initState() {
@@ -32,8 +32,8 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
   }
 
   Future getData() async {
-    final response = await Get.find<InstallationApi>()
-        .getNewInstallationList(InstallationListPayload())
+    final response = await Get.find<RepairRequestApi>()
+        .getRepairRequestList(InstallationListPayload())
         .callApi();
 
     final data = response.data?.model;
@@ -48,7 +48,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppbar.appBar(
-        'Danh sách lắp mới',
+        'Danh sách sửa chữa',
         action: IconButton(
           onPressed: getData,
           icon: const Icon(Icons.replay_outlined),
@@ -64,7 +64,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
               ),
               child: TitleNumberIndicator(
                 number: _data.length,
-                title: 'Yêu cầu lắp mới',
+                title: 'Yêu cầu sửa chữa',
               ),
             ),
           ),
@@ -82,7 +82,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
                   vertical: 10,
                   horizontal: AppStyles.horizontalPaddingValue,
                 ),
-                child: NewInstallationItem(item: item),
+                child: RepairRequestItem(item: item),
               );
             }, childCount: _data.length),
           ),

@@ -24,7 +24,7 @@ class Step3UpdateCustomerNote extends StatelessWidget {
           labelText: 'Ghi chú',
           controller: customerNoteTextController,
         ),
-        AppStyles.pdt15,
+        AppStyles.pdt20,
         ElevatedButton(onPressed: onPressed, child: const Text('Cập nhật')),
       ],
     );

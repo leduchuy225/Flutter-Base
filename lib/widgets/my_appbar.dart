@@ -6,7 +6,7 @@ import 'package:marquee/marquee.dart';
 class MyAppbar {
   MyAppbar._();
 
-  static AppBar appBar(String title) {
+  static AppBar appBar(String title, {Widget? action}) {
     return AppBar(
       centerTitle: true,
       title: AutoSizeText(
@@ -23,6 +23,7 @@ class MyAppbar {
           ),
         ),
       ),
+      actions: action != null ? [action] : null,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(colors: AppColors.defaultGradient),

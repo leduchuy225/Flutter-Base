@@ -15,8 +15,11 @@ class MyTexttileItem {
   final bool isCopy;
   final bool isPhoneNumber;
 
+  final Widget? child;
+
   MyTexttileItem({
     this.text,
+    this.child,
     this.titleText,
     this.isCopy = false,
     this.isPhoneNumber = false,
@@ -135,6 +138,9 @@ class MyTexttile extends StatelessWidget {
   }) {
     return Column(
       children: items.map((element) {
+        if (element.child != null) {
+          return element.child!;
+        }
         return MyTexttile(
           textFlex: textFlex,
           maxLines: maxLines,

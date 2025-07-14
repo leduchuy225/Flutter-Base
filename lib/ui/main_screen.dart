@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/dev_screen.dart';
+import 'package:flutter_base/ui/repair_request/repair_request_list/repair_request_list_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:get/get.dart';
@@ -49,6 +50,13 @@ class _MainScreenState extends State<MainScreen> {
                     icon: Icons.home_repair_service_rounded,
                     onTap: () {
                       Get.to(() => const NewInstallationListScreen());
+                    },
+                  ),
+                  FunctionItem(
+                    icon: Icons.build,
+                    title: 'Yêu cầu sửa chữa',
+                    onTap: () {
+                      Get.to(() => const RepairRequestListScreen());
                     },
                   ),
                   FunctionItem(

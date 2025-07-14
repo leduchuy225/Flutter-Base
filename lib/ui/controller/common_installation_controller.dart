@@ -73,7 +73,7 @@ abstract class CommonInstallationController<T> extends GetxController {
       case 5:
         return const MyDataState(
           icon: Icons.help_outline,
-          message: 'Liên hệ admin nhờ hỗ trợ',
+          message: 'Liên hệ admin hỗ trợ',
         );
       case 3:
         return Step3UpdateCustomerNote(

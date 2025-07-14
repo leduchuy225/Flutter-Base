@@ -7,13 +7,14 @@ import '../core/services/service_locator.dart';
 import 'authentication_api.dart';
 import 'installation_api.dart';
 import 'jsonplaceholder_api.dart';
+import 'mock/mock_repair_request_api.dart';
 import 'repair_request_api.dart';
 
 void setupApiLocator() {
   final dio = Get.find<HttpService>().dio;
 
   DI.lazyPut(() => JsonPlaceholderApi(dio));
-  DI.lazyPut<RepairRequestApi>(() => RepairRequestApi(dio));
   DI.lazyPut<InstallationApi>(() => MockInstallationApi(dio));
+  DI.lazyPut<RepairRequestApi>(() => MockRepairRequestApi(dio));
   DI.lazyPut<AuthenticationApi>(() => MockAuthenticationApi(dio));
 }
