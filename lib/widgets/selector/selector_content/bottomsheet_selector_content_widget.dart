@@ -10,6 +10,7 @@ import '../../search_field/search_field_widget.dart';
 class MyBottomsheetSelectorContent extends StatefulWidget {
   final String title;
   final MySelectorData data;
+  final bool isDismissOnSelect;
   final MySelectorController controller;
   final ScrollController scrollController;
 
@@ -17,6 +18,7 @@ class MyBottomsheetSelectorContent extends StatefulWidget {
     required this.data,
     required this.title,
     required this.controller,
+    this.isDismissOnSelect = true,
     required this.scrollController,
   });
 
@@ -40,6 +42,9 @@ class _MyBottomsheetSelectorContentState
       return;
     }
     widget.controller.selectors = [item];
+    if (widget.isDismissOnSelect) {
+      Get.back();
+    }
   }
 
   @override
@@ -57,15 +62,24 @@ class _MyBottomsheetSelectorContentState
                 },
               ),
               Expanded(
-                child: Center(
-                  child: Text(widget.title, style: AppTextStyles.body1),
+                child: Text(
+                  widget.title,
+                  style: AppTextStyles.body1,
+                  textAlign: TextAlign.center,
                 ),
               ),
-              TextButton(
-                child: Text('OK', style: AppTextStyles.body2),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+              Visibility(
+                visible: !widget.isDismissOnSelect,
+                child: TextButton(
+                  child: Text('OK', style: AppTextStyles.body2),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                replacement: TextButton(
+                  onPressed: () {},
+                  child: const Text(''),
+                ),
               ),
             ],
           ),

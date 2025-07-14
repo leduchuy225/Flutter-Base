@@ -8,6 +8,7 @@ import 'package:flutter_base/widgets/dialog/bottom_sheet_widget.dart';
 import '../../models/file_collection_model.dart';
 
 class FileCollectionItem extends StatelessWidget {
+  final bool isViewImageOnly;
   final FileCollectionModel item;
   final void Function() onViewDetail;
   final void Function(FileCollectionModel) onDeleteItem;
@@ -17,6 +18,7 @@ class FileCollectionItem extends StatelessWidget {
     required this.item,
     required this.onDeleteItem,
     required this.onViewDetail,
+    this.isViewImageOnly = false,
   });
 
   static Widget buildChild(
@@ -55,14 +57,15 @@ class FileCollectionItem extends StatelessWidget {
                 onViewDetail();
               },
             ),
-            MyBottomSheetAction(
-              id: 2,
-              icon: Icons.delete,
-              title: 'Xóa tệp tin',
-              onTap: (context, id) {
-                onDeleteItem(item);
-              },
-            ),
+            if (!isViewImageOnly)
+              MyBottomSheetAction(
+                id: 2,
+                icon: Icons.delete,
+                title: 'Xóa tệp tin',
+                onTap: (context, id) {
+                  onDeleteItem(item);
+                },
+              ),
           ],
         );
       },

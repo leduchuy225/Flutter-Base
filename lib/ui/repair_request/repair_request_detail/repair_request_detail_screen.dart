@@ -76,6 +76,7 @@ class _NewInstallationDetailScreenState
                         title: 'Thông tin KH',
                         items: [
                           MyTexttileItem(
+                            isCopy: true,
                             titleText: 'Mã KH',
                             text: customerData?.idLong,
                           ),

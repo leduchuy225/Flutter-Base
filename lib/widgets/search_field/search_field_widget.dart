@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 
 import '../../core/utils/diacritic/diacritic.dart';
-import '../../theme/styles.dart';
+import '../text_field/text_field_controller.dart';
 import 'search_deboucer.dart';
 
 class MySearchField extends StatefulWidget {
+  final MyTextFieldController? controller;
   final void Function(String text) onFiltered;
 
-  const MySearchField({Key? key, required this.onFiltered}) : super(key: key);
+  const MySearchField({Key? key, required this.onFiltered, this.controller})
+    : super(key: key);
 
   @override
   State<MySearchField> createState() => _MySearchFieldState();
@@ -43,12 +46,10 @@ class _MySearchFieldState extends State<MySearchField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return MyTextField(
       onChanged: onSearchChanged,
-      decoration: const InputDecoration(
-        labelText: 'Nhập nội dung',
-        fillColor: AppColors.textLight,
-      ),
+      hintText: 'Nội dung tìm kiếm',
+      controller: widget.controller,
     );
   }
 }

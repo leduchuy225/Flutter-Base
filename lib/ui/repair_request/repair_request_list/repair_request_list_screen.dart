@@ -3,6 +3,7 @@ import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/repair_request_api.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
+import 'package:flutter_base/widgets/search_field/search_field_widget.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
@@ -66,6 +67,17 @@ class _NewInstallationListScreenState extends State<RepairRequestListScreen> {
                 number: _data.length,
                 title: 'Yêu cầu sửa chữa',
               ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsetsGeometry.only(
+                top: 6,
+                bottom: 12,
+                left: AppStyles.horizontalPaddingValue,
+                right: AppStyles.horizontalPaddingValue,
+              ),
+              child: MySearchField(onFiltered: (text) {}),
             ),
           ),
           SliverToBoxAdapter(

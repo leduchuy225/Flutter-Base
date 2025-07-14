@@ -9,6 +9,7 @@ import 'selector_content/bottomsheet_selector_content_widget.dart';
 class MySelector extends StatefulWidget {
   final String title;
   final MySelectorData data;
+  final bool isDismissOnSelect;
   final MySelectorController? controller;
 
   const MySelector({
@@ -16,6 +17,7 @@ class MySelector extends StatefulWidget {
     this.controller,
     required this.data,
     required this.title,
+    this.isDismissOnSelect = true,
   }) : super(key: key);
 
   @override

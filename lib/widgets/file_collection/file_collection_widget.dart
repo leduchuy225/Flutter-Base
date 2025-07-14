@@ -14,6 +14,7 @@ class FileCollectionWidget extends StatefulWidget {
   final int? limit;
   final String title;
   final int? imageQuality;
+  final bool isViewImageOnly;
   final FileCollectionController? controller;
 
   const FileCollectionWidget({
@@ -21,6 +22,7 @@ class FileCollectionWidget extends StatefulWidget {
     this.limit,
     this.controller,
     this.imageQuality = 50,
+    this.isViewImageOnly = false,
     this.title = 'Tệp đính kèm',
   });
 
@@ -127,29 +129,32 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () async {
-                          await onPickImage(isTakeFromCamera: true);
-                        },
-                        icon: const Icon(
-                          size: 30,
-                          Icons.camera_alt_rounded,
-                          color: AppColors.primary,
+                  Visibility(
+                    visible: !widget.isViewImageOnly,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () async {
+                            await onPickImage(isTakeFromCamera: true);
+                          },
+                          icon: const Icon(
+                            size: 30,
+                            Icons.camera_alt_rounded,
+                            color: AppColors.primary,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          await onPickImage();
-                        },
-                        icon: const Icon(
-                          size: 30,
-                          Icons.image,
-                          color: AppColors.primary,
+                        IconButton(
+                          onPressed: () async {
+                            await onPickImage();
+                          },
+                          icon: const Icon(
+                            size: 30,
+                            Icons.image,
+                            color: AppColors.primary,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -161,6 +166,7 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
                 children: _mainController.files.mapIndexed((index, file) {
                   return FileCollectionItem(
                     item: file,
+                    isViewImageOnly: widget.isViewImageOnly,
                     onViewDetail: () {
                       onViewDetail(index);
                     },

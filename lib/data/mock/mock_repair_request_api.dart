@@ -58,9 +58,13 @@ class MockRepairRequestApi implements RepairRequestApi {
   @override
   Future<BaseResponse<CustomerSearchResponse>> searchCustomer(
     Map<String, dynamic> body,
-  ) {
-    // TODO: implement searchCustomer
-    throw UnimplementedError();
+  ) async {
+    final data = await readJsoncFile('.json_models/customer.jsonc');
+    final response = processJsonc(data[0]);
+    return BaseResponse(
+      code: 1,
+      data: CustomerSearchResponse.fromJson(response),
+    );
   }
 
   @override
