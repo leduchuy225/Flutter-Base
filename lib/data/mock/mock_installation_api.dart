@@ -10,6 +10,8 @@ import 'package:flutter_base/models/installation/installation_detail_response.da
 import 'package:flutter_base/models/installation/installation_list_payload.dart';
 
 import 'package:flutter_base/models/installation/installation_list_response.dart';
+import 'package:flutter_base/models/installation/technical_staff_list_payload.dart';
+import 'package:flutter_base/models/installation/technical_staff_list_response.dart';
 
 import '../../core/utils/jsonc_reader.dart';
 import '../installation_api.dart';
@@ -23,8 +25,12 @@ class MockInstallationApi implements InstallationApi {
   Future<BaseResponse<InstallationDetailResponse>> getNewInstallationDetail(
     InstallationDetailPayload body,
   ) async {
-    final data = await readJsoncFile('.json_models/installation_models.jsonc');
-    final response = processJsonc(data[3]);
+    final data = await JsoncReader.readJsoncFile(
+      '.json_models/installation_models.jsonc',
+    );
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(data, value: 'installation_detail_response'),
+    );
     return BaseResponse(
       code: 1,
       data: InstallationDetailResponse.fromJson(response),
@@ -35,8 +41,12 @@ class MockInstallationApi implements InstallationApi {
   Future<BaseResponse<InstallationListResponse>> getNewInstallationList(
     InstallationListPayload body,
   ) async {
-    final data = await readJsoncFile('.json_models/installation_models.jsonc');
-    final response = processJsonc(data[2]);
+    final data = await JsoncReader.readJsoncFile(
+      '.json_models/installation_models.jsonc',
+    );
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(data, value: 'installation_list_response'),
+    );
     return BaseResponse(
       code: 1,
       data: InstallationListResponse.fromJson(response),
@@ -66,5 +76,29 @@ class MockInstallationApi implements InstallationApi {
   }) {
     // TODO: implement uploadNewInstallationFile
     throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse> addTechnicalStaffNewInstallation(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement addTechnicalStaffNewInstallation
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<TechnicalStaffListResponse>> getTechnicalStaffList(
+    TechnicalStaffListPayload body,
+  ) async {
+    final data = await JsoncReader.readJsoncFile(
+      '.json_models/installation_models.jsonc',
+    );
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(data, value: 'technical_staff_list_response'),
+    );
+    return BaseResponse(
+      code: 1,
+      data: TechnicalStaffListResponse.fromJson(response),
+    );
   }
 }

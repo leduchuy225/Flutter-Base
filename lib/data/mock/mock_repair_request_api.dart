@@ -31,10 +31,12 @@ class MockRepairRequestApi implements RepairRequestApi {
   Future<BaseResponse<RepairRequestDetailResponse>> getRepairRequestDetail(
     InstallationDetailPayload body,
   ) async {
-    final data = await readJsoncFile(
+    final data = await JsoncReader.readJsoncFile(
       '.json_models/repair_request_models.jsonc',
     );
-    final response = processJsonc(data[1]);
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(data, value: 'repair_request_detail_response'),
+    );
     return BaseResponse(
       code: 1,
       data: RepairRequestDetailResponse.fromJson(response),
@@ -45,10 +47,12 @@ class MockRepairRequestApi implements RepairRequestApi {
   Future<BaseResponse<RepairRequestListResponse>> getRepairRequestList(
     InstallationListPayload body,
   ) async {
-    final data = await readJsoncFile(
+    final data = await JsoncReader.readJsoncFile(
       '.json_models/repair_request_models.jsonc',
     );
-    final response = processJsonc(data[0]);
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(data, value: 'repair_request_list_response'),
+    );
     return BaseResponse(
       code: 1,
       data: RepairRequestListResponse.fromJson(response),
@@ -59,12 +63,16 @@ class MockRepairRequestApi implements RepairRequestApi {
   Future<BaseResponse<CustomerSearchResponse>> searchCustomer(
     Map<String, dynamic> body,
   ) async {
-    final data = await readJsoncFile('.json_models/customer.jsonc');
-    final response = processJsonc(data[0]);
-    return BaseResponse(
-      code: 1,
-      data: CustomerSearchResponse.fromJson(response),
-    );
+    throw UnimplementedError();
+
+    // final data = await JsoncReader.readJsoncFile('.json_models/customer.jsonc');
+    // final response = JsoncReader.processJsonc(
+    //   JsoncReader.getInListByKey(data, value: value),
+    // );
+    // return BaseResponse(
+    //   code: 1,
+    //   data: CustomerSearchResponse.fromJson(response),
+    // );
   }
 
   @override
@@ -84,6 +92,14 @@ class MockRepairRequestApi implements RepairRequestApi {
     File? technicalStaffImage,
   }) {
     // TODO: implement uploadRepairRequestFile
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse> addTechnicalStaffRepairRequest(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement addTechnicalStaffRepairRequest
     throw UnimplementedError();
   }
 }

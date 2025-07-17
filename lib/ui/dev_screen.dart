@@ -7,7 +7,6 @@ import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
 import '../core/const/config.dart';
-import '../core/utils/jsonc_reader.dart';
 import '../data/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
 import '../models/file_collection_model.dart';
@@ -53,7 +52,7 @@ class _DevScreenState extends State<DevScreen> {
       // final data = await Get.find<JsonPlaceholderApi>().getPostDetail();
       // MyDialog.snackbar(data.data.toString());
 
-      await readJsoncFile('.json_models/installation_models.jsonc');
+      // await readJsoncFile('.json_models/installation_models.jsonc');
     });
   }
 

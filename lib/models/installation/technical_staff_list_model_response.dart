@@ -1,4 +1,4 @@
-class TechnicalStaffResponse {
+class TechnicalStaffListModelResponse {
   String? id;
   int? idNew;
   String? email;
@@ -91,7 +91,7 @@ class TechnicalStaffResponse {
   dynamic phuongXaName;
   int? parentLevel;
 
-  TechnicalStaffResponse({
+  TechnicalStaffListModelResponse({
     this.id,
     this.idNew,
     this.email,
@@ -185,8 +185,8 @@ class TechnicalStaffResponse {
     this.parentLevel,
   });
 
-  factory TechnicalStaffResponse.fromJson(Map<String, dynamic> json) {
-    return TechnicalStaffResponse(
+  factory TechnicalStaffListModelResponse.fromJson(Map<String, dynamic> json) {
+    return TechnicalStaffListModelResponse(
       id: json['Id'] as String?,
       idNew: json['IDNew'] as int?,
       email: json['Email'] as String?,

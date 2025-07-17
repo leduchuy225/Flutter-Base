@@ -8,6 +8,8 @@ import '../models/installation/installation_detail_payload.dart';
 import '../models/installation/installation_detail_response.dart';
 import '../models/installation/installation_list_payload.dart';
 import '../models/installation/installation_list_response.dart';
+import '../models/installation/technical_staff_list_payload.dart';
+import '../models/installation/technical_staff_list_response.dart';
 
 part 'installation_api.g.dart';
 
@@ -23,6 +25,16 @@ abstract class InstallationApi {
   @POST('/NewConnectionRequest/editjson')
   Future<BaseResponse<InstallationDetailResponse>> getNewInstallationDetail(
     @Body() InstallationDetailPayload body,
+  );
+
+  @POST('/apiv1/data/getlisttechnicalstaff')
+  Future<BaseResponse<TechnicalStaffListResponse>> getTechnicalStaffList(
+    @Body() TechnicalStaffListPayload body,
+  );
+
+  @POST('/NewConnectionRequest/addtechnicalstaff')
+  Future<BaseResponse> addTechnicalStaffNewInstallation(
+    @Body() Map<String, dynamic> body,
   );
 
   @POST('/NewConnectionRequest/UpdateCurrentStep_2_1')

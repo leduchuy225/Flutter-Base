@@ -629,7 +629,23 @@
         "Address2": "Adfdsf, Phường Hưng Phú, Quận Cái Răng, Thành Phố Cần Thơ, Việt Nam"
       },
       "MB_ConnectionRequestNoteViewModel": null,
-      "ListMB_ConnectionRequestNoteViewModel": null,
+      "ListMB_ConnectionRequestNoteViewModel": [
+        {
+          "ID": 10,
+          "Parent": null,
+          "CurrentStep": 2,
+          "Note": "Thêm nhân viên kỹ thuật demo3@gmail.com",
+          "CreatedBy": "7c9cd909-08aa-4708-8346-805c1a4d47fa",
+          "CreatedDate": "/Date(1751964531473)/",
+          "DeleteStatus": null,
+          "DeleteBy": null,
+          "DeleteDate": null,
+          "SetDefault": null,
+          "CreatedBy_Avatar": null,
+          "CreatedBy_Email": "prophongpham@gmail.com",
+          "CreatedBy_UserName": null
+        }
+      ],
       "ListMB_ConnectionRequestNoteViewModel2": null,
       "ListTechnicalLeader.technical_leader_response": [
         {
@@ -741,5 +757,123 @@
       "CreatedBy_Email": null,
       "CreatedBy_UserName": null
     }
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "technical_staff_list_payload", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/installation",
+    "model.technical_staff_list_model_payload": {
+      "CountryId": 237,
+      "ThanhPhoId": 31,
+      "QuanHuyenId": 312,
+      "PhuongXaId": 11581
+    }
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "technical_staff_list_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/installation",
+    "model.technical_staff_list_model_response": [
+      {
+        "Id": "300dd6fe-a7ff-473b-ab4e-2f1135fc959a",
+        "IDNew": 6154,
+        "Email": "demo3@gmail.com",
+        "EmailConfirmed": false,
+        "PasswordHash": null,
+        "SecurityStamp": null,
+        "PhoneNumber": null,
+        "PhoneNumberConfirmed": false,
+        "Address": null,
+        "TwoFactorEnabled": false,
+        "LockoutEndDateUtc": null,
+        "LockoutEnabled": false,
+        "AccessFailedCount": 0,
+        "UserName": null,
+        "FullName": null,
+        "Avatar": "",
+        "Status": false,
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedDate": null,
+        "ModifiedBy": null,
+        "GioiTinh": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "TienTong": null,
+        "TienTrue": null,
+        "TienFalse": null,
+        "TienStatus": null,
+        "TienBlock": null,
+        "GCoinAll": null,
+        "GCoinTrue": null,
+        "GCoinFalse": null,
+        "GCoinStatus": null,
+        "GCoinBlock": null,
+        "NgaySinh": null,
+        "Summary": null,
+        "Contents": null,
+        "LinkFaceBook": null,
+        "LinkTwitter": null,
+        "Linkedin": null,
+        "LinkGoogle": null,
+        "LinkYoutube": null,
+        "LinkPinterest": null,
+        "LinkInstagram": null,
+        "LinkSnapchat": null,
+        "LinkTiktok": null,
+        "ResetPasswordKey": null,
+        "ResetPasswordDate": null,
+        "ResetPasswordCount": null,
+        "ResetPasswordIp": null,
+        "ResetPasswordUserAgent": null,
+        "AspRole": null,
+        "UserDefau": null,
+        "ConfirmPassword": null,
+        "Roles": null,
+        "GA_Status": null,
+        "GA_Key": null,
+        "GA_Pass": null,
+        "GA_StartDate": null,
+        "GA_EndDate": null,
+        "MetaTitle": null,
+        "Parent": null,
+        "ListParent": null,
+        "Company": null,
+        "Website": null,
+        "JobInCompany": null,
+        "IndustryField": null,
+        "GroupName": null,
+        "JobInGroup": null,
+        "MoreInformation": null,
+        "Banner": null,
+        "Background": null,
+        "Vip": null,
+        "RankUser": null,
+        "CountryId": null,
+        "ThanhPhoId": null,
+        "QuanHuyenId": null,
+        "PhuongXaId": null,
+        "Token": null,
+        "GoogleMap": null,
+        "WebID": null,
+        "TransactionLock": null,
+        "CCCD": null,
+        "LastLogin": null,
+        "Position": null,
+        "CountryName": null,
+        "ThanhPhoName": null,
+        "QuanHuyenName": null,
+        "PhuongXaName": null,
+        "Parent_Level": 0
+      }
+    ],
+    "totalItems": 100
   }
 ]

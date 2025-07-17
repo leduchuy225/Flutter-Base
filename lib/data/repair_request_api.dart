@@ -31,6 +31,11 @@ abstract class RepairRequestApi {
     @Body() InstallationDetailPayload body,
   );
 
+  @POST('/repairrequest/addtechnicalstaff')
+  Future<BaseResponse> addTechnicalStaffRepairRequest(
+    @Body() Map<String, dynamic> body,
+  );
+
   @POST('/RepairRequest/UpdateCurrentStep_2_1')
   Future<BaseResponse> confirmRepairRequest(@Body() Map<String, dynamic> body);
 

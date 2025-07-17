@@ -1,4 +1,4 @@
-class MbRepairRequestNoteViewmodelResponse {
+class NoteViewmodelResponse {
   int? id;
   dynamic parent;
   int? currentStep;
@@ -13,7 +13,7 @@ class MbRepairRequestNoteViewmodelResponse {
   String? createdByEmail;
   dynamic createdByUserName;
 
-  MbRepairRequestNoteViewmodelResponse({
+  NoteViewmodelResponse({
     this.id,
     this.parent,
     this.currentStep,
@@ -29,10 +29,8 @@ class MbRepairRequestNoteViewmodelResponse {
     this.createdByUserName,
   });
 
-  factory MbRepairRequestNoteViewmodelResponse.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return MbRepairRequestNoteViewmodelResponse(
+  factory NoteViewmodelResponse.fromJson(Map<String, dynamic> json) {
+    return NoteViewmodelResponse(
       id: json['ID'] as int?,
       parent: json['Parent'] as dynamic,
       currentStep: json['CurrentStep'] as int?,

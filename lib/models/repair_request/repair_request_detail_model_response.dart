@@ -1,7 +1,6 @@
 import '../customer/customer_viewmodel_response.dart';
-import '../installation/technical_leader_response.dart';
-import 'mb_repair_request_note_viewmodel_response.dart';
-import 'technical_staff_response.dart';
+import '../installation/note_viewmodel_response.dart';
+import '../installation/technical_staff_list_model_response.dart';
 
 class RepairRequestDetailModelResponse {
   int? id;
@@ -39,9 +38,9 @@ class RepairRequestDetailModelResponse {
   dynamic googleMap;
   CustomerViewmodelResponse? mbCustomerViewModel;
   dynamic mbRepairRequestNoteViewModel;
-  List<MbRepairRequestNoteViewmodelResponse>? listMbRepairRequestNoteViewModel;
-  List<TechnicalLeaderResponse>? listTechnicalLeader;
-  List<TechnicalStaffResponse>? listTechnicalStaff;
+  List<NoteViewmodelResponse>? listMbRepairRequestNoteViewModel;
+  List<TechnicalStaffListModelResponse>? listTechnicalLeader;
+  List<TechnicalStaffListModelResponse>? listTechnicalStaff;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -155,19 +154,22 @@ class RepairRequestDetailModelResponse {
       listMbRepairRequestNoteViewModel:
           (json['ListMB_RepairRequestNoteViewModel'] as List<dynamic>?)
               ?.map(
-                (e) => MbRepairRequestNoteViewmodelResponse.fromJson(
-                  e as Map<String, dynamic>,
-                ),
+                (e) =>
+                    NoteViewmodelResponse.fromJson(e as Map<String, dynamic>),
               )
               .toList(),
       listTechnicalLeader: (json['ListTechnicalLeader'] as List<dynamic>?)
           ?.map(
-            (e) => TechnicalLeaderResponse.fromJson(e as Map<String, dynamic>),
+            (e) => TechnicalStaffListModelResponse.fromJson(
+              e as Map<String, dynamic>,
+            ),
           )
           .toList(),
       listTechnicalStaff: (json['ListTechnicalStaff'] as List<dynamic>?)
           ?.map(
-            (e) => TechnicalStaffResponse.fromJson(e as Map<String, dynamic>),
+            (e) => TechnicalStaffListModelResponse.fromJson(
+              e as Map<String, dynamic>,
+            ),
           )
           .toList(),
       address2: json['Address2'] as String?,

@@ -1,5 +1,6 @@
 import '../customer/customer_viewmodel_response.dart';
-import 'technical_leader_response.dart';
+import 'note_viewmodel_response.dart';
+import 'technical_staff_list_model_response.dart';
 
 class InstallationDetailModelResponse {
   int? id;
@@ -37,9 +38,9 @@ class InstallationDetailModelResponse {
   dynamic deviceSlid;
   CustomerViewmodelResponse? mbCustomerViewModel;
   dynamic mbConnectionRequestNoteViewModel;
-  dynamic listMbConnectionRequestNoteViewModel;
+  List<NoteViewmodelResponse>? listMbConnectionRequestNoteViewModel;
   dynamic listMbConnectionRequestNoteViewModel2;
-  List<TechnicalLeaderResponse>? listTechnicalLeader;
+  List<TechnicalStaffListModelResponse>? listTechnicalLeader;
   dynamic listTechnicalStaff;
   String? address2;
   dynamic countryIdTitle;
@@ -153,12 +154,19 @@ class InstallationDetailModelResponse {
       mbConnectionRequestNoteViewModel:
           json['MB_ConnectionRequestNoteViewModel'] as dynamic,
       listMbConnectionRequestNoteViewModel:
-          json['ListMB_ConnectionRequestNoteViewModel'] as dynamic,
+          (json['ListMB_ConnectionRequestNoteViewModel'] as List<dynamic>?)
+              ?.map(
+                (e) =>
+                    NoteViewmodelResponse.fromJson(e as Map<String, dynamic>),
+              )
+              .toList(),
       listMbConnectionRequestNoteViewModel2:
           json['ListMB_ConnectionRequestNoteViewModel2'] as dynamic,
       listTechnicalLeader: (json['ListTechnicalLeader'] as List<dynamic>?)
           ?.map(
-            (e) => TechnicalLeaderResponse.fromJson(e as Map<String, dynamic>),
+            (e) => TechnicalStaffListModelResponse.fromJson(
+              e as Map<String, dynamic>,
+            ),
           )
           .toList(),
       listTechnicalStaff: json['ListTechnicalStaff'] as dynamic,
@@ -215,7 +223,7 @@ class InstallationDetailModelResponse {
     'MB_CustomerViewModel': mbCustomerViewModel?.toJson(),
     'MB_ConnectionRequestNoteViewModel': mbConnectionRequestNoteViewModel,
     'ListMB_ConnectionRequestNoteViewModel':
-        listMbConnectionRequestNoteViewModel,
+        listMbConnectionRequestNoteViewModel?.map((e) => e.toJson()).toList(),
     'ListMB_ConnectionRequestNoteViewModel2':
         listMbConnectionRequestNoteViewModel2,
     'ListTechnicalLeader': listTechnicalLeader?.map((e) => e.toJson()).toList(),
