@@ -10,6 +10,9 @@ import '../models/installation/installation_list_payload.dart';
 import '../models/installation/installation_list_response.dart';
 import '../models/installation/technical_staff_list_payload.dart';
 import '../models/installation/technical_staff_list_response.dart';
+import '../models/installation/update_new_installation_note_response.dart';
+import '../models/installation/update_new_installation_report_response.dart';
+import '../models/installation/update_new_installation_technical_staff_response.dart';
 
 part 'installation_api.g.dart';
 
@@ -33,23 +36,22 @@ abstract class InstallationApi {
   );
 
   @POST('/NewConnectionRequest/addtechnicalstaff')
-  Future<BaseResponse> addTechnicalStaffNewInstallation(
-    @Body() Map<String, dynamic> body,
-  );
+  Future<BaseResponse<UpdateNewInstallationTechnicalStaffResponse>>
+  addTechnicalStaffNewInstallation(@Body() Map<String, dynamic> body);
 
-  @POST('/NewConnectionRequest/UpdateCurrentStep_2_1')
-  Future<BaseResponse> confirmNewInstallation(
-    @Body() Map<String, dynamic> body,
-  );
+  // @POST('/NewConnectionRequest/UpdateCurrentStep_2_1')
+  // Future<BaseResponse> confirmNewInstallation(
+  //   @Body() Map<String, dynamic> body,
+  // );
 
   @POST('/NewConnectionRequest/UpdateCurrentStep_3')
-  Future<BaseResponse> updateCustomerNewInstallationNote(
-    @Body() Map<String, dynamic> body,
-  );
+  Future<BaseResponse<UpdateNewInstallationNoteResponse>>
+  updateCustomerNewInstallationNote(@Body() Map<String, dynamic> body);
 
   @MultiPart()
   @POST('/NewConnectionRequest/UpdateCurrentStep_4')
-  Future<BaseResponse> uploadNewInstallationFile({
+  Future<BaseResponse<UpdateNewInstallationReportResponse>>
+  uploadNewInstallationFile({
     @Part(name: 'id') required String id,
     @Part(name: 'note') required String note,
     @Part(name: 'technicalStaffModuleImage[0]') File? technicalStaffModuleImage,

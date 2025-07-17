@@ -9,6 +9,9 @@ import '../models/installation/installation_detail_payload.dart';
 import '../models/installation/installation_list_payload.dart';
 import '../models/repair_request/repair_request_detail_response.dart';
 import '../models/repair_request/repair_request_list_response.dart';
+import '../models/repair_request/update_repair_request_note_response.dart';
+import '../models/repair_request/update_repair_request_report_response.dart';
+import '../models/repair_request/update_repair_request_technical_staff_response.dart';
 
 part 'repair_request_api.g.dart';
 
@@ -32,21 +35,20 @@ abstract class RepairRequestApi {
   );
 
   @POST('/repairrequest/addtechnicalstaff')
-  Future<BaseResponse> addTechnicalStaffRepairRequest(
-    @Body() Map<String, dynamic> body,
-  );
+  Future<BaseResponse<UpdateRepairRequestTechnicalStaffResponse>>
+  addTechnicalStaffRepairRequest(@Body() Map<String, dynamic> body);
 
-  @POST('/RepairRequest/UpdateCurrentStep_2_1')
-  Future<BaseResponse> confirmRepairRequest(@Body() Map<String, dynamic> body);
+  // @POST('/RepairRequest/UpdateCurrentStep_2_1')
+  // Future<BaseResponse> confirmRepairRequest(@Body() Map<String, dynamic> body);
 
   @POST('/RepairRequest/UpdateCurrentStep_3')
-  Future<BaseResponse> updateCustomerRepairRequestNote(
-    @Body() Map<String, dynamic> body,
-  );
+  Future<BaseResponse<UpdateRepairRequestNoteResponse>>
+  updateCustomerRepairRequestNote(@Body() Map<String, dynamic> body);
 
   @MultiPart()
   @POST('/RepairRequest/UpdateCurrentStep_4')
-  Future<BaseResponse> uploadRepairRequestFile({
+  Future<BaseResponse<UpdateRepairRequestReportResponse>>
+  uploadRepairRequestFile({
     @Part(name: 'id') required String id,
     @Part(name: 'note') required String note,
     @Part(name: 'technicalStaffModuleImage[0]') File? technicalStaffModuleImage,

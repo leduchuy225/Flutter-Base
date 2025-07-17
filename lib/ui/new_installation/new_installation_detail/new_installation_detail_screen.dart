@@ -33,102 +33,73 @@ class _NewInstallationDetailScreenState
     return Scaffold(
       appBar: MyAppbar.appBar('Chi tiết lắp đặt mới'),
       body: SingleChildScrollView(
-        // padding: AppStyles.horizontalPadding,
-        child: Column(
-          children: [
-            AppStyles.pdt15,
-            GetBuilder(
-              init: _controller,
-              builder: (controller) {
-                final detailData = controller.detailData;
-                final customerData = detailData?.mbCustomerViewModel;
-
-                return Column(
-                  children: [
-                    Padding(
-                      padding: AppStyles.horizontalPadding,
-                      child: MyTexttile.card(
-                        title: 'Thông tin yêu cầu',
-                        items: [
-                          MyTexttileItem(
-                            titleText: 'Gói cước',
-                            text: detailData?.serviceIdTitle,
-                          ),
-                          MyTexttileItem(
-                            titleText: 'Người tạo',
-                            text: detailData?.createdByUserName,
-                          ),
-                          MyTexttileItem(
-                            titleText: 'Ngày tạo',
-                            text: DatetimeUtils.formatDateFromAPI(
-                              detailData?.createdDate,
-                            ),
-                          ),
-                        ],
-                      ),
+        padding: AppStyles.horizontalPadding,
+        child: GetBuilder(
+          init: _controller,
+          builder: (controller) {
+            final detailData = controller.detailData;
+            final customerData = detailData?.mbCustomerViewModel;
+            return Column(
+              children: [
+                AppStyles.pdt15,
+                MyTexttile.card(
+                  title: 'Thông tin yêu cầu',
+                  items: [
+                    MyTexttileItem(
+                      titleText: 'Gói cước',
+                      text: detailData?.serviceIdTitle,
                     ),
-                    AppStyles.pdt15,
-                    Padding(
-                      padding: AppStyles.horizontalPadding,
-                      child: MyTexttile.card(
-                        title: 'Thông tin KH',
-                        items: [
-                          MyTexttileItem(
-                            isCopy: true,
-                            titleText: 'Mã KH',
-                            text: customerData?.idLong,
-                          ),
-                          MyTexttileItem(
-                            titleText: 'Tên KH',
-                            text: customerData?.fullName,
-                          ),
-                          MyTexttileItem(
-                            titleText: 'Ngày sinh',
-                            text: DatetimeUtils.formatDateFromAPI(
-                              customerData?.birthDay,
-                            ),
-                          ),
-                          MyTexttileItem(
-                            titleText: 'CCCD',
-                            text: customerData?.cccd,
-                          ),
-                          MyTexttileItem(
-                            titleText: 'SĐT',
-                            isPhoneNumber: true,
-                            text: customerData?.phoneNumber,
-                          ),
-                          MyTexttileItem(
-                            titleText: 'Địa chỉ',
-                            text: customerData?.address2,
-                          ),
-                        ],
+                    MyTexttileItem(
+                      titleText: 'Người tạo',
+                      text: detailData?.createdByUserName,
+                    ),
+                    MyTexttileItem(
+                      titleText: 'Ngày tạo',
+                      text: DatetimeUtils.formatDateFromAPI(
+                        detailData?.createdDate,
                       ),
                     ),
                   ],
-                );
-              },
-            ),
-            GetBuilder(
-              init: _controller,
-              builder: (controller) {
-                return Stepper(
-                  margin: EdgeInsets.zero,
-                  stepIconMargin: EdgeInsets.zero,
-                  currentStep: controller.currentRxStep.value - 1,
-                  physics: const NeverScrollableScrollPhysics(),
-                  controlsBuilder: (context, details) {
-                    return const Row(children: [SizedBox()]);
-                  },
-                  onStepTapped: (value) {
-                    // FOR TESING ONLY
-                    controller.currentRxStep.value = value + 1;
-                    controller.update();
-                  },
-                  steps: _controller.getSteps(),
-                );
-              },
-            ),
-          ],
+                ),
+                AppStyles.pdt15,
+                MyTexttile.card(
+                  title: 'Thông tin KH',
+                  items: [
+                    MyTexttileItem(
+                      isCopy: true,
+                      titleText: 'Mã KH',
+                      text: customerData?.idLong,
+                    ),
+                    MyTexttileItem(
+                      titleText: 'Tên KH',
+                      text: customerData?.fullName,
+                    ),
+                    MyTexttileItem(
+                      titleText: 'Ngày sinh',
+                      text: DatetimeUtils.formatDateFromAPI(
+                        customerData?.birthDay,
+                      ),
+                    ),
+                    MyTexttileItem(titleText: 'CCCD', text: customerData?.cccd),
+                    MyTexttileItem(
+                      titleText: 'SĐT',
+                      isPhoneNumber: true,
+                      text: customerData?.phoneNumber,
+                    ),
+                    MyTexttileItem(
+                      titleText: 'Địa chỉ',
+                      text: customerData?.address2,
+                    ),
+                  ],
+                ),
+                AppStyles.pdt15,
+                controller.getStepContent(3),
+                AppStyles.pdt15,
+                if (controller.noteListRxData.isNotEmpty)
+                  controller.getStepContent(4),
+              ],
+            );
+          },
         ),
       ),
     );

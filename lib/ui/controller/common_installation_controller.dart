@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/widgets/data_state_widget.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_controller.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
+import '../../models/installation/note_viewmodel_response.dart';
 import '../widgets/step_3_update_customer_note.dart';
 import '../widgets/step_4_update_installation_file.dart';
 
 abstract class CommonInstallationController<T> extends GetxController {
   final int totalSteps = 5;
 
+  final userInfor = Get.find<UserService>().userInfor;
+
   final currentRxStep = RxInt(1);
   final detailRxData = Rx<T?>(null);
+  final noteListRxData = RxList<NoteViewmodelResponse>([]);
 
   final customerNoteTextController = MyTextFieldController();
 
@@ -31,52 +36,20 @@ abstract class CommonInstallationController<T> extends GetxController {
 
   T? get detailData => detailRxData.value;
 
-  List<Step> getSteps() {
-    final List<Step> result = [];
-
-    for (int i = 1; i <= totalSteps; i += 1) {
-      if (currentRxStep.value > i) {
-        result.add(
-          Step(
-            isActive: true,
-            title: Text('Bước $i'),
-            state: StepState.complete,
-            content: getStepContent(i),
-          ),
-        );
-        continue;
-      }
-      if (currentRxStep.value == i) {
-        result.add(
-          Step(
-            isActive: true,
-            title: Text('Bước $i'),
-            state: StepState.editing,
-            content: getStepContent(i),
-          ),
-        );
-        continue;
-      }
-      if (currentRxStep.value < i) {
-        result.add(Step(title: Text('Bước $i'), content: getStepContent(i)));
-        continue;
-      }
-    }
-
-    return result;
-  }
-
   Widget getStepContent(int step) {
     switch (step) {
       case 1:
-      case 2:
       case 5:
         return const MyDataState(
           icon: Icons.help_outline,
           message: 'Liên hệ admin hỗ trợ',
         );
+      case 2:
+        return const SizedBox.shrink();
       case 3:
         return Step3UpdateCustomerNote(
+          notes: noteListRxData,
+          canAddNote: currentRxStep.value >= 2,
           customerNoteTextController: customerNoteTextController,
           onPressed: () {
             if (id == null) {
@@ -87,7 +60,7 @@ abstract class CommonInstallationController<T> extends GetxController {
             }
             MyDialog.alertDialog(
               okHandler: updateCustomerNote,
-              message: 'Xác nhận cập nhật bước 3 ?',
+              message: 'Xác nhận thêm ghi chú mới ?',
             );
           },
         );
@@ -116,7 +89,7 @@ abstract class CommonInstallationController<T> extends GetxController {
             }
             MyDialog.alertDialog(
               okHandler: uploadFile,
-              message: 'Xác nhận cập nhật bước 4 ?',
+              message: 'Xác nhận báo cáo công việc ?',
             );
           },
         );

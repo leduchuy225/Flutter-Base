@@ -120,30 +120,74 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> addTechnicalStaffNewInstallation(
-    Map<String, dynamic> body,
-  ) async {
+  Future<BaseResponse<UpdateNewInstallationTechnicalStaffResponse>>
+  addTechnicalStaffNewInstallation(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/NewConnectionRequest/addtechnicalstaff',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options =
+        _setStreamType<
+          BaseResponse<UpdateNewInstallationTechnicalStaffResponse>
+        >(
+          Options(method: 'POST', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                '/NewConnectionRequest/addtechnicalstaff',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
+    late BaseResponse<UpdateNewInstallationTechnicalStaffResponse> _value;
     try {
-      _value = BaseResponse<dynamic>.fromJson(
+      _value =
+          BaseResponse<UpdateNewInstallationTechnicalStaffResponse>.fromJson(
+            _result.data!,
+            (json) => UpdateNewInstallationTechnicalStaffResponse.fromJson(
+              json as Map<String, dynamic>,
+            ),
+          );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<UpdateNewInstallationNoteResponse>>
+  updateCustomerNewInstallationNote(Map<String, dynamic> body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _options =
+        _setStreamType<BaseResponse<UpdateNewInstallationNoteResponse>>(
+          Options(method: 'POST', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                '/NewConnectionRequest/UpdateCurrentStep_3',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<UpdateNewInstallationNoteResponse> _value;
+    try {
+      _value = BaseResponse<UpdateNewInstallationNoteResponse>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => UpdateNewInstallationNoteResponse.fromJson(
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -153,73 +197,8 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> confirmNewInstallation(
-    Map<String, dynamic> body,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body);
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/NewConnectionRequest/UpdateCurrentStep_2_1',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
-    try {
-      _value = BaseResponse<dynamic>.fromJson(
-        _result.data!,
-        (json) => json as dynamic,
-      );
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<BaseResponse<dynamic>> updateCustomerNewInstallationNote(
-    Map<String, dynamic> body,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body);
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/NewConnectionRequest/UpdateCurrentStep_3',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
-    try {
-      _value = BaseResponse<dynamic>.fromJson(
-        _result.data!,
-        (json) => json as dynamic,
-      );
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<BaseResponse<dynamic>> uploadNewInstallationFile({
+  Future<BaseResponse<UpdateNewInstallationReportResponse>>
+  uploadNewInstallationFile({
     required String id,
     required String note,
     File? technicalStaffModuleImage,
@@ -278,27 +257,32 @@ class _InstallationApi implements InstallationApi {
         );
       }
     }
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(
-            method: 'POST',
-            headers: _headers,
-            extra: _extra,
-            contentType: 'multipart/form-data',
-          )
-          .compose(
-            _dio.options,
-            '/NewConnectionRequest/UpdateCurrentStep_4',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options =
+        _setStreamType<BaseResponse<UpdateNewInstallationReportResponse>>(
+          Options(
+                method: 'POST',
+                headers: _headers,
+                extra: _extra,
+                contentType: 'multipart/form-data',
+              )
+              .compose(
+                _dio.options,
+                '/NewConnectionRequest/UpdateCurrentStep_4',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
+    late BaseResponse<UpdateNewInstallationReportResponse> _value;
     try {
-      _value = BaseResponse<dynamic>.fromJson(
+      _value = BaseResponse<UpdateNewInstallationReportResponse>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => UpdateNewInstallationReportResponse.fromJson(
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

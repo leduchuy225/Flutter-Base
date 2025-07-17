@@ -13,6 +13,7 @@ class MyTexttileItem {
   final String? titleText;
 
   final bool isCopy;
+  final bool isHide;
   final bool isPhoneNumber;
 
   final Widget? child;
@@ -22,6 +23,7 @@ class MyTexttileItem {
     this.child,
     this.titleText,
     this.isCopy = false,
+    this.isHide = false,
     this.isPhoneNumber = false,
   });
 }
@@ -138,6 +140,9 @@ class MyTexttile extends StatelessWidget {
   }) {
     return Column(
       children: items.map((element) {
+        if (element.isHide) {
+          return const SizedBox.shrink();
+        }
         if (element.child != null) {
           return element.child!;
         }

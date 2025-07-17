@@ -2,6 +2,36 @@
   {
     // To add enhancemed name to all generated files add new name after dot.
     // Example: user_post.model. Result: user_post.model.dart
+    "__className": "update_repair_request_technical_staff_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/repair_request", // <- this is not required.
+    "CurrentStep": 2,
+    "TechnicalStaff_Id": "300dd6fe-a7ff-473b-ab4e-2f1135fc959a",
+    "TechnicalStaff_Email": "demo3@gmail.com",
+    "TechnicalStaff_UserName": "demo3@gmail.com"
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "update_repair_request_note_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/repair_request", // <- this is not required.
+    "CurrentStep": 3
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "update_repair_request_report_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/repair_request", // <- this is not required.
+    "CurrentStep": 4
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
     "__className": "repair_request_list_response", // <- The base class name of the object.
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_widget.dart';
+import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 
@@ -24,33 +25,44 @@ class Step4UpdateInstallationFile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FileCollectionWidget(
-          limit: 1,
-          title: 'Ảnh module',
-          controller: technicalStaffModuleImageControler,
+    return MyTexttile.card(
+      title: 'Báo cáo công việc',
+      items: [
+        MyTexttileItem(
+          child: Column(
+            children: [
+              FileCollectionWidget(
+                limit: 1,
+                title: 'Ảnh module',
+                controller: technicalStaffModuleImageControler,
+              ),
+              AppStyles.pdt10,
+              FileCollectionWidget(
+                limit: 1,
+                title: 'Ảnh test tốc độ',
+                controller: technicalStaffTestImageControler,
+              ),
+              AppStyles.pdt10,
+              FileCollectionWidget(
+                limit: 1,
+                title: 'Ảnh tổng thể',
+                controller: technicalStaffImageControler,
+              ),
+              AppStyles.pdt30,
+              MyTextField(
+                isRequired: true,
+                labelText: 'Ghi chú',
+                controller: technicalNoteTextController,
+              ),
+              AppStyles.pdt20,
+              ElevatedButton(
+                onPressed: onPressed,
+                child: const Text('Cập nhật'),
+              ),
+              AppStyles.pdt15,
+            ],
+          ),
         ),
-        AppStyles.pdt10,
-        FileCollectionWidget(
-          limit: 1,
-          title: 'Ảnh test tốc độ',
-          controller: technicalStaffTestImageControler,
-        ),
-        AppStyles.pdt10,
-        FileCollectionWidget(
-          limit: 1,
-          title: 'Ảnh tổng thể',
-          controller: technicalStaffImageControler,
-        ),
-        AppStyles.pdt30,
-        MyTextField(
-          isRequired: true,
-          labelText: 'Ghi chú',
-          controller: technicalNoteTextController,
-        ),
-        AppStyles.pdt20,
-        ElevatedButton(onPressed: onPressed, child: const Text('Cập nhật')),
       ],
     );
   }

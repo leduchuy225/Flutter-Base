@@ -3,6 +3,7 @@ import 'package:flutter_base/data/repair_request_api.dart';
 import 'package:get/get.dart';
 
 import '../../../models/installation/installation_detail_payload.dart';
+import '../../../models/installation/note_viewmodel_response.dart';
 import '../../../models/repair_request/repair_request_detail_model_response.dart';
 import '../../controller/common_installation_controller.dart';
 
@@ -20,6 +21,7 @@ class RepairRequestDetailController
     if (data != null) {
       detailRxData.value = data;
       currentRxStep.value = data.currentStep ?? 1;
+      noteListRxData.value = data.listMbRepairRequestNoteViewModel ?? [];
 
       update();
     }
@@ -33,6 +35,17 @@ class RepairRequestDetailController
 
     if (response.isSuccess) {
       currentRxStep.value = 4;
+      noteListRxData.insert(
+        0,
+        NoteViewmodelResponse(
+          currentStep: 3,
+          createdByEmail: userInfor?.email,
+          note: customerNoteTextController.textTrim,
+          createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
+        ),
+      );
+
+      customerNoteTextController.clear();
 
       update();
     }

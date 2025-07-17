@@ -119,30 +119,34 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> addTechnicalStaffRepairRequest(
-    Map<String, dynamic> body,
-  ) async {
+  Future<BaseResponse<UpdateRepairRequestTechnicalStaffResponse>>
+  addTechnicalStaffRepairRequest(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/repairrequest/addtechnicalstaff',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options =
+        _setStreamType<BaseResponse<UpdateRepairRequestTechnicalStaffResponse>>(
+          Options(method: 'POST', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                '/repairrequest/addtechnicalstaff',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
+    late BaseResponse<UpdateRepairRequestTechnicalStaffResponse> _value;
     try {
-      _value = BaseResponse<dynamic>.fromJson(
+      _value = BaseResponse<UpdateRepairRequestTechnicalStaffResponse>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => UpdateRepairRequestTechnicalStaffResponse.fromJson(
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -152,30 +156,34 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> confirmRepairRequest(
-    Map<String, dynamic> body,
-  ) async {
+  Future<BaseResponse<UpdateRepairRequestNoteResponse>>
+  updateCustomerRepairRequestNote(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/RepairRequest/UpdateCurrentStep_2_1',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options =
+        _setStreamType<BaseResponse<UpdateRepairRequestNoteResponse>>(
+          Options(method: 'POST', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                '/RepairRequest/UpdateCurrentStep_3',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
+    late BaseResponse<UpdateRepairRequestNoteResponse> _value;
     try {
-      _value = BaseResponse<dynamic>.fromJson(
+      _value = BaseResponse<UpdateRepairRequestNoteResponse>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => UpdateRepairRequestNoteResponse.fromJson(
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -185,40 +193,8 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse<dynamic>> updateCustomerRepairRequestNote(
-    Map<String, dynamic> body,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body);
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/RepairRequest/UpdateCurrentStep_3',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
-    try {
-      _value = BaseResponse<dynamic>.fromJson(
-        _result.data!,
-        (json) => json as dynamic,
-      );
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<BaseResponse<dynamic>> uploadRepairRequestFile({
+  Future<BaseResponse<UpdateRepairRequestReportResponse>>
+  uploadRepairRequestFile({
     required String id,
     required String note,
     File? technicalStaffModuleImage,
@@ -277,27 +253,32 @@ class _RepairRequestApi implements RepairRequestApi {
         );
       }
     }
-    final _options = _setStreamType<BaseResponse<dynamic>>(
-      Options(
-            method: 'POST',
-            headers: _headers,
-            extra: _extra,
-            contentType: 'multipart/form-data',
-          )
-          .compose(
-            _dio.options,
-            '/RepairRequest/UpdateCurrentStep_4',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
+    final _options =
+        _setStreamType<BaseResponse<UpdateRepairRequestReportResponse>>(
+          Options(
+                method: 'POST',
+                headers: _headers,
+                extra: _extra,
+                contentType: 'multipart/form-data',
+              )
+              .compose(
+                _dio.options,
+                '/RepairRequest/UpdateCurrentStep_4',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<dynamic> _value;
+    late BaseResponse<UpdateRepairRequestReportResponse> _value;
     try {
-      _value = BaseResponse<dynamic>.fromJson(
+      _value = BaseResponse<UpdateRepairRequestReportResponse>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => UpdateRepairRequestReportResponse.fromJson(
+          json as Map<String, dynamic>,
+        ),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

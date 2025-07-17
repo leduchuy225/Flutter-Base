@@ -15,6 +15,7 @@ class MyTextField extends StatefulWidget {
   final String? labelText;
   final bool obscureText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final void Function()? onTap;
   final MyTextFieldController? controller;
   final void Function(String)? onChanged;
@@ -32,6 +33,7 @@ class MyTextField extends StatefulWidget {
     this.obscureText = false,
     this.onChanged,
     this.maxLines,
+    this.prefixIcon,
   });
 
   @override
@@ -80,6 +82,7 @@ class _MyTextFieldState extends State<MyTextField> {
             maxLines: widget.obscureText ? 1 : widget.maxLines,
             decoration: InputDecoration(
               suffixIcon: widget.suffixIcon,
+              prefixIcon: widget.prefixIcon,
               errorText: getErrorText(value.errorTexts),
               hintText: widget.hintText ?? widget.labelText,
               floatingLabelBehavior: FloatingLabelBehavior.always,

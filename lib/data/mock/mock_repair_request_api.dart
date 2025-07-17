@@ -12,6 +12,9 @@ import 'package:flutter_base/models/installation/installation_list_payload.dart'
 import 'package:flutter_base/models/repair_request/repair_request_detail_response.dart';
 
 import 'package:flutter_base/models/repair_request/repair_request_list_response.dart';
+import 'package:flutter_base/models/repair_request/update_repair_request_note_response.dart';
+import 'package:flutter_base/models/repair_request/update_repair_request_report_response.dart';
+import 'package:flutter_base/models/repair_request/update_repair_request_technical_staff_response.dart';
 
 import '../../core/utils/jsonc_reader.dart';
 import '../repair_request_api.dart';
@@ -20,12 +23,6 @@ class MockRepairRequestApi implements RepairRequestApi {
   final Dio dio;
 
   MockRepairRequestApi(this.dio);
-
-  @override
-  Future<BaseResponse> confirmRepairRequest(Map<String, dynamic> body) {
-    // TODO: implement confirmRepairRequest
-    throw UnimplementedError();
-  }
 
   @override
   Future<BaseResponse<RepairRequestDetailResponse>> getRepairRequestDetail(
@@ -76,15 +73,22 @@ class MockRepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse> updateCustomerRepairRequestNote(
-    Map<String, dynamic> body,
-  ) {
+  Future<BaseResponse<UpdateRepairRequestTechnicalStaffResponse>>
+  addTechnicalStaffRepairRequest(Map<String, dynamic> body) {
+    // TODO: implement addTechnicalStaffRepairRequest
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<UpdateRepairRequestNoteResponse>>
+  updateCustomerRepairRequestNote(Map<String, dynamic> body) {
     // TODO: implement updateCustomerRepairRequestNote
     throw UnimplementedError();
   }
 
   @override
-  Future<BaseResponse> uploadRepairRequestFile({
+  Future<BaseResponse<UpdateRepairRequestReportResponse>>
+  uploadRepairRequestFile({
     required String id,
     required String note,
     File? technicalStaffModuleImage,
@@ -92,14 +96,6 @@ class MockRepairRequestApi implements RepairRequestApi {
     File? technicalStaffImage,
   }) {
     // TODO: implement uploadRepairRequestFile
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<BaseResponse> addTechnicalStaffRepairRequest(
-    Map<String, dynamic> body,
-  ) {
-    // TODO: implement addTechnicalStaffRepairRequest
     throw UnimplementedError();
   }
 }
