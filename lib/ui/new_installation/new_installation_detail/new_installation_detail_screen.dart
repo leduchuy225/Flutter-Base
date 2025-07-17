@@ -93,10 +93,8 @@ class _NewInstallationDetailScreenState
                   ],
                 ),
                 AppStyles.pdt15,
-                controller.getStepContent(3),
+                controller.buildSteps(context),
                 AppStyles.pdt15,
-                if (controller.noteListRxData.isNotEmpty)
-                  controller.getStepContent(4),
               ],
             );
           },

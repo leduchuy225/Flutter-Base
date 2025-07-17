@@ -8,13 +8,13 @@ import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
 import '../../widgets/title_number_indicator.dart';
 
-class Step3UpdateCustomerNote extends StatelessWidget {
+class Step2UpdateInstallationFile extends StatelessWidget {
   final bool canAddNote;
   final void Function() onPressed;
   final List<NoteViewmodelResponse> notes;
   final MyTextFieldController customerNoteTextController;
 
-  const Step3UpdateCustomerNote({
+  const Step2UpdateInstallationFile({
     super.key,
     required this.notes,
     required this.onPressed,

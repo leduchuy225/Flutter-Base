@@ -66,6 +66,7 @@ class MockInstallationApi implements InstallationApi {
     final response = JsoncReader.processJsonc(
       JsoncReader.getInListByKey(data, value: 'technical_staff_list_response'),
     );
+    print(response);
     return BaseResponse(
       code: 1,
       data: TechnicalStaffListResponse.fromJson(response),

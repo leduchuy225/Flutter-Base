@@ -7,14 +7,14 @@ import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 import '../../theme/styles.dart';
 import '../../widgets/file_collection/file_collection_controller.dart';
 
-class Step4UpdateInstallationFile extends StatelessWidget {
+class Step3UpdateInstallationFile extends StatelessWidget {
   final FileCollectionController technicalStaffModuleImageControler;
   final FileCollectionController technicalStaffTestImageControler;
   final FileCollectionController technicalStaffImageControler;
   final MyTextFieldController technicalNoteTextController;
   final void Function() onPressed;
 
-  const Step4UpdateInstallationFile({
+  const Step3UpdateInstallationFile({
     super.key,
     required this.technicalStaffModuleImageControler,
     required this.technicalStaffTestImageControler,

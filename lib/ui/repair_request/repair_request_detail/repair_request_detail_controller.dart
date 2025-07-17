@@ -28,17 +28,34 @@ class RepairRequestDetailController
   }
 
   @override
+  Future assignTechnicalStaff() async {
+    final response = await Get.find<RepairRequestApi>()
+        .addTechnicalStaffRepairRequest({})
+        .callApi();
+
+    if (response.isSuccess) {
+      final step = response.data?.currentStep ?? 1;
+
+      currentRxStep.value = step;
+
+      update();
+    }
+  }
+
+  @override
   Future updateCustomerNote() async {
     final response = await Get.find<RepairRequestApi>()
         .updateCustomerRepairRequestNote({})
         .callApi();
 
     if (response.isSuccess) {
-      currentRxStep.value = 4;
+      final step = response.data?.currentStep ?? 1;
+
+      currentRxStep.value = step;
       noteListRxData.insert(
         0,
         NoteViewmodelResponse(
-          currentStep: 3,
+          currentStep: step,
           createdByEmail: userInfor?.email,
           note: customerNoteTextController.textTrim,
           createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -65,7 +82,9 @@ class RepairRequestDetailController
         .callApi();
 
     if (response.isSuccess) {
-      currentRxStep.value = 5;
+      final step = response.data?.currentStep ?? 1;
+
+      currentRxStep.value = step;
 
       update();
     }
