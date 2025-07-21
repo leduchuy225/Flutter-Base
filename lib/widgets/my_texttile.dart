@@ -73,9 +73,12 @@ class MyTexttile extends StatelessWidget {
     bool isViewDetail = false,
     EdgeInsets? paddingHeader,
     void Function()? onTapViewDetail,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+
     required List<MyTexttileItem> items,
   }) {
     return Column(
+      mainAxisSize: mainAxisSize,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(

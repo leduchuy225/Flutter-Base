@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/services/user_service.dart';
+import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/ui/widgets/step_0_close_request.dart';
 import 'package:flutter_base/widgets/data_state_widget.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_controller.dart';
@@ -21,6 +23,7 @@ abstract class CommonInstallationController<T> extends GetxController {
   final detailRxData = Rx<T?>(null);
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
 
+  final closeNoteTextController = MyTextFieldController();
   final customerNoteTextController = MyTextFieldController();
 
   final technicalNoteTextController = MyTextFieldController();
@@ -34,6 +37,8 @@ abstract class CommonInstallationController<T> extends GetxController {
 
   Future getDetailData();
 
+  Future closeRequest(BuildContext context);
+
   Future assignTechnicalStaff();
 
   Future updateCustomerNote();
@@ -45,18 +50,53 @@ abstract class CommonInstallationController<T> extends GetxController {
   Widget buildSteps(BuildContext context) {
     switch (currentRxStep.value) {
       case 3:
-        return Column(children: [_getStepContent(2), _getStepContent(3)]);
+        return Column(
+          children: [
+            getStepContent(context, step: 2),
+            AppStyles.pdt15,
+            getStepContent(context, step: 3),
+          ],
+        );
       default:
-        return _getStepContent(currentRxStep.value);
+        return getStepContent(context, step: currentRxStep.value);
     }
   }
 
-  Widget _getStepContent(int step) {
+  Widget getStepContent(BuildContext context, {required int step}) {
     switch (step) {
+      case 0:
+        return Step0CloseRequest(
+          closeNoteTextController: closeNoteTextController,
+          onPressed: () {
+            if (id == null) {
+              return;
+            }
+            if (!closeNoteTextController.checkIsNotEmpty()) {
+              return;
+            }
+            MyDialog.alertDialog(
+              message: 'Xác nhận đóng phiếu ?',
+              okHandler: () {
+                closeRequest(context);
+              },
+            );
+          },
+        );
       case 1:
         return Step1UpdateTechnicalStaff(
-          onPressed: () {},
           technicalStaffSelectController: technicalStaffSelectController,
+          onPressed: () {
+            if (id == null) {
+              return;
+            }
+            if (!technicalStaffSelectController.checkIsNotEmpty()) {
+              return;
+            }
+            MyDialog.alertDialog(
+              okHandler: assignTechnicalStaff,
+              message: 'Xác nhận chọn nhân viên kỹ thuật ?',
+            );
+          },
         );
       case 2:
         return Step2UpdateInstallationFile(

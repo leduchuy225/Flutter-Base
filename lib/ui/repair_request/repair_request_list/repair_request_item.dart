@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/utils/datetime_utils.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
-import 'package:get/get.dart';
 
 import '../../../models/repair_request/repair_request_list_model_response.dart';
-import '../repair_request_detail/repair_request_detail_controller.dart';
-import '../repair_request_detail/repair_request_detail_screen.dart';
 
 class RepairRequestItem extends StatelessWidget {
+  final void Function() onTapViewDetail;
   final RepairRequestListModelResponse item;
 
-  const RepairRequestItem({super.key, required this.item});
+  const RepairRequestItem({
+    super.key,
+    required this.item,
+    required this.onTapViewDetail,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +21,8 @@ class RepairRequestItem extends StatelessWidget {
       isViewDetail: true,
       tagColor: AppColors.primary,
       tag: 'Bước ${item.currentStep}',
+      onTapViewDetail: onTapViewDetail,
       title: (item.idLong ?? '').toString(),
-      onTapViewDetail: () {
-        Get.to(
-          () {
-            return const RepairRequestDetailScreen();
-          },
-          binding: BindingsBuilder.put(() {
-            return RepairRequestDetailController();
-          }),
-        );
-      },
       items: [
         MyTexttileItem(titleText: 'Gói cước', text: item.serviceIdTitle),
         MyTexttileItem(titleText: 'Tên KH', text: item.customersIdFullName),

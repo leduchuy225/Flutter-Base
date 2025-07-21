@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/widgets/dialog/bottom_sheet_widget.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,20 @@ class _NewInstallationDetailScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppbar.appBar('Chi tiết lắp đặt mới'),
+      appBar: MyAppbar.appBar(
+        'Chi tiết lắp đặt mới',
+        action: IconButton(
+          icon: const Icon(Icons.cancel_outlined),
+          onPressed: () {
+            MyBottomSheet.showBottomSheet(
+              context,
+              builder: (context) {
+                return _controller.getStepContent(context, step: 0);
+              },
+            );
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         padding: AppStyles.horizontalPadding,
         child: GetBuilder(

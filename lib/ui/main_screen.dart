@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import '../core/services/notification_service.dart';
 import '../theme/styles.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
-import 'customer_search_screen.dart';
 import 'new_installation/new_installation_list/new_installation_list_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -57,13 +56,6 @@ class _MainScreenState extends State<MainScreen> {
                     title: 'Yêu cầu sửa chữa',
                     onTap: () {
                       Get.to(() => const RepairRequestListScreen());
-                    },
-                  ),
-                  FunctionItem(
-                    icon: Icons.search,
-                    title: 'Tra cứu khách hàng',
-                    onTap: () {
-                      Get.to(() => const CustomerSearchScreen());
                     },
                   ),
                   FunctionItem(

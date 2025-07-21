@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/base_response.dart';
+import '../models/installation/close_new_installation_response.dart';
 import '../models/installation/installation_detail_payload.dart';
 import '../models/installation/installation_detail_response.dart';
 import '../models/installation/installation_list_payload.dart';
@@ -19,6 +20,11 @@ part 'installation_api.g.dart';
 @RestApi()
 abstract class InstallationApi {
   factory InstallationApi(Dio dio) = _InstallationApi;
+
+  @POST('/newconnectionrequest/SetPostClosed')
+  Future<BaseResponse<CloseNewInstallationResponse>> closeNewInstallation(
+    @Body() Map<String, dynamic> body,
+  );
 
   @POST('/NewConnectionRequest/LoadData')
   Future<BaseResponse<InstallationListResponse>> getNewInstallationList(

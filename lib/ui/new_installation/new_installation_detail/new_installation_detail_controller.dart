@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:get/get.dart';
 
@@ -87,6 +88,22 @@ class NewInstallationDetailController
       currentRxStep.value = step;
 
       update();
+    }
+  }
+
+  @override
+  Future closeRequest(BuildContext context) async {
+    final response = await Get.find<InstallationApi>()
+        .closeNewInstallation({})
+        .callApi();
+
+    if (response.data?.isClosed == true) {
+      Navigator.of(context).popUntil((route) {
+        return [
+          '/MainScreen',
+          '/NewInstallationListScreen',
+        ].contains(route.settings.name);
+      });
     }
   }
 

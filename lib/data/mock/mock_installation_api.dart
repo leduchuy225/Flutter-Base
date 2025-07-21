@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_base/models/base_response.dart';
+import 'package:flutter_base/models/installation/close_new_installation_response.dart';
 
 import 'package:flutter_base/models/installation/installation_detail_payload.dart';
 
@@ -75,16 +76,20 @@ class MockInstallationApi implements InstallationApi {
 
   @override
   Future<BaseResponse<UpdateNewInstallationTechnicalStaffResponse>>
-  addTechnicalStaffNewInstallation(Map<String, dynamic> body) {
-    // TODO: implement addTechnicalStaffNewInstallation
-    throw UnimplementedError();
+  addTechnicalStaffNewInstallation(Map<String, dynamic> body) async {
+    return BaseResponse(
+      code: 1,
+      data: UpdateNewInstallationTechnicalStaffResponse(currentStep: 2),
+    );
   }
 
   @override
   Future<BaseResponse<UpdateNewInstallationNoteResponse>>
-  updateCustomerNewInstallationNote(Map<String, dynamic> body) {
-    // TODO: implement updateCustomerNewInstallationNote
-    throw UnimplementedError();
+  updateCustomerNewInstallationNote(Map<String, dynamic> body) async {
+    return BaseResponse(
+      code: 1,
+      data: UpdateNewInstallationNoteResponse(currentStep: 3),
+    );
   }
 
   @override
@@ -98,5 +103,25 @@ class MockInstallationApi implements InstallationApi {
   }) {
     // TODO: implement uploadNewInstallationFile
     throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<CloseNewInstallationResponse>> closeNewInstallation(
+    Map<String, dynamic> body,
+  ) async {
+    final data = await JsoncReader.readJsoncFile(
+      '.json_models/installation_models.jsonc',
+    );
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(
+        data,
+        value: 'close_new_installation_response',
+      ),
+    );
+    print(response);
+    return BaseResponse(
+      code: 1,
+      data: CloseNewInstallationResponse.fromJson(response),
+    );
   }
 }

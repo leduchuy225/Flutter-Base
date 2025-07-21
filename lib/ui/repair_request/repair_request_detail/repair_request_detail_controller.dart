@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/repair_request_api.dart';
 import 'package:get/get.dart';
@@ -88,6 +89,12 @@ class RepairRequestDetailController
 
       update();
     }
+  }
+
+  @override
+  Future closeRequest(BuildContext context) {
+    // TODO: implement closeRequest
+    throw UnimplementedError();
   }
 
   @override

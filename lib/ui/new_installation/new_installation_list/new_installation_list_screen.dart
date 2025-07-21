@@ -9,6 +9,8 @@ import '../../../data/installation_api.dart';
 import '../../../models/installation/installation_list_model_response.dart';
 import '../../../models/installation/installation_list_payload.dart';
 import '../../../widgets/data_state_widget.dart';
+import '../new_installation_detail/new_installation_detail_controller.dart';
+import '../new_installation_detail/new_installation_detail_screen.dart';
 import 'new_installation_item.dart';
 
 class NewInstallationListScreen extends StatefulWidget {
@@ -82,7 +84,19 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
                   vertical: 10,
                   horizontal: AppStyles.horizontalPaddingValue,
                 ),
-                child: NewInstallationItem(item: item),
+                child: NewInstallationItem(
+                  item: item,
+                  onTapViewDetail: () {
+                    Get.to(
+                      () {
+                        return const NewInstallationDetailScreen();
+                      },
+                      binding: BindingsBuilder.put(() {
+                        return NewInstallationDetailController();
+                      }),
+                    );
+                  },
+                ),
               );
             }, childCount: _data.length),
           ),

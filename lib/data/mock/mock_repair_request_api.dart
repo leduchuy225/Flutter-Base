@@ -8,6 +8,7 @@ import 'package:flutter_base/models/customer/customer_search_response.dart';
 import 'package:flutter_base/models/installation/installation_detail_payload.dart';
 
 import 'package:flutter_base/models/installation/installation_list_payload.dart';
+import 'package:flutter_base/models/repair_request/close_repair_request_response.dart';
 
 import 'package:flutter_base/models/repair_request/repair_request_detail_response.dart';
 
@@ -96,6 +97,14 @@ class MockRepairRequestApi implements RepairRequestApi {
     File? technicalStaffImage,
   }) {
     // TODO: implement uploadRepairRequestFile
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<CloseRepairRequestResponse>> closeRepairRequest(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement closeRepairRequest
     throw UnimplementedError();
   }
 }

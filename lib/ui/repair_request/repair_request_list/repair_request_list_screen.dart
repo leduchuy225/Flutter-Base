@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 import '../../../models/installation/installation_list_payload.dart';
 import '../../../models/repair_request/repair_request_list_model_response.dart';
 import '../../../widgets/data_state_widget.dart';
+import '../repair_request_detail/repair_request_detail_controller.dart';
+import '../repair_request_detail/repair_request_detail_screen.dart';
 import 'repair_request_item.dart';
 
 class RepairRequestListScreen extends StatefulWidget {
@@ -94,7 +96,19 @@ class _NewInstallationListScreenState extends State<RepairRequestListScreen> {
                   vertical: 10,
                   horizontal: AppStyles.horizontalPaddingValue,
                 ),
-                child: RepairRequestItem(item: item),
+                child: RepairRequestItem(
+                  item: item,
+                  onTapViewDetail: () {
+                    Get.to(
+                      () {
+                        return const RepairRequestDetailScreen();
+                      },
+                      binding: BindingsBuilder.put(() {
+                        return RepairRequestDetailController();
+                      }),
+                    );
+                  },
+                ),
               );
             }, childCount: _data.length),
           ),
