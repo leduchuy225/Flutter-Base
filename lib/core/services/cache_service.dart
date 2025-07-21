@@ -3,6 +3,9 @@ class CacheService {
   static String packageInfo = 'packageInfo';
   static String loadingCount = 'loadingCount';
 
+  static String isRefreshRepairRequestList = 'isRefreshRepairRequestList';
+  static String isRefreshNewInstallationList = 'isRefreshNewInstallationList';
+
   static final CacheService _singleton = CacheService._internal();
 
   factory CacheService() {

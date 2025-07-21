@@ -64,6 +64,7 @@ dependencies:
   flutter_local_notifications: ^19.3.0
   image_picker: ^1.1.2
   geolocator: ^14.0.2
+  infinite_scroll_pagination: ^5.1.0
 
 dev_dependencies:
   flutter_test:

@@ -45,6 +45,10 @@ class MockInstallationApi implements InstallationApi {
   Future<BaseResponse<InstallationListResponse>> getNewInstallationList(
     InstallationListPayload body,
   ) async {
+    if (body.searchDefault?.page == 3) {
+      return BaseResponse(code: 1, data: InstallationListResponse(model: []));
+    }
+
     final data = await JsoncReader.readJsoncFile(
       '.json_models/installation_models.jsonc',
     );

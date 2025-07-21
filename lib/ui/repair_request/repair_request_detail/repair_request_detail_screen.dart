@@ -5,6 +5,7 @@ import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/datetime_utils.dart';
+import '../../../widgets/dialog/bottom_sheet_widget.dart';
 import 'repair_request_detail_controller.dart';
 
 class RepairRequestDetailScreen extends StatefulWidget {
@@ -31,7 +32,20 @@ class _NewInstallationDetailScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppbar.appBar('Chi tiết yêu cầu sửa chữa'),
+      appBar: MyAppbar.appBar(
+        'Chi tiết yêu cầu sửa chữa',
+        action: IconButton(
+          icon: const Icon(Icons.cancel_outlined),
+          onPressed: () {
+            MyBottomSheet.showBottomSheet(
+              context,
+              builder: (context) {
+                return _controller.getStepContent(context, step: 0);
+              },
+            );
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         padding: AppStyles.horizontalPadding,
         child: GetBuilder(

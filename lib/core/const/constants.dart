@@ -19,3 +19,10 @@ class MyStatus {
   static const int tokenTimeOut = 3;
   static const int notAuthenticate2Fa = 8;
 }
+
+class MBService {
+  MBService._();
+
+  static const NewInstallation = 'MB_Service';
+  static const RepairRequest = 'MB_RepairRequest';
+}

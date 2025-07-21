@@ -45,6 +45,8 @@ abstract class CommonInstallationController<T> extends GetxController {
 
   Future uploadFile();
 
+  void setIsRefreshValue();
+
   T? get detailData => detailRxData.value;
 
   Widget buildSteps(BuildContext context) {

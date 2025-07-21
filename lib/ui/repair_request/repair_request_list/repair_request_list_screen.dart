@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/repair_request_api.dart';
-import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/widgets/my_appbar.dart';
-import 'package:flutter_base/widgets/search_field/search_field_widget.dart';
-import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
+import '../../../core/const/constants.dart';
+import '../../../core/services/cache_service.dart';
 import '../../../models/installation/installation_list_payload.dart';
+import '../../../models/installation/installation_search_payload.dart';
 import '../../../models/repair_request/repair_request_list_model_response.dart';
-import '../../../widgets/data_state_widget.dart';
+import '../../../widgets/dialog/dialog_widget.dart';
+import '../../new_installation_and_repair_request_share/common_installation_list.dart';
+import '../../new_installation_and_repair_request_share/common_installation_list_controller.dart';
 import '../repair_request_detail/repair_request_detail_controller.dart';
 import '../repair_request_detail/repair_request_detail_screen.dart';
 import 'repair_request_item.dart';
@@ -23,97 +24,75 @@ class RepairRequestListScreen extends StatefulWidget {
 }
 
 class _NewInstallationListScreenState extends State<RepairRequestListScreen> {
-  List<RepairRequestListModelResponse> _data = [];
+  final _controller =
+      CommonInstallationListController<RepairRequestListModelResponse>();
 
-  @override
-  void initState() {
-    super.initState();
+  Future<List<RepairRequestListModelResponse>> getData({int page = 1}) async {
+    final body = InstallationListPayload(
+      typeData: MBService.NewInstallation,
+      searchDefault: InstallationSearchPayload(
+        page: page,
+        pageSize: 20,
+        typeOrder: true,
+      ),
+    );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getData();
-    });
-  }
-
-  Future getData() async {
     final response = await Get.find<RepairRequestApi>()
-        .getRepairRequestList(InstallationListPayload())
-        .callApi();
+        .getRepairRequestList(body)
+        .callApi(isShowLoading: false);
 
     final data = response.data?.model;
+
     if (data != null) {
-      setState(() {
-        _data = data;
-      });
+      return data;
     }
+
+    return [];
+  }
+
+  Widget buildChild(RepairRequestListModelResponse item) {
+    return RepairRequestItem(
+      item: item,
+      onTapViewDetail: () async {
+        if (item.id == null) {
+          MyDialog.snackbar('Không có ID');
+          return;
+        }
+
+        CacheService().write(
+          key: CacheService.isRefreshRepairRequestList,
+          value: false,
+        );
+
+        await Get.to(
+          () {
+            return const RepairRequestDetailScreen();
+          },
+          binding: BindingsBuilder.put(() {
+            return RepairRequestDetailController(repairRequestId: item.id!);
+          }),
+        );
+
+        final isRefresh =
+            CacheService().read<bool>(
+              key: CacheService.isRefreshRepairRequestList,
+            ) ??
+            false;
+
+        if (isRefresh) {
+          _controller.reset();
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppbar.appBar(
-        'Danh sách sửa chữa',
-        action: IconButton(
-          onPressed: getData,
-          icon: const Icon(Icons.replay_outlined),
-        ),
-      ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: AppStyles.horizontalPaddingValue,
-              ),
-              child: TitleNumberIndicator(
-                number: _data.length,
-                title: 'Yêu cầu sửa chữa',
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsetsGeometry.only(
-                top: 6,
-                bottom: 12,
-                left: AppStyles.horizontalPaddingValue,
-                right: AppStyles.horizontalPaddingValue,
-              ),
-              child: MySearchField(onFiltered: (text) {}),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Visibility(
-              visible: _data.isEmpty,
-              child: MyDataState.empty(),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final item = _data[index];
-              return Padding(
-                padding: const EdgeInsetsGeometry.symmetric(
-                  vertical: 10,
-                  horizontal: AppStyles.horizontalPaddingValue,
-                ),
-                child: RepairRequestItem(
-                  item: item,
-                  onTapViewDetail: () {
-                    Get.to(
-                      () {
-                        return const RepairRequestDetailScreen();
-                      },
-                      binding: BindingsBuilder.put(() {
-                        return RepairRequestDetailController();
-                      }),
-                    );
-                  },
-                ),
-              );
-            }, childCount: _data.length),
-          ),
-        ],
-      ),
+    return CommonInstallationListScreen(
+      getData: getData,
+      buildChild: buildChild,
+      controller: _controller,
+      title: 'Yêu cầu sửa chữa',
     );
   }
 }

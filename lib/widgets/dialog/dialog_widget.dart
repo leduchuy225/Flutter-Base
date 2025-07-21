@@ -12,7 +12,7 @@ class MyDialog {
     String? message, {
     Widget? icon,
     String title = 'Thông báo',
-    SnackbarType type = SnackbarType.INFORMATION,
+    SnackbarType type = SnackbarType.WARNING,
   }) {
     if (isNullOrEmpty(message)) {
       return;

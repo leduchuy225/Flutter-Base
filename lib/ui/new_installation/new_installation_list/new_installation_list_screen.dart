@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
-import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/widgets/my_appbar.dart';
-import 'package:flutter_base/widgets/title_number_indicator.dart';
+import 'package:flutter_base/core/services/cache_service.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/common_installation_list.dart';
+import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../data/installation_api.dart';
 import '../../../models/installation/installation_list_model_response.dart';
 import '../../../models/installation/installation_list_payload.dart';
-import '../../../widgets/data_state_widget.dart';
+import '../../../models/installation/installation_search_payload.dart';
+import '../../new_installation_and_repair_request_share/common_installation_list_controller.dart';
 import '../new_installation_detail/new_installation_detail_controller.dart';
 import '../new_installation_detail/new_installation_detail_screen.dart';
 import 'new_installation_item.dart';
@@ -22,86 +24,75 @@ class NewInstallationListScreen extends StatefulWidget {
 }
 
 class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
-  List<InstallationListModelResponse> _data = [];
+  final _controller =
+      CommonInstallationListController<InstallationListModelResponse>();
 
-  @override
-  void initState() {
-    super.initState();
+  Future<List<InstallationListModelResponse>> getData({int page = 1}) async {
+    final body = InstallationListPayload(
+      typeData: MBService.NewInstallation,
+      searchDefault: InstallationSearchPayload(
+        page: page,
+        pageSize: 20,
+        typeOrder: true,
+      ),
+    );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getData();
-    });
-  }
-
-  Future getData() async {
     final response = await Get.find<InstallationApi>()
-        .getNewInstallationList(InstallationListPayload())
-        .callApi();
+        .getNewInstallationList(body)
+        .callApi(isShowLoading: false);
 
     final data = response.data?.model;
+
     if (data != null) {
-      setState(() {
-        _data = data;
-      });
+      return data;
     }
+
+    return [];
+  }
+
+  Widget buildChild(InstallationListModelResponse item) {
+    return NewInstallationItem(
+      item: item,
+      onTapViewDetail: () async {
+        if (item.id == null) {
+          MyDialog.snackbar('Không có ID');
+          return;
+        }
+
+        CacheService().write(
+          key: CacheService.isRefreshNewInstallationList,
+          value: false,
+        );
+
+        await Get.to(
+          () {
+            return const NewInstallationDetailScreen();
+          },
+          binding: BindingsBuilder.put(() {
+            return NewInstallationDetailController(newInstallationId: item.id!);
+          }),
+        );
+
+        final isRefresh =
+            CacheService().read<bool>(
+              key: CacheService.isRefreshNewInstallationList,
+            ) ??
+            false;
+
+        if (isRefresh) {
+          _controller.reset();
+        }
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppbar.appBar(
-        'Danh sách lắp mới',
-        action: IconButton(
-          onPressed: getData,
-          icon: const Icon(Icons.replay_outlined),
-        ),
-      ),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: AppStyles.horizontalPaddingValue,
-              ),
-              child: TitleNumberIndicator(
-                number: _data.length,
-                title: 'Yêu cầu lắp mới',
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Visibility(
-              visible: _data.isEmpty,
-              child: MyDataState.empty(),
-            ),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final item = _data[index];
-              return Padding(
-                padding: const EdgeInsetsGeometry.symmetric(
-                  vertical: 10,
-                  horizontal: AppStyles.horizontalPaddingValue,
-                ),
-                child: NewInstallationItem(
-                  item: item,
-                  onTapViewDetail: () {
-                    Get.to(
-                      () {
-                        return const NewInstallationDetailScreen();
-                      },
-                      binding: BindingsBuilder.put(() {
-                        return NewInstallationDetailController();
-                      }),
-                    );
-                  },
-                ),
-              );
-            }, childCount: _data.length),
-          ),
-        ],
-      ),
+    return CommonInstallationListScreen(
+      getData: getData,
+      buildChild: buildChild,
+      controller: _controller,
+      title: 'Danh sách lắp mới',
     );
   }
 }

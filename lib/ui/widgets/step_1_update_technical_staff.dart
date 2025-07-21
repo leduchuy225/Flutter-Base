@@ -44,6 +44,7 @@ class Step1UpdateTechnicalStaff extends StatelessWidget {
                       return MySelectorModel(
                         id: element.id,
                         name: element.email ?? '',
+                        description: element.fullName,
                       );
                     }).toList();
                   },
