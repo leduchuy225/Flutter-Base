@@ -1,5 +1,5 @@
+import '../common/role_response.dart';
 import 'installation_list_model_response.dart';
-import 'role_response.dart';
 
 class InstallationListResponse {
   List<InstallationListModelResponse>? model;

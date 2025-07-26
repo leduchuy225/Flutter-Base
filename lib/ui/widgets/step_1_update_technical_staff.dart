@@ -5,7 +5,7 @@ import 'package:flutter_base/widgets/selector/selector_widget.dart';
 import 'package:get/get.dart';
 
 import '../../models/base_selector.dart';
-import '../../models/installation/technical_staff_list_payload.dart';
+import '../../models/common/technical_staff_list_payload.dart';
 import '../../theme/styles.dart';
 import '../../widgets/my_texttile.dart';
 import '../../widgets/selector/selector_controller.dart';

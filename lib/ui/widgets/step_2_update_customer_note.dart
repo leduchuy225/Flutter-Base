@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/datetime_utils.dart';
-import '../../models/installation/note_viewmodel_response.dart';
+import '../../models/common/note_viewmodel_response.dart';
 import '../../theme/styles.dart';
 import '../../widgets/my_texttile.dart';
 import '../../widgets/text_field/text_field_controller.dart';

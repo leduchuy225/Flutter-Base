@@ -1,4 +1,4 @@
-import 'package:flutter_base/models/installation/role_response.dart';
+import 'package:flutter_base/models/common/role_response.dart';
 
 import 'repair_request_list_model_response.dart';
 

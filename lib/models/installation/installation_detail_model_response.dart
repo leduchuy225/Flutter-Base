@@ -1,6 +1,6 @@
-import '../customer/customer_viewmodel_response.dart';
-import 'note_viewmodel_response.dart';
-import 'technical_staff_list_model_response.dart';
+import '../common/customer_viewmodel_response.dart';
+import '../common/note_viewmodel_response.dart';
+import '../common/technical_staff_list_model_response.dart';
 
 class InstallationDetailModelResponse {
   int? id;
@@ -36,12 +36,16 @@ class InstallationDetailModelResponse {
   dynamic googleMap;
   dynamic deviceAcc;
   dynamic deviceSlid;
+  String? expectedCompletionDate;
+  dynamic actualCompletionDate;
   CustomerViewmodelResponse? mbCustomerViewModel;
   dynamic mbConnectionRequestNoteViewModel;
   List<NoteViewmodelResponse>? listMbConnectionRequestNoteViewModel;
   dynamic listMbConnectionRequestNoteViewModel2;
   List<TechnicalStaffListModelResponse>? listTechnicalLeader;
   dynamic listTechnicalStaff;
+  dynamic mbConnectionRequestOverdueViewModel;
+  List<NoteViewmodelResponse>? listMbConnectionRequestOverdueViewModel;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -55,6 +59,8 @@ class InstallationDetailModelResponse {
   dynamic serviceIdTitle;
   dynamic createdByEmail;
   dynamic createdByUserName;
+  dynamic progress;
+  dynamic progressTitle;
 
   InstallationDetailModelResponse({
     this.id,
@@ -90,12 +96,16 @@ class InstallationDetailModelResponse {
     this.googleMap,
     this.deviceAcc,
     this.deviceSlid,
+    this.expectedCompletionDate,
+    this.actualCompletionDate,
     this.mbCustomerViewModel,
     this.mbConnectionRequestNoteViewModel,
     this.listMbConnectionRequestNoteViewModel,
     this.listMbConnectionRequestNoteViewModel2,
     this.listTechnicalLeader,
     this.listTechnicalStaff,
+    this.mbConnectionRequestOverdueViewModel,
+    this.listMbConnectionRequestOverdueViewModel,
     this.address2,
     this.countryIdTitle,
     this.provinceIdTitle,
@@ -109,6 +119,8 @@ class InstallationDetailModelResponse {
     this.serviceIdTitle,
     this.createdByEmail,
     this.createdByUserName,
+    this.progress,
+    this.progressTitle,
   });
 
   factory InstallationDetailModelResponse.fromJson(Map<String, dynamic> json) {
@@ -146,6 +158,8 @@ class InstallationDetailModelResponse {
       googleMap: json['GoogleMap'] as dynamic,
       deviceAcc: json['Device_ACC'] as dynamic,
       deviceSlid: json['Device_SLID'] as dynamic,
+      expectedCompletionDate: json['ExpectedCompletionDate'] as String?,
+      actualCompletionDate: json['ActualCompletionDate'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null
           ? null
           : CustomerViewmodelResponse.fromJson(
@@ -170,6 +184,15 @@ class InstallationDetailModelResponse {
           )
           .toList(),
       listTechnicalStaff: json['ListTechnicalStaff'] as dynamic,
+      mbConnectionRequestOverdueViewModel:
+          json['MB_ConnectionRequestOverdueViewModel'] as dynamic,
+      listMbConnectionRequestOverdueViewModel:
+          (json['ListMB_ConnectionRequestOverdueViewModel'] as List<dynamic>?)
+              ?.map(
+                (e) =>
+                    NoteViewmodelResponse.fromJson(e as Map<String, dynamic>),
+              )
+              .toList(),
       address2: json['Address2'] as String?,
       countryIdTitle: json['CountryID_Title'] as dynamic,
       provinceIdTitle: json['ProvinceID_Title'] as dynamic,
@@ -183,6 +206,8 @@ class InstallationDetailModelResponse {
       serviceIdTitle: json['ServiceID_Title'] as dynamic,
       createdByEmail: json['CreatedBy_Email'] as dynamic,
       createdByUserName: json['CreatedBy_UserName'] as dynamic,
+      progress: json['Progress'] as dynamic,
+      progressTitle: json['Progress_Title'] as dynamic,
     );
   }
 
@@ -220,6 +245,8 @@ class InstallationDetailModelResponse {
     'GoogleMap': googleMap,
     'Device_ACC': deviceAcc,
     'Device_SLID': deviceSlid,
+    'ExpectedCompletionDate': expectedCompletionDate,
+    'ActualCompletionDate': actualCompletionDate,
     'MB_CustomerViewModel': mbCustomerViewModel?.toJson(),
     'MB_ConnectionRequestNoteViewModel': mbConnectionRequestNoteViewModel,
     'ListMB_ConnectionRequestNoteViewModel':
@@ -228,6 +255,11 @@ class InstallationDetailModelResponse {
         listMbConnectionRequestNoteViewModel2,
     'ListTechnicalLeader': listTechnicalLeader?.map((e) => e.toJson()).toList(),
     'ListTechnicalStaff': listTechnicalStaff,
+    'MB_ConnectionRequestOverdueViewModel': mbConnectionRequestOverdueViewModel,
+    'ListMB_ConnectionRequestOverdueViewModel':
+        listMbConnectionRequestOverdueViewModel
+            ?.map((e) => e.toJson())
+            .toList(),
     'Address2': address2,
     'CountryID_Title': countryIdTitle,
     'ProvinceID_Title': provinceIdTitle,
@@ -241,5 +273,7 @@ class InstallationDetailModelResponse {
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
+    'Progress': progress,
+    'Progress_Title': progressTitle,
   };
 }

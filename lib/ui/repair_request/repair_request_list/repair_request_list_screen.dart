@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 
 import '../../../core/const/constants.dart';
 import '../../../core/services/cache_service.dart';
-import '../../../models/installation/installation_list_payload.dart';
-import '../../../models/installation/installation_search_payload.dart';
+import '../../../models/common/installation_list_payload.dart';
+import '../../../models/common/installation_search_payload.dart';
 import '../../../models/repair_request/repair_request_list_model_response.dart';
 import '../../../widgets/dialog/dialog_widget.dart';
 import '../../new_installation_and_repair_request_share/common_installation_list.dart';

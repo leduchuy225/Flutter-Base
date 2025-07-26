@@ -1,6 +1,6 @@
-import '../customer/customer_viewmodel_response.dart';
-import '../installation/note_viewmodel_response.dart';
-import '../installation/technical_staff_list_model_response.dart';
+import '../common/customer_viewmodel_response.dart';
+import '../common/note_viewmodel_response.dart';
+import '../common/technical_staff_list_model_response.dart';
 
 class RepairRequestDetailModelResponse {
   int? id;
@@ -28,19 +28,23 @@ class RepairRequestDetailModelResponse {
   dynamic closedDate;
   dynamic closedNote;
   String? technicalLeader;
-  String? technicalStaff;
-  String? technicalStaffDate;
-  bool? technicalStaffReception;
+  dynamic technicalStaff;
+  dynamic technicalStaffDate;
+  dynamic technicalStaffReception;
   dynamic technicalStaffModuleImage;
   dynamic technicalStaffTestImage;
   dynamic technicalStaffImage;
   dynamic technicalStaffRating;
   dynamic googleMap;
+  String? expectedCompletionDate;
+  dynamic actualCompletionDate;
   CustomerViewmodelResponse? mbCustomerViewModel;
   dynamic mbRepairRequestNoteViewModel;
   List<NoteViewmodelResponse>? listMbRepairRequestNoteViewModel;
   List<TechnicalStaffListModelResponse>? listTechnicalLeader;
-  List<TechnicalStaffListModelResponse>? listTechnicalStaff;
+  dynamic listTechnicalStaff;
+  dynamic mbRepairRequestOverdueViewModel;
+  List<dynamic>? listMbRepairRequestOverdueViewModel;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -54,6 +58,8 @@ class RepairRequestDetailModelResponse {
   dynamic serviceIdTitle;
   dynamic createdByEmail;
   dynamic createdByUserName;
+  dynamic progress;
+  dynamic progressTitle;
 
   RepairRequestDetailModelResponse({
     this.id,
@@ -89,11 +95,15 @@ class RepairRequestDetailModelResponse {
     this.technicalStaffImage,
     this.technicalStaffRating,
     this.googleMap,
+    this.expectedCompletionDate,
+    this.actualCompletionDate,
     this.mbCustomerViewModel,
     this.mbRepairRequestNoteViewModel,
     this.listMbRepairRequestNoteViewModel,
     this.listTechnicalLeader,
     this.listTechnicalStaff,
+    this.mbRepairRequestOverdueViewModel,
+    this.listMbRepairRequestOverdueViewModel,
     this.address2,
     this.countryIdTitle,
     this.provinceIdTitle,
@@ -107,6 +117,8 @@ class RepairRequestDetailModelResponse {
     this.serviceIdTitle,
     this.createdByEmail,
     this.createdByUserName,
+    this.progress,
+    this.progressTitle,
   });
 
   factory RepairRequestDetailModelResponse.fromJson(Map<String, dynamic> json) {
@@ -136,14 +148,16 @@ class RepairRequestDetailModelResponse {
       closedDate: json['ClosedDate'] as dynamic,
       closedNote: json['ClosedNote'] as dynamic,
       technicalLeader: json['TechnicalLeader'] as String?,
-      technicalStaff: json['TechnicalStaff'] as String?,
-      technicalStaffDate: json['TechnicalStaffDate'] as String?,
-      technicalStaffReception: json['TechnicalStaffReception'] as bool?,
+      technicalStaff: json['TechnicalStaff'] as dynamic,
+      technicalStaffDate: json['TechnicalStaffDate'] as dynamic,
+      technicalStaffReception: json['TechnicalStaffReception'] as dynamic,
       technicalStaffModuleImage: json['TechnicalStaffModuleImage'] as dynamic,
       technicalStaffTestImage: json['TechnicalStaffTestImage'] as dynamic,
       technicalStaffImage: json['TechnicalStaffImage'] as dynamic,
       technicalStaffRating: json['TechnicalStaffRating'] as dynamic,
       googleMap: json['GoogleMap'] as dynamic,
+      expectedCompletionDate: json['ExpectedCompletionDate'] as String?,
+      actualCompletionDate: json['ActualCompletionDate'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null
           ? null
           : CustomerViewmodelResponse.fromJson(
@@ -165,13 +179,12 @@ class RepairRequestDetailModelResponse {
             ),
           )
           .toList(),
-      listTechnicalStaff: (json['ListTechnicalStaff'] as List<dynamic>?)
-          ?.map(
-            (e) => TechnicalStaffListModelResponse.fromJson(
-              e as Map<String, dynamic>,
-            ),
-          )
-          .toList(),
+      listTechnicalStaff: json['ListTechnicalStaff'] as dynamic,
+      mbRepairRequestOverdueViewModel:
+          json['MB_RepairRequestOverdueViewModel'] as dynamic,
+      listMbRepairRequestOverdueViewModel:
+          json['ListMB_RepairRequestOverdueViewModel.note_viewmodel_response']
+              as List<dynamic>?,
       address2: json['Address2'] as String?,
       countryIdTitle: json['CountryID_Title'] as dynamic,
       provinceIdTitle: json['ProvinceID_Title'] as dynamic,
@@ -185,6 +198,8 @@ class RepairRequestDetailModelResponse {
       serviceIdTitle: json['ServiceID_Title'] as dynamic,
       createdByEmail: json['CreatedBy_Email'] as dynamic,
       createdByUserName: json['CreatedBy_UserName'] as dynamic,
+      progress: json['Progress'] as dynamic,
+      progressTitle: json['Progress_Title'] as dynamic,
     );
   }
 
@@ -222,13 +237,17 @@ class RepairRequestDetailModelResponse {
     'TechnicalStaffImage': technicalStaffImage,
     'TechnicalStaffRating': technicalStaffRating,
     'GoogleMap': googleMap,
+    'ExpectedCompletionDate': expectedCompletionDate,
+    'ActualCompletionDate': actualCompletionDate,
     'MB_CustomerViewModel': mbCustomerViewModel?.toJson(),
     'MB_RepairRequestNoteViewModel': mbRepairRequestNoteViewModel,
     'ListMB_RepairRequestNoteViewModel': listMbRepairRequestNoteViewModel
         ?.map((e) => e.toJson())
         .toList(),
     'ListTechnicalLeader': listTechnicalLeader?.map((e) => e.toJson()).toList(),
-    'ListTechnicalStaff': listTechnicalStaff?.map((e) => e.toJson()).toList(),
+    'ListTechnicalStaff': listTechnicalStaff,
+    'MB_RepairRequestOverdueViewModel': mbRepairRequestOverdueViewModel,
+    'ListMB_RepairRequestOverdueViewModel': listMbRepairRequestOverdueViewModel,
     'Address2': address2,
     'CountryID_Title': countryIdTitle,
     'ProvinceID_Title': provinceIdTitle,
@@ -242,5 +261,7 @@ class RepairRequestDetailModelResponse {
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
+    'Progress': progress,
+    'Progress_Title': progressTitle,
   };
 }

@@ -4,9 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/base_response.dart';
-import '../models/customer/customer_search_response.dart';
-import '../models/installation/installation_detail_payload.dart';
-import '../models/installation/installation_list_payload.dart';
+import '../models/common/installation_detail_payload.dart';
+import '../models/common/installation_list_payload.dart';
 import '../models/repair_request/close_repair_request_response.dart';
 import '../models/repair_request/repair_request_detail_response.dart';
 import '../models/repair_request/repair_request_list_response.dart';
@@ -21,9 +20,7 @@ abstract class RepairRequestApi {
   factory RepairRequestApi(Dio dio) = _RepairRequestApi;
 
   @POST('/apiv1/data/findcustomers')
-  Future<BaseResponse<CustomerSearchResponse>> searchCustomer(
-    @Body() Map<String, dynamic> body,
-  );
+  Future<BaseResponse> searchCustomer(@Body() Map<String, dynamic> body);
 
   @POST('/RepairRequest/SetPostClosed')
   Future<BaseResponse<CloseRepairRequestResponse>> closeRepairRequest(

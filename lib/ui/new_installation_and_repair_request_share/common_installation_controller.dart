@@ -9,7 +9,7 @@ import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
-import '../../models/installation/note_viewmodel_response.dart';
+import '../../models/common/note_viewmodel_response.dart';
 import '../widgets/step_1_update_technical_staff.dart';
 import '../widgets/step_2_update_customer_note.dart';
 import '../widgets/step_3_update_installation_file.dart';

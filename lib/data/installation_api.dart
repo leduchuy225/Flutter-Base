@@ -4,13 +4,13 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/base_response.dart';
+import '../models/common/installation_detail_payload.dart';
+import '../models/common/installation_list_payload.dart';
+import '../models/common/technical_staff_list_payload.dart';
+import '../models/common/technical_staff_list_response.dart';
 import '../models/installation/close_new_installation_response.dart';
-import '../models/installation/installation_detail_payload.dart';
 import '../models/installation/installation_detail_response.dart';
-import '../models/installation/installation_list_payload.dart';
 import '../models/installation/installation_list_response.dart';
-import '../models/installation/technical_staff_list_payload.dart';
-import '../models/installation/technical_staff_list_response.dart';
 import '../models/installation/update_new_installation_note_response.dart';
 import '../models/installation/update_new_installation_report_response.dart';
 import '../models/installation/update_new_installation_technical_staff_response.dart';

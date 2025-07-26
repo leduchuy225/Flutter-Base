@@ -7,9 +7,9 @@ import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../data/installation_api.dart';
+import '../../../models/common/installation_list_payload.dart';
+import '../../../models/common/installation_search_payload.dart';
 import '../../../models/installation/installation_list_model_response.dart';
-import '../../../models/installation/installation_list_payload.dart';
-import '../../../models/installation/installation_search_payload.dart';
 import '../../new_installation_and_repair_request_share/common_installation_list_controller.dart';
 import '../new_installation_detail/new_installation_detail_controller.dart';
 import '../new_installation_detail/new_installation_detail_screen.dart';

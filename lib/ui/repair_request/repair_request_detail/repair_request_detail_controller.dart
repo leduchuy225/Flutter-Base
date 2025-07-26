@@ -5,8 +5,8 @@ import 'package:flutter_base/data/repair_request_api.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
-import '../../../models/installation/installation_detail_payload.dart';
-import '../../../models/installation/note_viewmodel_response.dart';
+import '../../../models/common/installation_detail_payload.dart';
+import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/repair_request/repair_request_detail_model_response.dart';
 import '../../new_installation_and_repair_request_share/common_installation_controller.dart';
 

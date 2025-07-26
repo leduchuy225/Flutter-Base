@@ -2,17 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_base/models/base_response.dart';
+import 'package:flutter_base/models/common/installation_detail_payload.dart';
+import 'package:flutter_base/models/common/installation_list_payload.dart';
+import 'package:flutter_base/models/common/technical_staff_list_payload.dart';
+import 'package:flutter_base/models/common/technical_staff_list_response.dart';
 import 'package:flutter_base/models/installation/close_new_installation_response.dart';
-
-import 'package:flutter_base/models/installation/installation_detail_payload.dart';
-
 import 'package:flutter_base/models/installation/installation_detail_response.dart';
-
-import 'package:flutter_base/models/installation/installation_list_payload.dart';
-
 import 'package:flutter_base/models/installation/installation_list_response.dart';
-import 'package:flutter_base/models/installation/technical_staff_list_payload.dart';
-import 'package:flutter_base/models/installation/technical_staff_list_response.dart';
 import 'package:flutter_base/models/installation/update_new_installation_note_response.dart';
 import 'package:flutter_base/models/installation/update_new_installation_report_response.dart';
 import 'package:flutter_base/models/installation/update_new_installation_technical_staff_response.dart';
