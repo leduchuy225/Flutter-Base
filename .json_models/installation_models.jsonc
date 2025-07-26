@@ -27,7 +27,7 @@
   {
     // To add enhancemed name to all generated files add new name after dot.
     // Example: user_post.model. Result: user_post.model.dart
-    "__className": "update_new_installation_note_response", // <- The base class name of the object.
+    "__className": "update_new_installation_step_3_response", // <- The base class name of the object.
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.
     "__path": "/lib/models/installation",
@@ -36,7 +36,7 @@
   {
     // To add enhancemed name to all generated files add new name after dot.
     // Example: user_post.model. Result: user_post.model.dart
-    "__className": "update_new_installation_report_response", // <- The base class name of the object.
+    "__className": "update_new_installation_step_4_response", // <- The base class name of the object.
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.
     "__path": "/lib/models/installation",
@@ -960,5 +960,75 @@
       }
     ],
     "totalItems": 100
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "note_list_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/common",
+    "_note.note_viewmodel_response": [
+      {
+        "ID": 76,
+        "Parent": null,
+        "CurrentStep": 1,
+        "Note": "Ghi chú mới",
+        "CreatedBy": "300dd6fe-a7ff-473b-ab4e-2f1135fc959a",
+        "CreatedDate": "/Date(1753257004550)/",
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "SetDefault": null,
+        "CreatedBy_Avatar": null,
+        "CreatedBy_Email": "aphonghp7@gmail.com",
+        "CreatedBy_UserName": null
+      },
+      {
+        "ID": 75,
+        "Parent": null,
+        "CurrentStep": 1,
+        "Note": "12312",
+        "CreatedBy": "300dd6fe-a7ff-473b-ab4e-2f1135fc959a",
+        "CreatedDate": "/Date(1753256604857)/",
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "SetDefault": null,
+        "CreatedBy_Avatar": null,
+        "CreatedBy_Email": "aphonghp7@gmail.com",
+        "CreatedBy_UserName": null
+      },
+      {
+        "ID": 74,
+        "Parent": null,
+        "CurrentStep": 1,
+        "Note": "123",
+        "CreatedBy": "300dd6fe-a7ff-473b-ab4e-2f1135fc959a",
+        "CreatedDate": "/Date(1753256569253)/",
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "SetDefault": null,
+        "CreatedBy_Avatar": null,
+        "CreatedBy_Email": "aphonghp7@gmail.com",
+        "CreatedBy_UserName": null
+      },
+      {
+        "ID": 70,
+        "Parent": null,
+        "CurrentStep": 1,
+        "Note": "Tạo mới yêu cầu lắp mới",
+        "CreatedBy": "7c9cd909-08aa-4708-8346-805c1a4d47fa",
+        "CreatedDate": "/Date(1752900297873)/",
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "SetDefault": null,
+        "CreatedBy_Avatar": null,
+        "CreatedBy_Email": "prophongpham@gmail.com",
+        "CreatedBy_UserName": null
+      }
+    ]
   }
 ]

@@ -1,33 +1,33 @@
-[
-  {
-    // To add enhancemed name to all generated files add new name after dot.
-    // Example: user_post.model. Result: user_post.model.dart
-    "__className": "customer_search_response", // <- The base class name of the object.
-    // It's possible to override the default path with a new one by adding "__path" key.
-    // - it's useful if you want split your models to different workspace directories.
-    "__path": "/lib/models/customer", // <- this is not required.
-    "customers.customer_search_model_response": {
-      "ID": 3,
-      "IDLong": 892590940820,
-      "FullName": "Nguyễn Văn C",
-      "BirthDay": "/Date(1751994000000)/",
-      "Avatar": "/Data/images/Customer/Avatar/nhan-vien-2.webp",
-      "CCCD": "03221441114",
-      "CCCD_Issue": "/Date(1753203600000)/",
-      "CCCD_Front": "/Data/images/Customer/CCCD_Front/home_policy_icon_4.webp",
-      "CCCD_Back": "/Data/images/Customer/CCCD_Front/home_policy_icon_4.webp",
-      "PhoneNumber": "0955444711",
-      "CountryID": 237,
-      "ProvinceID": 31,
-      "DistrictID": 304,
-      "WardID": 11344,
-      "Address": "Thôn A",
-      "CreatedBy": "7c9cd909-08aa-4708-8346-805c1a4d47fa",
-      "CreatedDate": "/Date(1752124941023)/",
-      "DeleteStatus": null,
-      "DeleteBy": null,
-      "DeleteDate": null,
-      "SetDefault": null
-    }
-  }
-]
+// [
+//   {
+//     // To add enhancemed name to all generated files add new name after dot.
+//     // Example: user_post.model. Result: user_post.model.dart
+//     "__className": "customer_search_response", // <- The base class name of the object.
+//     // It's possible to override the default path with a new one by adding "__path" key.
+//     // - it's useful if you want split your models to different workspace directories.
+//     "__path": "/lib/models/customer", // <- this is not required.
+//     "customers.customer_search_model_response": {
+//       "ID": 3,
+//       "IDLong": 892590940820,
+//       "FullName": "Nguyễn Văn C",
+//       "BirthDay": "/Date(1751994000000)/",
+//       "Avatar": "/Data/images/Customer/Avatar/nhan-vien-2.webp",
+//       "CCCD": "03221441114",
+//       "CCCD_Issue": "/Date(1753203600000)/",
+//       "CCCD_Front": "/Data/images/Customer/CCCD_Front/home_policy_icon_4.webp",
+//       "CCCD_Back": "/Data/images/Customer/CCCD_Front/home_policy_icon_4.webp",
+//       "PhoneNumber": "0955444711",
+//       "CountryID": 237,
+//       "ProvinceID": 31,
+//       "DistrictID": 304,
+//       "WardID": 11344,
+//       "Address": "Thôn A",
+//       "CreatedBy": "7c9cd909-08aa-4708-8346-805c1a4d47fa",
+//       "CreatedDate": "/Date(1752124941023)/",
+//       "DeleteStatus": null,
+//       "DeleteBy": null,
+//       "DeleteDate": null,
+//       "SetDefault": null
+//     }
+//   }
+// ]

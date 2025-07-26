@@ -6,6 +6,7 @@ import 'package:retrofit/retrofit.dart';
 import '../models/base_response.dart';
 import '../models/common/installation_detail_payload.dart';
 import '../models/common/installation_list_payload.dart';
+import '../models/common/note_list_response.dart';
 import '../models/repair_request/close_repair_request_response.dart';
 import '../models/repair_request/repair_request_detail_response.dart';
 import '../models/repair_request/repair_request_list_response.dart';
@@ -58,4 +59,22 @@ abstract class RepairRequestApi {
     @Part(name: 'technicalStaffTestImage[0]') File? technicalStaffTestImage,
     @Part(name: 'technicalStaffImage[0]') File? technicalStaffImage,
   });
+
+  @POST('/repairrequest/addnote')
+  Future<BaseResponse> addRepairRequestNote(@Body() Map<String, dynamic> body);
+
+  @POST('/repairrequest/getnote')
+  Future<BaseResponse<NoteListResponse>> getRepairRequestNoteList(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/repairrequest/AddOverdue')
+  Future<BaseResponse> addRepairRequestOverdueNote(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/repairrequest/GetOverdue')
+  Future<BaseResponse<NoteListResponse>> getRepairRequestOverdueNoteList(
+    @Body() Map<String, dynamic> body,
+  );
 }

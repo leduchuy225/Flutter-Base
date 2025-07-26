@@ -6,6 +6,7 @@ import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/common/installation_detail_payload.dart';
 
 import 'package:flutter_base/models/common/installation_list_payload.dart';
+import 'package:flutter_base/models/common/note_list_response.dart';
 import 'package:flutter_base/models/repair_request/close_repair_request_response.dart';
 
 import 'package:flutter_base/models/repair_request/repair_request_detail_response.dart';
@@ -101,6 +102,34 @@ class MockRepairRequestApi implements RepairRequestApi {
     Map<String, dynamic> body,
   ) {
     // TODO: implement closeRepairRequest
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse> addRepairRequestNote(Map<String, dynamic> body) {
+    // TODO: implement addRepairRequestNote
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse> addRepairRequestOverdueNote(Map<String, dynamic> body) {
+    // TODO: implement addRepairRequestOverdueNote
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<NoteListResponse>> getRepairRequestNoteList(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement getRepairRequestNoteList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<NoteListResponse>> getRepairRequestOverdueNoteList(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement getRepairRequestOverdueNoteList
     throw UnimplementedError();
   }
 }

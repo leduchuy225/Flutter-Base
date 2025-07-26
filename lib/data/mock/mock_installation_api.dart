@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/common/installation_detail_payload.dart';
 import 'package:flutter_base/models/common/installation_list_payload.dart';
+import 'package:flutter_base/models/common/note_list_response.dart';
 import 'package:flutter_base/models/common/technical_staff_list_payload.dart';
 import 'package:flutter_base/models/common/technical_staff_list_response.dart';
 import 'package:flutter_base/models/installation/close_new_installation_response.dart';
@@ -123,5 +124,35 @@ class MockInstallationApi implements InstallationApi {
       code: 1,
       data: CloseNewInstallationResponse.fromJson(response),
     );
+  }
+
+  @override
+  Future<BaseResponse> addNewInstallationNote(Map<String, dynamic> body) {
+    // TODO: implement addNewInstallationNote
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse> addNewInstallationOverdueNote(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement addNewInstallationOverdueNote
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<NoteListResponse>> getNewInstallationNoteList(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement getNewInstallationNoteList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<NoteListResponse>> getNewInstallationOverdueNoteList(
+    Map<String, dynamic> body,
+  ) {
+    // TODO: implement getNewInstallationOverdueNoteList
+    throw UnimplementedError();
   }
 }

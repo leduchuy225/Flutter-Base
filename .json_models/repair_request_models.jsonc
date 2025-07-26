@@ -27,7 +27,7 @@
   {
     // To add enhancemed name to all generated files add new name after dot.
     // Example: user_post.model. Result: user_post.model.dart
-    "__className": "update_repair_request_note_response", // <- The base class name of the object.
+    "__className": "update_repair_request_step_3_response", // <- The base class name of the object.
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.
     "__path": "/lib/models/repair_request", // <- this is not required.
@@ -36,7 +36,7 @@
   {
     // To add enhancemed name to all generated files add new name after dot.
     // Example: user_post.model. Result: user_post.model.dart
-    "__className": "update_repair_request_report_response", // <- The base class name of the object.
+    "__className": "update_repair_request_step_4_response", // <- The base class name of the object.
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.
     "__path": "/lib/models/repair_request", // <- this is not required.

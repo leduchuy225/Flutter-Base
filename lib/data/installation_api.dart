@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_base/models/common/note_list_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/base_response.dart';
@@ -64,4 +65,24 @@ abstract class InstallationApi {
     @Part(name: 'technicalStaffTestImage[0]') File? technicalStaffTestImage,
     @Part(name: 'technicalStaffImage[0]') File? technicalStaffImage,
   });
+
+  @POST('/newconnectionrequest/addnote')
+  Future<BaseResponse> addNewInstallationNote(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/newconnectionrequest/getnote')
+  Future<BaseResponse<NoteListResponse>> getNewInstallationNoteList(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/newconnectionrequest/AddOverdue')
+  Future<BaseResponse> addNewInstallationOverdueNote(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/newconnectionrequest/GetOverdue')
+  Future<BaseResponse<NoteListResponse>> getNewInstallationOverdueNoteList(
+    @Body() Map<String, dynamic> body,
+  );
 }
