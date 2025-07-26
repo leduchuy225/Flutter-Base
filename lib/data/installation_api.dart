@@ -11,8 +11,8 @@ import '../models/common/technical_staff_list_response.dart';
 import '../models/installation/close_new_installation_response.dart';
 import '../models/installation/installation_detail_response.dart';
 import '../models/installation/installation_list_response.dart';
-import '../models/installation/update_new_installation_note_response.dart';
-import '../models/installation/update_new_installation_report_response.dart';
+import '../models/installation/update_new_installation_step_3_response.dart';
+import '../models/installation/update_new_installation_step_4_response.dart';
 import '../models/installation/update_new_installation_technical_staff_response.dart';
 
 part 'installation_api.g.dart';
@@ -51,13 +51,13 @@ abstract class InstallationApi {
   // );
 
   @POST('/NewConnectionRequest/UpdateCurrentStep_3')
-  Future<BaseResponse<UpdateNewInstallationNoteResponse>>
-  updateCustomerNewInstallationNote(@Body() Map<String, dynamic> body);
+  Future<BaseResponse<UpdateNewInstallationStep3Response>>
+  updateNewInstallationStep3(@Body() Map<String, dynamic> body);
 
   @MultiPart()
   @POST('/NewConnectionRequest/UpdateCurrentStep_4')
-  Future<BaseResponse<UpdateNewInstallationReportResponse>>
-  uploadNewInstallationFile({
+  Future<BaseResponse<UpdateNewInstallationStep4Response>>
+  uploadNewInstallationStep4({
     @Part(name: 'id') required String id,
     @Part(name: 'note') required String note,
     @Part(name: 'technicalStaffModuleImage[0]') File? technicalStaffModuleImage,

@@ -11,8 +11,8 @@ import 'package:flutter_base/models/repair_request/close_repair_request_response
 import 'package:flutter_base/models/repair_request/repair_request_detail_response.dart';
 
 import 'package:flutter_base/models/repair_request/repair_request_list_response.dart';
-import 'package:flutter_base/models/repair_request/update_repair_request_note_response.dart';
-import 'package:flutter_base/models/repair_request/update_repair_request_report_response.dart';
+import 'package:flutter_base/models/repair_request/update_repair_request_step_3_response.dart';
+import 'package:flutter_base/models/repair_request/update_repair_request_step_4_response.dart';
 import 'package:flutter_base/models/repair_request/update_repair_request_technical_staff_response.dart';
 
 import '../../core/utils/jsonc_reader.dart';
@@ -77,22 +77,22 @@ class MockRepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse<UpdateRepairRequestNoteResponse>>
-  updateCustomerRepairRequestNote(Map<String, dynamic> body) {
-    // TODO: implement updateCustomerRepairRequestNote
+  Future<BaseResponse<UpdateRepairRequestStep3Response>>
+  updateRepairRequestStep3(Map<String, dynamic> body) {
+    // TODO: implement updateRepairRequestStep3
     throw UnimplementedError();
   }
 
   @override
-  Future<BaseResponse<UpdateRepairRequestReportResponse>>
-  uploadRepairRequestFile({
+  Future<BaseResponse<UpdateRepairRequestStep4Response>>
+  uploadRepairRequestStep4({
     required String id,
     required String note,
     File? technicalStaffModuleImage,
     File? technicalStaffTestImage,
     File? technicalStaffImage,
   }) {
-    // TODO: implement uploadRepairRequestFile
+    // TODO: implement uploadRepairRequestStep4
     throw UnimplementedError();
   }
 

@@ -41,9 +41,9 @@ abstract class CommonInstallationController<T> extends GetxController {
 
   Future assignTechnicalStaff();
 
-  Future updateCustomerNote();
+  Future updateStep3();
 
-  Future uploadFile();
+  Future uploadStep4();
 
   void setIsRefreshValue();
 
@@ -113,7 +113,7 @@ abstract class CommonInstallationController<T> extends GetxController {
               return;
             }
             MyDialog.alertDialog(
-              okHandler: updateCustomerNote,
+              okHandler: updateStep3,
               message: 'Xác nhận thêm ghi chú mới ?',
             );
           },
@@ -142,7 +142,7 @@ abstract class CommonInstallationController<T> extends GetxController {
               return;
             }
             MyDialog.alertDialog(
-              okHandler: uploadFile,
+              okHandler: uploadStep4,
               message: 'Xác nhận báo cáo công việc ?',
             );
           },

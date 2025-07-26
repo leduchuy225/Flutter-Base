@@ -194,15 +194,15 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse<UpdateNewInstallationNoteResponse>>
-  updateCustomerNewInstallationNote(Map<String, dynamic> body) async {
+  Future<BaseResponse<UpdateNewInstallationStep3Response>>
+  updateNewInstallationStep3(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _options =
-        _setStreamType<BaseResponse<UpdateNewInstallationNoteResponse>>(
+        _setStreamType<BaseResponse<UpdateNewInstallationStep3Response>>(
           Options(method: 'POST', headers: _headers, extra: _extra)
               .compose(
                 _dio.options,
@@ -215,11 +215,11 @@ class _InstallationApi implements InstallationApi {
               ),
         );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<UpdateNewInstallationNoteResponse> _value;
+    late BaseResponse<UpdateNewInstallationStep3Response> _value;
     try {
-      _value = BaseResponse<UpdateNewInstallationNoteResponse>.fromJson(
+      _value = BaseResponse<UpdateNewInstallationStep3Response>.fromJson(
         _result.data!,
-        (json) => UpdateNewInstallationNoteResponse.fromJson(
+        (json) => UpdateNewInstallationStep3Response.fromJson(
           json as Map<String, dynamic>,
         ),
       );
@@ -231,8 +231,8 @@ class _InstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse<UpdateNewInstallationReportResponse>>
-  uploadNewInstallationFile({
+  Future<BaseResponse<UpdateNewInstallationStep4Response>>
+  uploadNewInstallationStep4({
     required String id,
     required String note,
     File? technicalStaffModuleImage,
@@ -292,7 +292,7 @@ class _InstallationApi implements InstallationApi {
       }
     }
     final _options =
-        _setStreamType<BaseResponse<UpdateNewInstallationReportResponse>>(
+        _setStreamType<BaseResponse<UpdateNewInstallationStep4Response>>(
           Options(
                 method: 'POST',
                 headers: _headers,
@@ -310,11 +310,11 @@ class _InstallationApi implements InstallationApi {
               ),
         );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<UpdateNewInstallationReportResponse> _value;
+    late BaseResponse<UpdateNewInstallationStep4Response> _value;
     try {
-      _value = BaseResponse<UpdateNewInstallationReportResponse>.fromJson(
+      _value = BaseResponse<UpdateNewInstallationStep4Response>.fromJson(
         _result.data!,
-        (json) => UpdateNewInstallationReportResponse.fromJson(
+        (json) => UpdateNewInstallationStep4Response.fromJson(
           json as Map<String, dynamic>,
         ),
       );

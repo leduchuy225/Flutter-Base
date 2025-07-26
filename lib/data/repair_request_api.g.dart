@@ -190,15 +190,15 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse<UpdateRepairRequestNoteResponse>>
-  updateCustomerRepairRequestNote(Map<String, dynamic> body) async {
+  Future<BaseResponse<UpdateRepairRequestStep3Response>>
+  updateRepairRequestStep3(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
     final _options =
-        _setStreamType<BaseResponse<UpdateRepairRequestNoteResponse>>(
+        _setStreamType<BaseResponse<UpdateRepairRequestStep3Response>>(
           Options(method: 'POST', headers: _headers, extra: _extra)
               .compose(
                 _dio.options,
@@ -211,11 +211,11 @@ class _RepairRequestApi implements RepairRequestApi {
               ),
         );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<UpdateRepairRequestNoteResponse> _value;
+    late BaseResponse<UpdateRepairRequestStep3Response> _value;
     try {
-      _value = BaseResponse<UpdateRepairRequestNoteResponse>.fromJson(
+      _value = BaseResponse<UpdateRepairRequestStep3Response>.fromJson(
         _result.data!,
-        (json) => UpdateRepairRequestNoteResponse.fromJson(
+        (json) => UpdateRepairRequestStep3Response.fromJson(
           json as Map<String, dynamic>,
         ),
       );
@@ -227,8 +227,8 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse<UpdateRepairRequestReportResponse>>
-  uploadRepairRequestFile({
+  Future<BaseResponse<UpdateRepairRequestStep4Response>>
+  uploadRepairRequestStep4({
     required String id,
     required String note,
     File? technicalStaffModuleImage,
@@ -288,7 +288,7 @@ class _RepairRequestApi implements RepairRequestApi {
       }
     }
     final _options =
-        _setStreamType<BaseResponse<UpdateRepairRequestReportResponse>>(
+        _setStreamType<BaseResponse<UpdateRepairRequestStep4Response>>(
           Options(
                 method: 'POST',
                 headers: _headers,
@@ -306,11 +306,11 @@ class _RepairRequestApi implements RepairRequestApi {
               ),
         );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<UpdateRepairRequestReportResponse> _value;
+    late BaseResponse<UpdateRepairRequestStep4Response> _value;
     try {
-      _value = BaseResponse<UpdateRepairRequestReportResponse>.fromJson(
+      _value = BaseResponse<UpdateRepairRequestStep4Response>.fromJson(
         _result.data!,
-        (json) => UpdateRepairRequestReportResponse.fromJson(
+        (json) => UpdateRepairRequestStep4Response.fromJson(
           json as Map<String, dynamic>,
         ),
       );

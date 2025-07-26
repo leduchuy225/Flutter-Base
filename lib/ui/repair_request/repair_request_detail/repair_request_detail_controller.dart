@@ -55,10 +55,10 @@ class RepairRequestDetailController
   }
 
   @override
-  Future updateCustomerNote() async {
+  Future updateStep3() async {
     final body = {'id': id, 'note': customerNoteTextController.textTrim};
     final response = await Get.find<RepairRequestApi>()
-        .updateCustomerRepairRequestNote(body)
+        .updateRepairRequestStep3(body)
         .callApi();
 
     if (response.isSuccess) {
@@ -85,9 +85,9 @@ class RepairRequestDetailController
   }
 
   @override
-  Future uploadFile() async {
+  Future uploadStep4() async {
     final response = await Get.find<RepairRequestApi>()
-        .uploadRepairRequestFile(
+        .uploadRepairRequestStep4(
           id: id.toString(),
           note: technicalNoteTextController.textTrim,
           technicalStaffImage: technicalStaffImageControler.firstFile,
