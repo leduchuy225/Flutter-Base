@@ -1,39 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 
 import '../../theme/styles.dart';
 import '../../widgets/my_texttile.dart';
+import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
 
-class Step0CloseRequest extends StatelessWidget {
+class Step2 extends StatelessWidget {
   final void Function() onPressed;
-  final MyTextFieldController closeNoteTextController;
+  final MyTextFieldController step2NoteTextController;
 
-  const Step0CloseRequest({
+  const Step2({
     super.key,
     required this.onPressed,
-    required this.closeNoteTextController,
+    required this.step2NoteTextController,
   });
 
   @override
   Widget build(BuildContext context) {
     return MyTexttile.card(
-      title: 'Đóng phiếu',
-      mainAxisSize: MainAxisSize.min,
+      title: 'Liên hệ với KH',
       items: [
         MyTexttileItem(
           child: Column(
             children: [
               AppStyles.pdt15,
               MyTextField(
-                isRequired: true,
-                labelText: 'Ghi chú',
-                controller: closeNoteTextController,
+                controller: step2NoteTextController,
+                labelText: 'Lịch hẹn với khách',
               ),
               AppStyles.pdt20,
               ElevatedButton(
                 onPressed: onPressed,
-                child: const Text('Đóng phiếu'),
+                child: const Text('Cập nhật'),
               ),
               AppStyles.pdt15,
             ],

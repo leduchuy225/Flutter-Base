@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/app_binding.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
 import 'package:flutter_base/data/api_locator.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
@@ -51,7 +52,7 @@ class _MainAppState extends State<MainApp> {
         // return GetPageRoute(page: () => const LoginScreen());
       },
       builder: (context, child) {
-        return SafeArea(child: child!, top: false);
+        return SafeArea(child: KeyboardDismissOnTap(child: child!), top: false);
       },
 
       // initialRoute: MainRouter.LOGIN,

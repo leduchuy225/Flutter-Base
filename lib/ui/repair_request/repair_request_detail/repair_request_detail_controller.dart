@@ -8,10 +8,11 @@ import '../../../core/services/cache_service.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/repair_request/repair_request_detail_model_response.dart';
-import '../../new_installation_and_repair_request_share/common_installation_controller.dart';
+import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
 
 class RepairRequestDetailController
-    extends CommonInstallationController<RepairRequestDetailModelResponse> {
+    extends
+        CommonInstallationDetailController<RepairRequestDetailModelResponse> {
   final int repairRequestId;
 
   RepairRequestDetailController({required this.repairRequestId});
@@ -56,7 +57,7 @@ class RepairRequestDetailController
 
   @override
   Future updateStep3() async {
-    final body = {'id': id, 'note': customerNoteTextController.textTrim};
+    final body = {'id': id, 'note': step2NoteTextController.textTrim};
     final response = await Get.find<RepairRequestApi>()
         .updateRepairRequestStep3(body)
         .callApi();
@@ -73,12 +74,12 @@ class RepairRequestDetailController
         NoteViewmodelResponse(
           currentStep: step,
           createdByEmail: userInfor?.email,
-          note: customerNoteTextController.textTrim,
+          note: step2NoteTextController.textTrim,
           createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
         ),
       );
 
-      customerNoteTextController.clear();
+      step2NoteTextController.clear();
 
       update();
     }
@@ -89,7 +90,7 @@ class RepairRequestDetailController
     final response = await Get.find<RepairRequestApi>()
         .uploadRepairRequestStep4(
           id: id.toString(),
-          note: technicalNoteTextController.textTrim,
+          note: step3NoteTextController.textTrim,
           technicalStaffImage: technicalStaffImageControler.firstFile,
           technicalStaffTestImage: technicalStaffTestImageControler.firstFile,
           technicalStaffModuleImage:
@@ -135,5 +136,29 @@ class RepairRequestDetailController
       value: true,
       key: CacheService.isRefreshRepairRequestList,
     );
+  }
+
+  @override
+  Future addNote() {
+    // TODO: implement addNote
+    throw UnimplementedError();
+  }
+
+  @override
+  Future addOverdueReason() {
+    // TODO: implement addOverdueReason
+    throw UnimplementedError();
+  }
+
+  @override
+  Future getNoteList() {
+    // TODO: implement getNoteList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future getOverdueReasonList() {
+    // TODO: implement getOverdueReasonList
+    throw UnimplementedError();
   }
 }

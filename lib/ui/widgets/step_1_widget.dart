@@ -10,11 +10,11 @@ import '../../theme/styles.dart';
 import '../../widgets/my_texttile.dart';
 import '../../widgets/selector/selector_controller.dart';
 
-class Step1UpdateTechnicalStaff extends StatelessWidget {
+class Step1 extends StatelessWidget {
   final void Function() onPressed;
   final MySelectorController technicalStaffSelectController;
 
-  const Step1UpdateTechnicalStaff({
+  const Step1({
     super.key,
     required this.onPressed,
     required this.technicalStaffSelectController,
@@ -36,7 +36,7 @@ class Step1UpdateTechnicalStaff extends StatelessWidget {
                   getFutureData: () async {
                     final response = await Get.find<InstallationApi>()
                         .getTechnicalStaffList(TechnicalStaffListPayload())
-                        .callApi();
+                        .callApi(isShowLoading: false);
 
                     final data = response.data?.model ?? [];
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/ui/widgets/step_0_close_request.dart';
 import 'package:flutter_base/widgets/data_state_widget.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_controller.dart';
@@ -10,23 +9,25 @@ import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
 import '../../models/common/note_viewmodel_response.dart';
-import '../widgets/step_1_update_technical_staff.dart';
-import '../widgets/step_2_update_customer_note.dart';
-import '../widgets/step_3_update_installation_file.dart';
+import '../widgets/step_1_widget.dart';
+import '../widgets/step_2_widget.dart';
+import '../widgets/step_3_widget.dart';
 
-abstract class CommonInstallationController<T> extends GetxController {
+abstract class CommonInstallationDetailController<T> extends GetxController {
   final int totalSteps = 5;
 
   final userInfor = Get.find<UserService>().userInfor;
 
   final currentRxStep = RxInt(1);
   final detailRxData = Rx<T?>(null);
+
+  final noteTextController = MyTextFieldController();
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
 
   final closeNoteTextController = MyTextFieldController();
-  final customerNoteTextController = MyTextFieldController();
+  final step2NoteTextController = MyTextFieldController();
+  final step3NoteTextController = MyTextFieldController();
 
-  final technicalNoteTextController = MyTextFieldController();
   final technicalStaffImageControler = FileCollectionController();
   final technicalStaffTestImageControler = FileCollectionController();
   final technicalStaffModuleImageControler = FileCollectionController();
@@ -44,6 +45,14 @@ abstract class CommonInstallationController<T> extends GetxController {
   Future updateStep3();
 
   Future uploadStep4();
+
+  Future addNote();
+
+  Future getNoteList();
+
+  Future addOverdueReason();
+
+  Future getOverdueReasonList();
 
   void setIsRefreshValue();
 
@@ -66,26 +75,8 @@ abstract class CommonInstallationController<T> extends GetxController {
 
   Widget getStepContent(BuildContext context, {required int step}) {
     switch (step) {
-      case 0:
-        return Step0CloseRequest(
-          closeNoteTextController: closeNoteTextController,
-          onPressed: () {
-            if (id == null) {
-              return;
-            }
-            if (!closeNoteTextController.checkIsNotEmpty()) {
-              return;
-            }
-            MyDialog.alertDialog(
-              message: 'Xác nhận đóng phiếu ?',
-              okHandler: () {
-                closeRequest(context);
-              },
-            );
-          },
-        );
       case 1:
-        return Step1UpdateTechnicalStaff(
+        return Step1(
           technicalStaffSelectController: technicalStaffSelectController,
           onPressed: () {
             if (id == null) {
@@ -101,15 +92,13 @@ abstract class CommonInstallationController<T> extends GetxController {
           },
         );
       case 2:
-        return Step2UpdateInstallationFile(
-          notes: noteListRxData,
-          canAddNote: currentRxStep.value >= 2,
-          customerNoteTextController: customerNoteTextController,
+        return Step2(
+          step2NoteTextController: step2NoteTextController,
           onPressed: () {
             if (id == null) {
               return;
             }
-            if (!customerNoteTextController.checkIsNotEmpty()) {
+            if (!step2NoteTextController.checkIsNotEmpty()) {
               return;
             }
             MyDialog.alertDialog(
@@ -119,12 +108,12 @@ abstract class CommonInstallationController<T> extends GetxController {
           },
         );
       case 3:
-        return Step3UpdateInstallationFile(
+        return Step3(
           technicalStaffImageControler: technicalStaffImageControler,
           technicalStaffTestImageControler: technicalStaffTestImageControler,
           technicalStaffModuleImageControler:
               technicalStaffModuleImageControler,
-          technicalNoteTextController: technicalNoteTextController,
+          step3NoteTextController: step3NoteTextController,
           onPressed: () {
             if (id == null) {
               return;
@@ -138,7 +127,7 @@ abstract class CommonInstallationController<T> extends GetxController {
               );
               return;
             }
-            if (!technicalNoteTextController.checkIsNotEmpty()) {
+            if (!step3NoteTextController.checkIsNotEmpty()) {
               return;
             }
             MyDialog.alertDialog(

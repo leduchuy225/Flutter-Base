@@ -7,19 +7,19 @@ import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 import '../../theme/styles.dart';
 import '../../widgets/file_collection/file_collection_controller.dart';
 
-class Step3UpdateInstallationFile extends StatelessWidget {
+class Step3 extends StatelessWidget {
   final FileCollectionController technicalStaffModuleImageControler;
   final FileCollectionController technicalStaffTestImageControler;
   final FileCollectionController technicalStaffImageControler;
-  final MyTextFieldController technicalNoteTextController;
+  final MyTextFieldController step3NoteTextController;
   final void Function() onPressed;
 
-  const Step3UpdateInstallationFile({
+  const Step3({
     super.key,
     required this.technicalStaffModuleImageControler,
     required this.technicalStaffTestImageControler,
     required this.technicalStaffImageControler,
-    required this.technicalNoteTextController,
+    required this.step3NoteTextController,
     required this.onPressed,
   });
 
@@ -52,7 +52,7 @@ class Step3UpdateInstallationFile extends StatelessWidget {
               MyTextField(
                 isRequired: true,
                 labelText: 'Ghi chú',
-                controller: technicalNoteTextController,
+                controller: step3NoteTextController,
               ),
               AppStyles.pdt20,
               ElevatedButton(

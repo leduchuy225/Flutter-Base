@@ -37,9 +37,9 @@ class _NewInstallationDetailScreenState
         action: IconButton(
           icon: const Icon(Icons.cancel_outlined),
           onPressed: () {
-            MyBottomSheet.showBottomSheet(
+            MyBottomSheet.showDraggableScrollableSheet(
               context,
-              builder: (context) {
+              builder: (context, scrollController) {
                 return _controller.getStepContent(context, step: 0);
               },
             );
