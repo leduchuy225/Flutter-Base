@@ -33,6 +33,8 @@ class NewInstallationDetailController
       detailRxData.value = data;
       currentRxStep.value = data.currentStep ?? 1;
       noteListRxData.value = data.listMbConnectionRequestNoteViewModel ?? [];
+      overdueNoteListRxData.value =
+          data.listMbConnectionRequestOverdueViewModel ?? [];
 
       update();
     }
@@ -131,36 +133,83 @@ class NewInstallationDetailController
 
   @override
   Future addNote() async {
-    noteListRxData.insert(
-      0,
-      NoteViewmodelResponse(
-        createdByEmail: userInfor?.email,
-        currentStep: currentRxStep.value,
-        note: noteTextController.textTrim,
-        createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
-      ),
-    );
+    final body = {'id': id, 'note': noteTextController.textTrim};
+    final response = await Get.find<InstallationApi>()
+        .addNewInstallationNote(body)
+        .callApi();
 
-    noteTextController.clear();
+    if (response.isSuccess) {
+      noteListRxData.insert(
+        0,
+        NoteViewmodelResponse(
+          createdByEmail: userInfor?.email,
+          currentStep: currentRxStep.value,
+          note: noteTextController.textTrim,
+          createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
+        ),
+      );
 
-    update();
+      noteTextController.clear();
+
+      update();
+    }
   }
 
   @override
-  Future addOverdueReason() {
-    // TODO: implement addOverdueReason
-    throw UnimplementedError();
+  Future addOverdueReason() async {
+    final body = {'id': id, 'note': overdueNoteTextController.textTrim};
+    final response = await Get.find<InstallationApi>()
+        .addNewInstallationOverdueNote(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      overdueNoteListRxData.insert(
+        0,
+        NoteViewmodelResponse(
+          createdByEmail: userInfor?.email,
+          note: overdueNoteTextController.textTrim,
+          createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
+        ),
+      );
+
+      overdueNoteTextController.clear();
+
+      update();
+    }
   }
 
   @override
-  Future getNoteList() {
-    // TODO: implement getNoteList
-    throw UnimplementedError();
+  Future getNoteList() async {
+    final body = {'id': id};
+    final response = await Get.find<InstallationApi>()
+        .getNewInstallationNoteList(body)
+        .callApi();
+
+    final data = response.data?.note;
+
+    if (response.isSuccess) {
+      noteListRxData.value = data ?? [];
+
+      update();
+    }
   }
 
   @override
-  Future getOverdueReasonList() {
-    // TODO: implement getOverdueReasonList
-    throw UnimplementedError();
+  Future getOverdueReasonList() async {
+    final body = {'id': id};
+    final response = await Get.find<InstallationApi>()
+        .getNewInstallationOverdueNoteList(body)
+        .callApi();
+
+    final data = response.data?.note;
+
+    if (response.isSuccess) {
+      overdueNoteListRxData.value = data ?? [];
+
+      update();
+    }
   }
+
+  @override
+  String? get expectedCompletionDate => detailData?.expectedCompletionDate;
 }

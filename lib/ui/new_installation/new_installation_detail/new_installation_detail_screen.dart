@@ -51,7 +51,7 @@ class _NewInstallationDetailScreenState
                 ),
                 MyTexttileItem(
                   titleText: 'Ngày tạo',
-                  text: DatetimeUtils.formatDateFromAPI(
+                  text: MyDatetimeUtils.formatDateFromAPI(
                     detailData?.createdDate,
                   ),
                 ),
@@ -72,7 +72,9 @@ class _NewInstallationDetailScreenState
                 ),
                 MyTexttileItem(
                   titleText: 'Ngày sinh',
-                  text: DatetimeUtils.formatDateFromAPI(customerData?.birthDay),
+                  text: MyDatetimeUtils.formatDateFromAPI(
+                    customerData?.birthDay,
+                  ),
                 ),
                 MyTexttileItem(titleText: 'CCCD', text: customerData?.cccd),
                 MyTexttileItem(

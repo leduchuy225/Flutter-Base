@@ -31,7 +31,7 @@ class NewInstallationItem extends StatelessWidget {
         MyTexttileItem(titleText: 'Người tạo', text: item.createdByUserName),
         MyTexttileItem(
           titleText: 'Ngày tạo',
-          text: DatetimeUtils.formatDateFromAPI(item.createdDate),
+          text: MyDatetimeUtils.formatDateFromAPI(item.createdDate),
         ),
       ],
     );

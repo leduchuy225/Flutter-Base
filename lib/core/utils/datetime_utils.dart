@@ -14,8 +14,8 @@ enum MyDateFormatEnum {
   }
 }
 
-class DatetimeUtils {
-  DatetimeUtils._();
+class MyDatetimeUtils {
+  MyDatetimeUtils._();
 
   static int _extractMilliseconds(String dateString) {
     final numericString = dateString.replaceAll(RegExp(r'\D'), '');
@@ -41,8 +41,8 @@ class DatetimeUtils {
     if (date == null) {
       return null;
     }
-    return DatetimeUtils.formatDate(
-      DatetimeUtils.convertDateFromAPI(date),
+    return MyDatetimeUtils.formatDate(
+      MyDatetimeUtils.convertDateFromAPI(date),
       toFormat: toFormat,
     );
   }
@@ -84,5 +84,25 @@ class DatetimeUtils {
     } catch (e) {
       return null;
     }
+  }
+
+  static int compareDateFromAPI({
+    String? firstDateString,
+    String? secondDateString,
+    DateTime? firstDateTime,
+    DateTime? secoundDateTime,
+  }) {
+    final firstDate =
+        firstDateTime ?? MyDatetimeUtils.convertDateFromAPI(firstDateString);
+    final secondDate =
+        secoundDateTime ?? MyDatetimeUtils.convertDateFromAPI(secondDateString);
+
+    if (firstDate == null) {
+      return 1;
+    }
+    if (secondDate == null) {
+      return -1;
+    }
+    return firstDate.compareTo(secondDate);
   }
 }

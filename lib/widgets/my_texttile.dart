@@ -65,6 +65,7 @@ class MyTexttile extends StatelessWidget {
   static Widget card({
     String? tag,
     int? maxLines,
+    Widget? child,
     String? title,
     Color? tagColor,
     int textFlex = 5,
@@ -72,10 +73,9 @@ class MyTexttile extends StatelessWidget {
     Widget? suffixHeader,
     bool isViewDetail = false,
     EdgeInsets? paddingHeader,
+    List<MyTexttileItem>? items,
     void Function()? onTapViewDetail,
     MainAxisSize mainAxisSize = MainAxisSize.max,
-
-    required List<MyTexttileItem> items,
   }) {
     return Column(
       mainAxisSize: mainAxisSize,
@@ -124,12 +124,14 @@ class MyTexttile extends StatelessWidget {
               bottomRight: Radius.circular(8),
             ),
           ),
-          child: MyTexttile.list(
-            items: items,
-            maxLines: maxLines,
-            textFlex: textFlex,
-            labelFlex: labelFlex,
-          ),
+          child:
+              child ??
+              MyTexttile.list(
+                items: items ?? [],
+                maxLines: maxLines,
+                textFlex: textFlex,
+                labelFlex: labelFlex,
+              ),
         ),
       ],
     );

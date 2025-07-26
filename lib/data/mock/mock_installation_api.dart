@@ -127,32 +127,40 @@ class MockInstallationApi implements InstallationApi {
   }
 
   @override
-  Future<BaseResponse> addNewInstallationNote(Map<String, dynamic> body) {
-    // TODO: implement addNewInstallationNote
-    throw UnimplementedError();
+  Future<BaseResponse> addNewInstallationNote(Map<String, dynamic> body) async {
+    return BaseResponse(code: 1, message: 'Thành công');
   }
 
   @override
   Future<BaseResponse> addNewInstallationOverdueNote(
     Map<String, dynamic> body,
-  ) {
-    // TODO: implement addNewInstallationOverdueNote
-    throw UnimplementedError();
+  ) async {
+    return BaseResponse(code: 1, message: 'Thành công');
   }
 
   @override
   Future<BaseResponse<NoteListResponse>> getNewInstallationNoteList(
     Map<String, dynamic> body,
-  ) {
-    // TODO: implement getNewInstallationNoteList
-    throw UnimplementedError();
+  ) async {
+    final data = await JsoncReader.readJsoncFile(
+      '.json_models/installation_models.jsonc',
+    );
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(data, value: 'note_list_response'),
+    );
+    return BaseResponse(code: 1, data: NoteListResponse.fromJson(response));
   }
 
   @override
   Future<BaseResponse<NoteListResponse>> getNewInstallationOverdueNoteList(
     Map<String, dynamic> body,
-  ) {
-    // TODO: implement getNewInstallationOverdueNoteList
-    throw UnimplementedError();
+  ) async {
+    final data = await JsoncReader.readJsoncFile(
+      '.json_models/installation_models.jsonc',
+    );
+    final response = JsoncReader.processJsonc(
+      JsoncReader.getInListByKey(data, value: 'note_list_response'),
+    );
+    return BaseResponse(code: 1, data: NoteListResponse.fromJson(response));
   }
 }

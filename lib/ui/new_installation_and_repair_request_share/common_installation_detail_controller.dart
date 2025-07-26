@@ -8,10 +8,11 @@ import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
+import '../../core/utils/datetime_utils.dart';
 import '../../models/common/note_viewmodel_response.dart';
-import '../widgets/step_1_widget.dart';
-import '../widgets/step_2_widget.dart';
-import '../widgets/step_3_widget.dart';
+import 'widgets/step_1_widget.dart';
+import 'widgets/step_2_widget.dart';
+import 'widgets/step_3_widget.dart';
 
 abstract class CommonInstallationDetailController<T> extends GetxController {
   final int totalSteps = 5;
@@ -21,8 +22,11 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final currentRxStep = RxInt(1);
   final detailRxData = Rx<T?>(null);
 
-  final noteTextController = MyTextFieldController();
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
+  final overdueNoteListRxData = RxList<NoteViewmodelResponse>([]);
+
+  final noteTextController = MyTextFieldController();
+  final overdueNoteTextController = MyTextFieldController();
 
   final closeNoteTextController = MyTextFieldController();
   final step2NoteTextController = MyTextFieldController();
@@ -34,7 +38,11 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final technicalStaffSelectController = MySelectorController();
 
+  T? get detailData => detailRxData.value;
+
   int? get id;
+
+  String? get expectedCompletionDate;
 
   Future getDetailData();
 
@@ -56,7 +64,20 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   void setIsRefreshValue();
 
-  T? get detailData => detailRxData.value;
+  String getOverdueTime() {
+    final result = MyDatetimeUtils.compareDateFromAPI(
+      firstDateTime: DateTime.now(),
+      secondDateString: expectedCompletionDate,
+    );
+    if (result > 0) {
+      return MyDatetimeUtils.formatDateFromAPI(
+            expectedCompletionDate,
+            toFormat: MyDateFormatEnum.DATE_TIME24s,
+          ) ??
+          '';
+    }
+    return '';
+  }
 
   Widget buildSteps(BuildContext context) {
     switch (currentRxStep.value) {
@@ -103,7 +124,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             }
             MyDialog.alertDialog(
               okHandler: updateStep3,
-              message: 'Xác nhận thêm ghi chú mới ?',
+              message: 'Xác nhận đã hẹn khách hàng ?',
             );
           },
         );

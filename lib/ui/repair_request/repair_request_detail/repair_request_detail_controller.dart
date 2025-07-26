@@ -161,4 +161,14 @@ class RepairRequestDetailController
     // TODO: implement getOverdueReasonList
     throw UnimplementedError();
   }
+
+  @override
+  String getOverdueTime() {
+    // TODO: implement getOverdueTime
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement expectedCompletionDate
+  String? get expectedCompletionDate => throw UnimplementedError();
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
-import 'package:flutter_base/ui/new_installation_and_repair_request_share/common_installation_list.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/common_installation_list_screen.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:get/get.dart';
 
