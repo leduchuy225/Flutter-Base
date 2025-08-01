@@ -9,7 +9,7 @@ import '../error_handler.dart';
 
 extension FutureExtension<T> on Future<BaseResponse<T>> {
   Future<BaseResponse<T>> callApi({
-    Duration? delay = const Duration(milliseconds: 1500), // FOR TEST ONLY
+    Duration? delay, // const Duration(milliseconds: 1500), // FOR TEST ONLY
     BaseResponse<T>? mockData,
     bool isShowLoading = true,
     bool isShowErrorMessage = true,

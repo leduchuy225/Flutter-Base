@@ -22,8 +22,9 @@ class MyDialog {
         icon: icon,
         title: title,
         message: message,
+        shouldIconPulse: false,
         backgroundColor: type.colors[0],
-        duration: const Duration(seconds: 4),
+        duration: const Duration(seconds: 3),
       ),
     );
   }

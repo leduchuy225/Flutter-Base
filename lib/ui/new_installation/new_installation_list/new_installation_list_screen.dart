@@ -29,6 +29,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
 
   Future<List<InstallationListModelResponse>> getData({int page = 1}) async {
     final body = InstallationListPayload(
+      coundLoad: 1,
       typeData: MBService.NewInstallation,
       searchDefault: InstallationSearchPayload(
         page: page,
@@ -39,7 +40,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
 
     final response = await Get.find<InstallationApi>()
         .getNewInstallationList(body)
-        .callApi(isShowLoading: false);
+        .callApi(isShowLoading: false, isShowSuccessMessage: false);
 
     final data = response.data?.model;
 

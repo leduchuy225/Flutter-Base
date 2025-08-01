@@ -42,7 +42,7 @@ class MyTexttile extends StatelessWidget {
     this.isPhoneNumber = false,
     this.isShowCopyIcon = false,
     this.isWithoutTitle = false,
-    this.isHideIfTextNull = true,
+    this.isHideIfTextNull = false,
     this.padding = EdgeInsets.zero,
     this.orientation = MyTexttileOrientation.HORIZONTAL,
   }) : super(key: key);

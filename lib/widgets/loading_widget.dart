@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 import '../core/services/cache_service.dart';
 
 class MyLoading extends StatelessWidget {
+  static String myLoadingId = 'MyLoadingId';
+  static final Map<String, OverlayEntry> _entries = {};
+
   static int get loadingCount {
     return CacheService().read<int>(key: CacheService.loadingCount) ?? 0;
   }
@@ -15,25 +18,36 @@ class MyLoading extends StatelessWidget {
 
   static void show() {
     setLoadingCount(loadingCount + 1);
-    if (Get.isDialogOpen == true) {
+    if (_entries.containsKey(myLoadingId)) {
       return;
     }
     setLoadingCount(1);
-    Get.dialog(
-      MyLoading(),
-      barrierDismissible: true,
-      barrierColor: Colors.black54,
+    final overlay = OverlayEntry(
+      builder: (context) {
+        return Stack(
+          children: [
+            const ModalBarrier(dismissible: false, color: Colors.black54),
+            MyLoading(),
+          ],
+        );
+      },
     );
+
+    if (Get.overlayContext != null) {
+      _entries[myLoadingId] = overlay;
+      Overlay.of(Get.overlayContext!, rootOverlay: true).insert(overlay);
+    }
   }
 
   static void hide() {
     setLoadingCount(loadingCount - 1);
-    if (Get.isDialogOpen == false) {
+    if (!_entries.containsKey(myLoadingId)) {
       return;
     }
     if (loadingCount <= 0) {
       setLoadingCount(0);
-      Get.back();
+      _entries[myLoadingId]?.remove();
+      _entries.remove(myLoadingId);
     }
   }
 

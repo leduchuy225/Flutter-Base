@@ -25,7 +25,7 @@ class RepairRequestDetailController
     );
     final response = await Get.find<RepairRequestApi>()
         .getRepairRequestDetail(body)
-        .callApi();
+        .callApi(isShowSuccessMessage: false);
 
     final data = response.data?.model;
 

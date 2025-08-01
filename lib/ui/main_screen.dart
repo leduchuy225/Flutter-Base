@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/ui/dev_screen.dart';
+// import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/ui/repair_request/repair_request_list/repair_request_list_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
@@ -58,14 +58,14 @@ class _MainScreenState extends State<MainScreen> {
                       Get.to(() => const RepairRequestListScreen());
                     },
                   ),
-                  FunctionItem(
-                    counter: 10,
-                    title: 'DEV',
-                    icon: Icons.developer_board,
-                    onTap: () {
-                      Get.to(() => const DevScreen());
-                    },
-                  ),
+                  // FunctionItem(
+                  //   counter: 10,
+                  //   title: 'DEV',
+                  //   icon: Icons.developer_board,
+                  //   onTap: () {
+                  //     Get.to(() => const DevScreen());
+                  //   },
+                  // ),
                 ],
               ),
             ),

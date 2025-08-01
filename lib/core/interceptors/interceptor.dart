@@ -59,7 +59,7 @@ class MyInterceptor extends Interceptor {
   ) async {
     final accessToken = await UserService.accessToken;
     if (accessToken.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $accessToken';
+      options.headers.addAll({'Authorization': 'Bearer $accessToken'});
     }
 
     if (options.data is Map) {

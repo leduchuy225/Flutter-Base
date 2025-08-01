@@ -66,12 +66,6 @@ class CommonInstallationListScreen<T> extends StatelessWidget {
                 ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Visibility(
-                child: MyDataState.empty(),
-                visible: (controller.pageState.items ?? []).isEmpty,
-              ),
-            ),
             PagedSliverList<int, T>(
               state: controller.pageState,
               fetchNextPage: fetchNextPage,
@@ -84,6 +78,9 @@ class CommonInstallationListScreen<T> extends StatelessWidget {
                       horizontal: AppStyles.horizontalPaddingValue,
                     ),
                   );
+                },
+                noItemsFoundIndicatorBuilder: (context) {
+                  return MyDataState.empty();
                 },
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/app_binding.dart';
+import 'package:flutter_base/core/services/http_service.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
 import 'package:flutter_base/data/api_locator.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -31,6 +32,10 @@ class _MainAppState extends State<MainApp> {
     super.initState();
     setupServiceLocator();
     setupApiLocator();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Get.find<HttpService>().configureDio();
+    });
   }
 
   @override

@@ -25,7 +25,7 @@ class NewInstallationDetailController
     );
     final response = await Get.find<InstallationApi>()
         .getNewInstallationDetail(body)
-        .callApi();
+        .callApi(isShowSuccessMessage: false);
 
     final data = response.data?.model;
 
