@@ -1,0 +1,19 @@
+class SignInstallationReportFileResponse {
+  int? id;
+  int? type;
+  String? urlFile;
+
+  SignInstallationReportFileResponse({this.id, this.type, this.urlFile});
+
+  factory SignInstallationReportFileResponse.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return SignInstallationReportFileResponse(
+      id: json['id'] as int?,
+      type: json['type'] as int?,
+      urlFile: json['urlFile'] as String?,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {'id': id, 'type': type, 'urlFile': urlFile};
+}

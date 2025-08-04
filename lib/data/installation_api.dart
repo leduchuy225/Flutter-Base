@@ -12,9 +12,13 @@ import '../models/common/technical_staff_list_response.dart';
 import '../models/installation/close_new_installation_response.dart';
 import '../models/installation/installation_detail_response.dart';
 import '../models/installation/installation_list_response.dart';
+import '../models/installation/installation_report_file_list_response.dart';
+import '../models/installation/sign_installation_report_file_response.dart';
 import '../models/installation/update_new_installation_step_3_response.dart';
 import '../models/installation/update_new_installation_step_4_response.dart';
 import '../models/installation/update_new_installation_technical_staff_response.dart';
+import '../models/installation/view_installation_report_file_payload.dart';
+import '../models/installation/view_installation_report_file_response.dart';
 
 part 'installation_api.g.dart';
 
@@ -85,4 +89,22 @@ abstract class InstallationApi {
   Future<BaseResponse<NoteListResponse>> getNewInstallationOverdueNoteList(
     @Body() Map<String, dynamic> body,
   );
+
+  @POST('/newconnectionrequest/GetReport')
+  Future<BaseResponse<InstallationReportFileListResponse>>
+  getInstallationReportFileList(@Body() Map<String, dynamic> body);
+
+  @POST('/newconnectionrequest/SetReport')
+  Future<BaseResponse<ViewInstallationReportFileResponse>>
+  viewInstallationReportFile(@Body() ViewInstallationReportFilePayload body);
+
+  @MultiPart()
+  @POST('/newconnectionrequest/SignReport')
+  Future<BaseResponse<SignInstallationReportFileResponse>>
+  signInstallationReportFile({
+    @Part(name: 'id') required String id,
+    @Part(name: 'type') required String type,
+    @Part(name: 'customersSign[0]') File? customersSign,
+    @Part(name: 'technicalStaffSign[0]') File? technicalStaffSign,
+  });
 }

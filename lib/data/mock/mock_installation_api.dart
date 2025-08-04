@@ -10,9 +10,13 @@ import 'package:flutter_base/models/common/technical_staff_list_response.dart';
 import 'package:flutter_base/models/installation/close_new_installation_response.dart';
 import 'package:flutter_base/models/installation/installation_detail_response.dart';
 import 'package:flutter_base/models/installation/installation_list_response.dart';
+import 'package:flutter_base/models/installation/installation_report_file_list_response.dart';
+import 'package:flutter_base/models/installation/sign_installation_report_file_response.dart';
 import 'package:flutter_base/models/installation/update_new_installation_step_3_response.dart';
 import 'package:flutter_base/models/installation/update_new_installation_step_4_response.dart';
 import 'package:flutter_base/models/installation/update_new_installation_technical_staff_response.dart';
+import 'package:flutter_base/models/installation/view_installation_report_file_payload.dart';
+import 'package:flutter_base/models/installation/view_installation_report_file_response.dart';
 
 import '../../core/utils/jsonc_reader.dart';
 import '../installation_api.dart';
@@ -162,5 +166,31 @@ class MockInstallationApi implements InstallationApi {
       JsoncReader.getInListByKey(data, value: 'note_list_response'),
     );
     return BaseResponse(code: 1, data: NoteListResponse.fromJson(response));
+  }
+
+  @override
+  Future<BaseResponse<InstallationReportFileListResponse>>
+  getInstallationReportFileList(Map<String, dynamic> body) {
+    // TODO: implement getInstallationReportFileList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<SignInstallationReportFileResponse>>
+  signInstallationReportFile({
+    required String id,
+    required String type,
+    File? customersSign,
+    File? technicalStaffSign,
+  }) {
+    // TODO: implement signInstallationReportFile
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<ViewInstallationReportFileResponse>>
+  viewInstallationReportFile(ViewInstallationReportFilePayload body) {
+    // TODO: implement viewInstallationReportFile
+    throw UnimplementedError();
   }
 }

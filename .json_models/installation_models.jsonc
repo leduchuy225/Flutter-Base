@@ -1030,5 +1030,60 @@
         "CreatedBy_UserName": null
       }
     ]
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "installation_report_file_list_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/installation",
+    "model.installation_report_file_list_model_response": [
+      {
+        "ID": 1,
+        "Title": "Biên bản nghiệm thu FTTx với khách hàng"
+      },
+      {
+        "ID": 2,
+        "Title": "Biên bản bàn giao thiết bị"
+      }
+    ]
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "view_installation_report_file_payload", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/installation",
+    "id": 1,
+    "type": 1,
+    "model.view_installation_report_file_model_payload": {
+      "DuLieu_Acc": "demo",
+      "DuLieu_Pass": "demo123",
+      "DuLieu_IpV4": "14.14.14.14",
+      "DuLieu_HoanThanh": "2025-07-07T17:00:00.000Z",
+      "DuLieu_ChatLuongDichVu": "tốt"
+    }
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "view_installation_report_file_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/installation",
+    "urlFile": "/data/filesreport/965458714854/bien_ban_nghiem_thu_fttx_voi_khach_hang_965458714854.doc"
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "sign_installation_report_file_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/installation",
+    "id": 1,
+    "type": 1,
+    "urlFile": "/data/filesreport/965458714854/bien_ban_nghiem_thu_fttx_voi_khach_hang_965458714854.doc"
   }
 ]
