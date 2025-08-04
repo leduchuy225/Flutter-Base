@@ -3,12 +3,14 @@ import 'package:get/instance_manager.dart';
 
 import '../core/services/service_locator.dart';
 import 'authentication_api.dart';
+import 'customer_api.dart';
 import 'installation_api.dart';
 import 'repair_request_api.dart';
 
 void setupApiLocator() {
   final dio = Get.find<HttpService>().dio;
 
+  DI.lazyPut<CustomerApi>(() => CustomerApi(dio));
   DI.lazyPut<InstallationApi>(() => InstallationApi(dio));
   DI.lazyPut<RepairRequestApi>(() => RepairRequestApi(dio));
   DI.lazyPut<AuthenticationApi>(() => AuthenticationApi(dio));

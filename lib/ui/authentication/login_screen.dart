@@ -5,7 +5,7 @@ import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/authentication/reset_password_screen.dart';
 import 'package:get/get.dart';
 
-import '../../core/const/config.dart';
+import '../../core/const/constants.dart';
 import '../../core/services/shared_preference_service.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';

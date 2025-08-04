@@ -33,8 +33,8 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
       typeData: MBService.NewInstallation,
       searchDefault: InstallationSearchPayload(
         page: page,
-        pageSize: 20,
         typeOrder: true,
+        pageSize: Config.pageSizeDefault,
       ),
     );
 

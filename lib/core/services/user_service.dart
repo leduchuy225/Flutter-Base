@@ -1,4 +1,3 @@
-import 'package:flutter_base/core/const/config.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/models/authentication/account_infor_response.dart';
@@ -10,6 +9,7 @@ import 'package:get/get.dart';
 import '../../data/authentication_api.dart';
 import '../../models/authentication/new_token_payload.dart';
 import '../../widgets/dialog/dialog_widget.dart';
+import '../const/constants.dart';
 import 'shared_preference_service.dart';
 
 class UserService extends GetxController {

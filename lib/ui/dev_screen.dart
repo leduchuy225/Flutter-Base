@@ -6,7 +6,6 @@ import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
 
-import '../core/const/config.dart';
 import '../data/jsonplaceholder_api.dart';
 import '../models/base_selector.dart';
 import '../models/file_collection_model.dart';
