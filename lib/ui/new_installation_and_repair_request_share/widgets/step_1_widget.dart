@@ -5,6 +5,7 @@ import 'package:flutter_base/widgets/selector/selector_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../models/base_selector.dart';
+import '../../../models/common/technical_staff_list_model_payload.dart';
 import '../../../models/common/technical_staff_list_payload.dart';
 import '../../../theme/styles.dart';
 import '../../../widgets/my_texttile.dart';
@@ -12,10 +13,12 @@ import '../../../widgets/selector/selector_controller.dart';
 
 class Step1 extends StatelessWidget {
   final void Function() onPressed;
+  final TechnicalStaffListModelPayload payload;
   final MySelectorController technicalStaffSelectController;
 
   const Step1({
     super.key,
+    required this.payload,
     required this.onPressed,
     required this.technicalStaffSelectController,
   });
@@ -33,8 +36,10 @@ class Step1 extends StatelessWidget {
             data: MySelectorData(
               getFutureData: () async {
                 final response = await Get.find<InstallationApi>()
-                    .getTechnicalStaffList(TechnicalStaffListPayload())
-                    .callApi(isShowLoading: false);
+                    .getTechnicalStaffList(
+                      TechnicalStaffListPayload(model: payload),
+                    )
+                    .callApi(isShowLoading: false, isShowSuccessMessage: false);
 
                 final data = response.data?.model ?? [];
 

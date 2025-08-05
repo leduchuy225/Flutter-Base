@@ -1059,11 +1059,18 @@
     "id": 1,
     "type": 1,
     "model.view_installation_report_file_model_payload": {
+      // Common
+      "DuLieu_HoanThanh": "2025-07-07T17:00:00.000Z",
+      // Biên bản nghiệm thu
       "DuLieu_Acc": "demo",
       "DuLieu_Pass": "demo123",
       "DuLieu_IpV4": "14.14.14.14",
-      "DuLieu_HoanThanh": "2025-07-07T17:00:00.000Z",
-      "DuLieu_ChatLuongDichVu": "tốt"
+      "DuLieu_ChatLuongDichVu": "tốt",
+      // Biên bản bàn giao
+      "TB_1_Ten": "Modem 1",
+      "TB_1_ThongSo": "144hz",
+      "TB_1_SLuong": "1",
+      "TB_1_HTrang": "hoạt động bình thường"
     }
   },
   {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/widgets/data_state_widget.dart';
 
 import '../../../core/utils/datetime_utils.dart';
 import '../../../models/common/note_viewmodel_response.dart';
@@ -53,6 +54,7 @@ class CommonInstallationNote extends StatelessWidget {
                   ),
                 ),
               ),
+            Visibility(visible: notes.isEmpty, child: MyDataState.empty()),
             ...notes.map((element) {
               return ListTile(
                 titleAlignment: ListTileTitleAlignment.center,

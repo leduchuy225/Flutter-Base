@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/repair_request_api.dart';
+import 'package:flutter_base/models/base_selector.dart';
+import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
@@ -171,4 +173,21 @@ class RepairRequestDetailController
   @override
   // TODO: implement expectedCompletionDate
   String? get expectedCompletionDate => throw UnimplementedError();
+
+  @override
+  // TODO: implement technicalStaffListModelPayload
+  TechnicalStaffListModelPayload get technicalStaffListModelPayload =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<MySelectorModel>> getReportTypeList() {
+    // TODO: implement getReportTypeList
+    throw UnimplementedError();
+  }
+
+  @override
+  Future previewReportFile() {
+    // TODO: implement previewReportFile
+    throw UnimplementedError();
+  }
 }

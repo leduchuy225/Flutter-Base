@@ -30,6 +30,13 @@ class MBService {
   static const RepairRequest = 'MB_RepairRequest';
 }
 
+class ReportType {
+  ReportType._();
+
+  static const BBNT = 1;
+  static const BBBG = 2;
+}
+
 class Config {
   static const pageSizeDefault = 20;
 

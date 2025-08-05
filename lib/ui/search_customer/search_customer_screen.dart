@@ -122,18 +122,18 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
                     Text('Bộ lọc tìm kiếm', style: AppTextStyles.title1),
                     AppStyles.pdt20,
                     MyTextField(labelText: 'ID', controller: _idTextController),
-                    AppStyles.pdt15,
+                    AppStyles.pdt20,
                     MyTextField(
                       labelText: 'CCCD',
                       controller: _cccdTextController,
                       keyboardType: TextInputType.number,
                     ),
-                    AppStyles.pdt15,
+                    AppStyles.pdt20,
                     MyTextField(
                       labelText: 'Tên khách hàng',
                       controller: _nameTextController,
                     ),
-                    AppStyles.pdt15,
+                    AppStyles.pdt20,
                     MyTextField(
                       labelText: 'Số điện thoại',
                       controller: _phoneTextController,

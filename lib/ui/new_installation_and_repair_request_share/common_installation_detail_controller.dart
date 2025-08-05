@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/services/user_service.dart';
+import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/sign_report_file_widget.dart';
 import 'package:flutter_base/widgets/data_state_widget.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_controller.dart';
@@ -10,6 +13,8 @@ import 'package:get/get.dart';
 
 import '../../core/utils/datetime_utils.dart';
 import '../../models/common/note_viewmodel_response.dart';
+import '../../models/common/technical_staff_list_model_payload.dart';
+import 'widgets/sign_report_file_data_controller.dart';
 import 'widgets/step_1_widget.dart';
 import 'widgets/step_2_widget.dart';
 import 'widgets/step_3_widget.dart';
@@ -21,6 +26,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final currentRxStep = RxInt(1);
   final detailRxData = Rx<T?>(null);
+  final previewReportFileLink = RxString('');
 
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
   final overdueNoteListRxData = RxList<NoteViewmodelResponse>([]);
@@ -38,11 +44,16 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final technicalStaffSelectController = MySelectorController();
 
+  final reportTypeListController = MySelectorController();
+  final reportController = SignReportFileDataController();
+
   T? get detailData => detailRxData.value;
 
   int? get id;
 
   String? get expectedCompletionDate;
+
+  TechnicalStaffListModelPayload get technicalStaffListModelPayload;
 
   Future getDetailData();
 
@@ -62,7 +73,19 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   Future getOverdueReasonList();
 
+  Future previewReportFile();
+
+  Future<List<MySelectorModel>> getReportTypeList();
+
   void setIsRefreshValue();
+
+  dynamic get currentReportId => reportTypeListController.first?.id;
+
+  @override
+  void onInit() {
+    super.onInit();
+    reportController.completeDateController.dateTime = DateTime.now();
+  }
 
   String getOverdueTime() {
     final result = MyDatetimeUtils.compareDateFromAPI(
@@ -87,6 +110,25 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             getStepContent(context, step: 2),
             AppStyles.pdt15,
             getStepContent(context, step: 3),
+            AppStyles.pdt15,
+            SignReportFileWidget(
+              filePath: '',
+              reportController: reportController,
+              getReportTypeList: getReportTypeList,
+              reportTypeListController: reportTypeListController,
+              previewReportFile: () async {
+                if (currentReportId == ReportType.BBNT) {
+                  if (!reportController.checkBbntIsValid()) {
+                    return;
+                  }
+                } else if (currentReportId == ReportType.BBBG) {
+                  if (!reportController.checkBbbgIsValid()) {
+                    return;
+                  }
+                }
+                await previewReportFile();
+              },
+            ),
           ],
         );
       default:
@@ -98,6 +140,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
     switch (step) {
       case 1:
         return Step1(
+          payload: technicalStaffListModelPayload,
           technicalStaffSelectController: technicalStaffSelectController,
           onPressed: () {
             if (id == null) {

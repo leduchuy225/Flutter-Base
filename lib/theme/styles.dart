@@ -105,7 +105,8 @@ class AppColors {
 
   static const Color header = Color.fromRGBO(82, 95, 127, 1.0);
 
-  static const Color bgColorScreen = Color.fromRGBO(248, 249, 254, 1.0);
+  static const Color bgColorScreen =
+      mobifiberRandom1; // Color.fromRGBO(248, 249, 254, 1.0);
   // Color.fromRGBO(248, 249, 254, 1.0);
 
   static const Color border = Color.fromRGBO(202, 209, 215, 1.0);
@@ -130,7 +131,7 @@ class AppColors {
   static const Color textGreyDark2 = Color(0xFF272727);
 
   static const Color textLight = Color(0xFFEDF2F3);
-  static const Color mobifonePrimary = Color(0xFF0563B1);
+  static const Color mobifonePrimary = mobifiberRandom2; // Color(0xFF0563B1);
   static const Color mobifoneSecodary = Color(0xFFE8222A);
   static const Color mobifoneRandom1 = Color(0xFF6398C1);
   static const Color mobifoneRandom2 = Color(0xFF343434);
@@ -140,6 +141,10 @@ class AppColors {
   static const Color mobifoneRandom6 = Color(0xFF3C8CC8);
   static const Color mobifoneRandom7 = Color(0xFF147CD4);
 
+  static const Color mobifiberRandom1 = Color(0xFFf9f9f9);
+  static const Color mobifiberRandom2 = Color(0xFF1d80d9);
+  static const Color mobifiberRandom3 = Color(0xFF069cf7);
+
   static const Color bgRandom1 = Color(0xFFCCECFA);
   static const Color bgRandom2 = Color(0xFFFFE5BD);
   static const Color bgRandom3 = Color(0xFFC8F0E9);
@@ -147,12 +152,14 @@ class AppColors {
   static const Color bgRandom5 = Color(0xFFFFD9ED);
   static const Color bgRandom6 = Color(0xFFC5D0F9);
 
-  static const Color bgHeaderItem = mobifoneRandom4; // Color(0xFFE3E8EF);
+  static const Color bgHeaderItem =
+      mobifiberRandom2; // mobifoneRandom4; // Color(0xFFE3E8EF);
   static const Color bgChildItem = Color(0xFFF0F4F9);
 
   static const List<Color> defaultGradient = [
-    AppColors.secondary,
-    AppColors.primary,
+    mobifiberRandom2, mobifiberRandom2,
+    // AppColors.secondary,
+    // AppColors.primary,
   ];
 }
 

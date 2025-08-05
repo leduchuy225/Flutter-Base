@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/datetime_utils.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../theme/styles.dart';
+import '../../../widgets/data_state_widget.dart';
 import '../../../widgets/my_texttile.dart';
 import '../../../widgets/text_field/text_field_controller.dart';
 import '../../../widgets/text_field/text_field_widget.dart';
@@ -68,25 +69,28 @@ class OverdueReasonListWidget extends StatelessWidget {
           child: const Icon(Icons.refresh),
         ),
         child: Column(
-          children: notes.map((element) {
-            return ListTile(
-              titleAlignment: ListTileTitleAlignment.center,
-              isThreeLine: true,
-              title: Text(element.note ?? ''),
-              subtitleTextStyle: AppTextStyles.body2.copyWith(
-                color: AppColors.textGrey2,
-              ),
-              subtitle: Padding(
-                padding: const EdgeInsetsGeometry.only(top: 6),
-                child: Text(
-                  [
-                    '- ${element.createdByEmail}',
-                    '- ${MyDatetimeUtils.formatDateFromAPI(element.createdDate, toFormat: MyDateFormatEnum.DATE_TIME24s)}',
-                  ].join('\n'),
+          children: [
+            Visibility(visible: notes.isEmpty, child: MyDataState.empty()),
+            ...notes.map((element) {
+              return ListTile(
+                titleAlignment: ListTileTitleAlignment.center,
+                isThreeLine: true,
+                title: Text(element.note ?? ''),
+                subtitleTextStyle: AppTextStyles.body2.copyWith(
+                  color: AppColors.textGrey2,
                 ),
-              ),
-            );
-          }).toList(),
+                subtitle: Padding(
+                  padding: const EdgeInsetsGeometry.only(top: 6),
+                  child: Text(
+                    [
+                      '- ${element.createdByEmail}',
+                      '- ${MyDatetimeUtils.formatDateFromAPI(element.createdDate, toFormat: MyDateFormatEnum.DATE_TIME24s)}',
+                    ].join('\n'),
+                  ),
+                ),
+              );
+            }).toList(),
+          ],
         ),
       ),
     );

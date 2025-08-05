@@ -12,7 +12,7 @@ class MobileFiber extends StatelessWidget {
         style ?? AppTextStyles.h1.copyWith(fontWeight: FontWeight.w400);
     return Container(
       decoration: const BoxDecoration(
-        color: AppColors.textLight,
+        color: AppColors.bgColorScreen,
         borderRadius: AppCorners.lgBorder,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12),

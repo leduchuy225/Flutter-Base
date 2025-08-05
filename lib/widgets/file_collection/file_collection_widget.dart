@@ -118,7 +118,10 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
                   Expanded(
                     child: Row(
                       children: [
-                        const Icon(Icons.file_copy_outlined),
+                        const Icon(
+                          Icons.file_copy_outlined,
+                          color: AppColors.textGreyDark,
+                        ),
                         AppStyles.pdl5,
                         Expanded(
                           child: Text(

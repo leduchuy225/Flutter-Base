@@ -17,6 +17,8 @@ class MyLoading extends StatelessWidget {
   }
 
   static void show() {
+    WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+
     setLoadingCount(loadingCount + 1);
     if (_entries.containsKey(myLoadingId)) {
       return;

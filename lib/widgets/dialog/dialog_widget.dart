@@ -17,13 +17,27 @@ class MyDialog {
     if (isNullOrEmpty(message)) {
       return;
     }
+
+    Widget _buildDefaultIcon() {
+      switch (type) {
+        case SnackbarType.SUCCESS:
+          return const Icon(Icons.system_security_update_good_outlined);
+        case SnackbarType.ERROR:
+          return const Icon(Icons.error);
+        case SnackbarType.WARNING:
+          return const Icon(Icons.warning);
+        case SnackbarType.INFORMATION:
+          return const Icon(Icons.perm_device_information);
+      }
+    }
+
     Get.showSnackbar(
       GetSnackBar(
-        icon: icon,
         title: title,
         message: message,
         shouldIconPulse: false,
         backgroundColor: type.colors[0],
+        icon: icon ?? _buildDefaultIcon(),
         duration: const Duration(seconds: 3),
       ),
     );

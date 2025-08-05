@@ -65,6 +65,7 @@ class UserService extends GetxController {
     if (data.isSuccess) {
       await Get.find<UserService>().updateUserInforFromAPI(
         isNavigateToMain: true,
+        isShowErrorMessage: true,
       );
     }
   }

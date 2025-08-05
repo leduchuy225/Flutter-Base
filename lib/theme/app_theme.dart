@@ -97,6 +97,7 @@ class AppTheme {
       //   letterSpacing: 0.5,
       // ),
     ),
+    iconTheme: const IconThemeData(color: AppColors.white),
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
       fillColor: AppColors.textLight,

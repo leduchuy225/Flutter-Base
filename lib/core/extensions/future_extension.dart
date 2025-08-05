@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_base/core/utils/utils.dart';
 import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/loading_widget.dart';
 
-import '../../theme/styles.dart';
 import '../error_handler.dart';
 
 extension FutureExtension<T> on Future<BaseResponse<T>> {
@@ -38,14 +36,7 @@ extension FutureExtension<T> on Future<BaseResponse<T>> {
         throw MyError(response: data);
       }
       if (isShowSuccessMessage && isNotNullOrEmpty(data.message)) {
-        MyDialog.snackbar(
-          data.message,
-          type: SnackbarType.SUCCESS,
-          icon: const Icon(
-            Icons.system_security_update_good_outlined,
-            color: AppColors.white,
-          ),
-        );
+        MyDialog.snackbar(data.message, type: SnackbarType.SUCCESS);
       }
       return data;
     }).onError((error, stackTrace) {

@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:flutter_base/models/base_selector.dart';
+import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
@@ -8,6 +11,8 @@ import '../../../data/installation_api.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/installation/installation_detail_model_response.dart';
+import '../../../models/installation/view_installation_report_file_model_payload.dart';
+import '../../../models/installation/view_installation_report_file_payload.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
 
 class NewInstallationDetailController
@@ -183,7 +188,7 @@ class NewInstallationDetailController
     final body = {'id': id};
     final response = await Get.find<InstallationApi>()
         .getNewInstallationNoteList(body)
-        .callApi();
+        .callApi(isShowSuccessMessage: false);
 
     final data = response.data?.note;
 
@@ -199,7 +204,7 @@ class NewInstallationDetailController
     final body = {'id': id};
     final response = await Get.find<InstallationApi>()
         .getNewInstallationOverdueNoteList(body)
-        .callApi();
+        .callApi(isShowSuccessMessage: false);
 
     final data = response.data?.note;
 
@@ -212,4 +217,67 @@ class NewInstallationDetailController
 
   @override
   String? get expectedCompletionDate => detailData?.expectedCompletionDate;
+
+  @override
+  TechnicalStaffListModelPayload get technicalStaffListModelPayload {
+    return TechnicalStaffListModelPayload(
+      phuongXaId: detailData?.wardId,
+      countryId: detailData?.countryId,
+      thanhPhoId: detailData?.provinceId,
+      quanHuyenId: detailData?.districtId,
+    );
+  }
+
+  @override
+  Future<List<MySelectorModel>> getReportTypeList() async {
+    final body = {'id': id};
+    final response = await Get.find<InstallationApi>()
+        .getInstallationReportFileList(body)
+        .callApi(isShowLoading: false, isShowSuccessMessage: false);
+
+    return (response.data?.model ?? []).map((element) {
+      return MySelectorModel(id: element.id, name: element.title ?? '');
+    }).toList();
+  }
+
+  @override
+  Future previewReportFile() async {
+    final body = ViewInstallationReportFilePayload(
+      id: id,
+      type: currentReportId,
+      model: ViewInstallationReportFileModelPayload(
+        duLieuHoanThanh: reportController.completeDateController.dateTime,
+        // Biên bản nghiệm thu
+        duLieuAcc: currentReportId == ReportType.BBNT
+            ? reportController.bbntAccountTextController.textTrim
+            : null,
+        duLieuChatLuongDichVu: currentReportId == ReportType.BBNT
+            ? reportController.bbntServiceQualityTextController.textTrim
+            : null,
+        duLieuIpV4: currentReportId == ReportType.BBNT
+            ? reportController.bbntIpV4TextController.textTrim
+            : null,
+        duLieuPass: currentReportId == ReportType.BBNT
+            ? reportController.bbntPasswordTextController.textTrim
+            : null,
+        // Biên bản bàn giao
+        tb1Ten: currentReportId == ReportType.BBBG
+            ? reportController.bbbgNameTextController.textTrim
+            : null,
+        tb1SLuong: currentReportId == ReportType.BBBG
+            ? reportController.bbbgAmountTextController.textTrim
+            : null,
+        tb1HTrang: currentReportId == ReportType.BBBG
+            ? reportController.bbbgStatusTextController.textTrim
+            : null,
+        tb1ThongSo: currentReportId == ReportType.BBBG
+            ? reportController.bbbgStatictisTextController.textTrim
+            : null,
+      ),
+    );
+
+    final response = await Get.find<InstallationApi>()
+        .viewInstallationReportFile(body)
+        .callApi();
+  }
 }

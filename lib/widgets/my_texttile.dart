@@ -95,7 +95,12 @@ class MyTexttile extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: SelectableText(title ?? '', style: AppTextStyles.body1),
+                child: SelectableText(
+                  title ?? '',
+                  style: AppTextStyles.body1.copyWith(
+                    color: AppColors.textLight,
+                  ),
+                ),
               ),
               AppStyles.pdl10,
               ?suffixHeader,
@@ -118,7 +123,7 @@ class MyTexttile extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
-            color: AppColors.bgChildItem,
+            color: AppColors.white,
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(8),
               bottomRight: Radius.circular(8),
