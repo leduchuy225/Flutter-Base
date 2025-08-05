@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/widgets/selector/selector_widget.dart';
 import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
+import 'package:flutter_base/widgets/webview/my_webview_screen.dart';
+import 'package:get/get.dart';
+import 'package:signature/signature.dart';
 
 import '../../../models/base_selector.dart';
 import '../../../theme/styles.dart';
@@ -11,8 +14,12 @@ import '../../../widgets/selector/selector_controller.dart';
 import 'sign_report_file_data_controller.dart';
 
 class SignReportFileWidget extends StatelessWidget {
+  final bool isSign;
   final String filePath;
+  final void Function() signReportFile;
   final void Function() previewReportFile;
+  final SignatureController staffSignatureController;
+  final SignatureController customerSignatureController;
   final MySelectorController reportTypeListController;
   final SignReportFileDataController reportController;
   final Future<List<MySelectorModel>> Function() getReportTypeList;
@@ -20,10 +27,14 @@ class SignReportFileWidget extends StatelessWidget {
   const SignReportFileWidget({
     super.key,
     required this.filePath,
+    required this.signReportFile,
     required this.reportController,
     required this.getReportTypeList,
     required this.previewReportFile,
     required this.reportTypeListController,
+    required this.staffSignatureController,
+    required this.customerSignatureController,
+    this.isSign = true,
   });
 
   Widget _buildBienBanNghiemThu(BuildContext context) {
@@ -102,29 +113,130 @@ class SignReportFileWidget extends StatelessWidget {
       title: 'Ký biên bản với KH',
       child: Column(
         children: [
-          AppStyles.pdt15,
-          MySelector(
-            title: 'Loại biên bản',
-            controller: reportTypeListController,
-            data: MySelectorData(getFutureData: getReportTypeList),
+          Visibility(
+            visible: !isSign,
+            child: Column(
+              children: [
+                AppStyles.pdt15,
+                MySelector(
+                  title: 'Loại biên bản',
+                  controller: reportTypeListController,
+                  data: MySelectorData(getFutureData: getReportTypeList),
+                ),
+                AppStyles.pdt20,
+                ValueListenableBuilder(
+                  valueListenable: reportTypeListController,
+                  builder: (context, value, child) {
+                    switch (reportTypeListController.first?.id) {
+                      case ReportType.BBNT:
+                        return _buildBienBanNghiemThu(context);
+                      case ReportType.BBBG:
+                        return _buildBienBanBanGiao(context);
+                      default:
+                        return const SizedBox();
+                    }
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: previewReportFile,
+                  child: const Text('Lấy mẫu biên bản'),
+                ),
+              ],
+            ),
           ),
-          AppStyles.pdt20,
-          ValueListenableBuilder(
-            valueListenable: reportTypeListController,
-            builder: (context, value, child) {
-              switch (reportTypeListController.first?.id) {
-                case ReportType.BBNT:
-                  return _buildBienBanNghiemThu(context);
-                case ReportType.BBBG:
-                  return _buildBienBanBanGiao(context);
-                default:
-                  return const SizedBox();
-              }
-            },
-          ),
-          ElevatedButton(
-            onPressed: previewReportFile,
-            child: const Text('Lấy biên bản'),
+          Visibility(
+            visible: filePath.isNotEmpty,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppStyles.pdt20,
+                Text(
+                  'Biên bản ${isSign ? 'đã' : 'chưa'} ký',
+                  style: AppTextStyles.body1,
+                ),
+                AppStyles.pdt15,
+                InkWell(
+                  onTap: () {
+                    Get.to(() {
+                      return MyWebviewScreen(
+                        url: filePath,
+                        title: reportTypeListController.text,
+                      );
+                    });
+                  },
+                  child: Card(
+                    child: ListTile(
+                      title: Text(
+                        filePath,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      leading: const Icon(Icons.document_scanner),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: !isSign,
+                  child: Column(
+                    children: [
+                      AppStyles.pdt15,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Chữ ký NV kĩ thuật',
+                              style: AppTextStyles.body1,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: staffSignatureController.clear,
+                            icon: const Icon(
+                              Icons.clear,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                      AppStyles.pdt6,
+                      Signature(
+                        height: 200,
+                        controller: staffSignatureController,
+                        backgroundColor: AppColors.textGrey1,
+                      ),
+                      AppStyles.pdt15,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Chữ ký KH',
+                              style: AppTextStyles.body1,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: customerSignatureController.clear,
+                            icon: const Icon(
+                              Icons.clear,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                      AppStyles.pdt6,
+                      Signature(
+                        height: 200,
+                        controller: customerSignatureController,
+                        backgroundColor: AppColors.textGrey1,
+                      ),
+                      AppStyles.pdt30,
+                      ElevatedButton(
+                        onPressed: signReportFile,
+                        child: const Text('Xác nhận ký'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           AppStyles.pdt20,
         ],

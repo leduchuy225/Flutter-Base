@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:flutter_base/core/utils/datetime_utils.dart';
 import 'package:flutter_base/data/customer_api.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
@@ -26,7 +27,7 @@ class SearchCustomerScreen extends StatefulWidget {
 }
 
 class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
-  final _idTextController = MyTextFieldController();
+  final _codeTextController = MyTextFieldController();
   final _cccdTextController = MyTextFieldController();
   final _nameTextController = MyTextFieldController();
   final _phoneTextController = MyTextFieldController();
@@ -34,7 +35,7 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
   var _state = PagingState<int, CustomerSearchModelResponse>();
 
   bool _getIsEmptySearchText({required bool isShowError}) {
-    if (_idTextController.textTrim.isNotEmpty ||
+    if (_codeTextController.textTrim.isNotEmpty ||
         _cccdTextController.textTrim.isNotEmpty ||
         _nameTextController.textTrim.isNotEmpty ||
         _phoneTextController.textTrim.isNotEmpty) {
@@ -57,8 +58,9 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
         pageSize: Config.pageSizeDefault,
       ),
       searchSet: CustomerSearchSet(
+        // idLong: _codeTextController.textTrim,
         cccd: _cccdTextController.textTrim,
-        idLong: _idTextController.textTrim,
+        code: _codeTextController.textTrim,
         fullName: _nameTextController.textTrim,
         phoneNumber: _phoneTextController.textTrim,
       ),
@@ -121,10 +123,13 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
                   children: [
                     Text('Bộ lọc tìm kiếm', style: AppTextStyles.title1),
                     AppStyles.pdt20,
-                    MyTextField(labelText: 'ID', controller: _idTextController),
+                    MyTextField(
+                      labelText: 'Mã KH',
+                      controller: _codeTextController,
+                    ),
                     AppStyles.pdt20,
                     MyTextField(
-                      labelText: 'CCCD',
+                      labelText: 'CCCD / Mã số thuế',
                       controller: _cccdTextController,
                       keyboardType: TextInputType.number,
                     ),
@@ -183,10 +188,8 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
                       child: MyTexttile.card(
                         title: item.fullName,
                         items: [
-                          MyTexttileItem(
-                            text: item.userName,
-                            titleText: 'Username',
-                          ),
+                          MyTexttileItem(text: item.code, titleText: 'Mã KH'),
+                          MyTexttileItem(text: item.userName, titleText: 'ACC'),
                           MyTexttileItem(text: item.cccd, titleText: 'CCCD'),
                           MyTexttileItem(
                             titleText: 'SĐT',
@@ -200,6 +203,34 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
                           MyTexttileItem(
                             titleText: 'Dịch vụ',
                             text: item.serviceTitle,
+                          ),
+                          MyTexttileItem(
+                            titleText: 'Mã NV',
+                            text: item.staffCode,
+                          ),
+                          MyTexttileItem(
+                            titleText: 'Tên NVPT',
+                            text: item.staffFullName,
+                          ),
+                          MyTexttileItem(
+                            titleText: 'Tình trạng HĐ',
+                            text: item.contractStatusTitle,
+                          ),
+                          MyTexttileItem(
+                            titleText: 'Tình trạng chặn cắt',
+                            text: item.blockingStatusTitle,
+                          ),
+                          MyTexttileItem(
+                            titleText: 'Ngày HT thi công',
+                            text: MyDatetimeUtils.formatDateFromAPI(
+                              item.completionDate,
+                            ),
+                          ),
+                          MyTexttileItem(
+                            titleText: 'Ngày hết hạn',
+                            text: MyDatetimeUtils.formatDateFromAPI(
+                              item.endDate,
+                            ),
                           ),
                         ],
                       ),

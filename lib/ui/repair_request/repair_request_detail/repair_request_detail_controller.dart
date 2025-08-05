@@ -190,4 +190,10 @@ class RepairRequestDetailController
     // TODO: implement previewReportFile
     throw UnimplementedError();
   }
+
+  @override
+  Future signReportFile() {
+    // TODO: implement signReportFile
+    throw UnimplementedError();
+  }
 }

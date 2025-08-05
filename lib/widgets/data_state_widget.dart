@@ -29,7 +29,7 @@ class MyDataState extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         AppStyles.pdt25,
-        Icon(icon, size: 80),
+        Icon(icon, size: 80, color: AppColors.black),
         AppStyles.pdt15,
         Text(message, style: AppTextStyles.h3),
         AppStyles.pdt15,

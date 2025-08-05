@@ -11,7 +11,7 @@ class FileCollectionModel extends Equatable {
   const FileCollectionModel({
     required this.fileName,
     required this.filePath,
-    required this.isLocal,
+    this.isLocal = false,
   });
 
   File? get file => isLocal == true ? File(filePath) : null;

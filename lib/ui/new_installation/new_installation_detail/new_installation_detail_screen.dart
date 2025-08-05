@@ -42,6 +42,10 @@ class _NewInstallationDetailScreenState
               title: 'Thông tin yêu cầu',
               items: [
                 MyTexttileItem(
+                  titleText: 'Mã HĐ',
+                  text: detailData?.contractCode,
+                ),
+                MyTexttileItem(
                   titleText: 'Gói cước',
                   text: detailData?.serviceIdTitle,
                 ),
@@ -53,6 +57,14 @@ class _NewInstallationDetailScreenState
                   titleText: 'Ngày tạo',
                   text: MyDatetimeUtils.formatDateFromAPI(
                     detailData?.createdDate,
+                    toFormat: MyDateFormatEnum.DATE_TIME24s,
+                  ),
+                ),
+                MyTexttileItem(
+                  titleText: 'Ngày HT dự kiến',
+                  text: MyDatetimeUtils.formatDateFromAPI(
+                    detailData?.expectedCompletionDate,
+                    toFormat: MyDateFormatEnum.DATE_TIME24s,
                   ),
                 ),
               ],
@@ -64,7 +76,7 @@ class _NewInstallationDetailScreenState
                 MyTexttileItem(
                   isCopy: true,
                   titleText: 'Mã KH',
-                  text: customerData?.idLong,
+                  text: customerData?.code,
                 ),
                 MyTexttileItem(
                   titleText: 'Tên KH',

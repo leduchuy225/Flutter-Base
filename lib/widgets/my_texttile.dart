@@ -260,7 +260,7 @@ class MyTexttile extends StatelessWidget {
     return Row(
       children: [
         Expanded(flex: labelFlex, child: _buildTitle()),
-        const SizedBox(width: 7.0),
+        const SizedBox(width: 10),
         Expanded(flex: textFlex, child: _buildText()),
       ],
     );

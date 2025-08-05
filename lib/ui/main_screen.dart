@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/repair_request/repair_request_list/repair_request_list_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
+import 'package:flutter_base/widgets/webview/my_webview_screen.dart';
 import 'package:get/get.dart';
 
 import '../core/services/notification_service.dart';
@@ -36,6 +37,35 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return DrawerScaffold(
       appBar: MyAppbar.appBar('Màn hình chính'),
+      // body: GridView(
+      //   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      //     crossAxisCount: 2,
+      //   ),
+      //   children: [
+      //     FunctionItem(
+      //       title: 'Yêu cầu lắp mới',
+      //       icon: Icons.home_repair_service_rounded,
+      //       onTap: () {
+      //         Get.to(() => const NewInstallationListScreen());
+      //       },
+      //     ),
+      //     FunctionItem(
+      //       icon: Icons.build,
+      //       title: 'Yêu cầu sửa chữa',
+      //       onTap: () {
+      //         Get.to(() => const RepairRequestListScreen());
+      //       },
+      //     ),
+      //     FunctionItem(
+      //       icon: Icons.search,
+      //       title: 'Tra cứu khách hàng',
+      //       onTap: () {
+      //         Get.to(() => const SearchCustomerScreen());
+      //       },
+      //     ),
+      //   ],
+      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,6 +94,19 @@ class _MainScreenState extends State<MainScreen> {
                     title: 'Tra cứu khách hàng',
                     onTap: () {
                       Get.to(() => const SearchCustomerScreen());
+                    },
+                  ),
+                  FunctionItem(
+                    icon: Icons.map,
+                    title: 'Bản đồ hạ tầng',
+                    onTap: () {
+                      Get.to(
+                        () => const MyWebviewScreen(
+                          title: 'Bản đồ hạ tầng',
+                          url:
+                              'https://www.google.com/maps/d/u/0/viewer?mid=1Pct3jqqytWF5jv2oj9A_VYu3s0lC5-U&ll=20.807126436311332%2C106.77067050000002&z=11',
+                        ),
+                      );
                     },
                   ),
                   // FunctionItem(

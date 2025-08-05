@@ -89,7 +89,7 @@ Map<String, dynamic> convertStringToMap(String? data) {
   }
 }
 
-String? getImageLink(String? data) {
+String? getFileLink(String? data) {
   if (isNullOrEmpty(data)) {
     return null;
   }

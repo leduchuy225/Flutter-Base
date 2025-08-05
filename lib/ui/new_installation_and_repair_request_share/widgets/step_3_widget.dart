@@ -8,6 +8,7 @@ import '../../../theme/styles.dart';
 import '../../../widgets/file_collection/file_collection_controller.dart';
 
 class Step3 extends StatelessWidget {
+  final bool isViewOnly;
   final FileCollectionController technicalStaffModuleImageControler;
   final FileCollectionController technicalStaffTestImageControler;
   final FileCollectionController technicalStaffImageControler;
@@ -21,6 +22,7 @@ class Step3 extends StatelessWidget {
     required this.technicalStaffImageControler,
     required this.step3NoteTextController,
     required this.onPressed,
+    this.isViewOnly = false,
   });
 
   @override
@@ -32,29 +34,42 @@ class Step3 extends StatelessWidget {
           FileCollectionWidget(
             limit: 1,
             title: 'Ảnh module',
+            isViewImageOnly: isViewOnly,
             controller: technicalStaffModuleImageControler,
           ),
           AppStyles.pdt10,
           FileCollectionWidget(
             limit: 1,
             title: 'Ảnh test tốc độ',
+            isViewImageOnly: isViewOnly,
             controller: technicalStaffTestImageControler,
           ),
           AppStyles.pdt10,
           FileCollectionWidget(
             limit: 1,
             title: 'Ảnh tổng thể',
+            isViewImageOnly: isViewOnly,
             controller: technicalStaffImageControler,
           ),
-          AppStyles.pdt30,
-          MyTextField(
-            isRequired: true,
-            labelText: 'Báo cáo công việc',
-            controller: step3NoteTextController,
+          Visibility(
+            visible: !isViewOnly,
+            child: Column(
+              children: [
+                AppStyles.pdt30,
+                MyTextField(
+                  isRequired: true,
+                  labelText: 'Báo cáo công việc',
+                  controller: step3NoteTextController,
+                ),
+                AppStyles.pdt20,
+                ElevatedButton(
+                  onPressed: onPressed,
+                  child: const Text('Cập nhật'),
+                ),
+                AppStyles.pdt15,
+              ],
+            ),
           ),
-          AppStyles.pdt20,
-          ElevatedButton(onPressed: onPressed, child: const Text('Cập nhật')),
-          AppStyles.pdt15,
         ],
       ),
     );

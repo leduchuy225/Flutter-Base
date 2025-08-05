@@ -10,6 +10,7 @@ import 'package:flutter_base/widgets/file_collection/file_collection_controller.
 import 'package:flutter_base/widgets/selector/selector_controller.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
+import 'package:signature/signature.dart';
 
 import '../../core/utils/datetime_utils.dart';
 import '../../models/common/note_viewmodel_response.dart';
@@ -26,6 +27,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final currentRxStep = RxInt(1);
   final detailRxData = Rx<T?>(null);
+  final isReportFileSigned = RxBool(false);
   final previewReportFileLink = RxString('');
 
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
@@ -46,6 +48,9 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final reportTypeListController = MySelectorController();
   final reportController = SignReportFileDataController();
+
+  final staffSignatureController = SignatureController();
+  final customerSignatureController = SignatureController();
 
   T? get detailData => detailRxData.value;
 
@@ -74,6 +79,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   Future getOverdueReasonList();
 
   Future previewReportFile();
+
+  Future signReportFile();
 
   Future<List<MySelectorModel>> getReportTypeList();
 
@@ -110,25 +117,14 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             getStepContent(context, step: 2),
             AppStyles.pdt15,
             getStepContent(context, step: 3),
+          ],
+        );
+      case 4:
+        return Column(
+          children: [
+            getStepContent(context, step: 3),
             AppStyles.pdt15,
-            SignReportFileWidget(
-              filePath: '',
-              reportController: reportController,
-              getReportTypeList: getReportTypeList,
-              reportTypeListController: reportTypeListController,
-              previewReportFile: () async {
-                if (currentReportId == ReportType.BBNT) {
-                  if (!reportController.checkBbntIsValid()) {
-                    return;
-                  }
-                } else if (currentReportId == ReportType.BBBG) {
-                  if (!reportController.checkBbbgIsValid()) {
-                    return;
-                  }
-                }
-                await previewReportFile();
-              },
-            ),
+            getStepContent(context, step: 4),
           ],
         );
       default:
@@ -173,6 +169,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case 3:
         return Step3(
+          isViewOnly: currentRxStep.value > 3,
           technicalStaffImageControler: technicalStaffImageControler,
           technicalStaffTestImageControler: technicalStaffTestImageControler,
           technicalStaffModuleImageControler:
@@ -201,6 +198,55 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           },
         );
       case 4:
+        return GetBuilder(
+          init: this,
+          builder: (controller) {
+            return SignReportFileWidget(
+              reportController: reportController,
+              getReportTypeList: getReportTypeList,
+              staffSignatureController: staffSignatureController,
+              reportTypeListController: reportTypeListController,
+              customerSignatureController: customerSignatureController,
+              filePath:
+                  'https://docs.google.com/document/d/1UvDyUThyUcKFH9luMVSlftbZLMP31iqf/edit?usp=sharing&ouid=105074865760102672014&rtpof=true&sd=true', // controller.previewReportFileLink.value,
+              previewReportFile: () async {
+                if (currentReportId == ReportType.BBNT) {
+                  if (!reportController.checkBbntIsValid()) {
+                    return;
+                  }
+                } else if (currentReportId == ReportType.BBBG) {
+                  if (!reportController.checkBbbgIsValid()) {
+                    return;
+                  }
+                }
+                staffSignatureController.clear();
+                customerSignatureController.clear();
+
+                await previewReportFile();
+              },
+              signReportFile: () {
+                if (staffSignatureController.isEmpty) {
+                  MyDialog.snackbar(
+                    'Nhân viên chưa thực hiện ký',
+                    type: SnackbarType.WARNING,
+                  );
+                  return;
+                }
+                if (customerSignatureController.isEmpty) {
+                  MyDialog.snackbar(
+                    'Khách hàng chưa thực hiện ký',
+                    type: SnackbarType.WARNING,
+                  );
+                  return;
+                }
+                MyDialog.alertDialog(
+                  okHandler: signReportFile,
+                  message: 'Xác nhận ký biên bản ?',
+                );
+              },
+            );
+          },
+        );
       case 5:
         return const MyDataState(
           icon: Icons.help_outline,

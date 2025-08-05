@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:flutter_base/core/utils/utils.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import '../../../core/services/cache_service.dart';
 import '../../../data/installation_api.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
+import '../../../models/file_collection_model.dart';
 import '../../../models/installation/installation_detail_model_response.dart';
 import '../../../models/installation/view_installation_report_file_model_payload.dart';
 import '../../../models/installation/view_installation_report_file_payload.dart';
@@ -40,6 +42,33 @@ class NewInstallationDetailController
       noteListRxData.value = data.listMbConnectionRequestNoteViewModel ?? [];
       overdueNoteListRxData.value =
           data.listMbConnectionRequestOverdueViewModel ?? [];
+
+      if (data.technicalStaffModuleImage != null) {
+        technicalStaffModuleImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.technicalStaffModuleImage,
+            filePath: getFileLink(data.technicalStaffModuleImage)!,
+          ),
+        ];
+      }
+
+      if (data.technicalStaffImage != null) {
+        technicalStaffImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.technicalStaffImage,
+            filePath: getFileLink(data.technicalStaffImage)!,
+          ),
+        ];
+      }
+
+      if (data.technicalStaffTestImage != null) {
+        technicalStaffTestImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.technicalStaffTestImage,
+            filePath: getFileLink(data.technicalStaffTestImage)!,
+          ),
+        ];
+      }
 
       update();
     }
@@ -279,5 +308,28 @@ class NewInstallationDetailController
     final response = await Get.find<InstallationApi>()
         .viewInstallationReportFile(body)
         .callApi();
+
+    final urlFile = getFileLink(response.data?.urlFile);
+
+    if (urlFile != null) {
+      previewReportFileLink.value = urlFile;
+      update();
+    }
+  }
+
+  @override
+  Future signReportFile() async {
+    final response = await Get.find<InstallationApi>()
+        .signInstallationReportFile(
+          id: id.toString(),
+          type: currentReportId,
+          //   customersSign: customerSignatureController.toPngBytes(),
+          //  technicalStaffSign: '',
+        )
+        .callApi();
+
+    if (response.isSuccess) {
+      isReportFileSigned.value = true;
+    }
   }
 }
