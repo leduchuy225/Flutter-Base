@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../data/installation_api.dart';
 import '../../../models/common/installation_list_payload.dart';
-import '../../../models/common/installation_search_payload.dart';
+import '../../../models/common/search_default_model_payload.dart';
 import '../../../models/installation/installation_list_model_response.dart';
 import '../../new_installation_and_repair_request_share/common_installation_list_controller.dart';
 import '../new_installation_detail/new_installation_detail_controller.dart';
@@ -31,7 +31,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
     final body = InstallationListPayload(
       coundLoad: 1,
       typeData: MBService.NewInstallation,
-      searchDefault: InstallationSearchPayload(
+      searchDefault: SearchDefaultModelPayload(
         page: page,
         typeOrder: true,
         pageSize: Config.pageSizeDefault,

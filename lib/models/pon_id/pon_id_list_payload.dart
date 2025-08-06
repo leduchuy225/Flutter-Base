@@ -1,15 +1,15 @@
 import '../common/search_default_model_payload.dart';
-import 'customer_search_set.dart';
+import 'pon_id_search_set_payload.dart';
 
-class CustomerSearchPayload {
+class PonIdListPayload {
   SearchDefaultModelPayload? searchDefault;
-  CustomerSearchSet? searchSet;
+  PonIdSearchSetPayload? searchSet;
   int? coundLoad;
 
-  CustomerSearchPayload({this.searchDefault, this.searchSet, this.coundLoad});
+  PonIdListPayload({this.searchDefault, this.searchSet, this.coundLoad});
 
-  factory CustomerSearchPayload.fromJson(Map<String, dynamic> json) {
-    return CustomerSearchPayload(
+  factory PonIdListPayload.fromJson(Map<String, dynamic> json) {
+    return PonIdListPayload(
       searchDefault: json['searchDefault'] == null
           ? null
           : SearchDefaultModelPayload.fromJson(
@@ -17,7 +17,7 @@ class CustomerSearchPayload {
             ),
       searchSet: json['searchSet'] == null
           ? null
-          : CustomerSearchSet.fromJson(
+          : PonIdSearchSetPayload.fromJson(
               json['searchSet'] as Map<String, dynamic>,
             ),
       coundLoad: json['coundLoad'] as int?,

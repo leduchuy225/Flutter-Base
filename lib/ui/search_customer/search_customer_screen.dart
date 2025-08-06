@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../core/const/constants.dart';
-import '../../models/customer/customer_search_default.dart';
+import '../../models/common/search_default_model_payload.dart';
 import '../../models/customer/customer_search_model_response.dart';
 import '../../models/customer/customer_search_payload.dart';
 import '../../models/customer/customer_search_set.dart';
@@ -52,7 +52,7 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
   Future<List<CustomerSearchModelResponse>> getData({required int page}) async {
     final body = CustomerSearchPayload(
       coundLoad: 1,
-      searchDefault: CustomerSearchDefault(
+      searchDefault: SearchDefaultModelPayload(
         page: page,
         typeOrder: true,
         pageSize: Config.pageSizeDefault,

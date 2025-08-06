@@ -1,7 +1,7 @@
-import 'installation_search_payload.dart';
+import 'search_default_model_payload.dart';
 
 class InstallationListPayload {
-  InstallationSearchPayload? searchDefault;
+  SearchDefaultModelPayload? searchDefault;
   String? typeData;
   int? coundLoad;
 
@@ -11,7 +11,7 @@ class InstallationListPayload {
     return InstallationListPayload(
       searchDefault: json['searchDefault'] == null
           ? null
-          : InstallationSearchPayload.fromJson(
+          : SearchDefaultModelPayload.fromJson(
               json['searchDefault'] as Map<String, dynamic>,
             ),
       typeData: json['typeData'] as String?,

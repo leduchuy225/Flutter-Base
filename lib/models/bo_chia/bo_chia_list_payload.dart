@@ -1,15 +1,15 @@
 import '../common/search_default_model_payload.dart';
-import 'customer_search_set.dart';
+import 'bo_chia_search_set_payload.dart';
 
-class CustomerSearchPayload {
+class BoChiaListPayload {
   SearchDefaultModelPayload? searchDefault;
-  CustomerSearchSet? searchSet;
+  BoChiaSearchSetPayload? searchSet;
   int? coundLoad;
 
-  CustomerSearchPayload({this.searchDefault, this.searchSet, this.coundLoad});
+  BoChiaListPayload({this.searchDefault, this.searchSet, this.coundLoad});
 
-  factory CustomerSearchPayload.fromJson(Map<String, dynamic> json) {
-    return CustomerSearchPayload(
+  factory BoChiaListPayload.fromJson(Map<String, dynamic> json) {
+    return BoChiaListPayload(
       searchDefault: json['searchDefault'] == null
           ? null
           : SearchDefaultModelPayload.fromJson(
@@ -17,7 +17,7 @@ class CustomerSearchPayload {
             ),
       searchSet: json['searchSet'] == null
           ? null
-          : CustomerSearchSet.fromJson(
+          : BoChiaSearchSetPayload.fromJson(
               json['searchSet'] as Map<String, dynamic>,
             ),
       coundLoad: json['coundLoad'] as int?,

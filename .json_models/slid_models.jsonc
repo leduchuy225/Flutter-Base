@@ -1,0 +1,223 @@
+[
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "slid_list_payload", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/slid", // <- this is not required.
+    "searchDefault.search_default_model_payload": {
+      "page": 1,
+      "pageSize": 10,
+      "searchString": "",
+      "TypeOrder": true
+    },
+    "searchSet.slid_search_set_payload": {},
+    "coundLoad": 1
+  },
+  {
+    // To add enhancemed name to all generated files add new name after dot.
+    // Example: user_post.model. Result: user_post.model.dart
+    "__className": "slid_list_response", // <- The base class name of the object.
+    // It's possible to override the default path with a new one by adding "__path" key.
+    // - it's useful if you want split your models to different workspace directories.
+    "__path": "/lib/models/slid", // <- this is not required.
+    "model.slid_list_model_response": [
+      {
+        "ID": 5,
+        "IDLong": 806713871689,
+        "Code": "KTY11H0000",
+        "OLT_ID": 4,
+        "OLT_IDLong": 215072339362,
+        "OLT_Code": "HPG_KTY_DAI_DONG",
+        "PONID_ID": 7,
+        "PONID_IDLong": 873471673740,
+        "PONID_Code": "0",
+        "CreatedBy": null,
+        "CreatedDate": "/Date(1754420551747)/",
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": true,
+        "SetDefault": null,
+        "GoogleMap": "20.848164, 156.678803",
+        "Title": null,
+        "CreatedBy_Email": "vuhoanhp9x@gmail.com",
+        "CreatedBy_UserName": "vuhuuhoan"
+      },
+      {
+        "ID": 4,
+        "IDLong": 68693951311,
+        "Code": "KTY11H0001",
+        "OLT_ID": 4,
+        "OLT_IDLong": 215072339362,
+        "OLT_Code": "HPG_KTY_DAI_DONG",
+        "PONID_ID": 7,
+        "PONID_IDLong": 873471673740,
+        "PONID_Code": "0",
+        "CreatedBy": null,
+        "CreatedDate": "/Date(1754419376343)/",
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": true,
+        "SetDefault": null,
+        "GoogleMap": "20.848164, 136.678803",
+        "Title": null,
+        "CreatedBy_Email": "vuhoanhp9x@gmail.com",
+        "CreatedBy_UserName": "vuhuuhoan"
+      },
+      {
+        "ID": 3,
+        "IDLong": 477292787778,
+        "Code": "KTY11H0002",
+        "OLT_ID": 4,
+        "OLT_IDLong": 215072339362,
+        "OLT_Code": "HPG_KTY_DAI_DONG",
+        "PONID_ID": 7,
+        "PONID_IDLong": 873471673740,
+        "PONID_Code": "0",
+        "CreatedBy": null,
+        "CreatedDate": "/Date(1754419369053)/",
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": true,
+        "SetDefault": null,
+        "GoogleMap": "20.848164, 126.678803",
+        "Title": null,
+        "CreatedBy_Email": "vuhoanhp9x@gmail.com",
+        "CreatedBy_UserName": "vuhuuhoan"
+      },
+      {
+        "ID": 2,
+        "IDLong": 539150306238,
+        "Code": "KTY11H0003",
+        "OLT_ID": 4,
+        "OLT_IDLong": 215072339362,
+        "OLT_Code": "HPG_KTY_DAI_DONG",
+        "PONID_ID": 7,
+        "PONID_IDLong": 873471673740,
+        "PONID_Code": "0",
+        "CreatedBy": null,
+        "CreatedDate": "/Date(1754414247670)/",
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": true,
+        "SetDefault": null,
+        "GoogleMap": "20.848164, 116.678803",
+        "Title": null,
+        "CreatedBy_Email": "vuhoanhp9x@gmail.com",
+        "CreatedBy_UserName": "vuhuuhoan"
+      },
+      {
+        "ID": 1,
+        "IDLong": 180474245927,
+        "Code": "KTY11H0004",
+        "OLT_ID": 4,
+        "OLT_IDLong": 215072339362,
+        "OLT_Code": "HPG_KTY_DAI_DONG",
+        "PONID_ID": 7,
+        "PONID_IDLong": 873471673740,
+        "PONID_Code": "0",
+        "CreatedBy": null,
+        "CreatedDate": "/Date(1754413545597)/",
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": true,
+        "SetDefault": null,
+        "GoogleMap": "20.848164, 106.678803",
+        "Title": null,
+        "CreatedBy_Email": "vuhoanhp9x@gmail.com",
+        "CreatedBy_UserName": "vuhuuhoan"
+      }
+    ],
+    "totalItems": 5,
+    "olt.olt_list_model_response": [
+      {
+        "ID": 1,
+        "IDLong": null,
+        "Code": "OLT_HAN_TRANG_CAT",
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": null,
+        "SetDefault": null,
+        "GoogleMap": "22",
+        "Title": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null
+      },
+      {
+        "ID": 2,
+        "IDLong": null,
+        "Code": "OTL_HONG_THAI",
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": null,
+        "SetDefault": null,
+        "GoogleMap": null,
+        "Title": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null
+      },
+      {
+        "ID": 3,
+        "IDLong": null,
+        "Code": "HPG_ALO_QUANG_TRUNG_3",
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": null,
+        "SetDefault": null,
+        "GoogleMap": null,
+        "Title": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null
+      },
+      {
+        "ID": 4,
+        "IDLong": null,
+        "Code": "HPG_KTY_DAI_DONG",
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": null,
+        "SetDefault": null,
+        "GoogleMap": null,
+        "Title": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null
+      }
+    ]
+  }
+]

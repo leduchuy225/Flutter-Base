@@ -49,7 +49,7 @@
     // It's possible to override the default path with a new one by adding "__path" key.
     // - it's useful if you want split your models to different workspace directories.
     "__path": "/lib/models/installation",
-    "searchDefault.installation_search_payload": {
+    "searchDefault.search_default_model_payload": {
       "page": 1,
       "pageSize": 10,
       "searchString": "",
