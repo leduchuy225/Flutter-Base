@@ -43,10 +43,30 @@ class NewInstallationDetailController
       overdueNoteListRxData.value =
           data.listMbConnectionRequestOverdueViewModel ?? [];
 
+      if (data.reportAcceptance != null) {
+        previewReportFileLink.value = data.reportAcceptance!;
+        isReportFileSigned.value = data.reportAcceptanceIsSign ?? false;
+        reportTypeListController.selectors = [
+          MySelectorModel(
+            id: ReportType.BBNT,
+            name: 'Biên bản nghiệm thu FTTx với khách hàng',
+          ),
+        ];
+      } else if (data.reportHandoverDevice != null) {
+        previewReportFileLink.value = data.reportHandoverDevice!;
+        isReportFileSigned.value = data.reportHandoverDeviceIsSign ?? false;
+        reportTypeListController.selectors = [
+          MySelectorModel(
+            id: ReportType.BBBG,
+            name: 'Biên bản bàn giao thiết bị',
+          ),
+        ];
+      }
+
       if (data.technicalStaffModuleImage != null) {
         technicalStaffModuleImageControler.files.value = [
           FileCollectionModel(
-            fileName: data.technicalStaffModuleImage,
+            fileName: data.technicalStaffModuleImage!,
             filePath: getFileLink(data.technicalStaffModuleImage)!,
           ),
         ];
@@ -55,7 +75,7 @@ class NewInstallationDetailController
       if (data.technicalStaffImage != null) {
         technicalStaffImageControler.files.value = [
           FileCollectionModel(
-            fileName: data.technicalStaffImage,
+            fileName: data.technicalStaffImage!,
             filePath: getFileLink(data.technicalStaffImage)!,
           ),
         ];
@@ -64,7 +84,7 @@ class NewInstallationDetailController
       if (data.technicalStaffTestImage != null) {
         technicalStaffTestImageControler.files.value = [
           FileCollectionModel(
-            fileName: data.technicalStaffTestImage,
+            fileName: data.technicalStaffTestImage!,
             filePath: getFileLink(data.technicalStaffTestImage)!,
           ),
         ];
@@ -319,17 +339,30 @@ class NewInstallationDetailController
 
   @override
   Future signReportFile() async {
+    final staffSignFile = await writeToImageFile(
+      fileName: 'staff_sign',
+      data: await staffSignatureController.toPngBytes(),
+    );
+    final customersSignFile = await writeToImageFile(
+      fileName: 'customer_sign',
+      data: await customerSignatureController.toPngBytes(),
+    );
+
     final response = await Get.find<InstallationApi>()
         .signInstallationReportFile(
           id: id.toString(),
-          type: currentReportId,
-          //   customersSign: customerSignatureController.toPngBytes(),
-          //  technicalStaffSign: '',
+          type: currentReportId.toString(),
+          customersSign: customersSignFile,
+          technicalStaffSign: staffSignFile,
         )
         .callApi();
 
-    if (response.isSuccess) {
+    final urlFile = getFileLink(response.data?.urlFile);
+
+    if (urlFile != null) {
       isReportFileSigned.value = true;
+      previewReportFileLink.value = urlFile;
+      update();
     }
   }
 }

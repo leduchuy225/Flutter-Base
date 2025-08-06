@@ -44,7 +44,7 @@ class RepairRequestDetailModelResponse {
   List<TechnicalStaffListModelResponse>? listTechnicalLeader;
   dynamic listTechnicalStaff;
   dynamic mbRepairRequestOverdueViewModel;
-  List<dynamic>? listMbRepairRequestOverdueViewModel;
+  List<NoteViewmodelResponse>? listMbRepairRequestOverdueViewModel;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -183,8 +183,12 @@ class RepairRequestDetailModelResponse {
       mbRepairRequestOverdueViewModel:
           json['MB_RepairRequestOverdueViewModel'] as dynamic,
       listMbRepairRequestOverdueViewModel:
-          json['ListMB_RepairRequestOverdueViewModel.note_viewmodel_response']
-              as List<dynamic>?,
+          (json['ListMB_RepairRequestOverdueViewModel'] as List<dynamic>?)
+              ?.map(
+                (e) =>
+                    NoteViewmodelResponse.fromJson(e as Map<String, dynamic>),
+              )
+              .toList(),
       address2: json['Address2'] as String?,
       countryIdTitle: json['CountryID_Title'] as dynamic,
       provinceIdTitle: json['ProvinceID_Title'] as dynamic,

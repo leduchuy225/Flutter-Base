@@ -45,3 +45,39 @@ class FunctionItem extends StatelessWidget {
     );
   }
 }
+
+class MainFunctionItem extends StatelessWidget {
+  final int counter;
+  final String title;
+  final IconData icon;
+
+  final void Function() onTap;
+
+  const MainFunctionItem({
+    super.key,
+    this.counter = 0,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsetsGeometry.all(16),
+          child: Column(
+            children: [
+              const SizedBox(),
+              Icon(icon, color: AppColors.primary, size: 50),
+              Text(title, style: AppTextStyles.title2),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+        ),
+      ),
+    );
+  }
+}

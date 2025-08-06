@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/widgets/loading_widget.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -28,6 +29,21 @@ class _MyWebviewScreenState extends State<MyWebviewScreen> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
+          onPageStarted: (url) {
+            MyLoading.show();
+          },
+          onPageFinished: (url) {
+            MyLoading.hide();
+          },
+          onHttpError: (error) {
+            MyLoading.hide();
+          },
+          onSslAuthError: (request) {
+            MyLoading.hide();
+          },
+          onWebResourceError: (error) {
+            MyLoading.hide();
+          },
           onNavigationRequest: (request) {
             print(request.url);
             if (request.url.startsWith('intent://www.google.com/maps')) {

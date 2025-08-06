@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 T? getAtIndex<T>(List<T>? data, int index) {
@@ -94,4 +97,18 @@ String? getFileLink(String? data) {
     return null;
   }
   return '${MyStrings.baseURL}$data';
+}
+
+Future<File?> writeToImageFile({
+  Uint8List? data,
+  required String fileName,
+}) async {
+  if (data == null) {
+    return null;
+  }
+  final Directory tempDir = await getTemporaryDirectory();
+  final file = await File('${tempDir.path}/$fileName.png}').create();
+  await file.writeAsBytes(data);
+
+  return file;
 }

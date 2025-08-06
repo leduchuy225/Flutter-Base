@@ -26,18 +26,28 @@ class InstallationDetailModelResponse {
   dynamic closedDate;
   dynamic closedNote;
   String? technicalLeader;
-  dynamic technicalStaff;
-  dynamic technicalStaffDate;
-  dynamic technicalStaffReception;
-  dynamic technicalStaffModuleImage;
-  dynamic technicalStaffTestImage;
-  dynamic technicalStaffImage;
+  String? technicalStaff;
+  String? technicalStaffDate;
+  bool? technicalStaffReception;
+  String? technicalStaffModuleImage;
+  String? technicalStaffTestImage;
+  String? technicalStaffImage;
   dynamic technicalStaffRating;
   dynamic googleMap;
-  dynamic deviceAcc;
-  dynamic deviceSlid;
   String? expectedCompletionDate;
   dynamic actualCompletionDate;
+  dynamic devicePort;
+  dynamic deviceAcc;
+  dynamic devicePass;
+  dynamic deviceStatus;
+  String? reportAcceptance;
+  dynamic reportHandoverDevice;
+  bool? reportAcceptanceIsSign;
+  bool? reportHandoverDeviceIsSign;
+  dynamic slidId;
+  dynamic slidIdLong;
+  dynamic dividerId;
+  dynamic dividerIdLong;
   CustomerViewmodelResponse? mbCustomerViewModel;
   dynamic mbConnectionRequestNoteViewModel;
   List<NoteViewmodelResponse>? listMbConnectionRequestNoteViewModel;
@@ -56,11 +66,16 @@ class InstallationDetailModelResponse {
   dynamic customersIdIdLong;
   dynamic customersIdFullName;
   dynamic customersIdCccd;
+  dynamic customersIdPhoneNumber;
   dynamic serviceIdTitle;
   dynamic createdByEmail;
   dynamic createdByUserName;
   dynamic progress;
   dynamic progressTitle;
+  dynamic typeTitle;
+  dynamic surveyStatusTitle;
+  dynamic technicalLeaderUserName;
+  dynamic technicalStaffUserName;
 
   InstallationDetailModelResponse({
     this.id,
@@ -94,10 +109,20 @@ class InstallationDetailModelResponse {
     this.technicalStaffImage,
     this.technicalStaffRating,
     this.googleMap,
-    this.deviceAcc,
-    this.deviceSlid,
     this.expectedCompletionDate,
     this.actualCompletionDate,
+    this.devicePort,
+    this.deviceAcc,
+    this.devicePass,
+    this.deviceStatus,
+    this.reportAcceptance,
+    this.reportHandoverDevice,
+    this.reportAcceptanceIsSign,
+    this.reportHandoverDeviceIsSign,
+    this.slidId,
+    this.slidIdLong,
+    this.dividerId,
+    this.dividerIdLong,
     this.mbCustomerViewModel,
     this.mbConnectionRequestNoteViewModel,
     this.listMbConnectionRequestNoteViewModel,
@@ -116,11 +141,16 @@ class InstallationDetailModelResponse {
     this.customersIdIdLong,
     this.customersIdFullName,
     this.customersIdCccd,
+    this.customersIdPhoneNumber,
     this.serviceIdTitle,
     this.createdByEmail,
     this.createdByUserName,
     this.progress,
     this.progressTitle,
+    this.typeTitle,
+    this.surveyStatusTitle,
+    this.technicalLeaderUserName,
+    this.technicalStaffUserName,
   });
 
   factory InstallationDetailModelResponse.fromJson(Map<String, dynamic> json) {
@@ -148,18 +178,28 @@ class InstallationDetailModelResponse {
       closedDate: json['ClosedDate'] as dynamic,
       closedNote: json['ClosedNote'] as dynamic,
       technicalLeader: json['TechnicalLeader'] as String?,
-      technicalStaff: json['TechnicalStaff'] as dynamic,
-      technicalStaffDate: json['TechnicalStaffDate'] as dynamic,
-      technicalStaffReception: json['TechnicalStaffReception'] as dynamic,
-      technicalStaffModuleImage: json['TechnicalStaffModuleImage'] as dynamic,
-      technicalStaffTestImage: json['TechnicalStaffTestImage'] as dynamic,
-      technicalStaffImage: json['TechnicalStaffImage'] as dynamic,
+      technicalStaff: json['TechnicalStaff'] as String?,
+      technicalStaffDate: json['TechnicalStaffDate'] as String?,
+      technicalStaffReception: json['TechnicalStaffReception'] as bool?,
+      technicalStaffModuleImage: json['TechnicalStaffModuleImage'] as String?,
+      technicalStaffTestImage: json['TechnicalStaffTestImage'] as String?,
+      technicalStaffImage: json['TechnicalStaffImage'] as String?,
       technicalStaffRating: json['TechnicalStaffRating'] as dynamic,
       googleMap: json['GoogleMap'] as dynamic,
-      deviceAcc: json['Device_ACC'] as dynamic,
-      deviceSlid: json['Device_SLID'] as dynamic,
       expectedCompletionDate: json['ExpectedCompletionDate'] as String?,
       actualCompletionDate: json['ActualCompletionDate'] as dynamic,
+      devicePort: json['Device_Port'] as dynamic,
+      deviceAcc: json['Device_ACC'] as dynamic,
+      devicePass: json['Device_Pass'] as dynamic,
+      deviceStatus: json['Device_Status'] as dynamic,
+      reportAcceptance: json['Report_Acceptance'] as String?,
+      reportHandoverDevice: json['Report_HandoverDevice'] as dynamic,
+      reportAcceptanceIsSign: json['Report_Acceptance_IsSign'] as bool?,
+      reportHandoverDeviceIsSign: json['Report_HandoverDevice_IsSign'] as bool?,
+      slidId: json['SLID_ID'] as dynamic,
+      slidIdLong: json['SLID_IDLong'] as dynamic,
+      dividerId: json['Divider_ID'] as dynamic,
+      dividerIdLong: json['Divider_IDLong'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null
           ? null
           : CustomerViewmodelResponse.fromJson(
@@ -203,11 +243,16 @@ class InstallationDetailModelResponse {
       customersIdIdLong: json['CustomersID_IDLong'] as dynamic,
       customersIdFullName: json['CustomersID_FullName'] as dynamic,
       customersIdCccd: json['CustomersID_CCCD'] as dynamic,
+      customersIdPhoneNumber: json['CustomersID_PhoneNumber'] as dynamic,
       serviceIdTitle: json['ServiceID_Title'] as dynamic,
       createdByEmail: json['CreatedBy_Email'] as dynamic,
       createdByUserName: json['CreatedBy_UserName'] as dynamic,
       progress: json['Progress'] as dynamic,
       progressTitle: json['Progress_Title'] as dynamic,
+      typeTitle: json['Type_Title'] as dynamic,
+      surveyStatusTitle: json['SurveyStatus_Title'] as dynamic,
+      technicalLeaderUserName: json['TechnicalLeader_UserName'] as dynamic,
+      technicalStaffUserName: json['TechnicalStaff_UserName'] as dynamic,
     );
   }
 
@@ -243,10 +288,20 @@ class InstallationDetailModelResponse {
     'TechnicalStaffImage': technicalStaffImage,
     'TechnicalStaffRating': technicalStaffRating,
     'GoogleMap': googleMap,
-    'Device_ACC': deviceAcc,
-    'Device_SLID': deviceSlid,
     'ExpectedCompletionDate': expectedCompletionDate,
     'ActualCompletionDate': actualCompletionDate,
+    'Device_Port': devicePort,
+    'Device_ACC': deviceAcc,
+    'Device_Pass': devicePass,
+    'Device_Status': deviceStatus,
+    'Report_Acceptance': reportAcceptance,
+    'Report_HandoverDevice': reportHandoverDevice,
+    'Report_Acceptance_IsSign': reportAcceptanceIsSign,
+    'Report_HandoverDevice_IsSign': reportHandoverDeviceIsSign,
+    'SLID_ID': slidId,
+    'SLID_IDLong': slidIdLong,
+    'Divider_ID': dividerId,
+    'Divider_IDLong': dividerIdLong,
     'MB_CustomerViewModel': mbCustomerViewModel?.toJson(),
     'MB_ConnectionRequestNoteViewModel': mbConnectionRequestNoteViewModel,
     'ListMB_ConnectionRequestNoteViewModel':
@@ -270,10 +325,15 @@ class InstallationDetailModelResponse {
     'CustomersID_IDLong': customersIdIdLong,
     'CustomersID_FullName': customersIdFullName,
     'CustomersID_CCCD': customersIdCccd,
+    'CustomersID_PhoneNumber': customersIdPhoneNumber,
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
     'Progress': progress,
     'Progress_Title': progressTitle,
+    'Type_Title': typeTitle,
+    'SurveyStatus_Title': surveyStatusTitle,
+    'TechnicalLeader_UserName': technicalLeaderUserName,
+    'TechnicalStaff_UserName': technicalStaffUserName,
   };
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/datetime_utils.dart';
-import '../../../widgets/dialog/bottom_sheet_widget.dart';
+import '../../new_installation_and_repair_request_share/common_installation_detail_screen.dart';
 import 'repair_request_detail_controller.dart';
 
 class RepairRequestDetailScreen extends StatefulWidget {
@@ -31,89 +30,79 @@ class _NewInstallationDetailScreenState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppbar.appBar(
-        'Chi tiết yêu cầu sửa chữa',
-        action: IconButton(
-          icon: const Icon(Icons.cancel_outlined),
-          onPressed: () {
-            MyBottomSheet.showDraggableScrollableSheet(
-              context,
-              builder: (context, scrollController) {
-                return _controller.getStepContent(context, step: 0);
-              },
-            );
-          },
-        ),
-      ),
-      body: SingleChildScrollView(
-        padding: AppStyles.horizontalPadding,
-        child: GetBuilder(
-          init: _controller,
-          builder: (controller) {
-            final detailData = controller.detailData;
-            final customerData = detailData?.mbCustomerViewModel;
-            return Column(
-              children: [
-                AppStyles.pdt15,
-                MyTexttile.card(
-                  title: 'Thông tin yêu cầu',
-                  items: [
-                    MyTexttileItem(
-                      titleText: 'Gói cước',
-                      text: detailData?.serviceIdTitle,
-                    ),
-                    MyTexttileItem(
-                      titleText: 'Người tạo',
-                      text: detailData?.createdByUserName,
-                    ),
-                    MyTexttileItem(
-                      titleText: 'Ngày tạo',
-                      text: MyDatetimeUtils.formatDateFromAPI(
-                        detailData?.createdDate,
-                      ),
-                    ),
-                  ],
+    return CommonInstallationDetailScreen(
+      controller: _controller,
+      title: 'Chi tiết yêu cầu sửa chữa',
+      buildInformationChild: (context, controller) {
+        final detailData = controller.detailData;
+        final customerData = detailData?.mbCustomerViewModel;
+        return Column(
+          children: [
+            MyTexttile.card(
+              title: 'Thông tin yêu cầu',
+              items: [
+                MyTexttileItem(
+                  titleText: 'Mã HĐ',
+                  text: detailData?.contractCode,
                 ),
-                AppStyles.pdt15,
-                MyTexttile.card(
-                  title: 'Thông tin KH',
-                  items: [
-                    MyTexttileItem(
-                      isCopy: true,
-                      titleText: 'Mã KH',
-                      text: customerData?.idLong,
-                    ),
-                    MyTexttileItem(
-                      titleText: 'Tên KH',
-                      text: customerData?.fullName,
-                    ),
-                    MyTexttileItem(
-                      titleText: 'Ngày sinh',
-                      text: MyDatetimeUtils.formatDateFromAPI(
-                        customerData?.birthDay,
-                      ),
-                    ),
-                    MyTexttileItem(titleText: 'CCCD', text: customerData?.cccd),
-                    MyTexttileItem(
-                      titleText: 'SĐT',
-                      isPhoneNumber: true,
-                      text: customerData?.phoneNumber,
-                    ),
-                    MyTexttileItem(
-                      titleText: 'Địa chỉ',
-                      text: customerData?.address2,
-                    ),
-                  ],
+                MyTexttileItem(
+                  titleText: 'Gói cước',
+                  text: detailData?.serviceIdTitle,
                 ),
-                AppStyles.pdt15,
-                controller.buildSteps(context),
-                AppStyles.pdt15,
+                MyTexttileItem(
+                  titleText: 'Người tạo',
+                  text: detailData?.createdByUserName,
+                ),
+                MyTexttileItem(
+                  titleText: 'Ngày tạo',
+                  text: MyDatetimeUtils.formatDateFromAPI(
+                    detailData?.createdDate,
+                    toFormat: MyDateFormatEnum.DATE_TIME24s,
+                  ),
+                ),
+                MyTexttileItem(
+                  titleText: 'Ngày HT dự kiến',
+                  text: MyDatetimeUtils.formatDateFromAPI(
+                    detailData?.expectedCompletionDate,
+                    toFormat: MyDateFormatEnum.DATE_TIME24s,
+                  ),
+                ),
               ],
-            );
-          },
-        ),
-      ),
+            ),
+            AppStyles.pdt15,
+            MyTexttile.card(
+              title: 'Thông tin KH',
+              items: [
+                MyTexttileItem(
+                  isCopy: true,
+                  titleText: 'Mã KH',
+                  text: customerData?.code,
+                ),
+                MyTexttileItem(
+                  titleText: 'Tên KH',
+                  text: customerData?.fullName,
+                ),
+                MyTexttileItem(
+                  titleText: 'Ngày sinh',
+                  text: MyDatetimeUtils.formatDateFromAPI(
+                    customerData?.birthDay,
+                  ),
+                ),
+                MyTexttileItem(titleText: 'CCCD', text: customerData?.cccd),
+                MyTexttileItem(
+                  titleText: 'SĐT',
+                  isPhoneNumber: true,
+                  text: customerData?.phoneNumber,
+                ),
+                MyTexttileItem(
+                  titleText: 'Địa chỉ',
+                  text: customerData?.address2,
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -31,7 +31,7 @@ class MyBottomSheet {
       isDismissible: true,
       useRootNavigator: true,
       isScrollControlled: true,
-      backgroundColor: AppColors.bgChildItem,
+      backgroundColor: AppColors.white,
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(

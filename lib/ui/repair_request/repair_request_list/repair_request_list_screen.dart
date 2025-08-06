@@ -30,7 +30,7 @@ class _NewInstallationListScreenState extends State<RepairRequestListScreen> {
   Future<List<RepairRequestListModelResponse>> getData({int page = 1}) async {
     final body = InstallationListPayload(
       coundLoad: 1,
-      typeData: MBService.NewInstallation,
+      typeData: MBService.RepairRequest,
       searchDefault: InstallationSearchPayload(
         page: page,
         typeOrder: true,

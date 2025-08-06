@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
+import 'package:flutter_base/core/utils/utils.dart';
 import 'package:flutter_base/widgets/selector/selector_widget.dart';
 import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
-import 'package:flutter_base/widgets/webview/my_webview_screen.dart';
-import 'package:get/get.dart';
 import 'package:signature/signature.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../models/base_selector.dart';
 import '../../../theme/styles.dart';
@@ -34,7 +34,7 @@ class SignReportFileWidget extends StatelessWidget {
     required this.reportTypeListController,
     required this.staffSignatureController,
     required this.customerSignatureController,
-    this.isSign = true,
+    this.isSign = false,
   });
 
   Widget _buildBienBanNghiemThu(BuildContext context) {
@@ -156,19 +156,17 @@ class SignReportFileWidget extends StatelessWidget {
                 ),
                 AppStyles.pdt15,
                 InkWell(
-                  onTap: () {
-                    Get.to(() {
-                      return MyWebviewScreen(
-                        url: filePath,
-                        title: reportTypeListController.text,
-                      );
-                    });
+                  onTap: () async {
+                    await launchMyURL(
+                      filePath,
+                      mode: LaunchMode.externalApplication,
+                    );
                   },
                   child: Card(
                     child: ListTile(
                       title: Text(
-                        filePath,
-                        maxLines: 2,
+                        filePath.split('/').last,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
                       leading: const Icon(Icons.document_scanner),
@@ -184,7 +182,7 @@ class SignReportFileWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              'Chữ ký NV kĩ thuật',
+                              'Chữ ký nhân viên kĩ thuật',
                               style: AppTextStyles.body1,
                             ),
                           ),
@@ -208,7 +206,7 @@ class SignReportFileWidget extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              'Chữ ký KH',
+                              'Chữ ký khách hàng',
                               style: AppTextStyles.body1,
                             ),
                           ),

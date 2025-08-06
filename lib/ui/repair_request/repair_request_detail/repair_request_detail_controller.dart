@@ -7,8 +7,10 @@ import 'package:flutter_base/models/common/technical_staff_list_model_payload.da
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
+import '../../../core/utils/utils.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
+import '../../../models/file_collection_model.dart';
 import '../../../models/repair_request/repair_request_detail_model_response.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
 
@@ -35,6 +37,36 @@ class RepairRequestDetailController
       detailRxData.value = data;
       currentRxStep.value = data.currentStep ?? 1;
       noteListRxData.value = data.listMbRepairRequestNoteViewModel ?? [];
+
+      overdueNoteListRxData.value =
+          data.listMbRepairRequestOverdueViewModel ?? [];
+
+      if (data.technicalStaffModuleImage != null) {
+        technicalStaffModuleImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.technicalStaffModuleImage,
+            filePath: getFileLink(data.technicalStaffModuleImage)!,
+          ),
+        ];
+      }
+
+      if (data.technicalStaffImage != null) {
+        technicalStaffImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.technicalStaffImage,
+            filePath: getFileLink(data.technicalStaffImage)!,
+          ),
+        ];
+      }
+
+      if (data.technicalStaffTestImage != null) {
+        technicalStaffTestImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.technicalStaffTestImage,
+            filePath: getFileLink(data.technicalStaffTestImage)!,
+          ),
+        ];
+      }
 
       update();
     }
@@ -69,17 +101,8 @@ class RepairRequestDetailController
       if (currentRxStep.value != step) {
         setIsRefreshValue();
       }
-      currentRxStep.value = step;
 
-      noteListRxData.insert(
-        0,
-        NoteViewmodelResponse(
-          currentStep: step,
-          createdByEmail: userInfor?.email,
-          note: step2NoteTextController.textTrim,
-          createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
-        ),
-      );
+      currentRxStep.value = step;
 
       step2NoteTextController.clear();
 
@@ -141,47 +164,100 @@ class RepairRequestDetailController
   }
 
   @override
-  Future addNote() {
-    // TODO: implement addNote
-    throw UnimplementedError();
+  Future addNote() async {
+    final body = {'id': id, 'note': noteTextController.textTrim};
+    final response = await Get.find<RepairRequestApi>()
+        .addRepairRequestNote(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      noteListRxData.insert(
+        0,
+        NoteViewmodelResponse(
+          createdByEmail: userInfor?.email,
+          currentStep: currentRxStep.value,
+          note: noteTextController.textTrim,
+          createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
+        ),
+      );
+
+      noteTextController.clear();
+
+      update();
+    }
   }
 
   @override
-  Future addOverdueReason() {
-    // TODO: implement addOverdueReason
-    throw UnimplementedError();
+  Future addOverdueReason() async {
+    final body = {'id': id, 'note': overdueNoteTextController.textTrim};
+    final response = await Get.find<RepairRequestApi>()
+        .addRepairRequestOverdueNote(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      overdueNoteListRxData.insert(
+        0,
+        NoteViewmodelResponse(
+          createdByEmail: userInfor?.email,
+          note: overdueNoteTextController.textTrim,
+          createdDate: DateTime.now().millisecondsSinceEpoch.toString(),
+        ),
+      );
+
+      overdueNoteTextController.clear();
+
+      update();
+    }
   }
 
   @override
-  Future getNoteList() {
-    // TODO: implement getNoteList
-    throw UnimplementedError();
+  Future getNoteList() async {
+    final body = {'id': id};
+    final response = await Get.find<RepairRequestApi>()
+        .getRepairRequestNoteList(body)
+        .callApi(isShowSuccessMessage: false);
+
+    final data = response.data?.note;
+
+    if (response.isSuccess) {
+      noteListRxData.value = data ?? [];
+
+      update();
+    }
   }
 
   @override
-  Future getOverdueReasonList() {
-    // TODO: implement getOverdueReasonList
-    throw UnimplementedError();
+  Future getOverdueReasonList() async {
+    final body = {'id': id};
+    final response = await Get.find<RepairRequestApi>()
+        .getRepairRequestOverdueNoteList(body)
+        .callApi(isShowSuccessMessage: false);
+
+    final data = response.data?.note;
+
+    if (response.isSuccess) {
+      overdueNoteListRxData.value = data ?? [];
+
+      update();
+    }
   }
 
   @override
-  String getOverdueTime() {
-    // TODO: implement getOverdueTime
-    throw UnimplementedError();
+  String? get expectedCompletionDate => detailData?.expectedCompletionDate;
+
+  @override
+  TechnicalStaffListModelPayload get technicalStaffListModelPayload {
+    return TechnicalStaffListModelPayload(
+      phuongXaId: detailData?.wardId,
+      countryId: detailData?.countryId,
+      thanhPhoId: detailData?.provinceId,
+      quanHuyenId: detailData?.districtId,
+    );
   }
 
   @override
-  // TODO: implement expectedCompletionDate
-  String? get expectedCompletionDate => throw UnimplementedError();
-
-  @override
-  // TODO: implement technicalStaffListModelPayload
-  TechnicalStaffListModelPayload get technicalStaffListModelPayload =>
-      throw UnimplementedError();
-
-  @override
-  Future<List<MySelectorModel>> getReportTypeList() {
-    // TODO: implement getReportTypeList
+  Future<List<MySelectorModel>> getReportTypeList() async {
+    // TODO: implement previewReportFile
     throw UnimplementedError();
   }
 

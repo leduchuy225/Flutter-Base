@@ -202,13 +202,13 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           init: this,
           builder: (controller) {
             return SignReportFileWidget(
+              isSign: isReportFileSigned.value,
               reportController: reportController,
               getReportTypeList: getReportTypeList,
+              filePath: controller.previewReportFileLink.value,
               staffSignatureController: staffSignatureController,
               reportTypeListController: reportTypeListController,
               customerSignatureController: customerSignatureController,
-              filePath:
-                  'https://docs.google.com/document/d/1UvDyUThyUcKFH9luMVSlftbZLMP31iqf/edit?usp=sharing&ouid=105074865760102672014&rtpof=true&sd=true', // controller.previewReportFileLink.value,
               previewReportFile: () async {
                 if (currentReportId == ReportType.BBNT) {
                   if (!reportController.checkBbntIsValid()) {

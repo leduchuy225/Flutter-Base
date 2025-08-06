@@ -7,11 +7,14 @@ class GradientBackground extends StatelessWidget {
   const GradientBackground({
     super.key,
     required this.children,
+
+    this.padding,
     this.sizeFraction = 0.1,
     this.colors = AppColors.defaultGradient,
   });
 
   final List<Color> colors;
+  final EdgeInsets? padding;
   final double sizeFraction;
   final List<Widget> children;
 
@@ -20,7 +23,7 @@ class GradientBackground extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(gradient: LinearGradient(colors: colors)),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: padding ?? const EdgeInsets.all(20),
         child: Column(
           children: [
             SizedBox(
