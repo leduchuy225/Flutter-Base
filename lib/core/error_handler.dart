@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/ui/authentication/otp_screen.dart';
 import 'package:flutter_base/ui/splash_screen.dart';
@@ -24,7 +25,10 @@ class MyError implements Exception {
     );
   }
 
-  static BaseResponse handleError(Object? error, {bool isShowMessage = true}) {
+  static Future<BaseResponse> handleError(
+    Object? error, {
+    bool isShowMessage = true,
+  }) async {
     BaseResponse _baseResponse = BaseResponse(
       code: MyStatus.error,
       message: MyStrings.systemError,
@@ -47,6 +51,7 @@ class MyError implements Exception {
           HttpStatus.forbidden,
           HttpStatus.unauthorized,
         ].contains(dioException.response?.statusCode)) {
+          await Get.find<UserService>().clearLocalData();
           Get.offAll(() => const SplashScreen());
         }
 
@@ -60,6 +65,7 @@ class MyError implements Exception {
         if (myException.response?.code == MyStatus.notAuthenticate2Fa) {
           Get.offAll(() => const OtpScreen());
         } else if (myException.response?.code == MyStatus.tokenTimeOut) {
+          await Get.find<UserService>().clearLocalData();
           Get.offAll(() => const SplashScreen());
         }
 

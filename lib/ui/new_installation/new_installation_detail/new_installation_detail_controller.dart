@@ -365,4 +365,7 @@ class NewInstallationDetailController
       update();
     }
   }
+
+  @override
+  String? get serviceType => MBService.NewInstallation;
 }

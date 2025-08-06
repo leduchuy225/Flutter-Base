@@ -204,6 +204,7 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
                             titleText: 'Dịch vụ',
                             text: item.serviceTitle,
                           ),
+                          MyTexttileItem(titleText: 'ACC', text: item.userName),
                           MyTexttileItem(
                             titleText: 'Mã NV',
                             text: item.staffCode,

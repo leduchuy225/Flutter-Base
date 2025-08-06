@@ -56,6 +56,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   int? get id;
 
+  String? get serviceType;
+
   String? get expectedCompletionDate;
 
   TechnicalStaffListModelPayload get technicalStaffListModelPayload;
@@ -120,13 +122,18 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           ],
         );
       case 4:
-        return Column(
-          children: [
-            getStepContent(context, step: 3),
-            AppStyles.pdt15,
-            getStepContent(context, step: 4),
-          ],
-        );
+        if (serviceType == MBService.NewInstallation) {
+          return Column(
+            children: [
+              getStepContent(context, step: 3),
+              AppStyles.pdt15,
+              getStepContent(context, step: 4),
+            ],
+          );
+        } else if (serviceType == MBService.RepairRequest) {
+          return getStepContent(context, step: 3);
+        }
+        return const SizedBox();
       default:
         return getStepContent(context, step: currentRxStep.value);
     }

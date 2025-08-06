@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/ui/repair_request/repair_request_list/repair_request_list_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
+import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/webview/my_webview_screen.dart';
 import 'package:get/get.dart';
 
@@ -8,8 +9,8 @@ import '../core/services/notification_service.dart';
 import '../core/services/user_service.dart';
 import '../theme/styles.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
-import '../widgets/gradient_background.dart';
 import 'new_installation/new_installation_list/new_installation_list_screen.dart';
+import 'olt/olt_list_screen.dart';
 import 'search_customer/search_customer_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -38,50 +39,52 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return DrawerScaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      appBar: MyAppbar.appBar('Màn hình chính'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           GetBuilder(
             init: _userService,
             builder: (service) {
-              return GradientBackground(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.account_box_rounded,
-                        color: AppColors.textLight,
-                      ),
-                      AppStyles.pdl10,
-                      Expanded(
-                        child: Text(
-                          service.userInfor?.fullName ?? '',
-                          style: AppTextStyles.body2.copyWith(
-                            color: AppColors.textLight,
+              return Container(
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+                color: AppColors.mobifiberRandom2,
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.account_box_rounded,
+                          color: AppColors.textLight,
+                        ),
+                        AppStyles.pdl10,
+                        Expanded(
+                          child: Text(
+                            service.userInfor?.fullName ?? '',
+                            style: AppTextStyles.body2.copyWith(
+                              color: AppColors.textLight,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  AppStyles.pdt10,
-                  Row(
-                    children: [
-                      const Icon(Icons.email, color: AppColors.textLight),
-                      AppStyles.pdl10,
-                      Expanded(
-                        child: Text(
-                          service.userInfor?.email ?? '',
-                          style: AppTextStyles.body2.copyWith(
-                            color: AppColors.textLight,
+                      ],
+                    ),
+                    AppStyles.pdt10,
+                    Row(
+                      children: [
+                        const Icon(Icons.email, color: AppColors.textLight),
+                        AppStyles.pdl10,
+                        Expanded(
+                          child: Text(
+                            service.userInfor?.email ?? '',
+                            style: AppTextStyles.body2.copyWith(
+                              color: AppColors.textLight,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               );
             },
           ),
@@ -89,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
             child: GridView(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
               ),
               children: [
                 MainFunctionItem(
@@ -124,6 +127,13 @@ class _MainScreenState extends State<MainScreen> {
                             'https://www.google.com/maps/d/u/0/viewer?mid=1Pct3jqqytWF5jv2oj9A_VYu3s0lC5-U&ll=20.807126436311332%2C106.77067050000002&z=11',
                       ),
                     );
+                  },
+                ),
+                MainFunctionItem(
+                  icon: Icons.offline_bolt,
+                  title: 'OLT',
+                  onTap: () {
+                    Get.to(() => const OltListScreen());
                   },
                 ),
               ],

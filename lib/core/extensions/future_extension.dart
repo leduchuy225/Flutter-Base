@@ -39,11 +39,11 @@ extension FutureExtension<T> on Future<BaseResponse<T>> {
         MyDialog.snackbar(data.message, type: SnackbarType.SUCCESS);
       }
       return data;
-    }).onError((error, stackTrace) {
+    }).onError((error, stackTrace) async {
       if (isShowLoading) {
         MyLoading.hide();
       }
-      final data = MyError.handleError(
+      final data = await MyError.handleError(
         error,
         isShowMessage: isShowErrorMessage,
       );

@@ -272,4 +272,7 @@ class RepairRequestDetailController
     // TODO: implement signReportFile
     throw UnimplementedError();
   }
+
+  @override
+  String? get serviceType => MBService.RepairRequest;
 }

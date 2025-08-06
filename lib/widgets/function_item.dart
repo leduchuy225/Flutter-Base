@@ -67,12 +67,16 @@ class MainFunctionItem extends StatelessWidget {
       onTap: onTap,
       child: Card(
         child: Padding(
-          padding: const EdgeInsetsGeometry.all(16),
+          padding: const EdgeInsetsGeometry.all(10),
           child: Column(
             children: [
               const SizedBox(),
-              Icon(icon, color: AppColors.primary, size: 50),
-              Text(title, style: AppTextStyles.title2),
+              Icon(icon, color: AppColors.primary, size: 28),
+              Text(
+                title,
+                style: AppTextStyles.body2,
+                textAlign: TextAlign.center,
+              ),
             ],
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),

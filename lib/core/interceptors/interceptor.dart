@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/services/cache_service.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:get/get.dart' hide Response;
@@ -71,6 +72,18 @@ class MyInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
+    if (response.data is Map &&
+        response.data['status'] == MyStatus.tokenTimeOut) {
+      response.statusCode = HttpStatus.unauthorized;
+      handler.reject(
+        DioException(
+          response: response,
+          type: DioExceptionType.badResponse,
+          requestOptions: response.requestOptions,
+        ),
+      );
+      return;
+    }
     handler.next(response);
   }
 
