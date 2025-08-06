@@ -1,12 +1,27 @@
 {
   "tasks": [
     {
-      "label": "Build and Move Flutter APK",
+      "label": "Build and Move Flutter APK DEV",
       "type": "shell",
       "command": "sh",
       "args": [
         "-c",
         "flutter build apk && cp build/app/outputs/flutter-apk/app-release.apk ./app-release.apk"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Builds the APK and moves it to project root"
+    },
+    {
+      "label": "Build and Move Flutter APK RELEASE",
+      "type": "shell",
+      "command": "sh",
+      "args": [
+        "-c",
+        "flutter build apk --release && cp build/app/outputs/flutter-apk/app-release.apk ./app-release.apk"
       ],
       "group": {
         "kind": "build",

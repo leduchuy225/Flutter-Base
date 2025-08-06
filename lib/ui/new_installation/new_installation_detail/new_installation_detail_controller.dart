@@ -44,7 +44,7 @@ class NewInstallationDetailController
           data.listMbConnectionRequestOverdueViewModel ?? [];
 
       if (data.reportAcceptance != null) {
-        previewReportFileLink.value = data.reportAcceptance!;
+        previewReportFileLink.value = getFileLink(data.reportAcceptance)!;
         isReportFileSigned.value = data.reportAcceptanceIsSign ?? false;
         reportTypeListController.selectors = [
           MySelectorModel(
@@ -53,7 +53,7 @@ class NewInstallationDetailController
           ),
         ];
       } else if (data.reportHandoverDevice != null) {
-        previewReportFileLink.value = data.reportHandoverDevice!;
+        previewReportFileLink.value = getFileLink(data.reportAcceptance)!;
         isReportFileSigned.value = data.reportHandoverDeviceIsSign ?? false;
         reportTypeListController.selectors = [
           MySelectorModel(

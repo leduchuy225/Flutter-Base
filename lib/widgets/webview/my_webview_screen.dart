@@ -45,9 +45,11 @@ class _MyWebviewScreenState extends State<MyWebviewScreen> {
             MyLoading.hide();
           },
           onNavigationRequest: (request) {
-            print(request.url);
-            if (request.url.startsWith('intent://www.google.com/maps')) {
-              launchMyURL(request.url, mode: LaunchMode.externalApplication);
+            if (request.url.startsWith('intent://')) {
+              launchMyURL(
+                request.url.replaceFirst('intent://', 'https://'),
+                mode: LaunchMode.externalApplication,
+              );
               return NavigationDecision.prevent;
             }
             return NavigationDecision.navigate;
