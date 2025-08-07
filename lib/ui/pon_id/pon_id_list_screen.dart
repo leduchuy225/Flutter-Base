@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/utils/datetime_utils.dart';
-import 'package:flutter_base/data/olt_api.dart';
+import 'package:flutter_base/data/pon_id_api.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
@@ -13,28 +13,32 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../core/const/constants.dart';
 import '../../models/common/search_default_model_payload.dart';
-import '../../models/olt/olt_list_model_response.dart';
-import '../../models/olt/olt_list_payload.dart';
-import '../../models/olt/olt_search_set_payload.dart';
+import '../../models/pon_id/pon_id_list_model_response.dart';
+import '../../models/pon_id/pon_id_list_payload.dart';
+import '../../models/pon_id/pon_id_search_set_payload.dart';
 import '../../widgets/data_state_widget.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 
-class OltListScreen extends StatefulWidget {
-  const OltListScreen({super.key});
+class PonIdListScreen extends StatefulWidget {
+  const PonIdListScreen({super.key});
 
   @override
-  State<OltListScreen> createState() => _OltListScreenState();
+  State<PonIdListScreen> createState() => _PonIdListScreenState();
 }
 
-class _OltListScreenState extends State<OltListScreen> {
-  final _codeTextController = MyTextFieldController();
-  final _nameTextController = MyTextFieldController();
+class _PonIdListScreenState extends State<PonIdListScreen> {
+  final _ponIdTextController = MyTextFieldController();
+  final _ponNameTextController = MyTextFieldController();
+  final _oltIdTextController = MyTextFieldController();
+  final _oltNameTextController = MyTextFieldController();
 
-  var _state = PagingState<int, OltListModelResponse>();
+  var _state = PagingState<int, PonIdListModelResponse>();
 
   bool _getIsEmptySearchText({required bool isShowError}) {
-    if (_codeTextController.textTrim.isNotEmpty ||
-        _nameTextController.textTrim.isNotEmpty) {
+    if (_ponIdTextController.textTrim.isNotEmpty ||
+        _ponNameTextController.textTrim.isNotEmpty ||
+        _oltIdTextController.textTrim.isNotEmpty ||
+        _oltNameTextController.textTrim.isNotEmpty) {
       return false;
     }
 
@@ -45,22 +49,24 @@ class _OltListScreenState extends State<OltListScreen> {
     return true;
   }
 
-  Future<List<OltListModelResponse>> getData({required int page}) async {
-    final body = OltListPayload(
+  Future<List<PonIdListModelResponse>> getData({required int page}) async {
+    final body = PonIdListPayload(
       coundLoad: 1,
       searchDefault: SearchDefaultModelPayload(
         page: page,
         typeOrder: true,
         pageSize: Config.pageSizeDefault,
       ),
-      searchSet: OltSearchSetPayload(
-        code: _nameTextController.textTrim,
-        idLong: _codeTextController.textTrim,
+      searchSet: PonIdSearchSetPayload(
+        code: _ponNameTextController.textTrim,
+        idLong: _ponIdTextController.textTrim,
+        oltCode: _oltNameTextController.textTrim,
+        oltIdLong: _oltIdTextController.textTrim,
       ),
     );
 
-    final response = await Get.find<OltApi>()
-        .getOltList(body)
+    final response = await Get.find<PonIdApi>()
+        .getPonIdList(body)
         .callApi(isShowSuccessMessage: false);
 
     return response.data?.model ?? [];
@@ -72,7 +78,7 @@ class _OltListScreenState extends State<OltListScreen> {
   }) async {
     if (isRefresh) {
       setState(() {
-        _state = PagingState<int, OltListModelResponse>();
+        _state = PagingState<int, PonIdListModelResponse>();
       });
     }
     if (_getIsEmptySearchText(isShowError: isShowError)) {
@@ -103,7 +109,7 @@ class _OltListScreenState extends State<OltListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppbar.appBar('Tra cứu OLT'),
+      appBar: MyAppbar.appBar('Tra cứu PON ID'),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -117,13 +123,23 @@ class _OltListScreenState extends State<OltListScreen> {
                     Text('Bộ lọc tìm kiếm', style: AppTextStyles.title1),
                     AppStyles.pdt20,
                     MyTextField(
-                      labelText: 'Mã OTL',
-                      controller: _codeTextController,
+                      labelText: 'Mã PON ID',
+                      controller: _ponIdTextController,
+                    ),
+                    AppStyles.pdt20,
+                    MyTextField(
+                      labelText: 'Tên PON ID',
+                      controller: _ponNameTextController,
+                    ),
+                    AppStyles.pdt20,
+                    MyTextField(
+                      labelText: 'Mã OLT',
+                      controller: _oltIdTextController,
                     ),
                     AppStyles.pdt20,
                     MyTextField(
                       labelText: 'Tên OLT',
-                      controller: _nameTextController,
+                      controller: _oltNameTextController,
                     ),
                     AppStyles.pdt30,
                     ElevatedButton(
@@ -144,15 +160,15 @@ class _OltListScreenState extends State<OltListScreen> {
                 horizontal: AppStyles.horizontalPaddingValue,
               ),
               child: TitleNumberIndicator(
-                title: 'Danh sách OLT',
+                title: 'Danh sách PON ID',
                 number: (_state.items ?? []).length,
               ),
             ),
           ),
-          PagedSliverList<int, OltListModelResponse>(
+          PagedSliverList<int, PonIdListModelResponse>(
             state: _state,
             fetchNextPage: fetchNextPage,
-            builderDelegate: PagedChildBuilderDelegate<OltListModelResponse>(
+            builderDelegate: PagedChildBuilderDelegate<PonIdListModelResponse>(
               noItemsFoundIndicatorBuilder: (context) {
                 return MyDataState.empty();
               },
@@ -166,12 +182,27 @@ class _OltListScreenState extends State<OltListScreen> {
                     horizontal: AppStyles.horizontalPaddingValue,
                   ),
                   child: MyTexttile.card(
-                    title: item.code,
+                    title: '# ${item.code}',
                     items: [
                       MyTexttileItem(
                         isCopy: true,
                         text: item.idLong,
+                        titleText: 'Mã PON ID',
+                      ),
+                      MyTexttileItem(
+                        isCopy: true,
+                        text: item.code,
+                        titleText: 'Tên PON ID',
+                      ),
+                      MyTexttileItem(
+                        isCopy: true,
+                        text: item.oltIdLong,
                         titleText: 'Mã OLT',
+                      ),
+                      MyTexttileItem(
+                        isCopy: true,
+                        text: item.oltCode,
+                        titleText: 'Tên OLT',
                       ),
                       MyTexttileItem(
                         text: item.googleMap,

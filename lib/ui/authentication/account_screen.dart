@@ -22,6 +22,7 @@ class _AccountScreenState extends State<AccountScreen> {
   final _userService = Get.find<UserService>();
 
   final _nameTextController = MyTextFieldController();
+  final _phoneTextController = MyTextFieldController();
   final _genderTextController = MyTextFieldController();
   final _emailTextController = MyTextFieldController();
   final _addressTextController = MyTextFieldController();
@@ -31,6 +32,7 @@ class _AccountScreenState extends State<AccountScreen> {
     super.initState();
 
     _nameTextController.text = _userService.userInfor?.fullName ?? '';
+    _phoneTextController.text = _userService.userInfor?.phoneNumber ?? '';
     _genderTextController.text = _userService.userInfor?.gioiTinh ?? '';
     _emailTextController.text = _userService.userInfor?.email ?? '';
     _addressTextController.text = _userService.userInfor?.address ?? '';
@@ -74,6 +76,12 @@ class _AccountScreenState extends State<AccountScreen> {
               readOnly: true,
               labelText: 'Họ và tên',
               controller: _nameTextController,
+            ),
+            AppStyles.pdt25,
+            MyTextField(
+              readOnly: true,
+              labelText: 'SĐT',
+              controller: _phoneTextController,
             ),
             AppStyles.pdt25,
             MyTextField(

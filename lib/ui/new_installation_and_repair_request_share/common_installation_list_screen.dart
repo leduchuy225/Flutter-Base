@@ -6,6 +6,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../widgets/data_state_widget.dart';
+import '../../core/const/constants.dart';
 import 'common_installation_list_controller.dart';
 
 class CommonInstallationListScreen<T> extends StatelessWidget {
@@ -31,7 +32,7 @@ class CommonInstallationListScreen<T> extends StatelessWidget {
 
     final newKey = (controller.pageState.keys?.last ?? 0) + 1;
     final newItems = await getData(page: newKey);
-    final isLastPage = newItems.isEmpty;
+    final isLastPage = newItems.length < Config.pageSizeDefault;
 
     controller.pageState = controller.pageState.copyWith(
       isLoading: false,

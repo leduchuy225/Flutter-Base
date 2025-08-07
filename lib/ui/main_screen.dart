@@ -11,6 +11,7 @@ import '../theme/styles.dart';
 import '../widgets/drawer/scaffold_drawer_widget.dart';
 import 'new_installation/new_installation_list/new_installation_list_screen.dart';
 import 'olt/olt_list_screen.dart';
+import 'pon_id/pon_id_list_screen.dart';
 import 'search_customer/search_customer_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -134,6 +135,13 @@ class _MainScreenState extends State<MainScreen> {
                   title: 'OLT',
                   onTap: () {
                     Get.to(() => const OltListScreen());
+                  },
+                ),
+                MainFunctionItem(
+                  icon: Icons.polyline_rounded,
+                  title: 'PON ID',
+                  onTap: () {
+                    Get.to(() => const PonIdListScreen());
                   },
                 ),
               ],

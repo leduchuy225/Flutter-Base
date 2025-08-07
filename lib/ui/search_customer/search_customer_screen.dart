@@ -95,7 +95,7 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
 
     final newKey = (_state.keys?.last ?? 0) + 1;
     final newItems = await getData(page: newKey);
-    final isLastPage = newItems.isEmpty;
+    final isLastPage = newItems.length < Config.pageSizeDefault;
 
     setState(() {
       _state = _state.copyWith(
@@ -188,7 +188,11 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
                       child: MyTexttile.card(
                         title: item.fullName,
                         items: [
-                          MyTexttileItem(text: item.code, titleText: 'Mã KH'),
+                          MyTexttileItem(
+                            isCopy: true,
+                            text: item.code,
+                            titleText: 'Mã KH',
+                          ),
                           MyTexttileItem(text: item.userName, titleText: 'ACC'),
                           MyTexttileItem(text: item.cccd, titleText: 'CCCD'),
                           MyTexttileItem(
@@ -204,7 +208,6 @@ class _SearchCustomerScreenState extends State<SearchCustomerScreen> {
                             titleText: 'Dịch vụ',
                             text: item.serviceTitle,
                           ),
-                          MyTexttileItem(titleText: 'ACC', text: item.userName),
                           MyTexttileItem(
                             titleText: 'Mã NV',
                             text: item.staffCode,
