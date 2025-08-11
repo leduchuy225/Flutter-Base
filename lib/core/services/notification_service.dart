@@ -4,10 +4,9 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/utils/utils.dart';
-import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
 
+import '../../widgets/dialog/dialog_widget.dart';
 import 'user_service.dart';
 
 class NotificationService {
@@ -16,7 +15,7 @@ class NotificationService {
 
   static final _localNotifications = FlutterLocalNotificationsPlugin();
 
-  static Future<void> initializeFBMessaging(BuildContext context) async {
+  static Future<void> handleFirebaseMessaging(BuildContext context) async {
     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
@@ -26,6 +25,19 @@ class NotificationService {
       );
     }
 
+    // App opened from background
+    messageOpenedAppSubscription = FirebaseMessaging.onMessageOpenedApp.listen((
+      RemoteMessage message,
+    ) async {
+      print('Notification tapped');
+      await NotificationService.navigateFromNotification(
+        context,
+        message: message,
+      );
+    });
+  }
+
+  static Future<void> initializeLocalNotification(BuildContext context) async {
     await NotificationService.setupLocalNotificationPlugin(
       onDidReceiveNotificationResponse: (notificaiton) async {
         await NotificationService.navigateFromNotification(
@@ -44,17 +56,6 @@ class NotificationService {
       print('Foreground message: ${message.notification?.title}');
       _showLocalNotification(message);
     });
-
-    // App opened from background
-    messageOpenedAppSubscription = FirebaseMessaging.onMessageOpenedApp.listen((
-      RemoteMessage message,
-    ) async {
-      print('Notification tapped');
-      await NotificationService.navigateFromNotification(
-        context,
-        message: message,
-      );
-    });
   }
 
   static void cancel() {
@@ -71,8 +72,14 @@ class NotificationService {
       return;
     }
 
+    MyDialog.snackbar(
+      message.notification?.body ?? '',
+      title: message.notification?.title ?? '',
+      type: SnackbarType.INFORMATION,
+    );
+
     // Handle navigation here
-    Get.to(() => const DevScreen());
+    // Get.to(() => const DevScreen());
   }
 
   static Future<void> _showLocalNotification(RemoteMessage message) async {

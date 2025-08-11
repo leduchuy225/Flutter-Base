@@ -27,14 +27,8 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await NotificationService.initializeFBMessaging(context);
+      await NotificationService.handleFirebaseMessaging(context);
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    NotificationService.cancel();
   }
 
   @override

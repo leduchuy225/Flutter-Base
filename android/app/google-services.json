@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "832593049919",
-    "project_id": "flutter-base-test-noti",
-    "storage_bucket": "flutter-base-test-noti.firebasestorage.app"
+    "project_number": "475856080311",
+    "project_id": "mobifiber-5fb79",
+    "storage_bucket": "mobifiber-5fb79.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:832593049919:android:23654c02d76a65ce45fb8a",
+        "mobilesdk_app_id": "1:475856080311:android:970486e7cfe11e7c21ac32",
         "android_client_info": {
-          "package_name": "com.example.flutter_base"
+          "package_name": "com.hig.mobifiber"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAnUOtCiseKazielEVWACZKqbHsB08bChI"
+          "current_key": "AIzaSyByD_kEmfESQPbYCmHyJuggo3DSJ751B2Q"
         }
       ],
       "services": {
