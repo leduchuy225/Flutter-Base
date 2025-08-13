@@ -2,19 +2,21 @@ class OltListModelResponse {
   int? id;
   int? idLong;
   String? code;
-  String? createdBy;
-  String? createdDate;
-  String? modifiedBy;
-  String? modifiedDate;
-  bool? deleteStatus;
+  dynamic createdBy;
+  dynamic createdDate;
+  dynamic modifiedBy;
+  dynamic modifiedDate;
+  dynamic deleteStatus;
   dynamic deleteBy;
   dynamic deleteDate;
-  bool? status;
+  dynamic status;
   dynamic setDefault;
   dynamic googleMap;
   dynamic title;
-  String? createdByEmail;
-  String? createdByUserName;
+  dynamic provinceId;
+  dynamic createdByEmail;
+  dynamic createdByUserName;
+  dynamic provinceIdTitle;
 
   OltListModelResponse({
     this.id,
@@ -31,8 +33,10 @@ class OltListModelResponse {
     this.setDefault,
     this.googleMap,
     this.title,
+    this.provinceId,
     this.createdByEmail,
     this.createdByUserName,
+    this.provinceIdTitle,
   });
 
   factory OltListModelResponse.fromJson(Map<String, dynamic> json) {
@@ -40,19 +44,21 @@ class OltListModelResponse {
       id: json['ID'] as int?,
       idLong: json['IDLong'] as int?,
       code: json['Code'] as String?,
-      createdBy: json['CreatedBy'] as String?,
-      createdDate: json['CreatedDate'] as String?,
-      modifiedBy: json['ModifiedBy'] as String?,
-      modifiedDate: json['ModifiedDate'] as String?,
-      deleteStatus: json['DeleteStatus'] as bool?,
+      createdBy: json['CreatedBy'] as dynamic,
+      createdDate: json['CreatedDate'] as dynamic,
+      modifiedBy: json['ModifiedBy'] as dynamic,
+      modifiedDate: json['ModifiedDate'] as dynamic,
+      deleteStatus: json['DeleteStatus'] as dynamic,
       deleteBy: json['DeleteBy'] as dynamic,
       deleteDate: json['DeleteDate'] as dynamic,
-      status: json['Status'] as bool?,
+      status: json['Status'] as dynamic,
       setDefault: json['SetDefault'] as dynamic,
       googleMap: json['GoogleMap'] as dynamic,
       title: json['Title'] as dynamic,
-      createdByEmail: json['CreatedBy_Email'] as String?,
-      createdByUserName: json['CreatedBy_UserName'] as String?,
+      provinceId: json['ProvinceID'] as dynamic,
+      createdByEmail: json['CreatedBy_Email'] as dynamic,
+      createdByUserName: json['CreatedBy_UserName'] as dynamic,
+      provinceIdTitle: json['ProvinceID_Title'] as dynamic,
     );
   }
 
@@ -71,7 +77,9 @@ class OltListModelResponse {
     'SetDefault': setDefault,
     'GoogleMap': googleMap,
     'Title': title,
+    'ProvinceID': provinceId,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
+    'ProvinceID_Title': provinceIdTitle,
   };
 }

@@ -26,8 +26,8 @@ class MyStatus {
 class MBService {
   MBService._();
 
-  static const NewInstallation = 'MB_Service';
   static const RepairRequest = 'MB_RepairRequest';
+  static const NewInstallation = 'MB_NewConnectionRequest';
 }
 
 class ReportType {

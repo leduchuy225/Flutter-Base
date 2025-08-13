@@ -1,0 +1,28 @@
+[
+  {
+    "__className": "olt_getall_response",
+    "__path": "/lib/models/olt",
+    "olt.olt_list_model_response": [
+      {
+        "ID": 1,
+        "IDLong": 766336975919,
+        "Code": "HPG_ADG_AN_DONG_2",
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": null,
+        "SetDefault": null,
+        "GoogleMap": null,
+        "Title": null,
+        "ProvinceID": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null,
+        "ProvinceID_Title": null
+      }
+    ]
+  }
+]
