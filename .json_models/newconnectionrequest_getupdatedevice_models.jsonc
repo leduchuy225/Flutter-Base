@@ -1,0 +1,44 @@
+[
+  {
+    "__className": "slid_list_and_divider_list_payload",
+    "__path": "/lib/models/installation",
+    "id": 1,
+    "model.slid_list_and_divider_list_model_payload": {
+      "CountryID": 237,
+      "ProvinceID": 1,
+      "OLT_ID": 2,
+      "PONID_ID": 10
+    }
+  },
+  {
+    "__className": "slid_list_and_divider_list_response",
+    "__path": "/lib/models/installation",
+    "list_SLID.slid_list_model_response": [
+      {
+        "ID": 578,
+        "IDLong": 325966166944,
+        "Code": "ADG21H0101",
+        "OLT_ID": 2,
+        "OLT_IDLong": 743362380248,
+        "OLT_Code": null,
+        "PONID_ID": 10,
+        "PONID_IDLong": 723027798786,
+        "PONID_Code": null,
+        "CreatedBy": "aee1441d-7cdc-40fa-9fdc-6032d6342a91",
+        "CreatedDate": "/Date(1755026280057)/",
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": false,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": true,
+        "SetDefault": null,
+        "GoogleMap": null,
+        "Title": null,
+        "IsOnline": false,
+        "ProvinceID": 1
+      }
+    ],
+    "list_Divider.bo_chia_list_model_response": []
+  }
+]

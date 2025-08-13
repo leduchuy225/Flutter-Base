@@ -44,7 +44,7 @@ class RepairRequestDetailController
       if (data.technicalStaffModuleImage != null) {
         technicalStaffModuleImageControler.files.value = [
           FileCollectionModel(
-            fileName: data.technicalStaffModuleImage,
+            fileName: data.technicalStaffModuleImage!,
             filePath: getFileLink(data.technicalStaffModuleImage)!,
           ),
         ];
@@ -53,7 +53,7 @@ class RepairRequestDetailController
       if (data.technicalStaffImage != null) {
         technicalStaffImageControler.files.value = [
           FileCollectionModel(
-            fileName: data.technicalStaffImage,
+            fileName: data.technicalStaffImage!,
             filePath: getFileLink(data.technicalStaffImage)!,
           ),
         ];
@@ -62,7 +62,7 @@ class RepairRequestDetailController
       if (data.technicalStaffTestImage != null) {
         technicalStaffTestImageControler.files.value = [
           FileCollectionModel(
-            fileName: data.technicalStaffTestImage,
+            fileName: data.technicalStaffTestImage!,
             filePath: getFileLink(data.technicalStaffTestImage)!,
           ),
         ];

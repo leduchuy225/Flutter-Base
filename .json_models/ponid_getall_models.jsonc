@@ -1,0 +1,31 @@
+[
+  {
+    "__className": "ponid_getall_response",
+    "__path": "/lib/models/pon_id",
+    "pONID.pon_id_list_model_response": [
+      {
+        "ID": 9,
+        "IDLong": 783877754151,
+        "Code": "0",
+        "OLT_ID": null,
+        "OLT_IDLong": null,
+        "OLT_Code": null,
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedBy": null,
+        "ModifiedDate": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "Status": null,
+        "SetDefault": null,
+        "GoogleMap": null,
+        "Title": null,
+        "ProvinceID": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null,
+        "ProvinceID_Title": null
+      }
+    ]
+  }
+]

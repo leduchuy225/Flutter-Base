@@ -1,0 +1,19 @@
+[
+  {
+    "__className": "update_material_payload",
+    "__path": "/lib/models/installation",
+    "id": 1,
+    "model.update_material_model_payload": [
+      {
+        "ID": 0,
+        "Material_ID": 1,
+        "Quantity": 10
+      }
+    ]
+  },
+  {
+    "__className": "update_material_response",
+    "__path": "/lib/models/installation",
+    "CurrentStep": 4
+  }
+]

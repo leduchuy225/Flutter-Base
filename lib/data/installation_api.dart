@@ -68,6 +68,11 @@ abstract class InstallationApi {
     @Part(name: 'technicalStaffModuleImage[0]') File? technicalStaffModuleImage,
     @Part(name: 'technicalStaffTestImage[0]') File? technicalStaffTestImage,
     @Part(name: 'technicalStaffImage[0]') File? technicalStaffImage,
+    @Part(name: 'CableLengthStart') String? cableLengthStart,
+    @Part(name: 'CableLengthEnd') String? cableLengthEnd,
+    @Part(name: 'report_ImageDivider[0]') File? report_ImageDivider,
+    @Part(name: 'report_CableLengthStart[0]') File? report_CableLengthStart,
+    @Part(name: 'report_CableLengthEnd[0]') File? report_CableLengthEnd,
   });
 
   @POST('/newconnectionrequest/addnote')

@@ -5,13 +5,13 @@ import '../common/technical_staff_list_model_response.dart';
 class RepairRequestDetailModelResponse {
   int? id;
   int? idLong;
-  int? parent;
-  int? parentLong;
+  dynamic parent;
+  dynamic parentLong;
   int? currentStep;
   int? customersId;
   int? serviceId;
   int? type;
-  String? contractCode;
+  dynamic contractCode;
   int? surveyStatus;
   int? countryId;
   int? provinceId;
@@ -28,16 +28,42 @@ class RepairRequestDetailModelResponse {
   dynamic closedDate;
   dynamic closedNote;
   String? technicalLeader;
-  dynamic technicalStaff;
-  dynamic technicalStaffDate;
-  dynamic technicalStaffReception;
-  dynamic technicalStaffModuleImage;
-  dynamic technicalStaffTestImage;
-  dynamic technicalStaffImage;
+  String? technicalStaff;
+  String? technicalStaffDate;
+  bool? technicalStaffReception;
+  String? technicalStaffModuleImage;
+  String? technicalStaffTestImage;
+  String? technicalStaffImage;
   dynamic technicalStaffRating;
-  dynamic googleMap;
-  String? expectedCompletionDate;
+  String? googleMap;
+  dynamic expectedCompletionDate;
   dynamic actualCompletionDate;
+  dynamic devicePort;
+  dynamic deviceAcc;
+  dynamic devicePass;
+  dynamic deviceStatus;
+  dynamic slidId;
+  dynamic slidIdLong;
+  dynamic dividerId;
+  dynamic dividerIdLong;
+  dynamic staffCode;
+  String? staffFullName;
+  String? staffPhoneNumber;
+  dynamic technicalStaffReportCompletedDate;
+  bool? isCompletedStaffOn;
+  dynamic customerNote;
+  int? reportDistance;
+  String? reportCorrectionMethod;
+  dynamic reportOtherArising;
+  dynamic reportResult;
+  String? reportImageDivider;
+  String? reportCableLengthStart;
+  String? reportCableLengthEnd;
+  int? cableLength;
+  int? cableLengthStart;
+  int? cableLengthEnd;
+  String? reportProblem;
+  dynamic reportProblemIsSet;
   CustomerViewmodelResponse? mbCustomerViewModel;
   dynamic mbRepairRequestNoteViewModel;
   List<NoteViewmodelResponse>? listMbRepairRequestNoteViewModel;
@@ -45,6 +71,7 @@ class RepairRequestDetailModelResponse {
   dynamic listTechnicalStaff;
   dynamic mbRepairRequestOverdueViewModel;
   List<NoteViewmodelResponse>? listMbRepairRequestOverdueViewModel;
+  List<dynamic>? listMbRepairRequestMaterialViewModel;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -55,11 +82,17 @@ class RepairRequestDetailModelResponse {
   dynamic customersIdIdLong;
   dynamic customersIdFullName;
   dynamic customersIdCccd;
+  dynamic customersIdPhoneNumber;
+  dynamic customersIdCode;
   dynamic serviceIdTitle;
   dynamic createdByEmail;
   dynamic createdByUserName;
   dynamic progress;
   dynamic progressTitle;
+  dynamic typeTitle;
+  dynamic surveyStatusTitle;
+  dynamic technicalLeaderUserName;
+  dynamic technicalStaffUserName;
 
   RepairRequestDetailModelResponse({
     this.id,
@@ -97,6 +130,32 @@ class RepairRequestDetailModelResponse {
     this.googleMap,
     this.expectedCompletionDate,
     this.actualCompletionDate,
+    this.devicePort,
+    this.deviceAcc,
+    this.devicePass,
+    this.deviceStatus,
+    this.slidId,
+    this.slidIdLong,
+    this.dividerId,
+    this.dividerIdLong,
+    this.staffCode,
+    this.staffFullName,
+    this.staffPhoneNumber,
+    this.technicalStaffReportCompletedDate,
+    this.isCompletedStaffOn,
+    this.customerNote,
+    this.reportDistance,
+    this.reportCorrectionMethod,
+    this.reportOtherArising,
+    this.reportResult,
+    this.reportImageDivider,
+    this.reportCableLengthStart,
+    this.reportCableLengthEnd,
+    this.cableLength,
+    this.cableLengthStart,
+    this.cableLengthEnd,
+    this.reportProblem,
+    this.reportProblemIsSet,
     this.mbCustomerViewModel,
     this.mbRepairRequestNoteViewModel,
     this.listMbRepairRequestNoteViewModel,
@@ -104,6 +163,7 @@ class RepairRequestDetailModelResponse {
     this.listTechnicalStaff,
     this.mbRepairRequestOverdueViewModel,
     this.listMbRepairRequestOverdueViewModel,
+    this.listMbRepairRequestMaterialViewModel,
     this.address2,
     this.countryIdTitle,
     this.provinceIdTitle,
@@ -114,24 +174,30 @@ class RepairRequestDetailModelResponse {
     this.customersIdIdLong,
     this.customersIdFullName,
     this.customersIdCccd,
+    this.customersIdPhoneNumber,
+    this.customersIdCode,
     this.serviceIdTitle,
     this.createdByEmail,
     this.createdByUserName,
     this.progress,
     this.progressTitle,
+    this.typeTitle,
+    this.surveyStatusTitle,
+    this.technicalLeaderUserName,
+    this.technicalStaffUserName,
   });
 
   factory RepairRequestDetailModelResponse.fromJson(Map<String, dynamic> json) {
     return RepairRequestDetailModelResponse(
       id: json['ID'] as int?,
       idLong: json['IDLong'] as int?,
-      parent: json['Parent'] as int?,
-      parentLong: json['ParentLong'] as int?,
+      parent: json['Parent'] as dynamic,
+      parentLong: json['ParentLong'] as dynamic,
       currentStep: json['CurrentStep'] as int?,
       customersId: json['CustomersID'] as int?,
       serviceId: json['ServiceID'] as int?,
       type: json['Type'] as int?,
-      contractCode: json['ContractCode'] as String?,
+      contractCode: json['ContractCode'] as dynamic,
       surveyStatus: json['SurveyStatus'] as int?,
       countryId: json['CountryID'] as int?,
       provinceId: json['ProvinceID'] as int?,
@@ -148,16 +214,43 @@ class RepairRequestDetailModelResponse {
       closedDate: json['ClosedDate'] as dynamic,
       closedNote: json['ClosedNote'] as dynamic,
       technicalLeader: json['TechnicalLeader'] as String?,
-      technicalStaff: json['TechnicalStaff'] as dynamic,
-      technicalStaffDate: json['TechnicalStaffDate'] as dynamic,
-      technicalStaffReception: json['TechnicalStaffReception'] as dynamic,
-      technicalStaffModuleImage: json['TechnicalStaffModuleImage'] as dynamic,
-      technicalStaffTestImage: json['TechnicalStaffTestImage'] as dynamic,
-      technicalStaffImage: json['TechnicalStaffImage'] as dynamic,
+      technicalStaff: json['TechnicalStaff'] as String?,
+      technicalStaffDate: json['TechnicalStaffDate'] as String?,
+      technicalStaffReception: json['TechnicalStaffReception'] as bool?,
+      technicalStaffModuleImage: json['TechnicalStaffModuleImage'] as String?,
+      technicalStaffTestImage: json['TechnicalStaffTestImage'] as String?,
+      technicalStaffImage: json['TechnicalStaffImage'] as String?,
       technicalStaffRating: json['TechnicalStaffRating'] as dynamic,
-      googleMap: json['GoogleMap'] as dynamic,
-      expectedCompletionDate: json['ExpectedCompletionDate'] as String?,
+      googleMap: json['GoogleMap'] as String?,
+      expectedCompletionDate: json['ExpectedCompletionDate'] as dynamic,
       actualCompletionDate: json['ActualCompletionDate'] as dynamic,
+      devicePort: json['Device_Port'] as dynamic,
+      deviceAcc: json['Device_ACC'] as dynamic,
+      devicePass: json['Device_Pass'] as dynamic,
+      deviceStatus: json['Device_Status'] as dynamic,
+      slidId: json['SLID_ID'] as dynamic,
+      slidIdLong: json['SLID_IDLong'] as dynamic,
+      dividerId: json['Divider_ID'] as dynamic,
+      dividerIdLong: json['Divider_IDLong'] as dynamic,
+      staffCode: json['StaffCode'] as dynamic,
+      staffFullName: json['StaffFullName'] as String?,
+      staffPhoneNumber: json['StaffPhoneNumber'] as String?,
+      technicalStaffReportCompletedDate:
+          json['TechnicalStaffReportCompletedDate'] as dynamic,
+      isCompletedStaffOn: json['IsCompletedStaffOn'] as bool?,
+      customerNote: json['CustomerNote'] as dynamic,
+      reportDistance: json['Report_Distance'] as int?,
+      reportCorrectionMethod: json['Report_CorrectionMethod'] as String?,
+      reportOtherArising: json['Report_OtherArising'] as dynamic,
+      reportResult: json['Report_Result'] as dynamic,
+      reportImageDivider: json['Report_ImageDivider'] as String?,
+      reportCableLengthStart: json['Report_CableLengthStart'] as String?,
+      reportCableLengthEnd: json['Report_CableLengthEnd'] as String?,
+      cableLength: json['CableLength'] as int?,
+      cableLengthStart: json['CableLengthStart'] as int?,
+      cableLengthEnd: json['CableLengthEnd'] as int?,
+      reportProblem: json['Report_Problem'] as String?,
+      reportProblemIsSet: json['Report_Problem_IsSet'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null
           ? null
           : CustomerViewmodelResponse.fromJson(
@@ -199,11 +292,17 @@ class RepairRequestDetailModelResponse {
       customersIdIdLong: json['CustomersID_IDLong'] as dynamic,
       customersIdFullName: json['CustomersID_FullName'] as dynamic,
       customersIdCccd: json['CustomersID_CCCD'] as dynamic,
+      customersIdPhoneNumber: json['CustomersID_PhoneNumber'] as dynamic,
+      customersIdCode: json['CustomersID_Code'] as dynamic,
       serviceIdTitle: json['ServiceID_Title'] as dynamic,
       createdByEmail: json['CreatedBy_Email'] as dynamic,
       createdByUserName: json['CreatedBy_UserName'] as dynamic,
       progress: json['Progress'] as dynamic,
       progressTitle: json['Progress_Title'] as dynamic,
+      typeTitle: json['Type_Title'] as dynamic,
+      surveyStatusTitle: json['SurveyStatus_Title'] as dynamic,
+      technicalLeaderUserName: json['TechnicalLeader_UserName'] as dynamic,
+      technicalStaffUserName: json['TechnicalStaff_UserName'] as dynamic,
     );
   }
 
@@ -243,6 +342,32 @@ class RepairRequestDetailModelResponse {
     'GoogleMap': googleMap,
     'ExpectedCompletionDate': expectedCompletionDate,
     'ActualCompletionDate': actualCompletionDate,
+    'Device_Port': devicePort,
+    'Device_ACC': deviceAcc,
+    'Device_Pass': devicePass,
+    'Device_Status': deviceStatus,
+    'SLID_ID': slidId,
+    'SLID_IDLong': slidIdLong,
+    'Divider_ID': dividerId,
+    'Divider_IDLong': dividerIdLong,
+    'StaffCode': staffCode,
+    'StaffFullName': staffFullName,
+    'StaffPhoneNumber': staffPhoneNumber,
+    'TechnicalStaffReportCompletedDate': technicalStaffReportCompletedDate,
+    'IsCompletedStaffOn': isCompletedStaffOn,
+    'CustomerNote': customerNote,
+    'Report_Distance': reportDistance,
+    'Report_CorrectionMethod': reportCorrectionMethod,
+    'Report_OtherArising': reportOtherArising,
+    'Report_Result': reportResult,
+    'Report_ImageDivider': reportImageDivider,
+    'Report_CableLengthStart': reportCableLengthStart,
+    'Report_CableLengthEnd': reportCableLengthEnd,
+    'CableLength': cableLength,
+    'CableLengthStart': cableLengthStart,
+    'CableLengthEnd': cableLengthEnd,
+    'Report_Problem': reportProblem,
+    'Report_Problem_IsSet': reportProblemIsSet,
     'MB_CustomerViewModel': mbCustomerViewModel?.toJson(),
     'MB_RepairRequestNoteViewModel': mbRepairRequestNoteViewModel,
     'ListMB_RepairRequestNoteViewModel': listMbRepairRequestNoteViewModel
@@ -252,6 +377,8 @@ class RepairRequestDetailModelResponse {
     'ListTechnicalStaff': listTechnicalStaff,
     'MB_RepairRequestOverdueViewModel': mbRepairRequestOverdueViewModel,
     'ListMB_RepairRequestOverdueViewModel': listMbRepairRequestOverdueViewModel,
+    'ListMB_RepairRequestMaterialViewModel':
+        listMbRepairRequestMaterialViewModel,
     'Address2': address2,
     'CountryID_Title': countryIdTitle,
     'ProvinceID_Title': provinceIdTitle,
@@ -262,10 +389,16 @@ class RepairRequestDetailModelResponse {
     'CustomersID_IDLong': customersIdIdLong,
     'CustomersID_FullName': customersIdFullName,
     'CustomersID_CCCD': customersIdCccd,
+    'CustomersID_PhoneNumber': customersIdPhoneNumber,
+    'CustomersID_Code': customersIdCode,
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
     'Progress': progress,
     'Progress_Title': progressTitle,
+    'Type_Title': typeTitle,
+    'SurveyStatus_Title': surveyStatusTitle,
+    'TechnicalLeader_UserName': technicalLeaderUserName,
+    'TechnicalStaff_UserName': technicalStaffUserName,
   };
 }

@@ -1,0 +1,35 @@
+[
+  {
+    "__className": "material_list_response",
+    "__path": "/lib/models/installation",
+    "model.material_list_model_response": [
+      {
+        "ID": 4,
+        "Material_ID": 1,
+        "Material_IDLong": null,
+        "Parent_ID": 1,
+        "Parent_IDLong": null,
+        "Quantity": 10,
+        "Price": null,
+        "PriceOld": null,
+        "PriceImport": null,
+        "UnitId": 1001,
+        "Status": null,
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedDate": null,
+        "ModifiedBy": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "SetDefault": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null,
+        "ModifiedBy_Email": null,
+        "ModifiedBy_UserName": null,
+        "Material_Title": "Cáp thuê bao",
+        "UnitId_Title": "Mét"
+      }
+    ]
+  }
+]

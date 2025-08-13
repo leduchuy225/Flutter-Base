@@ -1,0 +1,37 @@
+[
+  {
+    "__className": "update_device_payload",
+    "__path": "/lib/models/installation",
+    "id": 1,
+    "model.update_device_model_payload": {
+      "Device_Status": 1,
+      "OLT_ID": 2,
+      "OLT_IDLong": null,
+      "PONID_ID": 10,
+      "PONID_IDLong": null,
+      "SLID_IDLong": 303369971369,
+      "Divider_IDLong": null,
+      "Device_Port": 2,
+      "Device_ACC": "acc",
+      "Device_Pass": "pass",
+      "CountryID": 237,
+      "ProvinceID": 1
+    }
+  },
+  {
+    "__className": "update_device_response",
+    "__path": "/lib/models/installation",
+    "Device_Status": 1,
+    "SLID_ID": 579,
+    "SLID_IDLong": 303369971369,
+    "SLID_Code": "ADG21H0102",
+    "Divider_ID": null,
+    "Divider_IDLong": null,
+    "Divider_Code": null,
+    "Device_Port": 0,
+    "Device_ACC": "acc",
+    "Device_Pass": "pass",
+    "OLT_ID": 2,
+    "PONID_ID": 10
+  }
+]
