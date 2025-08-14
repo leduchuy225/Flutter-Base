@@ -238,6 +238,11 @@ class _InstallationApi implements InstallationApi {
     File? technicalStaffModuleImage,
     File? technicalStaffTestImage,
     File? technicalStaffImage,
+    String? cableLengthStart,
+    String? cableLengthEnd,
+    File? report_ImageDivider,
+    File? report_CableLengthStart,
+    File? report_CableLengthEnd,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -284,6 +289,57 @@ class _InstallationApi implements InstallationApi {
             MultipartFile.fromFileSync(
               technicalStaffImage.path,
               filename: technicalStaffImage.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    if (cableLengthStart != null) {
+      _data.fields.add(MapEntry('CableLengthStart', cableLengthStart));
+    }
+    if (cableLengthEnd != null) {
+      _data.fields.add(MapEntry('CableLengthEnd', cableLengthEnd));
+    }
+    if (report_ImageDivider != null) {
+      if (report_ImageDivider != null) {
+        _data.files.add(
+          MapEntry(
+            'report_ImageDivider[0]',
+            MultipartFile.fromFileSync(
+              report_ImageDivider.path,
+              filename: report_ImageDivider.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    if (report_CableLengthStart != null) {
+      if (report_CableLengthStart != null) {
+        _data.files.add(
+          MapEntry(
+            'report_CableLengthStart[0]',
+            MultipartFile.fromFileSync(
+              report_CableLengthStart.path,
+              filename: report_CableLengthStart.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    if (report_CableLengthEnd != null) {
+      if (report_CableLengthEnd != null) {
+        _data.files.add(
+          MapEntry(
+            'report_CableLengthEnd[0]',
+            MultipartFile.fromFileSync(
+              report_CableLengthEnd.path,
+              filename: report_CableLengthEnd.path
                   .split(Platform.pathSeparator)
                   .last,
             ),
@@ -600,6 +656,176 @@ class _InstallationApi implements InstallationApi {
         (json) => SignInstallationReportFileResponse.fromJson(
           json as Map<String, dynamic>,
         ),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<SlidListAndDividerListResponse>> getUpdateDevice(
+    SlidListAndDividerListPayload body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options =
+        _setStreamType<BaseResponse<SlidListAndDividerListResponse>>(
+          Options(method: 'POST', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                '/newconnectionrequest/getupdatedevice',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<SlidListAndDividerListResponse> _value;
+    try {
+      _value = BaseResponse<SlidListAndDividerListResponse>.fromJson(
+        _result.data!,
+        (json) => SlidListAndDividerListResponse.fromJson(
+          json as Map<String, dynamic>,
+        ),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<UpdateDeviceResponse>> updateDevice(
+    UpdateDevicePayload body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<BaseResponse<UpdateDeviceResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/newconnectionrequest/updatedevice',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<UpdateDeviceResponse> _value;
+    try {
+      _value = BaseResponse<UpdateDeviceResponse>.fromJson(
+        _result.data!,
+        (json) => UpdateDeviceResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<MaterialListResponse>> getMaterial(
+    Map<String, dynamic> body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _options = _setStreamType<BaseResponse<MaterialListResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/newconnectionrequest/GetMaterial',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<MaterialListResponse> _value;
+    try {
+      _value = BaseResponse<MaterialListResponse>.fromJson(
+        _result.data!,
+        (json) => MaterialListResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<UpdateMaterialResponse>> updateMaterial(
+    UpdateMaterialPayload body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<BaseResponse<UpdateMaterialResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/newconnectionrequest/UpdateMaterial',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<UpdateMaterialResponse> _value;
+    try {
+      _value = BaseResponse<UpdateMaterialResponse>.fromJson(
+        _result.data!,
+        (json) => UpdateMaterialResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<DeleteMaterialResponse>> deleteMaterial(
+    Map<String, dynamic> body,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _options = _setStreamType<BaseResponse<DeleteMaterialResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/newconnectionrequest/DeleteMaterial',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<DeleteMaterialResponse> _value;
+    try {
+      _value = BaseResponse<DeleteMaterialResponse>.fromJson(
+        _result.data!,
+        (json) => DeleteMaterialResponse.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

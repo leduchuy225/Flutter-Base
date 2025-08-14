@@ -1,6 +1,8 @@
 import '../common/customer_viewmodel_response.dart';
 import '../common/note_viewmodel_response.dart';
 import '../common/technical_staff_list_model_response.dart';
+import '../installation/material_list_model_response.dart';
+import 'repair_request_get_modem_log_model_response.dart';
 
 class RepairRequestDetailModelResponse {
   int? id;
@@ -71,7 +73,8 @@ class RepairRequestDetailModelResponse {
   dynamic listTechnicalStaff;
   dynamic mbRepairRequestOverdueViewModel;
   List<NoteViewmodelResponse>? listMbRepairRequestOverdueViewModel;
-  List<dynamic>? listMbRepairRequestMaterialViewModel;
+  List<MaterialListModelResponse>? listMbRepairRequestMaterialViewModel;
+  List<RepairRequestGetModemLogModelResponse>? listMbModemLogViewModel;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -164,6 +167,7 @@ class RepairRequestDetailModelResponse {
     this.mbRepairRequestOverdueViewModel,
     this.listMbRepairRequestOverdueViewModel,
     this.listMbRepairRequestMaterialViewModel,
+    this.listMbModemLogViewModel,
     this.address2,
     this.countryIdTitle,
     this.provinceIdTitle,
@@ -282,6 +286,22 @@ class RepairRequestDetailModelResponse {
                     NoteViewmodelResponse.fromJson(e as Map<String, dynamic>),
               )
               .toList(),
+      listMbRepairRequestMaterialViewModel:
+          (json['ListMB_RepairRequestMaterialViewModel'] as List<dynamic>?)
+              ?.map(
+                (e) => MaterialListModelResponse.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+      listMbModemLogViewModel:
+          (json['ListMB_ModemLogViewModel'] as List<dynamic>?)
+              ?.map(
+                (e) => RepairRequestGetModemLogModelResponse.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
       address2: json['Address2'] as String?,
       countryIdTitle: json['CountryID_Title'] as dynamic,
       provinceIdTitle: json['ProvinceID_Title'] as dynamic,
@@ -378,7 +398,10 @@ class RepairRequestDetailModelResponse {
     'MB_RepairRequestOverdueViewModel': mbRepairRequestOverdueViewModel,
     'ListMB_RepairRequestOverdueViewModel': listMbRepairRequestOverdueViewModel,
     'ListMB_RepairRequestMaterialViewModel':
-        listMbRepairRequestMaterialViewModel,
+        listMbRepairRequestMaterialViewModel?.map((e) => e.toJson()).toList(),
+    'ListMB_ModemLogViewModel': listMbModemLogViewModel
+        ?.map((e) => e.toJson())
+        .toList(),
     'Address2': address2,
     'CountryID_Title': countryIdTitle,
     'ProvinceID_Title': provinceIdTitle,

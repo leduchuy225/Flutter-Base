@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 import '../models/base_response.dart';
 import '../models/pon_id/pon_id_list_payload.dart';
 import '../models/pon_id/pon_id_list_response.dart';
+import '../models/pon_id/ponid_getall_response.dart';
 
 part 'pon_id_api.g.dart';
 
@@ -14,5 +15,10 @@ abstract class PonIdApi {
   @POST('/ponid/loaddata')
   Future<BaseResponse<PonIdListResponse>> getPonIdList(
     @Body() PonIdListPayload body,
+  );
+
+  @POST('/ponid/getall')
+  Future<BaseResponse<PonidGetallResponse>> getPonIdByOltId(
+    @Body() Map<String, dynamic> body,
   );
 }

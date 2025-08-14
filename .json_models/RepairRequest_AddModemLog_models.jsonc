@@ -1,0 +1,45 @@
+[
+  {
+    "__className": "repair_request_add_modem_log_payload",
+    "__path": "/lib/models/repair_request",
+    "id": 1,
+    "model.repair_request_add_modem_log_model_payload": {
+      "ModemOld": "modem cũ",
+      "ModemNew": "modem mới"
+    }
+  },
+  {
+    "__className": "repair_request_add_modem_log_response",
+    "__path": "/lib/models/repair_request",
+    "CurrentStep": 4,
+    "model.repair_request_add_modem_log_model_response": [
+      {
+        "ID": 1,
+        "IDLong": null,
+        "ParentID": null,
+        "ParentIDLong": null,
+        "ParentType": null,
+        "UserId": null,
+        "SetDate": "/Date(1755140599837)/",
+        "ModemOld": "modem cũ",
+        "ModemNew": "modem mới",
+        "Status": null,
+        "Orders": null,
+        "CreatedBy": null,
+        "CreatedDate": null,
+        "ModifiedDate": null,
+        "ModifiedBy": null,
+        "DeleteStatus": null,
+        "DeleteBy": null,
+        "DeleteDate": null,
+        "SetDefault": null,
+        "CreatedBy_Email": null,
+        "CreatedBy_UserName": null,
+        "ModifiedBy_Email": null,
+        "ModifiedBy_UserName": null,
+        "UserId_Email": "nguyenvanhung19972002@gmail.com",
+        "UserId_UserName": "nguyenvanhung19972002@gmail.com"
+      }
+    ]
+  }
+]

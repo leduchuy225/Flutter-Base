@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_base/models/common/note_list_response.dart';
+import 'package:flutter_base/models/installation/delete_material_response.dart';
+import 'package:flutter_base/models/installation/update_material_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/base_response.dart';
@@ -13,7 +15,13 @@ import '../models/installation/close_new_installation_response.dart';
 import '../models/installation/installation_detail_response.dart';
 import '../models/installation/installation_list_response.dart';
 import '../models/installation/installation_report_file_list_response.dart';
+import '../models/installation/material_list_response.dart';
 import '../models/installation/sign_installation_report_file_response.dart';
+import '../models/installation/slid_list_and_divider_list_payload.dart';
+import '../models/installation/slid_list_and_divider_list_response.dart';
+import '../models/installation/update_device_payload.dart';
+import '../models/installation/update_device_response.dart';
+import '../models/installation/update_material_payload.dart';
 import '../models/installation/update_new_installation_step_3_response.dart';
 import '../models/installation/update_new_installation_step_4_response.dart';
 import '../models/installation/update_new_installation_technical_staff_response.dart';
@@ -112,4 +120,29 @@ abstract class InstallationApi {
     @Part(name: 'customersSign[0]') File? customersSign,
     @Part(name: 'technicalStaffSign[0]') File? technicalStaffSign,
   });
+
+  @POST('/newconnectionrequest/getupdatedevice')
+  Future<BaseResponse<SlidListAndDividerListResponse>> getUpdateDevice(
+    @Body() SlidListAndDividerListPayload body,
+  );
+
+  @POST('/newconnectionrequest/updatedevice')
+  Future<BaseResponse<UpdateDeviceResponse>> updateDevice(
+    @Body() UpdateDevicePayload body,
+  );
+
+  @POST('/newconnectionrequest/GetMaterial')
+  Future<BaseResponse<MaterialListResponse>> getMaterial(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/newconnectionrequest/UpdateMaterial')
+  Future<BaseResponse<UpdateMaterialResponse>> updateMaterial(
+    @Body() UpdateMaterialPayload body,
+  );
+
+  @POST('/newconnectionrequest/DeleteMaterial')
+  Future<BaseResponse<DeleteMaterialResponse>> deleteMaterial(
+    @Body() Map<String, dynamic> body,
+  );
 }

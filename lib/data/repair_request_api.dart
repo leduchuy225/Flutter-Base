@@ -7,8 +7,18 @@ import '../models/base_response.dart';
 import '../models/common/installation_detail_payload.dart';
 import '../models/common/installation_list_payload.dart';
 import '../models/common/note_list_response.dart';
+import '../models/installation/delete_material_response.dart';
+import '../models/installation/installation_report_file_list_response.dart';
+import '../models/installation/material_list_response.dart';
+import '../models/installation/update_material_payload.dart';
+import '../models/installation/update_material_response.dart';
+import '../models/installation/view_installation_report_file_payload.dart';
+import '../models/installation/view_installation_report_file_response.dart';
 import '../models/repair_request/close_repair_request_response.dart';
+import '../models/repair_request/repair_request_add_modem_log_payload.dart';
+import '../models/repair_request/repair_request_add_modem_log_response.dart';
 import '../models/repair_request/repair_request_detail_response.dart';
+import '../models/repair_request/repair_request_get_modem_log_response.dart';
 import '../models/repair_request/repair_request_list_response.dart';
 import '../models/repair_request/update_repair_request_step_3_response.dart';
 import '../models/repair_request/update_repair_request_step_4_response.dart';
@@ -76,5 +86,44 @@ abstract class RepairRequestApi {
   @POST('/repairrequest/GetOverdue')
   Future<BaseResponse<NoteListResponse>> getRepairRequestOverdueNoteList(
     @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/RepairRequest/GetReport')
+  Future<BaseResponse<InstallationReportFileListResponse>>
+  getRepairReportFileList(@Body() Map<String, dynamic> body);
+
+  @POST('/RepairRequest/SetReport')
+  Future<BaseResponse<ViewInstallationReportFileResponse>> viewRepairReportFile(
+    @Body() ViewInstallationReportFilePayload body,
+  );
+
+  @POST('/RepairRequest/DeleteReport')
+  Future<BaseResponse> deleteRepairReportFile(
+    @Body() ViewInstallationReportFilePayload body,
+  );
+
+  @POST('/RepairRequest/GetMaterial')
+  Future<BaseResponse<MaterialListResponse>> getMaterial(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/RepairRequest/UpdateMaterial')
+  Future<BaseResponse<UpdateMaterialResponse>> updateMaterial(
+    @Body() UpdateMaterialPayload body,
+  );
+
+  @POST('/RepairRequest/DeleteMaterial')
+  Future<BaseResponse<DeleteMaterialResponse>> deleteMaterial(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/RepairRequest/GetModemLog')
+  Future<BaseResponse<RepairRequestGetModemLogResponse>> getModemLog(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/RepairRequest/AddModemLog')
+  Future<BaseResponse<RepairRequestAddModemLogResponse>> addModemLog(
+    @Body() RepairRequestAddModemLogPayload body,
   );
 }

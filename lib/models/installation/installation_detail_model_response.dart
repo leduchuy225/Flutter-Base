@@ -33,19 +33,34 @@ class InstallationDetailModelResponse {
   String? technicalStaffTestImage;
   String? technicalStaffImage;
   dynamic technicalStaffRating;
-  dynamic googleMap;
-  String? expectedCompletionDate;
+  String? googleMap;
+  dynamic expectedCompletionDate;
   dynamic actualCompletionDate;
-  dynamic devicePort;
-  dynamic deviceAcc;
-  dynamic devicePass;
-  dynamic deviceStatus;
+  int? devicePort;
+  String? deviceAcc;
+  String? devicePass;
+  int? deviceStatus;
   String? reportAcceptance;
-  dynamic reportHandoverDevice;
-  bool? reportAcceptanceIsSign;
-  bool? reportHandoverDeviceIsSign;
-  dynamic slidId;
-  dynamic slidIdLong;
+  String? reportHandoverDevice;
+  dynamic reportAcceptanceIsSign;
+  dynamic reportHandoverDeviceIsSign;
+  dynamic staffCode;
+  String? staffFullName;
+  String? staffPhoneNumber;
+  dynamic technicalStaffReportCompletedDate;
+  bool? isCompletedStaffOn;
+  int? reportDistance;
+  dynamic reportResult;
+  String? reportImageDivider;
+  String? reportCableLengthStart;
+  String? reportCableLengthEnd;
+  int? cableLength;
+  int? cableLengthStart;
+  int? cableLengthEnd;
+  String? reportNew;
+  dynamic reportNewIsSet;
+  int? slidId;
+  int? slidIdLong;
   dynamic dividerId;
   dynamic dividerIdLong;
   CustomerViewmodelResponse? mbCustomerViewModel;
@@ -67,6 +82,7 @@ class InstallationDetailModelResponse {
   dynamic customersIdFullName;
   dynamic customersIdCccd;
   dynamic customersIdPhoneNumber;
+  dynamic customersIdCode;
   dynamic serviceIdTitle;
   dynamic createdByEmail;
   dynamic createdByUserName;
@@ -76,6 +92,14 @@ class InstallationDetailModelResponse {
   dynamic surveyStatusTitle;
   dynamic technicalLeaderUserName;
   dynamic technicalStaffUserName;
+  String? slidCode;
+  dynamic dividerCode;
+  int? oltId;
+  int? oltIdLong;
+  dynamic oltCode;
+  int? ponidId;
+  int? ponidIdLong;
+  dynamic ponidCode;
 
   InstallationDetailModelResponse({
     this.id,
@@ -119,6 +143,21 @@ class InstallationDetailModelResponse {
     this.reportHandoverDevice,
     this.reportAcceptanceIsSign,
     this.reportHandoverDeviceIsSign,
+    this.staffCode,
+    this.staffFullName,
+    this.staffPhoneNumber,
+    this.technicalStaffReportCompletedDate,
+    this.isCompletedStaffOn,
+    this.reportDistance,
+    this.reportResult,
+    this.reportImageDivider,
+    this.reportCableLengthStart,
+    this.reportCableLengthEnd,
+    this.cableLength,
+    this.cableLengthStart,
+    this.cableLengthEnd,
+    this.reportNew,
+    this.reportNewIsSet,
     this.slidId,
     this.slidIdLong,
     this.dividerId,
@@ -142,6 +181,7 @@ class InstallationDetailModelResponse {
     this.customersIdFullName,
     this.customersIdCccd,
     this.customersIdPhoneNumber,
+    this.customersIdCode,
     this.serviceIdTitle,
     this.createdByEmail,
     this.createdByUserName,
@@ -151,6 +191,14 @@ class InstallationDetailModelResponse {
     this.surveyStatusTitle,
     this.technicalLeaderUserName,
     this.technicalStaffUserName,
+    this.slidCode,
+    this.dividerCode,
+    this.oltId,
+    this.oltIdLong,
+    this.oltCode,
+    this.ponidId,
+    this.ponidIdLong,
+    this.ponidCode,
   });
 
   factory InstallationDetailModelResponse.fromJson(Map<String, dynamic> json) {
@@ -185,19 +233,36 @@ class InstallationDetailModelResponse {
       technicalStaffTestImage: json['TechnicalStaffTestImage'] as String?,
       technicalStaffImage: json['TechnicalStaffImage'] as String?,
       technicalStaffRating: json['TechnicalStaffRating'] as dynamic,
-      googleMap: json['GoogleMap'] as dynamic,
-      expectedCompletionDate: json['ExpectedCompletionDate'] as String?,
+      googleMap: json['GoogleMap'] as String?,
+      expectedCompletionDate: json['ExpectedCompletionDate'] as dynamic,
       actualCompletionDate: json['ActualCompletionDate'] as dynamic,
-      devicePort: json['Device_Port'] as dynamic,
-      deviceAcc: json['Device_ACC'] as dynamic,
-      devicePass: json['Device_Pass'] as dynamic,
-      deviceStatus: json['Device_Status'] as dynamic,
+      devicePort: json['Device_Port'] as int?,
+      deviceAcc: json['Device_ACC'] as String?,
+      devicePass: json['Device_Pass'] as String?,
+      deviceStatus: json['Device_Status'] as int?,
       reportAcceptance: json['Report_Acceptance'] as String?,
-      reportHandoverDevice: json['Report_HandoverDevice'] as dynamic,
-      reportAcceptanceIsSign: json['Report_Acceptance_IsSign'] as bool?,
-      reportHandoverDeviceIsSign: json['Report_HandoverDevice_IsSign'] as bool?,
-      slidId: json['SLID_ID'] as dynamic,
-      slidIdLong: json['SLID_IDLong'] as dynamic,
+      reportHandoverDevice: json['Report_HandoverDevice'] as String?,
+      reportAcceptanceIsSign: json['Report_Acceptance_IsSign'] as dynamic,
+      reportHandoverDeviceIsSign:
+          json['Report_HandoverDevice_IsSign'] as dynamic,
+      staffCode: json['StaffCode'] as dynamic,
+      staffFullName: json['StaffFullName'] as String?,
+      staffPhoneNumber: json['StaffPhoneNumber'] as String?,
+      technicalStaffReportCompletedDate:
+          json['TechnicalStaffReportCompletedDate'] as dynamic,
+      isCompletedStaffOn: json['IsCompletedStaffOn'] as bool?,
+      reportDistance: json['Report_Distance'] as int?,
+      reportResult: json['Report_Result'] as dynamic,
+      reportImageDivider: json['Report_ImageDivider'] as String?,
+      reportCableLengthStart: json['Report_CableLengthStart'] as String?,
+      reportCableLengthEnd: json['Report_CableLengthEnd'] as String?,
+      cableLength: json['CableLength'] as int?,
+      cableLengthStart: json['CableLengthStart'] as int?,
+      cableLengthEnd: json['CableLengthEnd'] as int?,
+      reportNew: json['Report_New'] as String?,
+      reportNewIsSet: json['Report_New_IsSet'] as dynamic,
+      slidId: json['SLID_ID'] as int?,
+      slidIdLong: json['SLID_IDLong'] as int?,
       dividerId: json['Divider_ID'] as dynamic,
       dividerIdLong: json['Divider_IDLong'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null
@@ -244,6 +309,7 @@ class InstallationDetailModelResponse {
       customersIdFullName: json['CustomersID_FullName'] as dynamic,
       customersIdCccd: json['CustomersID_CCCD'] as dynamic,
       customersIdPhoneNumber: json['CustomersID_PhoneNumber'] as dynamic,
+      customersIdCode: json['CustomersID_Code'] as dynamic,
       serviceIdTitle: json['ServiceID_Title'] as dynamic,
       createdByEmail: json['CreatedBy_Email'] as dynamic,
       createdByUserName: json['CreatedBy_UserName'] as dynamic,
@@ -253,6 +319,14 @@ class InstallationDetailModelResponse {
       surveyStatusTitle: json['SurveyStatus_Title'] as dynamic,
       technicalLeaderUserName: json['TechnicalLeader_UserName'] as dynamic,
       technicalStaffUserName: json['TechnicalStaff_UserName'] as dynamic,
+      slidCode: json['SLID_Code'] as String?,
+      dividerCode: json['Divider_Code'] as dynamic,
+      oltId: json['OLT_ID'] as int?,
+      oltIdLong: json['OLT_IDLong'] as int?,
+      oltCode: json['OLT_Code'] as dynamic,
+      ponidId: json['PONID_ID'] as int?,
+      ponidIdLong: json['PONID_IDLong'] as int?,
+      ponidCode: json['PONID_Code'] as dynamic,
     );
   }
 
@@ -298,6 +372,21 @@ class InstallationDetailModelResponse {
     'Report_HandoverDevice': reportHandoverDevice,
     'Report_Acceptance_IsSign': reportAcceptanceIsSign,
     'Report_HandoverDevice_IsSign': reportHandoverDeviceIsSign,
+    'StaffCode': staffCode,
+    'StaffFullName': staffFullName,
+    'StaffPhoneNumber': staffPhoneNumber,
+    'TechnicalStaffReportCompletedDate': technicalStaffReportCompletedDate,
+    'IsCompletedStaffOn': isCompletedStaffOn,
+    'Report_Distance': reportDistance,
+    'Report_Result': reportResult,
+    'Report_ImageDivider': reportImageDivider,
+    'Report_CableLengthStart': reportCableLengthStart,
+    'Report_CableLengthEnd': reportCableLengthEnd,
+    'CableLength': cableLength,
+    'CableLengthStart': cableLengthStart,
+    'CableLengthEnd': cableLengthEnd,
+    'Report_New': reportNew,
+    'Report_New_IsSet': reportNewIsSet,
     'SLID_ID': slidId,
     'SLID_IDLong': slidIdLong,
     'Divider_ID': dividerId,
@@ -326,6 +415,7 @@ class InstallationDetailModelResponse {
     'CustomersID_FullName': customersIdFullName,
     'CustomersID_CCCD': customersIdCccd,
     'CustomersID_PhoneNumber': customersIdPhoneNumber,
+    'CustomersID_Code': customersIdCode,
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
@@ -335,5 +425,13 @@ class InstallationDetailModelResponse {
     'SurveyStatus_Title': surveyStatusTitle,
     'TechnicalLeader_UserName': technicalLeaderUserName,
     'TechnicalStaff_UserName': technicalStaffUserName,
+    'SLID_Code': slidCode,
+    'Divider_Code': dividerCode,
+    'OLT_ID': oltId,
+    'OLT_IDLong': oltIdLong,
+    'OLT_Code': oltCode,
+    'PONID_ID': ponidId,
+    'PONID_IDLong': ponidIdLong,
+    'PONID_Code': ponidCode,
   };
 }
