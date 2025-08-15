@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/utils/utils.dart';
 import 'package:flutter_base/theme/app_theme.dart';
+import 'package:flutter_base/theme/styles.dart';
 import 'package:get/get.dart';
 
 enum SnackbarType { ERROR, SUCCESS, WARNING, INFORMATION }
@@ -43,37 +44,45 @@ class MyDialog {
     );
   }
 
-  static void alertDialog({
-    required String message,
+  static Future<T?> alertDialog<T>({
+    String? message,
+    Widget? content,
+    List<Widget>? actions,
     String title = 'Thông báo',
     void Function()? okHandler,
     bool isDismissOnTap = true,
+    EdgeInsetsGeometry? buttonPadding,
+    EdgeInsetsGeometry? contentPadding,
   }) {
-    Get.dialog(
+    return Get.dialog<T?>(
       AlertDialog(
-        title: Text(title),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () {
-              if (isDismissOnTap && Get.isDialogOpen == true) {
-                Get.back();
-              }
-            },
-            child: const Text('Hủy'),
-          ),
-          TextButton(
-            onPressed: () {
-              if (isDismissOnTap && Get.isDialogOpen == true) {
-                Get.back();
-              }
-              if (okHandler != null) {
-                okHandler();
-              }
-            },
-            child: const Text('Đồng ý'),
-          ),
-        ],
+        buttonPadding: buttonPadding,
+        contentPadding: contentPadding,
+        title: Text(title, style: AppTextStyles.h3),
+        content: content ?? Text(message ?? ''),
+        actions:
+            actions ??
+            [
+              TextButton(
+                child: const Text('Hủy'),
+                onPressed: () {
+                  if (isDismissOnTap && Get.isDialogOpen == true) {
+                    Get.back();
+                  }
+                },
+              ),
+              TextButton(
+                child: const Text('Đồng ý'),
+                onPressed: () {
+                  if (isDismissOnTap && Get.isDialogOpen == true) {
+                    Get.back();
+                  }
+                  if (okHandler != null) {
+                    okHandler();
+                  }
+                },
+              ),
+            ],
       ),
     );
   }

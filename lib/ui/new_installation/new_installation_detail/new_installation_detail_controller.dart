@@ -368,4 +368,28 @@ class NewInstallationDetailController
 
   @override
   String? get serviceType => MBService.NewInstallation;
+
+  @override
+  Future deleteMaterialApi() {
+    // TODO: implement deleteMaterialApi
+    throw UnimplementedError();
+  }
+
+  @override
+  Future getMaterialApi() {
+    // TODO: implement getMaterialApi
+    throw UnimplementedError();
+  }
+
+  @override
+  Future updateMaterialApi(UpdateMaterialPayload) {
+    // TODO: implement updateMaterialApi
+    throw UnimplementedError();
+  }
+
+  @override
+  int? get countryId => detailData?.countryId;
+
+  @override
+  int? get provinceId => detailData?.provinceId;
 }

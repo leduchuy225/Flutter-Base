@@ -8,14 +8,18 @@ import 'selector_content/bottomsheet_selector_content_widget.dart';
 
 class MySelector extends StatefulWidget {
   final String title;
+  final Widget? suffixIcon;
   final MySelectorData data;
   final bool isDismissOnSelect;
   final MySelectorController? controller;
+  final bool Function(MySelectorController)? onBeginSelect;
 
   const MySelector({
     Key? key,
     this.controller,
+    this.suffixIcon,
     required this.data,
+    this.onBeginSelect,
     required this.title,
     this.isDismissOnSelect = true,
   }) : super(key: key);
@@ -44,7 +48,12 @@ class _MySelectorState extends State<MySelector> {
       readOnly: true,
       labelText: widget.title,
       controller: _mainController,
+      suffixIcon: widget.suffixIcon,
       onTap: () {
+        if (widget.onBeginSelect != null &&
+            widget.onBeginSelect!(_mainController) == false) {
+          return;
+        }
         MyBottomSheet.showDraggableScrollableSheet<List<MySelectorModel>>(
           context,
           builder: (context, scrollController) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/ui/repair_request/repair_request_list/repair_request_list_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
@@ -136,6 +137,13 @@ class _MainScreenState extends State<MainScreen> {
                   title: 'PON ID',
                   onTap: () {
                     Get.to(() => const PonIdListScreen());
+                  },
+                ),
+                MainFunctionItem(
+                  icon: Icons.developer_mode,
+                  title: 'DEV',
+                  onTap: () {
+                    Get.to(() => const DevScreen());
                   },
                 ),
               ],

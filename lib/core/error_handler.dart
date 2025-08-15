@@ -50,6 +50,7 @@ class MyError implements Exception {
         if ([
           HttpStatus.forbidden,
           HttpStatus.unauthorized,
+          HttpStatus.movedTemporarily,
         ].contains(dioException.response?.statusCode)) {
           await Get.find<UserService>().clearLocalData();
           Get.offAll(() => const SplashScreen());

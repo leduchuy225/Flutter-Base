@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/utils/utils.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/datetime_utils.dart';
@@ -42,16 +43,29 @@ class _NewInstallationDetailScreenState
               title: 'Thông tin yêu cầu',
               items: [
                 MyTexttileItem(
-                  titleText: 'Mã HĐ',
-                  text: detailData?.contractCode,
-                ),
-                MyTexttileItem(
                   titleText: 'Gói cước',
                   text: detailData?.serviceIdTitle,
                 ),
                 MyTexttileItem(
+                  titleText: 'Tọa độ',
+                  text: detailData?.googleMap,
+                  trailing: InkWell(
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: Icon(Icons.directions, color: AppColors.primary),
+                    ),
+                    onTap: () {
+                      openLocationInMap(coordinates: detailData?.googleMap);
+                    },
+                  ),
+                ),
+                MyTexttileItem(
                   titleText: 'Người tạo',
                   text: detailData?.createdByUserName,
+                ),
+                MyTexttileItem(
+                  titleText: 'Email người tạo',
+                  text: detailData?.createdByEmail,
                 ),
                 MyTexttileItem(
                   titleText: 'Ngày tạo',
@@ -88,7 +102,6 @@ class _NewInstallationDetailScreenState
                     customerData?.birthDay,
                   ),
                 ),
-                MyTexttileItem(titleText: 'CCCD', text: customerData?.cccd),
                 MyTexttileItem(
                   titleText: 'SĐT',
                   isPhoneNumber: true,

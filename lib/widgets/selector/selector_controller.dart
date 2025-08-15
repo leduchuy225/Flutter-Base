@@ -7,15 +7,30 @@ import '../search_field/search_field_widget.dart';
 import '../text_field/text_field_controller.dart';
 
 class MySelectorController extends MyTextFieldController {
+  final bool isNameWithDescription;
+
   List<MySelectorModel> _selectors = [];
+  void Function(List<MySelectorModel>)? _onChanged;
+
+  MySelectorController({this.isNameWithDescription = false});
+
+  set onChanged(void Function(List<MySelectorModel>)? onChangedFunction) {
+    _onChanged = onChangedFunction;
+  }
 
   set selectors(List<MySelectorModel> selectors) {
     _selectors = selectors;
     text = selectors
         .map((element) {
+          if (isNameWithDescription) {
+            return '${element.name} - ${element.description}';
+          }
           return element.name;
         })
         .join('\n');
+    if (_onChanged != null) {
+      _onChanged!(_selectors);
+    }
   }
 
   List<MySelectorModel> get selectors {
@@ -25,18 +40,41 @@ class MySelectorController extends MyTextFieldController {
   MySelectorModel? get first {
     return _selectors.firstOrNull;
   }
+
+  @override
+  void clear() {
+    selectors = [];
+  }
+
+  bool get isEmpty {
+    return _selectors.isNotEmpty;
+  }
 }
 
 class MySelectorData extends GetxController {
+  final List? excludeIds;
   final String? cacheKey;
   final Future<List<MySelectorModel>> Function() getFutureData;
 
-  MySelectorData({required this.getFutureData, this.cacheKey});
+  MySelectorData({required this.getFutureData, this.cacheKey, this.excludeIds});
 
   List<MySelectorModel> _dataListDefault = [];
 
   final isLoading = true.obs;
   final dataListShow = <MySelectorModel>[].obs;
+
+  Future setDefaultData(
+    Future<List<MySelectorModel>> Function() getFutureData,
+  ) async {
+    _dataListDefault = await getFutureData().then((value) {
+      if (excludeIds == null) {
+        return value;
+      }
+      return value.where((item) {
+        return !(excludeIds ?? []).contains(item.id);
+      }).toList();
+    });
+  }
 
   Future<void> updateDataList() async {
     isLoading.value = true;
@@ -45,14 +83,14 @@ class MySelectorData extends GetxController {
       final cacheService = CacheService();
       final data = cacheService.read<List<MySelectorModel>>(key: cacheKey!);
       if (data == null) {
-        _dataListDefault = await getFutureData();
+        await setDefaultData(getFutureData);
         cacheService.write(key: cacheKey!, value: _dataListDefault);
       } else {
-        _dataListDefault = data;
+        await setDefaultData(() => Future.value(data));
       }
       dataListShow.value = _dataListDefault;
     } else {
-      _dataListDefault = await getFutureData();
+      await setDefaultData(getFutureData);
       dataListShow.value = _dataListDefault;
     }
 

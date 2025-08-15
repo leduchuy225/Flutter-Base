@@ -71,6 +71,9 @@ Future<void> launchMyURL(
     return;
   }
   try {
+    // if (data.startsWith('intent://')) {
+    //   data = data.replaceFirst('intent://', 'https://');
+    // }
     await launchUrlString(data, mode: mode);
   } catch (error) {
     MyDialog.snackbar(error.toString(), type: SnackbarType.WARNING);
@@ -111,4 +114,25 @@ Future<File?> writeToImageFile({
   await file.writeAsBytes(data);
 
   return file;
+}
+
+num? getNullOrNumber(String? data) {
+  if (data == null) {
+    return null;
+  }
+  return num.tryParse(data);
+}
+
+void openLocationInMap({
+  String? latitude,
+  String? longitude,
+  String? coordinates,
+}) {
+  if (coordinates == null && (longitude == null || latitude == null)) {
+    MyDialog.snackbar('Không có thông tin tọa độ', type: SnackbarType.WARNING);
+    return;
+  }
+  final String url =
+      'https://www.google.com/maps/dir/?api=1&destination=${coordinates ?? '$latitude,$longitude'}&travelmode=driving';
+  launchMyURL(url.replaceAll(' ', ''), mode: LaunchMode.externalApplication);
 }

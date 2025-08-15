@@ -17,10 +17,12 @@ class MyTexttileItem {
   final bool isPhoneNumber;
 
   final Widget? child;
+  final Widget? trailing;
 
   MyTexttileItem({
     this.text,
     this.child,
+    this.trailing,
     this.titleText,
     this.isCopy = false,
     this.isHide = false,
@@ -34,6 +36,7 @@ class MyTexttile extends StatelessWidget {
     this.text,
     this.maxLines,
     this.textStyle,
+    this.trailing,
     this.titleText,
     this.labelStyle,
     this.textFlex = 5,
@@ -41,7 +44,6 @@ class MyTexttile extends StatelessWidget {
     this.hasDivider = true,
     this.isPhoneNumber = false,
     this.isShowCopyIcon = false,
-    this.isWithoutTitle = false,
     this.isHideIfTextNull = false,
     this.padding = EdgeInsets.zero,
     this.orientation = MyTexttileOrientation.HORIZONTAL,
@@ -53,9 +55,9 @@ class MyTexttile extends StatelessWidget {
   final int? maxLines;
   final bool hasDivider;
   final String? titleText;
+  final Widget? trailing;
   final bool isPhoneNumber;
   final bool isShowCopyIcon;
-  final bool isWithoutTitle;
   final TextStyle? textStyle;
   final TextStyle? labelStyle;
   final bool isHideIfTextNull;
@@ -161,6 +163,7 @@ class MyTexttile extends StatelessWidget {
           maxLines: maxLines,
           text: element.text,
           labelFlex: labelFlex,
+          trailing: element.trailing,
           titleText: element.titleText,
           isShowCopyIcon: element.isCopy,
           isPhoneNumber: element.isPhoneNumber,
@@ -224,6 +227,7 @@ class MyTexttile extends StatelessWidget {
                 AppTextStyles.body2.copyWith(color: AppColors.textGreyDark),
           ),
         ),
+        if (trailing != null) trailing!,
         Visibility(
           visible: isPhoneNumber && _textProcessed.isNotEmpty,
           child: InkWell(

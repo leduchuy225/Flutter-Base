@@ -16,6 +16,7 @@ class MyTextField extends StatefulWidget {
   final bool obscureText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final TextAlign textAlign;
   final void Function()? onTap;
   final TextInputType? keyboardType;
   final MyTextFieldController? controller;
@@ -36,6 +37,7 @@ class MyTextField extends StatefulWidget {
     this.maxLines,
     this.prefixIcon,
     this.keyboardType,
+    this.textAlign = TextAlign.start,
   });
 
   @override
@@ -79,6 +81,7 @@ class _MyTextFieldState extends State<MyTextField> {
             enabled: value.isEnable,
             readOnly: widget.readOnly,
             controller: _mainController,
+            textAlign: widget.textAlign,
             onChanged: widget.onChanged,
             obscureText: widget.obscureText,
             keyboardType: widget.keyboardType,

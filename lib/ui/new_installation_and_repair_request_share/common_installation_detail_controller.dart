@@ -15,7 +15,11 @@ import 'package:signature/signature.dart';
 import '../../core/utils/datetime_utils.dart';
 import '../../models/common/note_viewmodel_response.dart';
 import '../../models/common/technical_staff_list_model_payload.dart';
+import 'widgets/material_selector/material_selector_controller.dart';
+import 'widgets/material_selector/material_selector_widget.dart';
 import 'widgets/sign_report_file_data_controller.dart';
+import 'widgets/slid_and_divider/slid_and_divider_controller.dart';
+import 'widgets/slid_and_divider/slid_and_divider_widget.dart';
 import 'widgets/step_1_widget.dart';
 import 'widgets/step_2_widget.dart';
 import 'widgets/step_3_widget.dart';
@@ -52,9 +56,17 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final staffSignatureController = SignatureController();
   final customerSignatureController = SignatureController();
 
+  final materialSelectorController = MaterialSelectorController();
+
+  final slidAndDividerController = SlidAndDividerController();
+
   T? get detailData => detailRxData.value;
 
   int? get id;
+
+  int? get countryId;
+
+  int? get provinceId;
 
   String? get serviceType;
 
@@ -85,6 +97,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   Future signReportFile();
 
   Future<List<MySelectorModel>> getReportTypeList();
+
+  Future getMaterialApi();
+  Future deleteMaterialApi();
+  Future updateMaterialApi(UpdateMaterialPayload);
 
   void setIsRefreshValue();
 
@@ -117,6 +133,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         return Column(
           children: [
             getStepContent(context, step: 2),
+            AppStyles.pdt15,
+            getStepContent(context, step: 6),
+            AppStyles.pdt15,
+            getStepContent(context, step: 7),
             AppStyles.pdt15,
             getStepContent(context, step: 3),
           ],
@@ -186,15 +206,15 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             if (id == null) {
               return;
             }
-            if (technicalStaffImageControler.files.isEmpty ||
-                technicalStaffModuleImageControler.files.isEmpty ||
-                technicalStaffTestImageControler.files.isEmpty) {
-              MyDialog.snackbar(
-                'Chưa chọn đủ loại ảnh',
-                type: SnackbarType.WARNING,
-              );
-              return;
-            }
+            // if (technicalStaffImageControler.files.isEmpty ||
+            //     technicalStaffModuleImageControler.files.isEmpty ||
+            //     technicalStaffTestImageControler.files.isEmpty) {
+            //   MyDialog.snackbar(
+            //     'Chưa chọn đủ loại ảnh',
+            //     type: SnackbarType.WARNING,
+            //   );
+            //   return;
+            // }
             if (!step3NoteTextController.checkIsNotEmpty()) {
               return;
             }
@@ -258,6 +278,20 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         return const MyDataState(
           icon: Icons.help_outline,
           message: 'Liên hệ admin hỗ trợ',
+        );
+      case 6:
+        return MaterialSelectorWidget(
+          id: id!,
+          deleteMaterialApi: deleteMaterialApi,
+          updateMaterialApi: updateMaterialApi,
+          controller: materialSelectorController,
+        );
+      case 7:
+        return SlidAndDividerWidget(
+          id: id,
+          countryId: countryId,
+          provinceId: provinceId,
+          controller: slidAndDividerController,
         );
       default:
         return const SizedBox.shrink();

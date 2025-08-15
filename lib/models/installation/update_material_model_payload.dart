@@ -1,7 +1,7 @@
 class UpdateMaterialModelPayload {
   int? id;
   int? materialId;
-  int? quantity;
+  num? quantity;
 
   UpdateMaterialModelPayload({this.id, this.materialId, this.quantity});
 
@@ -9,7 +9,7 @@ class UpdateMaterialModelPayload {
     return UpdateMaterialModelPayload(
       id: json['ID'] as int?,
       materialId: json['Material_ID'] as int?,
-      quantity: json['Quantity'] as int?,
+      quantity: json['Quantity'] as num?,
     );
   }
 

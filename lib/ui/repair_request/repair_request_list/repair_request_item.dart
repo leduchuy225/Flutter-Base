@@ -20,13 +20,12 @@ class RepairRequestItem extends StatelessWidget {
     return MyTexttile.card(
       isViewDetail: true,
       tagColor: AppColors.primary,
-      tag: 'Bước ${item.currentStep}',
+      tag: item.isClosed == true ? 'Đã đóng' : 'Bước ${item.currentStep}',
       onTapViewDetail: onTapViewDetail,
       title: (item.idLong ?? '').toString(),
       items: [
         MyTexttileItem(titleText: 'Gói cước', text: item.serviceIdTitle),
         MyTexttileItem(titleText: 'Tên KH', text: item.customersIdFullName),
-        MyTexttileItem(titleText: 'CCCD KH', text: item.customersIdCccd),
         MyTexttileItem(titleText: 'Địa chỉ', text: item.address2),
         MyTexttileItem(titleText: 'Người tạo', text: item.createdByUserName),
         MyTexttileItem(

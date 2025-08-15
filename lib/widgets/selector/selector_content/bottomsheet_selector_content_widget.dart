@@ -111,7 +111,10 @@ class _MyBottomsheetSelectorContentState
                       padding: AppStyles.horizontalPadding,
                       child: Row(
                         children: [
-                          Icon(Icons.info_outline_rounded),
+                          Icon(
+                            Icons.info_outline_rounded,
+                            color: AppColors.black,
+                          ),
                           AppStyles.pdl5,
                           Text(MyStrings.noData),
                         ],
@@ -126,7 +129,12 @@ class _MyBottomsheetSelectorContentState
                       return ListTile(
                         title: Text(item.name),
                         subtitle: item.description != null
-                            ? Text(item.description ?? '')
+                            ? Text(
+                                item.description ?? '',
+                                style: AppTextStyles.body2.copyWith(
+                                  color: AppColors.textGrey2,
+                                ),
+                              )
                             : null,
                         leading: Radio<MySelectorModel?>(
                           value: item,

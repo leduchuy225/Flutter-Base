@@ -1,6 +1,7 @@
 import '../common/customer_viewmodel_response.dart';
 import '../common/note_viewmodel_response.dart';
 import '../common/technical_staff_list_model_response.dart';
+import 'material_list_model_response.dart';
 
 class InstallationDetailModelResponse {
   int? id;
@@ -71,6 +72,7 @@ class InstallationDetailModelResponse {
   dynamic listTechnicalStaff;
   dynamic mbConnectionRequestOverdueViewModel;
   List<NoteViewmodelResponse>? listMbConnectionRequestOverdueViewModel;
+  List<MaterialListModelResponse>? listMbConnectionRequestMaterialViewModel;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -82,6 +84,7 @@ class InstallationDetailModelResponse {
   dynamic customersIdFullName;
   dynamic customersIdCccd;
   dynamic customersIdPhoneNumber;
+  dynamic customersIdUserName;
   dynamic customersIdCode;
   dynamic serviceIdTitle;
   dynamic createdByEmail;
@@ -170,6 +173,7 @@ class InstallationDetailModelResponse {
     this.listTechnicalStaff,
     this.mbConnectionRequestOverdueViewModel,
     this.listMbConnectionRequestOverdueViewModel,
+    this.listMbConnectionRequestMaterialViewModel,
     this.address2,
     this.countryIdTitle,
     this.provinceIdTitle,
@@ -181,6 +185,7 @@ class InstallationDetailModelResponse {
     this.customersIdFullName,
     this.customersIdCccd,
     this.customersIdPhoneNumber,
+    this.customersIdUserName,
     this.customersIdCode,
     this.serviceIdTitle,
     this.createdByEmail,
@@ -298,6 +303,14 @@ class InstallationDetailModelResponse {
                     NoteViewmodelResponse.fromJson(e as Map<String, dynamic>),
               )
               .toList(),
+      listMbConnectionRequestMaterialViewModel:
+          (json['ListMB_ConnectionRequestMaterialViewModel'] as List<dynamic>?)
+              ?.map(
+                (e) => MaterialListModelResponse.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
       address2: json['Address2'] as String?,
       countryIdTitle: json['CountryID_Title'] as dynamic,
       provinceIdTitle: json['ProvinceID_Title'] as dynamic,
@@ -309,6 +322,7 @@ class InstallationDetailModelResponse {
       customersIdFullName: json['CustomersID_FullName'] as dynamic,
       customersIdCccd: json['CustomersID_CCCD'] as dynamic,
       customersIdPhoneNumber: json['CustomersID_PhoneNumber'] as dynamic,
+      customersIdUserName: json['CustomersID_UserName'] as dynamic,
       customersIdCode: json['CustomersID_Code'] as dynamic,
       serviceIdTitle: json['ServiceID_Title'] as dynamic,
       createdByEmail: json['CreatedBy_Email'] as dynamic,
@@ -404,6 +418,10 @@ class InstallationDetailModelResponse {
         listMbConnectionRequestOverdueViewModel
             ?.map((e) => e.toJson())
             .toList(),
+    'ListMB_ConnectionRequestMaterialViewModel':
+        listMbConnectionRequestMaterialViewModel
+            ?.map((e) => e.toJson())
+            .toList(),
     'Address2': address2,
     'CountryID_Title': countryIdTitle,
     'ProvinceID_Title': provinceIdTitle,
@@ -415,6 +433,7 @@ class InstallationDetailModelResponse {
     'CustomersID_FullName': customersIdFullName,
     'CustomersID_CCCD': customersIdCccd,
     'CustomersID_PhoneNumber': customersIdPhoneNumber,
+    'CustomersID_UserName': customersIdUserName,
     'CustomersID_Code': customersIdCode,
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,

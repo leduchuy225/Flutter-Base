@@ -17,6 +17,7 @@ import '../widgets/my_appbar.dart';
 import '../widgets/my_texttile.dart';
 import '../widgets/selector/selector_controller.dart';
 import '../widgets/selector/selector_widget.dart';
+import 'new_installation_and_repair_request_share/widgets/slid_and_divider/slid_and_divider_selector_widget.dart';
 
 class DevScreen extends StatefulWidget {
   const DevScreen({super.key});
@@ -174,6 +175,13 @@ class _DevScreenState extends State<DevScreen> {
             const DatetimePicker(title: 'Chọn thời gian', isTimePicker: true),
             AppStyles.pdt20,
             FileCollectionWidget(controller: _fileCollectionController),
+            AppStyles.pdt20,
+            ElevatedButton(
+              child: const Text('Open device selector'),
+              onPressed: () {
+                SlidAndDividerSelectorWidget.openDialog();
+              },
+            ),
             AppStyles.pdt20,
           ],
         ),

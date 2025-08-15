@@ -1,5 +1,6 @@
 import 'package:flutter_base/core/services/http_service.dart';
 import 'package:flutter_base/data/bo_chia_api.dart';
+import 'package:flutter_base/data/material_api.dart';
 import 'package:flutter_base/data/olt_api.dart';
 import 'package:flutter_base/data/pon_id_api.dart';
 import 'package:flutter_base/data/slid_api.dart';
@@ -23,4 +24,6 @@ void setupApiLocator() {
   DI.lazyPut<SlidApi>(() => SlidApi(dio));
   DI.lazyPut<PonIdApi>(() => PonIdApi(dio));
   DI.lazyPut<BoChiaApi>(() => BoChiaApi(dio));
+
+  DI.lazyPut<MaterialApi>(() => MaterialApi(dio));
 }

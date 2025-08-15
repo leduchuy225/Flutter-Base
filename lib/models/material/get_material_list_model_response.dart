@@ -1,15 +1,13 @@
-class MaterialListModelResponse {
+class GetMaterialListModelResponse {
   int? id;
-  int? materialId;
-  dynamic materialIdLong;
-  int? parentId;
-  dynamic parentIdLong;
-  num? quantity;
+  int? idLong;
+  String? title;
   dynamic price;
   dynamic priceOld;
   dynamic priceImport;
-  int? unitId;
+  dynamic unitId;
   dynamic status;
+  dynamic orders;
   dynamic createdBy;
   dynamic createdDate;
   dynamic modifiedDate;
@@ -17,26 +15,24 @@ class MaterialListModelResponse {
   dynamic deleteStatus;
   dynamic deleteBy;
   dynamic deleteDate;
+  dynamic image;
   dynamic setDefault;
   dynamic createdByEmail;
   dynamic createdByUserName;
   dynamic modifiedByEmail;
   dynamic modifiedByUserName;
-  String? materialTitle;
   String? unitIdTitle;
 
-  MaterialListModelResponse({
+  GetMaterialListModelResponse({
     this.id,
-    this.materialId,
-    this.materialIdLong,
-    this.parentId,
-    this.parentIdLong,
-    this.quantity,
+    this.idLong,
+    this.title,
     this.price,
     this.priceOld,
     this.priceImport,
     this.unitId,
     this.status,
+    this.orders,
     this.createdBy,
     this.createdDate,
     this.modifiedDate,
@@ -44,28 +40,26 @@ class MaterialListModelResponse {
     this.deleteStatus,
     this.deleteBy,
     this.deleteDate,
+    this.image,
     this.setDefault,
     this.createdByEmail,
     this.createdByUserName,
     this.modifiedByEmail,
     this.modifiedByUserName,
-    this.materialTitle,
     this.unitIdTitle,
   });
 
-  factory MaterialListModelResponse.fromJson(Map<String, dynamic> json) {
-    return MaterialListModelResponse(
+  factory GetMaterialListModelResponse.fromJson(Map<String, dynamic> json) {
+    return GetMaterialListModelResponse(
       id: json['ID'] as int?,
-      materialId: json['Material_ID'] as int?,
-      materialIdLong: json['Material_IDLong'] as dynamic,
-      parentId: json['Parent_ID'] as int?,
-      parentIdLong: json['Parent_IDLong'] as dynamic,
-      quantity: json['Quantity'] as num?,
+      idLong: json['IDLong'] as int?,
+      title: json['Title'] as String?,
       price: json['Price'] as dynamic,
       priceOld: json['PriceOld'] as dynamic,
       priceImport: json['PriceImport'] as dynamic,
-      unitId: json['UnitId'] as int?,
+      unitId: json['UnitId'] as dynamic,
       status: json['Status'] as dynamic,
+      orders: json['Orders'] as dynamic,
       createdBy: json['CreatedBy'] as dynamic,
       createdDate: json['CreatedDate'] as dynamic,
       modifiedDate: json['ModifiedDate'] as dynamic,
@@ -73,28 +67,26 @@ class MaterialListModelResponse {
       deleteStatus: json['DeleteStatus'] as dynamic,
       deleteBy: json['DeleteBy'] as dynamic,
       deleteDate: json['DeleteDate'] as dynamic,
+      image: json['Image'] as dynamic,
       setDefault: json['SetDefault'] as dynamic,
       createdByEmail: json['CreatedBy_Email'] as dynamic,
       createdByUserName: json['CreatedBy_UserName'] as dynamic,
       modifiedByEmail: json['ModifiedBy_Email'] as dynamic,
       modifiedByUserName: json['ModifiedBy_UserName'] as dynamic,
-      materialTitle: json['Material_Title'] as String?,
       unitIdTitle: json['UnitId_Title'] as String?,
     );
   }
 
   Map<String, dynamic> toJson() => {
     'ID': id,
-    'Material_ID': materialId,
-    'Material_IDLong': materialIdLong,
-    'Parent_ID': parentId,
-    'Parent_IDLong': parentIdLong,
-    'Quantity': quantity,
+    'IDLong': idLong,
+    'Title': title,
     'Price': price,
     'PriceOld': priceOld,
     'PriceImport': priceImport,
     'UnitId': unitId,
     'Status': status,
+    'Orders': orders,
     'CreatedBy': createdBy,
     'CreatedDate': createdDate,
     'ModifiedDate': modifiedDate,
@@ -102,12 +94,12 @@ class MaterialListModelResponse {
     'DeleteStatus': deleteStatus,
     'DeleteBy': deleteBy,
     'DeleteDate': deleteDate,
+    'Image': image,
     'SetDefault': setDefault,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
     'ModifiedBy_Email': modifiedByEmail,
     'ModifiedBy_UserName': modifiedByUserName,
-    'Material_Title': materialTitle,
     'UnitId_Title': unitIdTitle,
   };
 }
