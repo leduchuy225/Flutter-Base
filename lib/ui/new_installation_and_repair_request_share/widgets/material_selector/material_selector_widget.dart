@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/utils/utils.dart';
 import 'package:flutter_base/data/material_api.dart';
+import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
@@ -14,14 +15,18 @@ import '../../../../models/base_selector.dart';
 import '../../../../models/installation/material_list_model_response.dart';
 import '../../../../models/installation/update_material_model_payload.dart';
 import '../../../../models/installation/update_material_payload.dart';
+import '../../../../models/installation/update_material_response.dart';
 import '../../../../widgets/text_field/text_field_controller.dart';
 import 'material_selector_controller.dart';
 
 class MaterialSelectorWidget extends StatefulWidget {
   final int id;
   final MaterialSelectorController controller;
-  final Future Function() deleteMaterialApi;
-  final Future Function(UpdateMaterialPayload) updateMaterialApi;
+  final Future<BaseResponse> Function(Map<String, dynamic>) deleteMaterialApi;
+  final Future<BaseResponse<UpdateMaterialResponse>> Function(
+    UpdateMaterialPayload,
+  )
+  updateMaterialApi;
 
   const MaterialSelectorWidget({
     super.key,
@@ -41,16 +46,20 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
   );
 
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {});
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MyTexttile.card(
       title: 'Vật tư',
+      suffixHeader: InkWell(
+        child: const Icon(Icons.playlist_remove),
+        onTap: () async {
+          final body = {'id': widget.id};
+          final response = await widget.deleteMaterialApi(body);
+
+          if (response.isSuccess) {
+            materialSeletorController.clear();
+          }
+        },
+      ),
       child: GetBuilder(
         init: widget.controller,
         builder: (controller) {
@@ -61,7 +70,17 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                 title: 'Danh sách vật tư',
                 controller: materialSeletorController,
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.add_circle, color: AppColors.black),
+                  icon: ValueListenableBuilder(
+                    valueListenable: materialSeletorController,
+                    builder: (context, _, _) {
+                      return Icon(
+                        Icons.add_circle,
+                        color: materialSeletorController.first == null
+                            ? AppColors.black
+                            : AppColors.primary,
+                      );
+                    },
+                  ),
                   onPressed: () {
                     if (materialSeletorController.checkIsNotEmpty()) {
                       final item = materialSeletorController.first;
@@ -110,13 +129,19 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: IconButton(
-                          onPressed: () {
-                            controller.remove(material);
-                          },
-                          icon: const Icon(
-                            Icons.delete,
-                            color: AppColors.black,
+                        child: Visibility(
+                          visible: material.id == null,
+                          child: IconButton(
+                            onPressed: () async {
+                              if (material.id == null) {
+                                controller.remove(material);
+                                return;
+                              }
+                            },
+                            icon: const Icon(
+                              Icons.delete,
+                              color: AppColors.black,
+                            ),
                           ),
                         ),
                       ),
@@ -167,7 +192,7 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                 onPressed: () {
                   MyDialog.alertDialog(
                     message: 'Xác nhận muốn cập nhật số lượng vật tư ?',
-                    okHandler: () {
+                    okHandler: () async {
                       final body = UpdateMaterialPayload(
                         id: widget.id,
                         model: controller.materialList.map((material) {
@@ -178,10 +203,13 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                           );
                         }).toList(),
                       );
-                      print(body.toJson());
-                      // Get.find<InstallationApi>()
-                      //     .updateMaterial(body)
-                      //     .callApi();
+
+                      final response = await widget.updateMaterialApi(body);
+                      final data = response.data?.model ?? [];
+
+                      if (response.isSuccess) {
+                        controller.replace(data);
+                      }
                     },
                   );
                 },

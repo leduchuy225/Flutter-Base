@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/services/user_service.dart';
+import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/sign_report_file_widget.dart';
@@ -15,6 +16,8 @@ import 'package:signature/signature.dart';
 import '../../core/utils/datetime_utils.dart';
 import '../../models/common/note_viewmodel_response.dart';
 import '../../models/common/technical_staff_list_model_payload.dart';
+import '../../models/installation/update_material_payload.dart';
+import '../../models/installation/update_material_response.dart';
 import 'widgets/material_selector/material_selector_controller.dart';
 import 'widgets/material_selector/material_selector_widget.dart';
 import 'widgets/sign_report_file_data_controller.dart';
@@ -98,9 +101,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   Future<List<MySelectorModel>> getReportTypeList();
 
-  Future getMaterialApi();
-  Future deleteMaterialApi();
-  Future updateMaterialApi(UpdateMaterialPayload);
+  Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body);
+  Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
+    UpdateMaterialPayload body,
+  );
 
   void setIsRefreshValue();
 

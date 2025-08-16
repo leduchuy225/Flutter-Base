@@ -3,8 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/utils/utils.dart';
+import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
+import 'package:flutter_base/models/installation/update_material_payload.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
@@ -13,6 +15,7 @@ import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/file_collection_model.dart';
 import '../../../models/installation/installation_detail_model_response.dart';
+import '../../../models/installation/update_material_response.dart';
 import '../../../models/installation/view_installation_report_file_model_payload.dart';
 import '../../../models/installation/view_installation_report_file_payload.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
@@ -370,26 +373,20 @@ class NewInstallationDetailController
   String? get serviceType => MBService.NewInstallation;
 
   @override
-  Future deleteMaterialApi() {
-    // TODO: implement deleteMaterialApi
-    throw UnimplementedError();
-  }
-
-  @override
-  Future getMaterialApi() {
-    // TODO: implement getMaterialApi
-    throw UnimplementedError();
-  }
-
-  @override
-  Future updateMaterialApi(UpdateMaterialPayload) {
-    // TODO: implement updateMaterialApi
-    throw UnimplementedError();
-  }
-
-  @override
   int? get countryId => detailData?.countryId;
 
   @override
   int? get provinceId => detailData?.provinceId;
+
+  @override
+  Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body) {
+    return Get.find<InstallationApi>().deleteMaterial(body).callApi();
+  }
+
+  @override
+  Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
+    UpdateMaterialPayload body,
+  ) {
+    return Get.find<InstallationApi>().updateMaterial(body).callApi();
+  }
 }

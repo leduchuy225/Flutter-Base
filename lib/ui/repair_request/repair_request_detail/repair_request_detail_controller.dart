@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/repair_request_api.dart';
+import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
+import 'package:flutter_base/models/installation/update_material_payload.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
@@ -11,6 +13,7 @@ import '../../../core/utils/utils.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/file_collection_model.dart';
+import '../../../models/installation/update_material_response.dart';
 import '../../../models/repair_request/repair_request_detail_model_response.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
 
@@ -277,28 +280,24 @@ class RepairRequestDetailController
   String? get serviceType => MBService.RepairRequest;
 
   @override
-  Future deleteMaterialApi() {
-    // TODO: implement deleteMaterialApi
-    throw UnimplementedError();
-  }
-
-  @override
-  Future getMaterialApi() {
-    // TODO: implement getMaterialApi
-    throw UnimplementedError();
-  }
-
-  @override
-  Future updateMaterialApi(UpdateMaterialPayload) {
-    // TODO: implement updateMaterialApi
-    throw UnimplementedError();
-  }
-
-  @override
   // TODO: implement countryId
   int? get countryId => throw UnimplementedError();
 
   @override
   // TODO: implement provinceId
   int? get provinceId => throw UnimplementedError();
+
+  @override
+  Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body) {
+    // TODO: implement deleteMaterialApi
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
+    UpdateMaterialPayload body,
+  ) {
+    // TODO: implement updateMaterialApi
+    throw UnimplementedError();
+  }
 }

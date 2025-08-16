@@ -1,8 +1,9 @@
+import '../bo_chia/bo_chia_list_model_response.dart';
 import 'slid_list_model_response.dart';
 
 class SlidListAndDividerListResponse {
   List<SlidListModelResponse>? listSlid;
-  List<dynamic>? listDivider;
+  List<BoChiaListModelResponse>? listDivider;
 
   SlidListAndDividerListResponse({this.listSlid, this.listDivider});
 
@@ -13,13 +14,16 @@ class SlidListAndDividerListResponse {
             (e) => SlidListModelResponse.fromJson(e as Map<String, dynamic>),
           )
           .toList(),
-      listDivider:
-          json['list_Divider.bo_chia_list_model_response'] as List<dynamic>?,
+      listDivider: (json['list_Divider'] as List<dynamic>?)
+          ?.map(
+            (e) => BoChiaListModelResponse.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     );
   }
 
   Map<String, dynamic> toJson() => {
     'list_SLID': listSlid?.map((e) => e.toJson()).toList(),
-    'list_Divider': listDivider,
+    'list_Divider': listDivider?.map((e) => e.toJson()).toList(),
   };
 }

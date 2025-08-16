@@ -24,4 +24,14 @@ class MaterialSelectorController extends GetxController {
     }).toList();
     update();
   }
+
+  void clear() {
+    _materialListObs.value = [];
+    update();
+  }
+
+  void replace(List<MaterialListModelResponse> data) {
+    _materialListObs.value = data;
+    update();
+  }
 }

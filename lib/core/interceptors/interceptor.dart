@@ -81,6 +81,7 @@ class MyInterceptor extends Interceptor {
           type: DioExceptionType.badResponse,
           requestOptions: response.requestOptions,
         ),
+        true,
       );
       return;
     }
