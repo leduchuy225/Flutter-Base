@@ -4,7 +4,7 @@ import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/theme/styles.dart';
-import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/sign_report_file_widget.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/sign_report_file/sign_report_file_widget.dart';
 import 'package:flutter_base/widgets/data_state_widget.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_controller.dart';
@@ -20,6 +20,7 @@ import '../../models/installation/update_material_payload.dart';
 import '../../models/installation/update_material_response.dart';
 import 'widgets/material_selector/material_selector_controller.dart';
 import 'widgets/material_selector/material_selector_widget.dart';
+import 'widgets/sign_report_file/report_file_item.dart';
 import 'widgets/sign_report_file_data_controller.dart';
 import 'widgets/slid_and_divider/slid_and_divider_controller.dart';
 import 'widgets/slid_and_divider/slid_and_divider_widget.dart';
@@ -34,8 +35,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final currentRxStep = RxInt(1);
   final detailRxData = Rx<T?>(null);
-  final isReportFileSigned = RxBool(false);
-  final previewReportFileLink = RxString('');
+  // final isReportFileSigned = RxBool(false);
+  // final previewReportFileLink = RxString('');
+  final reportSelectedIdToSign = RxInt(0);
+  final reportFiles = RxList<SignReportFileItemModel>([]);
 
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
   final overdueNoteListRxData = RxList<NoteViewmodelResponse>([]);
@@ -110,7 +113,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
     UpdateMaterialPayload body,
   );
 
-  dynamic get currentReportId => reportTypeListController.first?.id;
+  int get currentReportIdToSign => reportSelectedIdToSign.value;
+  dynamic get currentReportIdToPreview => reportTypeListController.first?.id;
 
   @override
   void onInit() {
@@ -261,19 +265,30 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           init: this,
           builder: (controller) {
             return SignReportFileWidget(
-              isSign: isReportFileSigned.value,
+              files: controller.reportFiles,
               reportController: reportController,
               getReportTypeList: getReportTypeList,
-              filePath: controller.previewReportFileLink.value,
+              reportSelectedIdToSign: controller.reportSelectedIdToSign.value,
               staffSignatureController: staffSignatureController,
               reportTypeListController: reportTypeListController,
               customerSignatureController: customerSignatureController,
+              onReportSelected: (value) {
+                if (value == null) {
+                  return;
+                }
+                reportSelectedIdToSign.value = value;
+
+                staffSignatureController.clear();
+                customerSignatureController.clear();
+
+                update();
+              },
               previewReportFile: () async {
-                if (currentReportId == ReportType.BBNT) {
+                if (currentReportIdToPreview == ReportType.BBNT) {
                   if (!reportController.checkBbntIsValid()) {
                     return;
                   }
-                } else if (currentReportId == ReportType.BBBG) {
+                } else if (currentReportIdToPreview == ReportType.BBBG) {
                   if (!reportController.checkBbbgIsValid()) {
                     return;
                   }

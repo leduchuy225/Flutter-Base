@@ -35,6 +35,7 @@ class ReportType {
 
   static const BBNT = 1;
   static const BBBG = 2;
+  static const BBKM = 3;
 }
 
 class Config {

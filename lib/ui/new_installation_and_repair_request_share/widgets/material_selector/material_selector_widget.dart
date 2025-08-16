@@ -49,17 +49,6 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
   Widget build(BuildContext context) {
     return MyTexttile.card(
       title: 'Vật tư',
-      suffixHeader: InkWell(
-        child: const Icon(Icons.playlist_remove),
-        onTap: () async {
-          final body = {'id': widget.id};
-          final response = await widget.deleteMaterialApi(body);
-
-          if (response.isSuccess) {
-            materialSeletorController.clear();
-          }
-        },
-      ),
       child: GetBuilder(
         init: widget.controller,
         builder: (controller) {
@@ -129,19 +118,29 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                     children: [
                       Expanded(
                         flex: 1,
-                        child: Visibility(
-                          visible: material.id == null,
-                          child: IconButton(
-                            onPressed: () async {
-                              if (material.id == null) {
-                                controller.remove(material);
-                                return;
-                              }
-                            },
-                            icon: const Icon(
-                              Icons.delete,
-                              color: AppColors.black,
-                            ),
+                        child: IconButton(
+                          onPressed: () {
+                            if (material.id == null) {
+                              controller.remove(material);
+                              return;
+                            }
+                            MyDialog.alertDialog(
+                              message:
+                                  'Bạn chắc chắn muốn xóa vật tư ${material.materialTitle} ?',
+                              okHandler: () async {
+                                final body = {'id': material.id};
+                                final response = await widget.deleteMaterialApi(
+                                  body,
+                                );
+                                if (response.isSuccess) {
+                                  controller.remove(material);
+                                }
+                              },
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.delete,
+                            color: AppColors.black,
                           ),
                         ),
                       ),

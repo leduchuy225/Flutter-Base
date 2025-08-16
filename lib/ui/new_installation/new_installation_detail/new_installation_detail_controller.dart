@@ -20,6 +20,7 @@ import '../../../models/installation/update_material_response.dart';
 import '../../../models/installation/view_installation_report_file_model_payload.dart';
 import '../../../models/installation/view_installation_report_file_payload.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
+import '../../new_installation_and_repair_request_share/widgets/sign_report_file/report_file_item.dart';
 
 class NewInstallationDetailController
     extends
@@ -47,25 +48,29 @@ class NewInstallationDetailController
       overdueNoteListRxData.value =
           data.listMbConnectionRequestOverdueViewModel ?? [];
 
-      if (data.reportAcceptance != null) {
-        previewReportFileLink.value = getFileLink(data.reportAcceptance)!;
-        isReportFileSigned.value = data.reportAcceptanceIsSign ?? false;
-        reportTypeListController.selectors = [
-          MySelectorModel(
+      reportFiles.addAll([
+        if (data.reportAcceptance != null)
+          SignReportFileItemModel(
             id: ReportType.BBNT,
+            url: getFileLink(data.reportAcceptance)!,
             name: 'Biên bản nghiệm thu FTTx với khách hàng',
+            isSigned: data.reportAcceptanceIsSign ?? false,
           ),
-        ];
-      } else if (data.reportHandoverDevice != null) {
-        previewReportFileLink.value = getFileLink(data.reportAcceptance)!;
-        isReportFileSigned.value = data.reportHandoverDeviceIsSign ?? false;
-        reportTypeListController.selectors = [
-          MySelectorModel(
+        if (data.reportHandoverDevice != null)
+          SignReportFileItemModel(
             id: ReportType.BBBG,
             name: 'Biên bản bàn giao thiết bị',
+            url: getFileLink(data.reportHandoverDevice)!,
+            isSigned: data.reportHandoverDeviceIsSign ?? false,
           ),
-        ];
-      }
+        if (data.reportNew != null)
+          SignReportFileItemModel(
+            id: ReportType.BBKM,
+            name: 'Biên bản kéo mới',
+            url: getFileLink(data.reportNew)!,
+            isSigned: data.reportNewIsSet ?? false,
+          ),
+      ]);
 
       if (data.technicalStaffModuleImage != null) {
         technicalStaffModuleImageControler.files.value = [
@@ -309,33 +314,33 @@ class NewInstallationDetailController
   Future previewReportFile() async {
     final body = ViewInstallationReportFilePayload(
       id: id,
-      type: currentReportId,
+      type: currentReportIdToPreview,
       model: ViewInstallationReportFileModelPayload(
         duLieuHoanThanh: reportController.completeDateController.dateTime,
         // Biên bản nghiệm thu
-        duLieuAcc: currentReportId == ReportType.BBNT
+        duLieuAcc: currentReportIdToPreview == ReportType.BBNT
             ? reportController.bbntAccountTextController.textTrim
             : null,
-        duLieuChatLuongDichVu: currentReportId == ReportType.BBNT
+        duLieuChatLuongDichVu: currentReportIdToPreview == ReportType.BBNT
             ? reportController.bbntServiceQualityTextController.textTrim
             : null,
-        duLieuIpV4: currentReportId == ReportType.BBNT
+        duLieuIpV4: currentReportIdToPreview == ReportType.BBNT
             ? reportController.bbntIpV4TextController.textTrim
             : null,
-        duLieuPass: currentReportId == ReportType.BBNT
+        duLieuPass: currentReportIdToPreview == ReportType.BBNT
             ? reportController.bbntPasswordTextController.textTrim
             : null,
         // Biên bản bàn giao
-        tb1Ten: currentReportId == ReportType.BBBG
+        tb1Ten: currentReportIdToPreview == ReportType.BBBG
             ? reportController.bbbgNameTextController.textTrim
             : null,
-        tb1SLuong: currentReportId == ReportType.BBBG
+        tb1SLuong: currentReportIdToPreview == ReportType.BBBG
             ? reportController.bbbgAmountTextController.textTrim
             : null,
-        tb1HTrang: currentReportId == ReportType.BBBG
+        tb1HTrang: currentReportIdToPreview == ReportType.BBBG
             ? reportController.bbbgStatusTextController.textTrim
             : null,
-        tb1ThongSo: currentReportId == ReportType.BBBG
+        tb1ThongSo: currentReportIdToPreview == ReportType.BBBG
             ? reportController.bbbgStatictisTextController.textTrim
             : null,
       ),
@@ -348,7 +353,25 @@ class NewInstallationDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
-      previewReportFileLink.value = urlFile;
+      if (reportFiles.every((report) {
+        return report.id != currentReportIdToPreview;
+      })) {
+        reportFiles.add(
+          SignReportFileItemModel(
+            url: urlFile,
+            isSigned: false,
+            id: reportTypeListController.first?.id,
+            name: reportTypeListController.first?.name ?? '',
+          ),
+        );
+      } else {
+        reportFiles.forEach((report) {
+          if (report.id == currentReportIdToPreview) {
+            report.url = urlFile;
+            report.isSigned = false;
+          }
+        });
+      }
       update();
     }
   }
@@ -367,17 +390,21 @@ class NewInstallationDetailController
     final response = await Get.find<InstallationApi>()
         .signInstallationReportFile(
           id: id.toString(),
-          type: currentReportId.toString(),
           customersSign: customersSignFile,
           technicalStaffSign: staffSignFile,
+          type: currentReportIdToSign.toString(),
         )
         .callApi();
 
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
-      isReportFileSigned.value = true;
-      previewReportFileLink.value = urlFile;
+      reportFiles.forEach((report) {
+        if (report.id == currentReportIdToSign) {
+          report.url = urlFile;
+          report.isSigned = true;
+        }
+      });
       update();
     }
   }
