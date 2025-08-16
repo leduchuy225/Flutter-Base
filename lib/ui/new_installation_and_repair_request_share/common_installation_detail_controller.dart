@@ -77,6 +77,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   TechnicalStaffListModelPayload get technicalStaffListModelPayload;
 
+  bool get isRefreshValue;
+
+  void setIsRefreshValue();
+
   Future getDetailData();
 
   Future closeRequest(BuildContext context);
@@ -105,8 +109,6 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
     UpdateMaterialPayload body,
   );
-
-  void setIsRefreshValue();
 
   dynamic get currentReportId => reportTypeListController.first?.id;
 
@@ -138,20 +140,46 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(context, step: 2),
             AppStyles.pdt15,
-            getStepContent(context, step: 6),
-            AppStyles.pdt15,
             getStepContent(context, step: 7),
             AppStyles.pdt15,
-            getStepContent(context, step: 3),
+            getStepContent(context, step: 6),
+            Visibility(
+              visible: slidAndDividerController.data?.slidCode != null,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(top: 15),
+                child: getStepContent(context, step: 3),
+              ),
+            ),
+            Visibility(
+              visible: slidAndDividerController.data?.slidCode != null,
+              child: Padding(
+                padding: const EdgeInsetsGeometry.only(top: 15),
+                child: getStepContent(context, step: 4),
+              ),
+            ),
           ],
         );
       case 4:
         if (serviceType == MBService.NewInstallation) {
           return Column(
             children: [
-              getStepContent(context, step: 3),
+              getStepContent(context, step: 7),
               AppStyles.pdt15,
-              getStepContent(context, step: 4),
+              getStepContent(context, step: 6),
+              Visibility(
+                visible: slidAndDividerController.data?.slidCode != null,
+                child: Padding(
+                  padding: const EdgeInsetsGeometry.only(top: 15),
+                  child: getStepContent(context, step: 3),
+                ),
+              ),
+              Visibility(
+                visible: slidAndDividerController.data?.slidCode != null,
+                child: Padding(
+                  padding: const EdgeInsetsGeometry.only(top: 15),
+                  child: getStepContent(context, step: 4),
+                ),
+              ),
             ],
           );
         } else if (serviceType == MBService.RepairRequest) {
@@ -296,6 +324,9 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           countryId: countryId,
           provinceId: provinceId,
           controller: slidAndDividerController,
+          onSuccess: (response) {
+            setIsRefreshValue();
+          },
         );
       default:
         return const SizedBox.shrink();

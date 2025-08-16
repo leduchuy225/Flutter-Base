@@ -4,7 +4,7 @@ import 'repair_request_list_model_response.dart';
 
 class RepairRequestListResponse {
   List<RepairRequestListModelResponse>? model;
-  int? totalItems;
+  num? totalItems;
   RoleResponse? role;
 
   RepairRequestListResponse({this.model, this.totalItems, this.role});
@@ -18,7 +18,7 @@ class RepairRequestListResponse {
             ),
           )
           .toList(),
-      totalItems: json['totalItems'] as int?,
+      totalItems: json['totalItems'] as num?,
       role: json['role'] == null
           ? null
           : RoleResponse.fromJson(json['role'] as Map<String, dynamic>),

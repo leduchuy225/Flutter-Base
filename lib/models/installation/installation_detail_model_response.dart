@@ -4,18 +4,18 @@ import '../common/technical_staff_list_model_response.dart';
 import 'material_list_model_response.dart';
 
 class InstallationDetailModelResponse {
-  int? id;
-  int? idLong;
-  int? currentStep;
-  int? customersId;
-  int? serviceId;
-  int? type;
+  num? id;
+  num? idLong;
+  num? currentStep;
+  num? customersId;
+  num? serviceId;
+  num? type;
   String? contractCode;
-  int? surveyStatus;
-  int? countryId;
-  int? provinceId;
-  int? districtId;
-  int? wardId;
+  num? surveyStatus;
+  num? countryId;
+  num? provinceId;
+  num? districtId;
+  num? wardId;
   String? address;
   String? createdBy;
   String? createdDate;
@@ -37,10 +37,10 @@ class InstallationDetailModelResponse {
   String? googleMap;
   dynamic expectedCompletionDate;
   dynamic actualCompletionDate;
-  int? devicePort;
+  num? devicePort;
   String? deviceAcc;
   String? devicePass;
-  int? deviceStatus;
+  num? deviceStatus;
   String? reportAcceptance;
   String? reportHandoverDevice;
   dynamic reportAcceptanceIsSign;
@@ -50,18 +50,18 @@ class InstallationDetailModelResponse {
   String? staffPhoneNumber;
   dynamic technicalStaffReportCompletedDate;
   bool? isCompletedStaffOn;
-  int? reportDistance;
+  num? reportDistance;
   dynamic reportResult;
   String? reportImageDivider;
   String? reportCableLengthStart;
   String? reportCableLengthEnd;
-  int? cableLength;
-  int? cableLengthStart;
-  int? cableLengthEnd;
+  num? cableLength;
+  num? cableLengthStart;
+  num? cableLengthEnd;
   String? reportNew;
   dynamic reportNewIsSet;
-  int? slidId;
-  int? slidIdLong;
+  num? slidId;
+  num? slidIdLong;
   dynamic dividerId;
   dynamic dividerIdLong;
   CustomerViewmodelResponse? mbCustomerViewModel;
@@ -97,11 +97,11 @@ class InstallationDetailModelResponse {
   dynamic technicalStaffUserName;
   String? slidCode;
   dynamic dividerCode;
-  int? oltId;
-  int? oltIdLong;
+  num? oltId;
+  num? oltIdLong;
   dynamic oltCode;
-  int? ponidId;
-  int? ponidIdLong;
+  num? ponidId;
+  num? ponidIdLong;
   dynamic ponidCode;
 
   InstallationDetailModelResponse({
@@ -208,18 +208,18 @@ class InstallationDetailModelResponse {
 
   factory InstallationDetailModelResponse.fromJson(Map<String, dynamic> json) {
     return InstallationDetailModelResponse(
-      id: json['ID'] as int?,
-      idLong: json['IDLong'] as int?,
-      currentStep: json['CurrentStep'] as int?,
-      customersId: json['CustomersID'] as int?,
-      serviceId: json['ServiceID'] as int?,
-      type: json['Type'] as int?,
+      id: json['ID'] as num?,
+      idLong: json['IDLong'] as num?,
+      currentStep: json['CurrentStep'] as num?,
+      customersId: json['CustomersID'] as num?,
+      serviceId: json['ServiceID'] as num?,
+      type: json['Type'] as num?,
       contractCode: json['ContractCode'] as String?,
-      surveyStatus: json['SurveyStatus'] as int?,
-      countryId: json['CountryID'] as int?,
-      provinceId: json['ProvinceID'] as int?,
-      districtId: json['DistrictID'] as int?,
-      wardId: json['WardID'] as int?,
+      surveyStatus: json['SurveyStatus'] as num?,
+      countryId: json['CountryID'] as num?,
+      provinceId: json['ProvinceID'] as num?,
+      districtId: json['DistrictID'] as num?,
+      wardId: json['WardID'] as num?,
       address: json['Address'] as String?,
       createdBy: json['CreatedBy'] as String?,
       createdDate: json['CreatedDate'] as String?,
@@ -241,10 +241,10 @@ class InstallationDetailModelResponse {
       googleMap: json['GoogleMap'] as String?,
       expectedCompletionDate: json['ExpectedCompletionDate'] as dynamic,
       actualCompletionDate: json['ActualCompletionDate'] as dynamic,
-      devicePort: json['Device_Port'] as int?,
+      devicePort: json['Device_Port'] as num?,
       deviceAcc: json['Device_ACC'] as String?,
       devicePass: json['Device_Pass'] as String?,
-      deviceStatus: json['Device_Status'] as int?,
+      deviceStatus: json['Device_Status'] as num?,
       reportAcceptance: json['Report_Acceptance'] as String?,
       reportHandoverDevice: json['Report_HandoverDevice'] as String?,
       reportAcceptanceIsSign: json['Report_Acceptance_IsSign'] as dynamic,
@@ -256,18 +256,18 @@ class InstallationDetailModelResponse {
       technicalStaffReportCompletedDate:
           json['TechnicalStaffReportCompletedDate'] as dynamic,
       isCompletedStaffOn: json['IsCompletedStaffOn'] as bool?,
-      reportDistance: json['Report_Distance'] as int?,
+      reportDistance: json['Report_Distance'] as num?,
       reportResult: json['Report_Result'] as dynamic,
       reportImageDivider: json['Report_ImageDivider'] as String?,
       reportCableLengthStart: json['Report_CableLengthStart'] as String?,
       reportCableLengthEnd: json['Report_CableLengthEnd'] as String?,
-      cableLength: json['CableLength'] as int?,
-      cableLengthStart: json['CableLengthStart'] as int?,
-      cableLengthEnd: json['CableLengthEnd'] as int?,
+      cableLength: json['CableLength'] as num?,
+      cableLengthStart: json['CableLengthStart'] as num?,
+      cableLengthEnd: json['CableLengthEnd'] as num?,
       reportNew: json['Report_New'] as String?,
       reportNewIsSet: json['Report_New_IsSet'] as dynamic,
-      slidId: json['SLID_ID'] as int?,
-      slidIdLong: json['SLID_IDLong'] as int?,
+      slidId: json['SLID_ID'] as num?,
+      slidIdLong: json['SLID_IDLong'] as num?,
       dividerId: json['Divider_ID'] as dynamic,
       dividerIdLong: json['Divider_IDLong'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null
@@ -335,11 +335,11 @@ class InstallationDetailModelResponse {
       technicalStaffUserName: json['TechnicalStaff_UserName'] as dynamic,
       slidCode: json['SLID_Code'] as String?,
       dividerCode: json['Divider_Code'] as dynamic,
-      oltId: json['OLT_ID'] as int?,
-      oltIdLong: json['OLT_IDLong'] as int?,
+      oltId: json['OLT_ID'] as num?,
+      oltIdLong: json['OLT_IDLong'] as num?,
       oltCode: json['OLT_Code'] as dynamic,
-      ponidId: json['PONID_ID'] as int?,
-      ponidIdLong: json['PONID_IDLong'] as int?,
+      ponidId: json['PONID_ID'] as num?,
+      ponidIdLong: json['PONID_IDLong'] as num?,
       ponidCode: json['PONID_Code'] as dynamic,
     );
   }

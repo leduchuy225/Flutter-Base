@@ -1,14 +1,14 @@
 import 'repair_request_add_modem_log_model_payload.dart';
 
 class RepairRequestAddModemLogPayload {
-  int? id;
+  num? id;
   RepairRequestAddModemLogModelPayload? model;
 
   RepairRequestAddModemLogPayload({this.id, this.model});
 
   factory RepairRequestAddModemLogPayload.fromJson(Map<String, dynamic> json) {
     return RepairRequestAddModemLogPayload(
-      id: json['id'] as int?,
+      id: json['id'] as num?,
       model: json['model'] == null
           ? null
           : RepairRequestAddModemLogModelPayload.fromJson(

@@ -70,7 +70,9 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
             return const NewInstallationDetailScreen();
           },
           binding: BindingsBuilder.put(() {
-            return NewInstallationDetailController(newInstallationId: item.id!);
+            return NewInstallationDetailController(
+              newInstallationId: item.id!.toInt(),
+            );
           }),
         );
 

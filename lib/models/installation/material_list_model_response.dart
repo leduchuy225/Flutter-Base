@@ -1,14 +1,14 @@
 class MaterialListModelResponse {
-  int? id;
-  int? materialId;
+  num? id;
+  num? materialId;
   dynamic materialIdLong;
-  int? parentId;
+  num? parentId;
   dynamic parentIdLong;
   num? quantity;
   dynamic price;
   dynamic priceOld;
   dynamic priceImport;
-  int? unitId;
+  num? unitId;
   dynamic status;
   dynamic createdBy;
   dynamic createdDate;
@@ -55,16 +55,16 @@ class MaterialListModelResponse {
 
   factory MaterialListModelResponse.fromJson(Map<String, dynamic> json) {
     return MaterialListModelResponse(
-      id: json['ID'] as int?,
-      materialId: json['Material_ID'] as int?,
+      id: json['ID'] as num?,
+      materialId: json['Material_ID'] as num?,
       materialIdLong: json['Material_IDLong'] as dynamic,
-      parentId: json['Parent_ID'] as int?,
+      parentId: json['Parent_ID'] as num?,
       parentIdLong: json['Parent_IDLong'] as dynamic,
       quantity: json['Quantity'] as num?,
       price: json['Price'] as dynamic,
       priceOld: json['PriceOld'] as dynamic,
       priceImport: json['PriceImport'] as dynamic,
-      unitId: json['UnitId'] as int?,
+      unitId: json['UnitId'] as num?,
       status: json['Status'] as dynamic,
       createdBy: json['CreatedBy'] as dynamic,
       createdDate: json['CreatedDate'] as dynamic,

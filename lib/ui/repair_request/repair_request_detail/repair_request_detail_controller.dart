@@ -38,7 +38,7 @@ class RepairRequestDetailController
 
     if (data != null) {
       detailRxData.value = data;
-      currentRxStep.value = data.currentStep ?? 1;
+      currentRxStep.value = data.currentStep?.toInt() ?? 1;
       noteListRxData.value = data.listMbRepairRequestNoteViewModel ?? [];
 
       overdueNoteListRxData.value =
@@ -86,7 +86,7 @@ class RepairRequestDetailController
       setIsRefreshValue();
 
       final step = response.data?.currentStep ?? 1;
-      currentRxStep.value = step;
+      currentRxStep.value = step.toInt();
 
       update();
     }
@@ -105,7 +105,7 @@ class RepairRequestDetailController
         setIsRefreshValue();
       }
 
-      currentRxStep.value = step;
+      currentRxStep.value = step.toInt();
 
       step2NoteTextController.clear();
 
@@ -130,7 +130,7 @@ class RepairRequestDetailController
       setIsRefreshValue();
 
       final step = response.data?.currentStep ?? 1;
-      currentRxStep.value = step;
+      currentRxStep.value = step.toInt();
 
       update();
     }
@@ -251,10 +251,10 @@ class RepairRequestDetailController
   @override
   TechnicalStaffListModelPayload get technicalStaffListModelPayload {
     return TechnicalStaffListModelPayload(
-      phuongXaId: detailData?.wardId,
-      countryId: detailData?.countryId,
-      thanhPhoId: detailData?.provinceId,
-      quanHuyenId: detailData?.districtId,
+      phuongXaId: detailData?.wardId?.toInt(),
+      countryId: detailData?.countryId?.toInt(),
+      thanhPhoId: detailData?.provinceId?.toInt(),
+      quanHuyenId: detailData?.districtId?.toInt(),
     );
   }
 
@@ -299,5 +299,13 @@ class RepairRequestDetailController
   ) {
     // TODO: implement updateMaterialApi
     throw UnimplementedError();
+  }
+
+  @override
+  bool get isRefreshValue {
+    return CacheService().read<bool>(
+          key: CacheService.isRefreshRepairRequestList,
+        ) ??
+        false;
   }
 }

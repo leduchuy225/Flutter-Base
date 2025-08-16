@@ -3,7 +3,7 @@ import 'installation_list_model_response.dart';
 
 class InstallationListResponse {
   List<InstallationListModelResponse>? model;
-  int? totalItems;
+  num? totalItems;
   RoleResponse? role;
 
   InstallationListResponse({this.model, this.totalItems, this.role});
@@ -17,7 +17,7 @@ class InstallationListResponse {
             ),
           )
           .toList(),
-      totalItems: json['totalItems'] as int?,
+      totalItems: json['totalItems'] as num?,
       role: json['role'] == null
           ? null
           : RoleResponse.fromJson(json['role'] as Map<String, dynamic>),

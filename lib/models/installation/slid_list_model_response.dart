@@ -1,12 +1,12 @@
 class SlidListModelResponse {
-  int? id;
-  int? idLong;
+  num? id;
+  num? idLong;
   String? code;
-  int? oltId;
-  int? oltIdLong;
+  num? oltId;
+  num? oltIdLong;
   dynamic oltCode;
-  int? ponidId;
-  int? ponidIdLong;
+  num? ponidId;
+  num? ponidIdLong;
   dynamic ponidCode;
   String? createdBy;
   String? createdDate;
@@ -20,7 +20,7 @@ class SlidListModelResponse {
   dynamic googleMap;
   dynamic title;
   bool? isOnline;
-  int? provinceId;
+  num? provinceId;
 
   SlidListModelResponse({
     this.id,
@@ -49,14 +49,14 @@ class SlidListModelResponse {
 
   factory SlidListModelResponse.fromJson(Map<String, dynamic> json) {
     return SlidListModelResponse(
-      id: json['ID'] as int?,
-      idLong: json['IDLong'] as int?,
+      id: json['ID'] as num?,
+      idLong: json['IDLong'] as num?,
       code: json['Code'] as String?,
-      oltId: json['OLT_ID'] as int?,
-      oltIdLong: json['OLT_IDLong'] as int?,
+      oltId: json['OLT_ID'] as num?,
+      oltIdLong: json['OLT_IDLong'] as num?,
       oltCode: json['OLT_Code'] as dynamic,
-      ponidId: json['PONID_ID'] as int?,
-      ponidIdLong: json['PONID_IDLong'] as int?,
+      ponidId: json['PONID_ID'] as num?,
+      ponidIdLong: json['PONID_IDLong'] as num?,
       ponidCode: json['PONID_Code'] as dynamic,
       createdBy: json['CreatedBy'] as String?,
       createdDate: json['CreatedDate'] as String?,
@@ -70,7 +70,7 @@ class SlidListModelResponse {
       googleMap: json['GoogleMap'] as dynamic,
       title: json['Title'] as dynamic,
       isOnline: json['IsOnline'] as bool?,
-      provinceId: json['ProvinceID'] as int?,
+      provinceId: json['ProvinceID'] as num?,
     );
   }
 

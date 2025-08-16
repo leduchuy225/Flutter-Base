@@ -1,6 +1,6 @@
 class GetMaterialListModelResponse {
-  int? id;
-  int? idLong;
+  num? id;
+  num? idLong;
   String? title;
   dynamic price;
   dynamic priceOld;
@@ -51,8 +51,8 @@ class GetMaterialListModelResponse {
 
   factory GetMaterialListModelResponse.fromJson(Map<String, dynamic> json) {
     return GetMaterialListModelResponse(
-      id: json['ID'] as int?,
-      idLong: json['IDLong'] as int?,
+      id: json['ID'] as num?,
+      idLong: json['IDLong'] as num?,
       title: json['Title'] as String?,
       price: json['Price'] as dynamic,
       priceOld: json['PriceOld'] as dynamic,

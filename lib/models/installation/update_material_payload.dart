@@ -1,14 +1,14 @@
 import 'update_material_model_payload.dart';
 
 class UpdateMaterialPayload {
-  int? id;
+  num? id;
   List<UpdateMaterialModelPayload>? model;
 
   UpdateMaterialPayload({this.id, this.model});
 
   factory UpdateMaterialPayload.fromJson(Map<String, dynamic> json) {
     return UpdateMaterialPayload(
-      id: json['id'] as int?,
+      id: json['id'] as num?,
       model: (json['model'] as List<dynamic>?)
           ?.map(
             (e) =>

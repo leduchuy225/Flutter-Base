@@ -1,14 +1,14 @@
 import 'repair_request_add_modem_log_model_response.dart';
 
 class RepairRequestAddModemLogResponse {
-  int? currentStep;
+  num? currentStep;
   List<RepairRequestAddModemLogModelResponse>? model;
 
   RepairRequestAddModemLogResponse({this.currentStep, this.model});
 
   factory RepairRequestAddModemLogResponse.fromJson(Map<String, dynamic> json) {
     return RepairRequestAddModemLogResponse(
-      currentStep: json['CurrentStep'] as int?,
+      currentStep: json['CurrentStep'] as num?,
       model: (json['model'] as List<dynamic>?)
           ?.map(
             (e) => RepairRequestAddModemLogModelResponse.fromJson(

@@ -5,20 +5,20 @@ import '../installation/material_list_model_response.dart';
 import 'repair_request_get_modem_log_model_response.dart';
 
 class RepairRequestDetailModelResponse {
-  int? id;
-  int? idLong;
+  num? id;
+  num? idLong;
   dynamic parent;
   dynamic parentLong;
-  int? currentStep;
-  int? customersId;
-  int? serviceId;
-  int? type;
+  num? currentStep;
+  num? customersId;
+  num? serviceId;
+  num? type;
   dynamic contractCode;
-  int? surveyStatus;
-  int? countryId;
-  int? provinceId;
-  int? districtId;
-  int? wardId;
+  num? surveyStatus;
+  num? countryId;
+  num? provinceId;
+  num? districtId;
+  num? wardId;
   String? address;
   String? createdBy;
   String? createdDate;
@@ -54,16 +54,16 @@ class RepairRequestDetailModelResponse {
   dynamic technicalStaffReportCompletedDate;
   bool? isCompletedStaffOn;
   dynamic customerNote;
-  int? reportDistance;
+  num? reportDistance;
   String? reportCorrectionMethod;
   dynamic reportOtherArising;
   dynamic reportResult;
   String? reportImageDivider;
   String? reportCableLengthStart;
   String? reportCableLengthEnd;
-  int? cableLength;
-  int? cableLengthStart;
-  int? cableLengthEnd;
+  num? cableLength;
+  num? cableLengthStart;
+  num? cableLengthEnd;
   String? reportProblem;
   dynamic reportProblemIsSet;
   CustomerViewmodelResponse? mbCustomerViewModel;
@@ -193,20 +193,20 @@ class RepairRequestDetailModelResponse {
 
   factory RepairRequestDetailModelResponse.fromJson(Map<String, dynamic> json) {
     return RepairRequestDetailModelResponse(
-      id: json['ID'] as int?,
-      idLong: json['IDLong'] as int?,
+      id: json['ID'] as num?,
+      idLong: json['IDLong'] as num?,
       parent: json['Parent'] as dynamic,
       parentLong: json['ParentLong'] as dynamic,
-      currentStep: json['CurrentStep'] as int?,
-      customersId: json['CustomersID'] as int?,
-      serviceId: json['ServiceID'] as int?,
-      type: json['Type'] as int?,
+      currentStep: json['CurrentStep'] as num?,
+      customersId: json['CustomersID'] as num?,
+      serviceId: json['ServiceID'] as num?,
+      type: json['Type'] as num?,
       contractCode: json['ContractCode'] as dynamic,
-      surveyStatus: json['SurveyStatus'] as int?,
-      countryId: json['CountryID'] as int?,
-      provinceId: json['ProvinceID'] as int?,
-      districtId: json['DistrictID'] as int?,
-      wardId: json['WardID'] as int?,
+      surveyStatus: json['SurveyStatus'] as num?,
+      countryId: json['CountryID'] as num?,
+      provinceId: json['ProvinceID'] as num?,
+      districtId: json['DistrictID'] as num?,
+      wardId: json['WardID'] as num?,
       address: json['Address'] as String?,
       createdBy: json['CreatedBy'] as String?,
       createdDate: json['CreatedDate'] as String?,
@@ -243,16 +243,16 @@ class RepairRequestDetailModelResponse {
           json['TechnicalStaffReportCompletedDate'] as dynamic,
       isCompletedStaffOn: json['IsCompletedStaffOn'] as bool?,
       customerNote: json['CustomerNote'] as dynamic,
-      reportDistance: json['Report_Distance'] as int?,
+      reportDistance: json['Report_Distance'] as num?,
       reportCorrectionMethod: json['Report_CorrectionMethod'] as String?,
       reportOtherArising: json['Report_OtherArising'] as dynamic,
       reportResult: json['Report_Result'] as dynamic,
       reportImageDivider: json['Report_ImageDivider'] as String?,
       reportCableLengthStart: json['Report_CableLengthStart'] as String?,
       reportCableLengthEnd: json['Report_CableLengthEnd'] as String?,
-      cableLength: json['CableLength'] as int?,
-      cableLengthStart: json['CableLengthStart'] as int?,
-      cableLengthEnd: json['CableLengthEnd'] as int?,
+      cableLength: json['CableLength'] as num?,
+      cableLengthStart: json['CableLengthStart'] as num?,
+      cableLengthEnd: json['CableLengthEnd'] as num?,
       reportProblem: json['Report_Problem'] as String?,
       reportProblemIsSet: json['Report_Problem_IsSet'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null

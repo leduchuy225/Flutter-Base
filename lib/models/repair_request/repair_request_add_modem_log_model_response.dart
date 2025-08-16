@@ -1,5 +1,5 @@
 class RepairRequestAddModemLogModelResponse {
-  int? id;
+  num? id;
   dynamic idLong;
   dynamic parentId;
   dynamic parentIdLong;
@@ -57,7 +57,7 @@ class RepairRequestAddModemLogModelResponse {
     Map<String, dynamic> json,
   ) {
     return RepairRequestAddModemLogModelResponse(
-      id: json['ID'] as int?,
+      id: json['ID'] as num?,
       idLong: json['IDLong'] as dynamic,
       parentId: json['ParentID'] as dynamic,
       parentIdLong: json['ParentIDLong'] as dynamic,

@@ -24,11 +24,13 @@ class SlidAndDividerSelectorWidget extends StatefulWidget {
   final int countryId;
   final int provinceId;
   final UpdateDeviceResponse? defaultData;
+  final void Function(UpdateDeviceResponse?)? onSuccess;
 
   const SlidAndDividerSelectorWidget({
     super.key,
-    required this.id,
+    this.onSuccess,
     this.defaultData,
+    required this.id,
     required this.countryId,
     required this.provinceId,
   });
@@ -38,6 +40,7 @@ class SlidAndDividerSelectorWidget extends StatefulWidget {
     int? countryId,
     int? provinceId,
     UpdateDeviceResponse? defaultData,
+    void Function(UpdateDeviceResponse?)? onSuccess,
   }) {
     if (provinceId == null || countryId == null || id == null) {
       MyDialog.snackbar('Không đủ thông tin', type: SnackbarType.WARNING);
@@ -50,6 +53,7 @@ class SlidAndDividerSelectorWidget extends StatefulWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16),
       content: SlidAndDividerSelectorWidget(
         id: id,
+        onSuccess: onSuccess,
         countryId: countryId,
         provinceId: provinceId,
         defaultData: defaultData,
@@ -89,7 +93,7 @@ class _SlidAndDividerSelectorWidgetState
     };
 
     _dividerSelectorController.onChanged = (data) {
-      _ponIdSelectorController.clear();
+      _portSelectorController.clear();
     };
   }
 
@@ -328,6 +332,9 @@ class _SlidAndDividerSelectorWidgetState
                           );
 
                       if (response.isSuccess) {
+                        if (widget.onSuccess != null) {
+                          widget.onSuccess!(response.data);
+                        }
                         Get.back(result: response.data);
                       }
 

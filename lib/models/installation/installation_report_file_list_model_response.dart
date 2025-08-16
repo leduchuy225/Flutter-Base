@@ -1,5 +1,5 @@
 class InstallationReportFileListModelResponse {
-  int? id;
+  num? id;
   String? title;
 
   InstallationReportFileListModelResponse({this.id, this.title});
@@ -8,7 +8,7 @@ class InstallationReportFileListModelResponse {
     Map<String, dynamic> json,
   ) {
     return InstallationReportFileListModelResponse(
-      id: json['ID'] as int?,
+      id: json['ID'] as num?,
       title: json['Title'] as String?,
     );
   }

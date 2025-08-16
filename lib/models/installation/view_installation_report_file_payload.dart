@@ -1,8 +1,8 @@
 import 'view_installation_report_file_model_payload.dart';
 
 class ViewInstallationReportFilePayload {
-  int? id;
-  int? type;
+  num? id;
+  num? type;
   ViewInstallationReportFileModelPayload? model;
 
   ViewInstallationReportFilePayload({this.id, this.type, this.model});
@@ -11,8 +11,8 @@ class ViewInstallationReportFilePayload {
     Map<String, dynamic> json,
   ) {
     return ViewInstallationReportFilePayload(
-      id: json['id'] as int?,
-      type: json['type'] as int?,
+      id: json['id'] as num?,
+      type: json['type'] as num?,
       model: json['model'] == null
           ? null
           : ViewInstallationReportFileModelPayload.fromJson(

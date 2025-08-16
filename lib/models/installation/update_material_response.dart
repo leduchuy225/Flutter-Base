@@ -1,14 +1,14 @@
 import 'material_list_model_response.dart';
 
 class UpdateMaterialResponse {
-  int? currentStep;
+  num? currentStep;
   List<MaterialListModelResponse>? model;
 
   UpdateMaterialResponse({this.currentStep, this.model});
 
   factory UpdateMaterialResponse.fromJson(Map<String, dynamic> json) {
     return UpdateMaterialResponse(
-      currentStep: json['CurrentStep'] as int?,
+      currentStep: json['CurrentStep'] as num?,
       model: (json['model'] as List<dynamic>?)
           ?.map(
             (e) =>

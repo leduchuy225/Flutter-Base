@@ -1,6 +1,6 @@
 class SignInstallationReportFileResponse {
-  int? id;
-  int? type;
+  num? id;
+  num? type;
   String? urlFile;
 
   SignInstallationReportFileResponse({this.id, this.type, this.urlFile});
@@ -9,8 +9,8 @@ class SignInstallationReportFileResponse {
     Map<String, dynamic> json,
   ) {
     return SignInstallationReportFileResponse(
-      id: json['id'] as int?,
-      type: json['type'] as int?,
+      id: json['id'] as num?,
+      type: json['type'] as num?,
       urlFile: json['urlFile'] as String?,
     );
   }

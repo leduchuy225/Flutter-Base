@@ -1,14 +1,14 @@
 import 'update_device_model_payload.dart';
 
 class UpdateDevicePayload {
-  int? id;
+  num? id;
   UpdateDeviceModelPayload? model;
 
   UpdateDevicePayload({this.id, this.model});
 
   factory UpdateDevicePayload.fromJson(Map<String, dynamic> json) {
     return UpdateDevicePayload(
-      id: json['id'] as int?,
+      id: json['id'] as num?,
       model: json['model'] == null
           ? null
           : UpdateDeviceModelPayload.fromJson(

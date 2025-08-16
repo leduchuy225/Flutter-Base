@@ -1,14 +1,14 @@
 import 'slid_list_and_divider_list_model_payload.dart';
 
 class SlidListAndDividerListPayload {
-  int? id;
+  num? id;
   SlidListAndDividerListModelPayload? model;
 
   SlidListAndDividerListPayload({this.id, this.model});
 
   factory SlidListAndDividerListPayload.fromJson(Map<String, dynamic> json) {
     return SlidListAndDividerListPayload(
-      id: json['id'] as int?,
+      id: json['id'] as num?,
       model: json['model'] == null
           ? null
           : SlidListAndDividerListModelPayload.fromJson(

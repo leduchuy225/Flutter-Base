@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
+import '../../../../models/installation/update_device_response.dart';
 import 'slid_and_divider_controller.dart';
 import 'slid_and_divider_selector_widget.dart';
 
@@ -10,11 +11,13 @@ class SlidAndDividerWidget extends StatelessWidget {
   final int? countryId;
   final int? provinceId;
   final SlidAndDividerController controller;
+  final void Function(UpdateDeviceResponse?)? onSuccess;
 
   const SlidAndDividerWidget({
     super.key,
     this.id,
     this.countryId,
+    this.onSuccess,
     this.provinceId,
     required this.controller,
   });
@@ -31,6 +34,7 @@ class SlidAndDividerWidget extends StatelessWidget {
             onTap: () async {
               final result = await SlidAndDividerSelectorWidget.openDialog(
                 id: id,
+                onSuccess: onSuccess,
                 countryId: countryId,
                 provinceId: provinceId,
                 defaultData: controller.data,

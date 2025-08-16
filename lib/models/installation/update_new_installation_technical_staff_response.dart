@@ -1,5 +1,5 @@
 class UpdateNewInstallationTechnicalStaffResponse {
-  int? currentStep;
+  num? currentStep;
   String? technicalStaffId;
   String? technicalStaffEmail;
   String? technicalStaffUserName;
@@ -15,7 +15,7 @@ class UpdateNewInstallationTechnicalStaffResponse {
     Map<String, dynamic> json,
   ) {
     return UpdateNewInstallationTechnicalStaffResponse(
-      currentStep: json['CurrentStep'] as int?,
+      currentStep: json['CurrentStep'] as num?,
       technicalStaffId: json['TechnicalStaff_Id'] as String?,
       technicalStaffEmail: json['TechnicalStaff_Email'] as String?,
       technicalStaffUserName: json['TechnicalStaff_UserName'] as String?,

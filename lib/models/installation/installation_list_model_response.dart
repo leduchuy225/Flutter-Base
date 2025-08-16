@@ -1,16 +1,16 @@
 class InstallationListModelResponse {
-  int? id;
-  int? idLong;
-  int? currentStep;
-  int? customersId;
-  int? serviceId;
+  num? id;
+  num? idLong;
+  num? currentStep;
+  num? customersId;
+  num? serviceId;
   dynamic type;
   dynamic contractCode;
   dynamic surveyStatus;
-  int? countryId;
-  int? provinceId;
-  int? districtId;
-  int? wardId;
+  num? countryId;
+  num? provinceId;
+  num? districtId;
+  num? wardId;
   String? address;
   String? createdBy;
   String? createdDate;
@@ -45,7 +45,7 @@ class InstallationListModelResponse {
   String? wardIdTitle;
   dynamic closedByEmail;
   dynamic closedByUserName;
-  int? customersIdIdLong;
+  num? customersIdIdLong;
   String? customersIdFullName;
   String? customersIdCccd;
   String? serviceIdTitle;
@@ -109,18 +109,18 @@ class InstallationListModelResponse {
 
   factory InstallationListModelResponse.fromJson(Map<String, dynamic> json) {
     return InstallationListModelResponse(
-      id: json['ID'] as int?,
-      idLong: json['IDLong'] as int?,
-      currentStep: json['CurrentStep'] as int?,
-      customersId: json['CustomersID'] as int?,
-      serviceId: json['ServiceID'] as int?,
+      id: json['ID'] as num?,
+      idLong: json['IDLong'] as num?,
+      currentStep: json['CurrentStep'] as num?,
+      customersId: json['CustomersID'] as num?,
+      serviceId: json['ServiceID'] as num?,
       type: json['Type'] as dynamic,
       contractCode: json['ContractCode'] as dynamic,
       surveyStatus: json['SurveyStatus'] as dynamic,
-      countryId: json['CountryID'] as int?,
-      provinceId: json['ProvinceID'] as int?,
-      districtId: json['DistrictID'] as int?,
-      wardId: json['WardID'] as int?,
+      countryId: json['CountryID'] as num?,
+      provinceId: json['ProvinceID'] as num?,
+      districtId: json['DistrictID'] as num?,
+      wardId: json['WardID'] as num?,
       address: json['Address'] as String?,
       createdBy: json['CreatedBy'] as String?,
       createdDate: json['CreatedDate'] as String?,
@@ -158,7 +158,7 @@ class InstallationListModelResponse {
       wardIdTitle: json['WardID_Title'] as String?,
       closedByEmail: json['ClosedBy_Email'] as dynamic,
       closedByUserName: json['ClosedBy_UserName'] as dynamic,
-      customersIdIdLong: json['CustomersID_IDLong'] as int?,
+      customersIdIdLong: json['CustomersID_IDLong'] as num?,
       customersIdFullName: json['CustomersID_FullName'] as String?,
       customersIdCccd: json['CustomersID_CCCD'] as String?,
       serviceIdTitle: json['ServiceID_Title'] as String?,

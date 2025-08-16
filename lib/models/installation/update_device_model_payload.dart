@@ -1,16 +1,16 @@
 class UpdateDeviceModelPayload {
-  int? deviceStatus;
-  int? oltId;
+  num? deviceStatus;
+  num? oltId;
   dynamic oltIdLong;
-  int? ponidId;
+  num? ponidId;
   dynamic ponidIdLong;
-  int? slidIdLong;
+  num? slidIdLong;
   dynamic dividerIdLong;
-  int? devicePort;
+  num? devicePort;
   String? deviceAcc;
   String? devicePass;
-  int? countryId;
-  int? provinceId;
+  num? countryId;
+  num? provinceId;
 
   UpdateDeviceModelPayload({
     this.deviceStatus,
@@ -29,18 +29,18 @@ class UpdateDeviceModelPayload {
 
   factory UpdateDeviceModelPayload.fromJson(Map<String, dynamic> json) {
     return UpdateDeviceModelPayload(
-      deviceStatus: json['Device_Status'] as int?,
-      oltId: json['OLT_ID'] as int?,
+      deviceStatus: json['Device_Status'] as num?,
+      oltId: json['OLT_ID'] as num?,
       oltIdLong: json['OLT_IDLong'] as dynamic,
-      ponidId: json['PONID_ID'] as int?,
+      ponidId: json['PONID_ID'] as num?,
       ponidIdLong: json['PONID_IDLong'] as dynamic,
-      slidIdLong: json['SLID_IDLong'] as int?,
+      slidIdLong: json['SLID_IDLong'] as num?,
       dividerIdLong: json['Divider_IDLong'] as dynamic,
-      devicePort: json['Device_Port'] as int?,
+      devicePort: json['Device_Port'] as num?,
       deviceAcc: json['Device_ACC'] as String?,
       devicePass: json['Device_Pass'] as String?,
-      countryId: json['CountryID'] as int?,
-      provinceId: json['ProvinceID'] as int?,
+      countryId: json['CountryID'] as num?,
+      provinceId: json['ProvinceID'] as num?,
     );
   }
 

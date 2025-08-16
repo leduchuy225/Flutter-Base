@@ -31,7 +31,10 @@ class CommonInstallationDetailScreen<
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.notes),
-        onPressed: () {
+        onPressed: () async {
+          if (controller.isRefreshValue) {
+            controller.getNoteList();
+          }
           MyBottomSheet.showDraggableScrollableSheet(
             context,
             builder: (context, scrollController) {

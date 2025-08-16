@@ -1,11 +1,11 @@
 class UpdateRepairRequestStep4Response {
-  int? currentStep;
+  num? currentStep;
 
   UpdateRepairRequestStep4Response({this.currentStep});
 
   factory UpdateRepairRequestStep4Response.fromJson(Map<String, dynamic> json) {
     return UpdateRepairRequestStep4Response(
-      currentStep: json['CurrentStep'] as int?,
+      currentStep: json['CurrentStep'] as num?,
     );
   }
 

@@ -1,8 +1,8 @@
 class SlidListAndDividerListModelPayload {
-  int? countryId;
-  int? provinceId;
-  int? oltId;
-  int? ponidId;
+  num? countryId;
+  num? provinceId;
+  num? oltId;
+  num? ponidId;
 
   SlidListAndDividerListModelPayload({
     this.countryId,
@@ -15,10 +15,10 @@ class SlidListAndDividerListModelPayload {
     Map<String, dynamic> json,
   ) {
     return SlidListAndDividerListModelPayload(
-      countryId: json['CountryID'] as int?,
-      provinceId: json['ProvinceID'] as int?,
-      oltId: json['OLT_ID'] as int?,
-      ponidId: json['PONID_ID'] as int?,
+      countryId: json['CountryID'] as num?,
+      provinceId: json['ProvinceID'] as num?,
+      oltId: json['OLT_ID'] as num?,
+      ponidId: json['PONID_ID'] as num?,
     );
   }
 

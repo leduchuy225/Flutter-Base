@@ -1,5 +1,5 @@
 class UpdateNewInstallationStep3Response {
-  int? currentStep;
+  num? currentStep;
 
   UpdateNewInstallationStep3Response({this.currentStep});
 
@@ -7,7 +7,7 @@ class UpdateNewInstallationStep3Response {
     Map<String, dynamic> json,
   ) {
     return UpdateNewInstallationStep3Response(
-      currentStep: json['CurrentStep'] as int?,
+      currentStep: json['CurrentStep'] as num?,
     );
   }
 

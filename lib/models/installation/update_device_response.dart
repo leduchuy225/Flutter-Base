@@ -1,16 +1,16 @@
 class UpdateDeviceResponse {
-  int? deviceStatus;
-  int? slidId;
-  int? slidIdLong;
+  num? deviceStatus;
+  num? slidId;
+  num? slidIdLong;
   String? slidCode;
   dynamic dividerId;
   dynamic dividerIdLong;
   dynamic dividerCode;
-  int? devicePort;
+  num? devicePort;
   String? deviceAcc;
   String? devicePass;
-  int? oltId;
-  int? ponidId;
+  num? oltId;
+  num? ponidId;
 
   UpdateDeviceResponse({
     this.deviceStatus,
@@ -29,18 +29,18 @@ class UpdateDeviceResponse {
 
   factory UpdateDeviceResponse.fromJson(Map<String, dynamic> json) {
     return UpdateDeviceResponse(
-      deviceStatus: json['Device_Status'] as int?,
-      slidId: json['SLID_ID'] as int?,
-      slidIdLong: json['SLID_IDLong'] as int?,
+      deviceStatus: json['Device_Status'] as num?,
+      slidId: json['SLID_ID'] as num?,
+      slidIdLong: json['SLID_IDLong'] as num?,
       slidCode: json['SLID_Code'] as String?,
       dividerId: json['Divider_ID'] as dynamic,
       dividerIdLong: json['Divider_IDLong'] as dynamic,
       dividerCode: json['Divider_Code'] as dynamic,
-      devicePort: json['Device_Port'] as int?,
+      devicePort: json['Device_Port'] as num?,
       deviceAcc: json['Device_ACC'] as String?,
       devicePass: json['Device_Pass'] as String?,
-      oltId: json['OLT_ID'] as int?,
-      ponidId: json['PONID_ID'] as int?,
+      oltId: json['OLT_ID'] as num?,
+      ponidId: json['PONID_ID'] as num?,
     );
   }
 

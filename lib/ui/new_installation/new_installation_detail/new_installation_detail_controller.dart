@@ -15,6 +15,7 @@ import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/file_collection_model.dart';
 import '../../../models/installation/installation_detail_model_response.dart';
+import '../../../models/installation/update_device_response.dart';
 import '../../../models/installation/update_material_response.dart';
 import '../../../models/installation/view_installation_report_file_model_payload.dart';
 import '../../../models/installation/view_installation_report_file_payload.dart';
@@ -41,7 +42,7 @@ class NewInstallationDetailController
 
     if (data != null) {
       detailRxData.value = data;
-      currentRxStep.value = data.currentStep ?? 1;
+      currentRxStep.value = data.currentStep?.toInt() ?? 1;
       noteListRxData.value = data.listMbConnectionRequestNoteViewModel ?? [];
       overdueNoteListRxData.value =
           data.listMbConnectionRequestOverdueViewModel ?? [];
@@ -93,6 +94,18 @@ class NewInstallationDetailController
         ];
       }
 
+      materialSelectorController.replace(
+        data.listMbConnectionRequestMaterialViewModel ?? [],
+      );
+
+      slidAndDividerController.data = UpdateDeviceResponse(
+        slidCode: data.slidCode,
+        deviceAcc: data.deviceAcc,
+        devicePort: data.devicePort,
+        devicePass: data.devicePass,
+        dividerCode: data.dividerCode,
+      );
+
       update();
     }
   }
@@ -108,7 +121,7 @@ class NewInstallationDetailController
       setIsRefreshValue();
 
       final step = response.data?.currentStep ?? 1;
-      currentRxStep.value = step;
+      currentRxStep.value = step.toInt();
 
       update();
     }
@@ -127,7 +140,7 @@ class NewInstallationDetailController
         setIsRefreshValue();
       }
 
-      currentRxStep.value = step;
+      currentRxStep.value = step.toInt();
 
       step2NoteTextController.clear();
 
@@ -152,7 +165,7 @@ class NewInstallationDetailController
       setIsRefreshValue();
 
       final step = response.data?.currentStep ?? 1;
-      currentRxStep.value = step;
+      currentRxStep.value = step.toInt();
 
       update();
     }
@@ -273,10 +286,10 @@ class NewInstallationDetailController
   @override
   TechnicalStaffListModelPayload get technicalStaffListModelPayload {
     return TechnicalStaffListModelPayload(
-      phuongXaId: detailData?.wardId,
-      countryId: detailData?.countryId,
-      thanhPhoId: detailData?.provinceId,
-      quanHuyenId: detailData?.districtId,
+      phuongXaId: detailData?.wardId?.toInt(),
+      countryId: detailData?.countryId?.toInt(),
+      thanhPhoId: detailData?.provinceId?.toInt(),
+      quanHuyenId: detailData?.districtId?.toInt(),
     );
   }
 
@@ -373,10 +386,10 @@ class NewInstallationDetailController
   String? get serviceType => MBService.NewInstallation;
 
   @override
-  int? get countryId => detailData?.countryId;
+  int? get countryId => detailData?.countryId?.toInt();
 
   @override
-  int? get provinceId => detailData?.provinceId;
+  int? get provinceId => detailData?.provinceId?.toInt();
 
   @override
   Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body) {
@@ -386,7 +399,26 @@ class NewInstallationDetailController
   @override
   Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
     UpdateMaterialPayload body,
-  ) {
-    return Get.find<InstallationApi>().updateMaterial(body).callApi();
+  ) async {
+    final response = await Get.find<InstallationApi>()
+        .updateMaterial(body)
+        .callApi();
+
+    if (response.data?.currentStep != null) {
+      currentRxStep.value = response.data!.currentStep!.toInt();
+      setIsRefreshValue();
+
+      update();
+    }
+
+    return response;
+  }
+
+  @override
+  bool get isRefreshValue {
+    return CacheService().read<bool>(
+          key: CacheService.isRefreshNewInstallationList,
+        ) ??
+        false;
   }
 }
