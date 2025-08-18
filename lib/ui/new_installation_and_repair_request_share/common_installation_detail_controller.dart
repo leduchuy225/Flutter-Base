@@ -232,7 +232,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case 3:
         return Step3(
-          isViewOnly: currentRxStep.value > 3,
+          // isViewOnly: currentRxStep.value > 3,
           technicalStaffImageControler: technicalStaffImageControler,
           technicalStaffTestImageControler: technicalStaffTestImageControler,
           technicalStaffModuleImageControler:
@@ -261,63 +261,58 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           },
         );
       case 4:
-        return GetBuilder(
-          init: this,
-          builder: (controller) {
-            return SignReportFileWidget(
-              files: controller.reportFiles,
-              reportController: reportController,
-              getReportTypeList: getReportTypeList,
-              reportSelectedIdToSign: controller.reportSelectedIdToSign.value,
-              staffSignatureController: staffSignatureController,
-              reportTypeListController: reportTypeListController,
-              customerSignatureController: customerSignatureController,
-              onReportSelected: (value) {
-                if (value == null) {
-                  return;
-                }
-                reportSelectedIdToSign.value = value;
+        return SignReportFileWidget(
+          files: reportFiles,
+          reportController: reportController,
+          getReportTypeList: getReportTypeList,
+          staffSignatureController: staffSignatureController,
+          reportTypeListController: reportTypeListController,
+          reportSelectedIdToSign: reportSelectedIdToSign.value,
+          customerSignatureController: customerSignatureController,
+          onReportSelected: (value) {
+            if (value == null) {
+              return;
+            }
+            reportSelectedIdToSign.value = value;
 
-                staffSignatureController.clear();
-                customerSignatureController.clear();
+            staffSignatureController.clear();
+            customerSignatureController.clear();
 
-                update();
-              },
-              previewReportFile: () async {
-                if (currentReportIdToPreview == ReportType.BBNT) {
-                  if (!reportController.checkBbntIsValid()) {
-                    return;
-                  }
-                } else if (currentReportIdToPreview == ReportType.BBBG) {
-                  if (!reportController.checkBbbgIsValid()) {
-                    return;
-                  }
-                }
-                staffSignatureController.clear();
-                customerSignatureController.clear();
+            update();
+          },
+          previewReportFile: () async {
+            if (currentReportIdToPreview == ReportType.BBNT) {
+              if (!reportController.checkBbntIsValid()) {
+                return;
+              }
+            } else if (currentReportIdToPreview == ReportType.BBBG) {
+              if (!reportController.checkBbbgIsValid()) {
+                return;
+              }
+            }
+            staffSignatureController.clear();
+            customerSignatureController.clear();
 
-                await previewReportFile();
-              },
-              signReportFile: () {
-                if (staffSignatureController.isEmpty) {
-                  MyDialog.snackbar(
-                    'Nhân viên chưa thực hiện ký',
-                    type: SnackbarType.WARNING,
-                  );
-                  return;
-                }
-                if (customerSignatureController.isEmpty) {
-                  MyDialog.snackbar(
-                    'Khách hàng chưa thực hiện ký',
-                    type: SnackbarType.WARNING,
-                  );
-                  return;
-                }
-                MyDialog.alertDialog(
-                  okHandler: signReportFile,
-                  message: 'Xác nhận ký biên bản ?',
-                );
-              },
+            await previewReportFile();
+          },
+          signReportFile: () {
+            if (staffSignatureController.isEmpty) {
+              MyDialog.snackbar(
+                'Nhân viên chưa thực hiện ký',
+                type: SnackbarType.WARNING,
+              );
+              return;
+            }
+            if (customerSignatureController.isEmpty) {
+              MyDialog.snackbar(
+                'Khách hàng chưa thực hiện ký',
+                type: SnackbarType.WARNING,
+              );
+              return;
+            }
+            MyDialog.alertDialog(
+              okHandler: signReportFile,
+              message: 'Xác nhận ký biên bản ?',
             );
           },
         );

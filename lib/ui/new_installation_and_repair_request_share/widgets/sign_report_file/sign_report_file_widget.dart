@@ -7,6 +7,7 @@ import 'package:signature/signature.dart';
 import '../../../../models/base_selector.dart';
 import '../../../../theme/styles.dart';
 import '../../../../widgets/datetime_picker/datetime_picker_widget.dart';
+import '../../../../widgets/my_tab_bar.dart';
 import '../../../../widgets/my_texttile.dart';
 import '../../../../widgets/selector/selector_controller.dart';
 import '../sign_report_file_data_controller.dart';
@@ -30,13 +31,41 @@ class SignReportFileWidget extends StatelessWidget {
     required this.signReportFile,
     required this.reportController,
     required this.getReportTypeList,
+    required this.onReportSelected,
     required this.previewReportFile,
     required this.reportTypeListController,
     required this.staffSignatureController,
     required this.customerSignatureController,
     required this.reportSelectedIdToSign,
-    required this.onReportSelected,
   });
+
+  Widget _buildSignatureArea(
+    BuildContext context, {
+    required String name,
+    required SignatureController controller,
+  }) {
+    return Column(
+      children: [
+        AppStyles.pdt6,
+        Row(
+          children: [
+            Expanded(child: Text(name, style: AppTextStyles.body1)),
+            IconButton(
+              onPressed: staffSignatureController.clear,
+              icon: const Icon(Icons.cleaning_services, color: AppColors.black),
+            ),
+          ],
+        ),
+        AppStyles.pdt6,
+        Signature(
+          height: 200,
+          controller: controller,
+          backgroundColor: AppColors.textGrey1,
+        ),
+        AppStyles.pdt20,
+      ],
+    );
+  }
 
   Widget _buildBienBanNghiemThu(BuildContext context) {
     return Column(
@@ -191,55 +220,24 @@ class SignReportFileWidget extends StatelessWidget {
             visible: _reportNotSigned.isNotEmpty && reportSelectedIdToSign != 0,
             child: Column(
               children: [
-                AppStyles.pdt15,
-                Row(
+                MyTabBar(
+                  tabs: const [
+                    Tab(text: 'Nhân viên'),
+                    Tab(text: 'Khách hàng'),
+                  ],
                   children: [
-                    Expanded(
-                      child: Text(
-                        'Chữ ký nhân viên kĩ thuật',
-                        style: AppTextStyles.body1,
-                      ),
+                    _buildSignatureArea(
+                      context,
+                      name: 'Chữ ký nhân viên kỹ thuật',
+                      controller: staffSignatureController,
                     ),
-                    IconButton(
-                      onPressed: staffSignatureController.clear,
-                      icon: const Icon(
-                        Icons.cleaning_services,
-                        color: AppColors.black,
-                      ),
+                    _buildSignatureArea(
+                      context,
+                      name: 'Chữ ký khách hàng',
+                      controller: customerSignatureController,
                     ),
                   ],
                 ),
-                AppStyles.pdt6,
-                Signature(
-                  height: 200,
-                  controller: staffSignatureController,
-                  backgroundColor: AppColors.textGrey1,
-                ),
-                AppStyles.pdt15,
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Chữ ký khách hàng',
-                        style: AppTextStyles.body1,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: customerSignatureController.clear,
-                      icon: const Icon(
-                        Icons.cleaning_services,
-                        color: AppColors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                AppStyles.pdt6,
-                Signature(
-                  height: 200,
-                  controller: customerSignatureController,
-                  backgroundColor: AppColors.textGrey1,
-                ),
-                AppStyles.pdt30,
                 ElevatedButton(
                   onPressed: signReportFile,
                   child: const Text('Xác nhận ký'),

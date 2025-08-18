@@ -359,16 +359,16 @@ class NewInstallationDetailController
         reportFiles.add(
           SignReportFileItemModel(
             url: urlFile,
-            isSigned: false,
             id: reportTypeListController.first?.id,
             name: reportTypeListController.first?.name ?? '',
+            isSigned: currentReportIdToPreview == ReportType.BBKM,
           ),
         );
       } else {
         reportFiles.forEach((report) {
           if (report.id == currentReportIdToPreview) {
             report.url = urlFile;
-            report.isSigned = false;
+            report.isSigned = currentReportIdToPreview == ReportType.BBKM;
           }
         });
       }
