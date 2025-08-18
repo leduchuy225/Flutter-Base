@@ -163,6 +163,11 @@ class NewInstallationDetailController
           technicalStaffTestImage: technicalStaffTestImageControler.firstFile,
           technicalStaffModuleImage:
               technicalStaffModuleImageControler.firstFile,
+          cableLengthEnd: cableEndTextController.textTrim,
+          cableLengthStart: cableStartTextController.textTrim,
+          report_CableLengthEnd: reportCableEndImageControler.firstFile,
+          report_CableLengthStart: reportCableStartImageControler.firstFile,
+          report_ImageDivider: reportDividerImageControler.firstFile,
         )
         .callApi();
 

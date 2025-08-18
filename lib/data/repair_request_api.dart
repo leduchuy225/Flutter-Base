@@ -126,4 +126,7 @@ abstract class RepairRequestApi {
   Future<BaseResponse<RepairRequestAddModemLogResponse>> addModemLog(
     @Body() RepairRequestAddModemLogPayload body,
   );
+
+  @POST('/RepairRequest/CompletedStaff')
+  Future<BaseResponse> confirmTaskCompletion(@Body() Map<String, dynamic> body);
 }

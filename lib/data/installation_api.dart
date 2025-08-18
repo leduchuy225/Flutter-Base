@@ -145,4 +145,7 @@ abstract class InstallationApi {
   Future<BaseResponse<DeleteMaterialResponse>> deleteMaterial(
     @Body() Map<String, dynamic> body,
   );
+
+  @POST('/newconnectionrequest/CompletedStaff')
+  Future<BaseResponse> confirmTaskCompletion(@Body() Map<String, dynamic> body);
 }

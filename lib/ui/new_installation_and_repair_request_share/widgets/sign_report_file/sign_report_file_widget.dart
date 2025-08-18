@@ -10,8 +10,8 @@ import '../../../../widgets/datetime_picker/datetime_picker_widget.dart';
 import '../../../../widgets/my_tab_bar.dart';
 import '../../../../widgets/my_texttile.dart';
 import '../../../../widgets/selector/selector_controller.dart';
-import '../sign_report_file_data_controller.dart';
 import 'report_file_item.dart';
+import 'sign_report_file_data_controller.dart';
 
 class SignReportFileWidget extends StatelessWidget {
   final int reportSelectedIdToSign;

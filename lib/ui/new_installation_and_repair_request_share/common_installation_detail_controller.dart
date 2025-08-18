@@ -21,7 +21,7 @@ import '../../models/installation/update_material_response.dart';
 import 'widgets/material_selector/material_selector_controller.dart';
 import 'widgets/material_selector/material_selector_widget.dart';
 import 'widgets/sign_report_file/report_file_item.dart';
-import 'widgets/sign_report_file_data_controller.dart';
+import 'widgets/sign_report_file/sign_report_file_data_controller.dart';
 import 'widgets/slid_and_divider/slid_and_divider_controller.dart';
 import 'widgets/slid_and_divider/slid_and_divider_widget.dart';
 import 'widgets/step_1_widget.dart';
@@ -50,9 +50,16 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final step2NoteTextController = MyTextFieldController();
   final step3NoteTextController = MyTextFieldController();
 
+  final cableStartTextController = MyTextFieldController();
+  final cableEndTextController = MyTextFieldController();
+
   final technicalStaffImageControler = FileCollectionController();
   final technicalStaffTestImageControler = FileCollectionController();
   final technicalStaffModuleImageControler = FileCollectionController();
+
+  final reportDividerImageControler = FileCollectionController();
+  final reportCableStartImageControler = FileCollectionController();
+  final reportCableEndImageControler = FileCollectionController();
 
   final technicalStaffSelectController = MySelectorController();
 
@@ -233,7 +240,12 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
       case 3:
         return Step3(
           // isViewOnly: currentRxStep.value > 3,
+          cableEndTextController: cableEndTextController,
+          cableStartTextController: cableStartTextController,
+          reportDividerImageControler: reportDividerImageControler,
+          reportCableEndImageControler: reportCableEndImageControler,
           technicalStaffImageControler: technicalStaffImageControler,
+          reportCableStartImageControler: reportCableStartImageControler,
           technicalStaffTestImageControler: technicalStaffTestImageControler,
           technicalStaffModuleImageControler:
               technicalStaffModuleImageControler,

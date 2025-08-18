@@ -13,6 +13,11 @@ class Step3 extends StatelessWidget {
   final FileCollectionController technicalStaffTestImageControler;
   final FileCollectionController technicalStaffImageControler;
   final MyTextFieldController step3NoteTextController;
+  final MyTextFieldController cableStartTextController;
+  final MyTextFieldController cableEndTextController;
+  final FileCollectionController reportDividerImageControler;
+  final FileCollectionController reportCableStartImageControler;
+  final FileCollectionController reportCableEndImageControler;
   final void Function() onPressed;
 
   const Step3({
@@ -23,6 +28,11 @@ class Step3 extends StatelessWidget {
     required this.step3NoteTextController,
     required this.onPressed,
     this.isViewOnly = false,
+    required this.cableStartTextController,
+    required this.cableEndTextController,
+    required this.reportDividerImageControler,
+    required this.reportCableStartImageControler,
+    required this.reportCableEndImageControler,
   });
 
   @override
@@ -31,6 +41,27 @@ class Step3 extends StatelessWidget {
       title: 'Thực hiện công việc',
       child: Column(
         children: [
+          AppStyles.pdt10,
+          Row(
+            children: [
+              Expanded(
+                child: MyTextField(
+                  labelText: 'Đầu sợi cáp',
+                  keyboardType: TextInputType.number,
+                  controller: cableStartTextController,
+                ),
+              ),
+              AppStyles.pdl10,
+              Expanded(
+                child: MyTextField(
+                  labelText: 'Cuối sợi cáp',
+                  keyboardType: TextInputType.number,
+                  controller: cableEndTextController,
+                ),
+              ),
+            ],
+          ),
+          AppStyles.pdt10,
           FileCollectionWidget(
             limit: 1,
             title: 'Ảnh module',
@@ -51,11 +82,32 @@ class Step3 extends StatelessWidget {
             isViewImageOnly: isViewOnly,
             controller: technicalStaffImageControler,
           ),
+          AppStyles.pdt10,
+          FileCollectionWidget(
+            limit: 1,
+            title: 'Ảnh bộ chia',
+            isViewImageOnly: isViewOnly,
+            controller: reportDividerImageControler,
+          ),
+          AppStyles.pdt10,
+          FileCollectionWidget(
+            limit: 1,
+            title: 'Ảnh đầu sợi cáp',
+            isViewImageOnly: isViewOnly,
+            controller: reportCableStartImageControler,
+          ),
+          AppStyles.pdt10,
+          FileCollectionWidget(
+            limit: 1,
+            title: 'Ảnh cuối sợi cáp',
+            isViewImageOnly: isViewOnly,
+            controller: reportCableEndImageControler,
+          ),
           Visibility(
             visible: !isViewOnly,
             child: Column(
               children: [
-                AppStyles.pdt30,
+                AppStyles.pdt25,
                 MyTextField(
                   isRequired: true,
                   labelText: 'Báo cáo công việc',
