@@ -366,14 +366,14 @@ class NewInstallationDetailController
             url: urlFile,
             id: reportTypeListController.first?.id,
             name: reportTypeListController.first?.name ?? '',
-            isSigned: currentReportIdToPreview == ReportType.BBKM,
+            isSigned: ReportType.isAutoSigned(currentReportIdToPreview),
           ),
         );
       } else {
         reportFiles.forEach((report) {
           if (report.id == currentReportIdToPreview) {
             report.url = urlFile;
-            report.isSigned = currentReportIdToPreview == ReportType.BBKM;
+            report.isSigned = ReportType.isAutoSigned(currentReportIdToPreview);
           }
         });
       }
@@ -424,8 +424,16 @@ class NewInstallationDetailController
   int? get provinceId => detailData?.provinceId?.toInt();
 
   @override
-  Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body) {
-    return Get.find<InstallationApi>().deleteMaterial(body).callApi();
+  Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body) async {
+    final response = await Get.find<InstallationApi>()
+        .deleteMaterial(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      setIsRefreshValue();
+    }
+
+    return response;
   }
 
   @override
@@ -453,4 +461,29 @@ class NewInstallationDetailController
         ) ??
         false;
   }
+
+  @override
+  Future addModemReplacementLog() {
+    // TODO: implement addModemReplacementLog
+    throw UnimplementedError();
+  }
+
+  @override
+  Future completeRquest(BuildContext context) async {
+    final body = {'id': id};
+    final response = await Get.find<InstallationApi>()
+        .confirmTaskCompletion(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      setIsRefreshValue();
+      Navigator.of(context).pop();
+    }
+  }
+
+  @override
+  bool get isRequestClosed => detailData?.isClosed ?? false;
+
+  @override
+  bool get isRequestReadyToClose => detailData?.isCompletedStaffOn ?? false;
 }

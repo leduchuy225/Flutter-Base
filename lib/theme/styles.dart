@@ -140,6 +140,7 @@ class AppColors {
   static const Color mobifoneRandom5 = Color(0xFF30447A);
   static const Color mobifoneRandom6 = Color(0xFF3C8CC8);
   static const Color mobifoneRandom7 = Color(0xFF147CD4);
+  static const Color mobifoneRandom8 = Color(0xFF0563B1);
 
   static const Color mobifiberRandom1 = Color(0xFFf9f9f9);
   static const Color mobifiberRandom2 = Color(0xFF1d80d9);

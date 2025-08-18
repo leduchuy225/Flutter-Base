@@ -3,7 +3,7 @@ import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/services/user_service.dart';
 import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
-import 'package:flutter_base/theme/styles.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/modem_replace_log_widget.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/sign_report_file/sign_report_file_widget.dart';
 import 'package:flutter_base/widgets/data_state_widget.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
@@ -18,6 +18,8 @@ import '../../models/common/note_viewmodel_response.dart';
 import '../../models/common/technical_staff_list_model_payload.dart';
 import '../../models/installation/update_material_payload.dart';
 import '../../models/installation/update_material_response.dart';
+import '../../models/repair_request/repair_request_get_modem_log_model_response.dart';
+import '../../widgets/dialog/bottom_sheet_widget.dart';
 import 'widgets/material_selector/material_selector_controller.dart';
 import 'widgets/material_selector/material_selector_widget.dart';
 import 'widgets/sign_report_file/report_file_item.dart';
@@ -35,10 +37,12 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final currentRxStep = RxInt(1);
   final detailRxData = Rx<T?>(null);
-  // final isReportFileSigned = RxBool(false);
-  // final previewReportFileLink = RxString('');
+
   final reportSelectedIdToSign = RxInt(0);
   final reportFiles = RxList<SignReportFileItemModel>([]);
+  final modemReplacementLogs = RxList<RepairRequestGetModemLogModelResponse>(
+    [],
+  );
 
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
   final overdueNoteListRxData = RxList<NoteViewmodelResponse>([]);
@@ -73,6 +77,9 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final slidAndDividerController = SlidAndDividerController();
 
+  final oldModemTextController = MyTextFieldController();
+  final newModemTextController = MyTextFieldController();
+
   T? get detailData => detailRxData.value;
 
   int? get id;
@@ -88,6 +95,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   TechnicalStaffListModelPayload get technicalStaffListModelPayload;
 
   bool get isRefreshValue;
+
+  bool get isRequestClosed;
+
+  bool get isRequestReadyToClose;
 
   void setIsRefreshValue();
 
@@ -114,6 +125,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   Future signReportFile();
 
   Future<List<MySelectorModel>> getReportTypeList();
+
+  Future addModemReplacementLog();
+
+  Future completeRquest(BuildContext context);
 
   Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body);
   Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
@@ -144,65 +159,75 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
     return '';
   }
 
-  Widget buildSteps(BuildContext context) {
-    switch (currentRxStep.value) {
+  Widget buildSteps(BuildContext context, {int? step}) {
+    switch (step ?? currentRxStep.value) {
+      case 1:
+        return Column(
+          children: [getStepContent(context, step: 1, isVisible: !isClosed)],
+        );
+      case 2:
+        return Column(
+          children: [getStepContent(context, step: 2, isVisible: !isClosed)],
+        );
       case 3:
         return Column(
           children: [
-            getStepContent(context, step: 2),
-            AppStyles.pdt15,
-            getStepContent(context, step: 7),
-            AppStyles.pdt15,
-            getStepContent(context, step: 6),
-            Visibility(
-              visible: slidAndDividerController.data?.slidCode != null,
-              child: Padding(
-                padding: const EdgeInsetsGeometry.only(top: 15),
-                child: getStepContent(context, step: 3),
-              ),
-            ),
-            Visibility(
-              visible: slidAndDividerController.data?.slidCode != null,
-              child: Padding(
-                padding: const EdgeInsetsGeometry.only(top: 15),
-                child: getStepContent(context, step: 4),
-              ),
-            ),
+            getStepContent(context, step: 2, isVisible: !isClosed),
+            buildSteps(context, step: 4),
           ],
         );
       case 4:
-        if (serviceType == MBService.NewInstallation) {
-          return Column(
-            children: [
-              getStepContent(context, step: 7),
-              AppStyles.pdt15,
-              getStepContent(context, step: 6),
-              Visibility(
-                visible: slidAndDividerController.data?.slidCode != null,
-                child: Padding(
-                  padding: const EdgeInsetsGeometry.only(top: 15),
-                  child: getStepContent(context, step: 3),
-                ),
-              ),
-              Visibility(
-                visible: slidAndDividerController.data?.slidCode != null,
-                child: Padding(
-                  padding: const EdgeInsetsGeometry.only(top: 15),
-                  child: getStepContent(context, step: 4),
-                ),
-              ),
-            ],
-          );
-        } else if (serviceType == MBService.RepairRequest) {
-          return getStepContent(context, step: 3);
-        }
-        return const SizedBox();
+        return Column(
+          children: [
+            getStepContent(
+              context,
+              step: 7,
+              isVisible: serviceType == MBService.NewInstallation,
+            ),
+            getStepContent(
+              context,
+              step: 8,
+              isVisible: serviceType == MBService.RepairRequest,
+            ),
+            getStepContent(context, step: 6),
+            getStepContent(
+              context,
+              step: 3,
+              isVisible:
+                  serviceType == MBService.RepairRequest ||
+                  (serviceType == MBService.NewInstallation &&
+                      slidAndDividerController.data?.slidCode != null),
+            ),
+            getStepContent(
+              context,
+              step: 4,
+              isVisible:
+                  serviceType == MBService.RepairRequest ||
+                  (serviceType == MBService.NewInstallation &&
+                      slidAndDividerController.data?.slidCode != null),
+            ),
+          ],
+        );
       default:
-        return getStepContent(context, step: currentRxStep.value);
+        return const SizedBox();
     }
   }
 
-  Widget getStepContent(BuildContext context, {required int step}) {
+  Widget getStepContent(
+    BuildContext context, {
+    required int step,
+    bool isVisible = true,
+  }) {
+    if (!isVisible) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      child: _getStepWidget(context, step: step),
+      padding: const EdgeInsetsGeometry.only(bottom: 15),
+    );
+  }
+
+  Widget _getStepWidget(BuildContext context, {required int step}) {
     switch (step) {
       case 1:
         return Step1(
@@ -239,7 +264,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case 3:
         return Step3(
-          // isViewOnly: currentRxStep.value > 3,
+          // isViewOnly: isClosed,
           cableEndTextController: cableEndTextController,
           cableStartTextController: cableStartTextController,
           reportDividerImageControler: reportDividerImageControler,
@@ -254,15 +279,6 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             if (id == null) {
               return;
             }
-            // if (technicalStaffImageControler.files.isEmpty ||
-            //     technicalStaffModuleImageControler.files.isEmpty ||
-            //     technicalStaffTestImageControler.files.isEmpty) {
-            //   MyDialog.snackbar(
-            //     'Chưa chọn đủ loại ảnh',
-            //     type: SnackbarType.WARNING,
-            //   );
-            //   return;
-            // }
             if (!step3NoteTextController.checkIsNotEmpty()) {
               return;
             }
@@ -304,6 +320,9 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             }
             staffSignatureController.clear();
             customerSignatureController.clear();
+
+            reportSelectedIdToSign.value = 0;
+            update();
 
             await previewReportFile();
           },
@@ -348,6 +367,37 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           controller: slidAndDividerController,
           onSuccess: (response) {
             setIsRefreshValue();
+          },
+        );
+      case 8:
+        return ModemReplaceLogWidget(
+          oldModemTextController: oldModemTextController,
+          newModemTextController: newModemTextController,
+          onPressed: () {
+            if (!oldModemTextController.checkIsNotEmpty() ||
+                !newModemTextController.checkIsNotEmpty()) {
+              return;
+            }
+            MyDialog.alertDialog(
+              okHandler: addModemReplacementLog,
+              message: 'Xác nhận thay thế modem ?',
+            );
+          },
+          onRightIconPressed: () {
+            MyBottomSheet.showDraggableScrollableSheet(
+              context,
+              builder: (context, scrollController) {
+                return GetBuilder(
+                  init: this,
+                  builder: (controller) {
+                    return ModemReplacementLogListWidget(
+                      scrollController: scrollController,
+                      modemLogs: controller.modemReplacementLogs,
+                    );
+                  },
+                );
+              },
+            );
           },
         );
       default:

@@ -67,7 +67,7 @@ class CommonInstallationDetailScreen<
         },
       ),
       appBar: MyAppbar.appBar(
-        'Chi tiết lắp đặt mới',
+        title,
         action: IconButton(
           icon: const Icon(Icons.cancel_outlined),
           onPressed: () {
@@ -96,96 +96,142 @@ class CommonInstallationDetailScreen<
           },
         ),
       ),
-      body: SingleChildScrollView(
-        padding: AppStyles.horizontalPadding,
-        child: GetBuilder(
-          init: controller,
-          builder: (controller) {
-            final overdueTime = controller.getOverdueTime();
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Visibility(
-                  visible: overdueTime.isNotEmpty,
-                  child: Padding(
-                    padding: const EdgeInsetsGeometry.only(top: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          'Giải trình chậm trễ',
-                          style: AppTextStyles.title1,
-                        ),
-                        AppStyles.pdt15,
-                        Text(
-                          'Dự kiến $overdueTime\nQuá thời gian dự kiến hoàn thành.',
-                          style: AppTextStyles.body1.copyWith(
-                            color: AppColors.error,
+      body: GetBuilder(
+        init: controller,
+        builder: (controller) {
+          final overdueTime = controller.getOverdueTime();
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: AppStyles.horizontalPadding,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Visibility(
+                        visible: controller.isClosed,
+                        child: Padding(
+                          padding: const EdgeInsetsGeometry.only(top: 20),
+                          child: Center(
+                            child: Text(
+                              'Yêu cầu đã hoàn thành',
+                              style: AppTextStyles.title1.copyWith(
+                                color: AppColors.error,
+                              ),
+                            ),
                           ),
                         ),
-                        AppStyles.pdt15,
-                        OverdueReasonWidget(
-                          noteTextController:
-                              controller.overdueNoteTextController,
-                          onPressed: () {
-                            if (controller.id == null) {
-                              return;
-                            }
-                            if (!controller.overdueNoteTextController
-                                .checkIsNotEmpty()) {
-                              return;
-                            }
-                            MyDialog.alertDialog(
-                              message: 'Xác nhận giải trình ?',
-                              okHandler: controller.addOverdueReason,
-                            );
-                          },
-                          onRightIconPressed: () {
-                            MyBottomSheet.showDraggableScrollableSheet(
-                              context,
-                              builder: (context, scrollController) {
-                                return GetBuilder(
-                                  init: controller,
-                                  builder: (controller) {
-                                    return OverdueReasonListWidget(
-                                      scrollController: scrollController,
-                                      notes: controller.overdueNoteListRxData,
-                                      onRefresh:
-                                          controller.getOverdueReasonList,
-                                    );
-                                  },
-                                );
-                              },
-                            );
-                          },
+                      ),
+                      Visibility(
+                        visible: overdueTime.isNotEmpty,
+                        child: Padding(
+                          padding: const EdgeInsetsGeometry.only(top: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                'Giải trình chậm trễ',
+                                style: AppTextStyles.title1,
+                              ),
+                              AppStyles.pdt15,
+                              Text(
+                                'Dự kiến $overdueTime\nQuá thời gian dự kiến hoàn thành.',
+                                style: AppTextStyles.body1.copyWith(
+                                  color: AppColors.error,
+                                ),
+                              ),
+                              AppStyles.pdt15,
+                              OverdueReasonWidget(
+                                noteTextController:
+                                    controller.overdueNoteTextController,
+                                onPressed: () {
+                                  if (controller.id == null) {
+                                    return;
+                                  }
+                                  if (!controller.overdueNoteTextController
+                                      .checkIsNotEmpty()) {
+                                    return;
+                                  }
+                                  MyDialog.alertDialog(
+                                    message: 'Xác nhận giải trình ?',
+                                    okHandler: controller.addOverdueReason,
+                                  );
+                                },
+                                onRightIconPressed: () {
+                                  MyBottomSheet.showDraggableScrollableSheet(
+                                    context,
+                                    builder: (context, scrollController) {
+                                      return GetBuilder(
+                                        init: controller,
+                                        builder: (controller) {
+                                          return OverdueReasonListWidget(
+                                            scrollController: scrollController,
+                                            notes: controller
+                                                .overdueNoteListRxData,
+                                            onRefresh:
+                                                controller.getOverdueReasonList,
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                      AppStyles.pdt15,
+                      Text('Thông tin chung', style: AppTextStyles.title1),
+                      AppStyles.pdt15,
+                      buildInformationChild(context, controller),
+                      AppStyles.pdt15,
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Tiến độ công việc',
+                              style: AppTextStyles.title1,
+                            ),
+                          ),
+                          MyTag(text: 'Bước ${controller.currentRxStep}'),
+                        ],
+                      ),
+                      AppStyles.pdt15,
+                      controller.buildSteps(context),
+                      AppStyles.pdt15,
+                    ],
                   ),
                 ),
-                AppStyles.pdt15,
-                Text('Thông tin chung', style: AppTextStyles.title1),
-                AppStyles.pdt15,
-                buildInformationChild(context, controller),
-                AppStyles.pdt15,
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Tiến độ công việc',
-                        style: AppTextStyles.title1,
+              ),
+              Visibility(
+                visible: controller.isRequestReadyToClose,
+                child: Padding(
+                  padding: const EdgeInsetsGeometry.symmetric(
+                    vertical: 16,
+                    horizontal: 16,
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all<Color>(
+                        AppColors.mobifoneRandom8,
                       ),
                     ),
-                    MyTag(text: 'Bước ${controller.currentRxStep}'),
-                  ],
+                    onPressed: () {
+                      MyDialog.alertDialog(
+                        message: 'Xác nhận hoàn thành yêu cầu ?',
+                        okHandler: () {
+                          controller.completeRquest(context);
+                        },
+                      );
+                    },
+                    child: const Text('Hoàn thành yêu cầu'),
+                  ),
                 ),
-                AppStyles.pdt15,
-                controller.buildSteps(context),
-                AppStyles.pdt50,
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -16,7 +16,7 @@ class FileCollectionController extends GetxController {
   }
 
   File? get firstFile {
-    return files.first.file;
+    return files.firstOrNull?.file;
   }
 
   List<File> getLocalFiles() {

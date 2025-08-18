@@ -36,6 +36,11 @@ class ReportType {
   static const BBNT = 1;
   static const BBBG = 2;
   static const BBKM = 3;
+  static const BBSC = 4;
+
+  static bool isAutoSigned(int id) {
+    return [ReportType.BBKM, ReportType.BBSC].contains(id);
+  }
 }
 
 class Config {

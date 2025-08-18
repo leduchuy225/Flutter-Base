@@ -1,0 +1,103 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_base/core/utils/datetime_utils.dart';
+
+import '../../../models/repair_request/repair_request_get_modem_log_model_response.dart';
+import '../../../theme/styles.dart';
+import '../../../widgets/data_state_widget.dart';
+import '../../../widgets/my_texttile.dart';
+import '../../../widgets/text_field/text_field_controller.dart';
+import '../../../widgets/text_field/text_field_widget.dart';
+
+class ModemReplaceLogWidget extends StatelessWidget {
+  final void Function() onPressed;
+  final void Function() onRightIconPressed;
+  final MyTextFieldController oldModemTextController;
+  final MyTextFieldController newModemTextController;
+
+  const ModemReplaceLogWidget({
+    super.key,
+    required this.onPressed,
+    required this.onRightIconPressed,
+    required this.oldModemTextController,
+    required this.newModemTextController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MyTexttile.card(
+      title: 'Thay thế modem',
+      suffixHeader: InkWell(
+        onTap: onRightIconPressed,
+        child: const Icon(Icons.list),
+      ),
+      child: Column(
+        children: [
+          AppStyles.pdt15,
+          MyTextField(
+            labelText: 'Modem cũ',
+            controller: oldModemTextController,
+          ),
+          AppStyles.pdt20,
+          MyTextField(
+            labelText: 'Modem mới',
+            controller: newModemTextController,
+          ),
+          AppStyles.pdt20,
+          ElevatedButton(onPressed: onPressed, child: const Text('Cập nhật')),
+          AppStyles.pdt15,
+        ],
+      ),
+    );
+  }
+}
+
+class ModemReplacementLogListWidget extends StatelessWidget {
+  final ScrollController? scrollController;
+  final List<RepairRequestGetModemLogModelResponse> modemLogs;
+
+  const ModemReplacementLogListWidget({
+    super.key,
+    this.scrollController,
+    required this.modemLogs,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: MyTexttile.card(
+        title: 'Lịch sử thay thế modem',
+        mainAxisSize: MainAxisSize.min,
+        paddingHeader: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        child: Column(
+          children: [
+            Visibility(visible: modemLogs.isEmpty, child: MyDataState.empty()),
+            ...modemLogs.map((element) {
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: MyTexttile.list(
+                    items: [
+                      MyTexttileItem(titleText: 'Mới', text: element.modemNew),
+                      MyTexttileItem(titleText: 'Cũ', text: element.modemOld),
+                      MyTexttileItem(
+                        titleText: 'Người TH',
+                        text: element.userIdEmail,
+                      ),
+                      MyTexttileItem(
+                        titleText: 'Ngày TH',
+                        text: MyDatetimeUtils.formatDateFromAPI(
+                          element.setDate,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ],
+        ),
+      ),
+    );
+  }
+}

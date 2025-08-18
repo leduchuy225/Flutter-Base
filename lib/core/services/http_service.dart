@@ -48,7 +48,7 @@ class HttpService {
     _dio.interceptors.addAll([
       CookieManager(cookieJar),
       MyInterceptor(),
-      PrettyDioLogger(),
+      PrettyDioLogger(requestBody: true),
     ]);
   }
 }

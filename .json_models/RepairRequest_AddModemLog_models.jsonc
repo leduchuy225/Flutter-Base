@@ -12,7 +12,7 @@
     "__className": "repair_request_add_modem_log_response",
     "__path": "/lib/models/repair_request",
     "CurrentStep": 4,
-    "model.repair_request_add_modem_log_model_response": [
+    "model.repair_request_get_modem_log_model_response": [
       {
         "ID": 1,
         "IDLong": null,

@@ -14,8 +14,13 @@ import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/file_collection_model.dart';
 import '../../../models/installation/update_material_response.dart';
+import '../../../models/installation/view_installation_report_file_model_payload.dart';
+import '../../../models/installation/view_installation_report_file_payload.dart';
+import '../../../models/repair_request/repair_request_add_modem_log_model_payload.dart';
+import '../../../models/repair_request/repair_request_add_modem_log_payload.dart';
 import '../../../models/repair_request/repair_request_detail_model_response.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
+import '../../new_installation_and_repair_request_share/widgets/sign_report_file/report_file_item.dart';
 
 class RepairRequestDetailController
     extends
@@ -44,6 +49,16 @@ class RepairRequestDetailController
       overdueNoteListRxData.value =
           data.listMbRepairRequestOverdueViewModel ?? [];
 
+      reportFiles.addAll([
+        if (data.reportProblem != null)
+          SignReportFileItemModel(
+            id: ReportType.BBNT,
+            name: 'Biên bản mẫu sự cố',
+            url: getFileLink(data.reportProblem)!,
+            isSigned: data.reportProblemIsSet ?? false,
+          ),
+      ]);
+
       if (data.technicalStaffModuleImage != null) {
         technicalStaffModuleImageControler.files.value = [
           FileCollectionModel(
@@ -70,6 +85,12 @@ class RepairRequestDetailController
           ),
         ];
       }
+
+      materialSelectorController.replace(
+        data.listMbRepairRequestMaterialViewModel ?? [],
+      );
+
+      modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
 
       update();
     }
@@ -260,14 +281,52 @@ class RepairRequestDetailController
 
   @override
   Future<List<MySelectorModel>> getReportTypeList() async {
-    // TODO: implement previewReportFile
-    throw UnimplementedError();
+    final body = {'id': id};
+    final response = await Get.find<RepairRequestApi>()
+        .getRepairReportFileList(body)
+        .callApi(isShowLoading: false, isShowSuccessMessage: false);
+
+    return (response.data?.model ?? []).map((element) {
+      return MySelectorModel(id: element.id, name: element.title ?? '');
+    }).toList();
   }
 
   @override
-  Future previewReportFile() {
-    // TODO: implement previewReportFile
-    throw UnimplementedError();
+  Future previewReportFile() async {
+    final body = ViewInstallationReportFilePayload(
+      id: id,
+      type: currentReportIdToPreview,
+      model: ViewInstallationReportFileModelPayload(),
+    );
+
+    final response = await Get.find<RepairRequestApi>()
+        .viewRepairReportFile(body)
+        .callApi();
+
+    final urlFile = getFileLink(response.data?.urlFile);
+
+    if (urlFile != null) {
+      if (reportFiles.every((report) {
+        return report.id != currentReportIdToPreview;
+      })) {
+        reportFiles.add(
+          SignReportFileItemModel(
+            url: urlFile,
+            id: reportTypeListController.first?.id,
+            name: reportTypeListController.first?.name ?? '',
+            isSigned: ReportType.isAutoSigned(currentReportIdToPreview),
+          ),
+        );
+      } else {
+        reportFiles.forEach((report) {
+          if (report.id == currentReportIdToPreview) {
+            report.url = urlFile;
+            report.isSigned = ReportType.isAutoSigned(currentReportIdToPreview);
+          }
+        });
+      }
+      update();
+    }
   }
 
   @override
@@ -280,25 +339,40 @@ class RepairRequestDetailController
   String? get serviceType => MBService.RepairRequest;
 
   @override
-  // TODO: implement countryId
-  int? get countryId => throw UnimplementedError();
+  int? get countryId => detailData?.countryId?.toInt();
 
   @override
-  // TODO: implement provinceId
-  int? get provinceId => throw UnimplementedError();
+  int? get provinceId => detailData?.provinceId?.toInt();
 
   @override
-  Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body) {
-    // TODO: implement deleteMaterialApi
-    throw UnimplementedError();
+  Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body) async {
+    final response = await Get.find<RepairRequestApi>()
+        .deleteMaterial(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      setIsRefreshValue();
+    }
+
+    return response;
   }
 
   @override
   Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
     UpdateMaterialPayload body,
-  ) {
-    // TODO: implement updateMaterialApi
-    throw UnimplementedError();
+  ) async {
+    final response = await Get.find<RepairRequestApi>()
+        .updateMaterial(body)
+        .callApi();
+
+    if (response.data?.currentStep != null) {
+      currentRxStep.value = response.data!.currentStep!.toInt();
+      setIsRefreshValue();
+
+      update();
+    }
+
+    return response;
   }
 
   @override
@@ -308,4 +382,51 @@ class RepairRequestDetailController
         ) ??
         false;
   }
+
+  @override
+  Future addModemReplacementLog() async {
+    final body = RepairRequestAddModemLogPayload(
+      id: id,
+      model: RepairRequestAddModemLogModelPayload(
+        modemNew: newModemTextController.textTrim,
+        modemOld: oldModemTextController.textTrim,
+      ),
+    );
+
+    final response = await Get.find<RepairRequestApi>()
+        .addModemLog(body)
+        .callApi();
+
+    final data = response.data?.model;
+
+    if (data != null) {
+      newModemTextController.clear();
+      oldModemTextController.clear();
+
+      modemReplacementLogs.value = data;
+
+      setIsRefreshValue();
+
+      update();
+    }
+  }
+
+  @override
+  Future completeRquest(BuildContext context) async {
+    final body = {'id': id};
+    final response = await Get.find<RepairRequestApi>()
+        .confirmTaskCompletion(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      setIsRefreshValue();
+      Navigator.of(context).pop();
+    }
+  }
+
+  @override
+  bool get isRequestClosed => detailData?.isClosed ?? false;
+
+  @override
+  bool get isRequestReadyToClose => detailData?.isCompletedStaffOn ?? false;
 }
