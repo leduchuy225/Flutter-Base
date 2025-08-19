@@ -27,6 +27,9 @@ import '../models/installation/update_new_installation_step_4_response.dart';
 import '../models/installation/update_new_installation_technical_staff_response.dart';
 import '../models/installation/view_installation_report_file_payload.dart';
 import '../models/installation/view_installation_report_file_response.dart';
+import '../models/repair_request/repair_request_add_modem_log_payload.dart';
+import '../models/repair_request/repair_request_add_modem_log_response.dart';
+import '../models/repair_request/repair_request_get_modem_log_response.dart';
 
 part 'installation_api.g.dart';
 
@@ -57,11 +60,6 @@ abstract class InstallationApi {
   @POST('/NewConnectionRequest/addtechnicalstaff')
   Future<BaseResponse<UpdateNewInstallationTechnicalStaffResponse>>
   addTechnicalStaffNewInstallation(@Body() Map<String, dynamic> body);
-
-  // @POST('/NewConnectionRequest/UpdateCurrentStep_2_1')
-  // Future<BaseResponse> confirmNewInstallation(
-  //   @Body() Map<String, dynamic> body,
-  // );
 
   @POST('/NewConnectionRequest/UpdateCurrentStep_3')
   Future<BaseResponse<UpdateNewInstallationStep3Response>>
@@ -144,6 +142,16 @@ abstract class InstallationApi {
   @POST('/newconnectionrequest/DeleteMaterial')
   Future<BaseResponse<DeleteMaterialResponse>> deleteMaterial(
     @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/newconnectionrequest/GetModemLog')
+  Future<BaseResponse<RepairRequestGetModemLogResponse>> getModemLog(
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/newconnectionrequest/AddModemLog')
+  Future<BaseResponse<RepairRequestAddModemLogResponse>> addModemLog(
+    @Body() RepairRequestAddModemLogPayload body,
   );
 
   @POST('/newconnectionrequest/CompletedStaff')

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../models/accident/get_accident_list_model_response.dart';
 import '../models/base_response.dart';
 import '../models/common/installation_detail_payload.dart';
 import '../models/common/installation_list_payload.dart';
@@ -52,9 +53,6 @@ abstract class RepairRequestApi {
   Future<BaseResponse<UpdateRepairRequestTechnicalStaffResponse>>
   addTechnicalStaffRepairRequest(@Body() Map<String, dynamic> body);
 
-  // @POST('/RepairRequest/UpdateCurrentStep_2_1')
-  // Future<BaseResponse> confirmRepairRequest(@Body() Map<String, dynamic> body);
-
   @POST('/RepairRequest/UpdateCurrentStep_3')
   Future<BaseResponse<UpdateRepairRequestStep3Response>>
   updateRepairRequestStep3(@Body() Map<String, dynamic> body);
@@ -68,6 +66,13 @@ abstract class RepairRequestApi {
     @Part(name: 'technicalStaffModuleImage[0]') File? technicalStaffModuleImage,
     @Part(name: 'technicalStaffTestImage[0]') File? technicalStaffTestImage,
     @Part(name: 'technicalStaffImage[0]') File? technicalStaffImage,
+    @Part(name: 'CableLengthStart') String? cableLengthStart,
+    @Part(name: 'CableLengthEnd') String? cableLengthEnd,
+    @Part(name: 'report_ImageDivider[0]') File? report_ImageDivider,
+    @Part(name: 'report_CableLengthStart[0]') File? report_CableLengthStart,
+    @Part(name: 'report_CableLengthEnd[0]') File? report_CableLengthEnd,
+    @Part(name: 'List_ListError')
+    List<GetAccidentListModelResponse>? accidentList,
   });
 
   @POST('/repairrequest/addnote')
@@ -129,4 +134,7 @@ abstract class RepairRequestApi {
 
   @POST('/RepairRequest/CompletedStaff')
   Future<BaseResponse> confirmTaskCompletion(@Body() Map<String, dynamic> body);
+
+  @POST('/ListError/GetAll')
+  Future<BaseResponse<List<GetAccidentListModelResponse>>> getListAllAccident();
 }

@@ -817,6 +817,12 @@
       "SurveyStatus_Title": null,
       "TechnicalLeader_UserName": null,
       "TechnicalStaff_UserName": null
+      // "List_ListError.get_accident_list_model_response": [
+      //   {
+      //     "id": 8,
+      //     "text": "Thay modem"
+      //   }
+      // ]
     }
   }
 ]

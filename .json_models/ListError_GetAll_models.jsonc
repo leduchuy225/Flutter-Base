@@ -1,0 +1,12 @@
+[
+  {
+    "__className": "get_accident_list_response",
+    "__path": "/lib/models/accident",
+    "ListError.get_accident_list_model_response": [
+      {
+        "id": 18,
+        "text": "Mồ 2"
+      }
+    ]
+  }
+]

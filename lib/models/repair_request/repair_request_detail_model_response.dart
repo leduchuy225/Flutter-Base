@@ -1,3 +1,4 @@
+import '../accident/get_accident_list_model_response.dart';
 import '../common/customer_viewmodel_response.dart';
 import '../common/note_viewmodel_response.dart';
 import '../common/technical_staff_list_model_response.dart';
@@ -96,6 +97,7 @@ class RepairRequestDetailModelResponse {
   dynamic surveyStatusTitle;
   dynamic technicalLeaderUserName;
   dynamic technicalStaffUserName;
+  List<GetAccidentListModelResponse>? listListError;
 
   RepairRequestDetailModelResponse({
     this.id,
@@ -189,6 +191,7 @@ class RepairRequestDetailModelResponse {
     this.surveyStatusTitle,
     this.technicalLeaderUserName,
     this.technicalStaffUserName,
+    this.listListError,
   });
 
   factory RepairRequestDetailModelResponse.fromJson(Map<String, dynamic> json) {
@@ -323,6 +326,13 @@ class RepairRequestDetailModelResponse {
       surveyStatusTitle: json['SurveyStatus_Title'] as dynamic,
       technicalLeaderUserName: json['TechnicalLeader_UserName'] as dynamic,
       technicalStaffUserName: json['TechnicalStaff_UserName'] as dynamic,
+      listListError: (json['List_ListError'] as List<dynamic>?)
+          ?.map(
+            (e) => GetAccidentListModelResponse.fromJson(
+              e as Map<String, dynamic>,
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -423,5 +433,6 @@ class RepairRequestDetailModelResponse {
     'SurveyStatus_Title': surveyStatusTitle,
     'TechnicalLeader_UserName': technicalLeaderUserName,
     'TechnicalStaff_UserName': technicalStaffUserName,
+    'List_ListError': listListError?.map((e) => e.toJson()).toList(),
   };
 }

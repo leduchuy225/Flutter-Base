@@ -234,6 +234,12 @@ class _RepairRequestApi implements RepairRequestApi {
     File? technicalStaffModuleImage,
     File? technicalStaffTestImage,
     File? technicalStaffImage,
+    String? cableLengthStart,
+    String? cableLengthEnd,
+    File? report_ImageDivider,
+    File? report_CableLengthStart,
+    File? report_CableLengthEnd,
+    List<GetAccidentListModelResponse>? accidentList,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -287,6 +293,58 @@ class _RepairRequestApi implements RepairRequestApi {
         );
       }
     }
+    if (cableLengthStart != null) {
+      _data.fields.add(MapEntry('CableLengthStart', cableLengthStart));
+    }
+    if (cableLengthEnd != null) {
+      _data.fields.add(MapEntry('CableLengthEnd', cableLengthEnd));
+    }
+    if (report_ImageDivider != null) {
+      if (report_ImageDivider != null) {
+        _data.files.add(
+          MapEntry(
+            'report_ImageDivider[0]',
+            MultipartFile.fromFileSync(
+              report_ImageDivider.path,
+              filename: report_ImageDivider.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    if (report_CableLengthStart != null) {
+      if (report_CableLengthStart != null) {
+        _data.files.add(
+          MapEntry(
+            'report_CableLengthStart[0]',
+            MultipartFile.fromFileSync(
+              report_CableLengthStart.path,
+              filename: report_CableLengthStart.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    if (report_CableLengthEnd != null) {
+      if (report_CableLengthEnd != null) {
+        _data.files.add(
+          MapEntry(
+            'report_CableLengthEnd[0]',
+            MultipartFile.fromFileSync(
+              report_CableLengthEnd.path,
+              filename: report_CableLengthEnd.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    _data.fields.add(MapEntry('List_ListError', jsonEncode(accidentList)));
     final _options =
         _setStreamType<BaseResponse<UpdateRepairRequestStep4Response>>(
           Options(
@@ -761,6 +819,48 @@ class _RepairRequestApi implements RepairRequestApi {
       _value = BaseResponse<dynamic>.fromJson(
         _result.data!,
         (json) => json as dynamic,
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseResponse<List<GetAccidentListModelResponse>>>
+  getListAllAccident() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<BaseResponse<List<GetAccidentListModelResponse>>>(
+          Options(method: 'POST', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                '/ListError/GetAll',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<List<GetAccidentListModelResponse>> _value;
+    try {
+      _value = BaseResponse<List<GetAccidentListModelResponse>>.fromJson(
+        _result.data!,
+        (json) => json is List<dynamic>
+            ? json
+                  .map<GetAccidentListModelResponse>(
+                    (i) => GetAccidentListModelResponse.fromJson(
+                      i as Map<String, dynamic>,
+                    ),
+                  )
+                  .toList()
+            : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
