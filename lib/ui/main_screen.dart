@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/ui/dev_screen.dart';
+import 'package:flutter_base/ui/divider/divider_list_screen.dart';
+// import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/ui/repair_request/repair_request_list/repair_request_list_screen.dart';
+import 'package:flutter_base/ui/slid/slid_list_screen.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/webview/my_webview_screen.dart';
@@ -140,12 +142,26 @@ class _MainScreenState extends State<MainScreen> {
                   },
                 ),
                 MainFunctionItem(
-                  icon: Icons.developer_mode,
-                  title: 'DEV',
+                  icon: Icons.device_hub,
+                  title: 'Bộ chia',
                   onTap: () {
-                    Get.to(() => const DevScreen());
+                    Get.to(() => const DividerListScreen());
                   },
                 ),
+                MainFunctionItem(
+                  icon: Icons.shape_line_rounded,
+                  title: 'SLID',
+                  onTap: () {
+                    Get.to(() => const SlidListScreen());
+                  },
+                ),
+                // MainFunctionItem(
+                //   icon: Icons.developer_mode,
+                //   title: 'DEV',
+                //   onTap: () {
+                //     Get.to(() => const DevScreen());
+                //   },
+                // ),
               ],
             ),
           ),

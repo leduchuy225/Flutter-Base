@@ -1,0 +1,10 @@
+[
+  {
+    "__className": "slid_search_set_payload",
+    "__path": "/lib/models/slid",
+    "IDLong": "Mã SL ID",
+    "Code": "Tên SL ID",
+    "OLT_Code": "Tên OLT",
+    "PONID_Code": "Tên PON ID"
+  }
+]

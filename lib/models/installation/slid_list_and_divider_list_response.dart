@@ -1,5 +1,5 @@
 import '../bo_chia/bo_chia_list_model_response.dart';
-import 'slid_list_model_response.dart';
+import '../slid/slid_list_model_response.dart';
 
 class SlidListAndDividerListResponse {
   List<SlidListModelResponse>? listSlid;
