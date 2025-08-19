@@ -112,7 +112,7 @@ class _DividerListScreenState extends State<DividerListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppbar.appBar('Tra cứu PON ID'),
+      appBar: MyAppbar.appBar('Tra cứu bộ chia'),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -144,6 +144,7 @@ class _DividerListScreenState extends State<DividerListScreen> {
                       labelText: 'Mã PON ID',
                       controller: _ponIdTextController,
                     ),
+                    AppStyles.pdt20,
                     MyTextField(
                       labelText: 'SL Port',
                       controller: _portNumberTextController,

@@ -19,6 +19,8 @@ import '../../../models/installation/update_device_response.dart';
 import '../../../models/installation/update_material_response.dart';
 import '../../../models/installation/view_installation_report_file_model_payload.dart';
 import '../../../models/installation/view_installation_report_file_payload.dart';
+import '../../../models/repair_request/repair_request_add_modem_log_model_payload.dart';
+import '../../../models/repair_request/repair_request_add_modem_log_payload.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_controller.dart';
 import '../../new_installation_and_repair_request_share/widgets/sign_report_file/report_file_item.dart';
 
@@ -99,6 +101,36 @@ class NewInstallationDetailController
         ];
       }
 
+      if (data.reportImageDivider != null) {
+        reportDividerImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.reportImageDivider!,
+            filePath: getFileLink(data.reportImageDivider)!,
+          ),
+        ];
+      }
+
+      if (data.reportCableLengthStart != null) {
+        reportCableStartImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.reportCableLengthStart!,
+            filePath: getFileLink(data.reportCableLengthStart)!,
+          ),
+        ];
+      }
+
+      if (data.reportCableLengthEnd != null) {
+        reportCableEndImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.reportCableLengthEnd!,
+            filePath: getFileLink(data.reportCableLengthEnd)!,
+          ),
+        ];
+      }
+
+      cableEndTextController.text = (data.cableLengthEnd ?? '').toString();
+      cableStartTextController.text = (data.cableLengthStart ?? '').toString();
+
       materialSelectorController.replace(
         data.listMbConnectionRequestMaterialViewModel ?? [],
       );
@@ -117,7 +149,10 @@ class NewInstallationDetailController
 
   @override
   Future assignTechnicalStaff() async {
-    final body = {'id': id, 'userId': technicalStaffSelectController.first?.id};
+    final body = {
+      'id': id,
+      'userId': technicalStaffSelectorController.first?.id,
+    };
     final response = await Get.find<InstallationApi>()
         .addTechnicalStaffNewInstallation(body)
         .callApi();
@@ -311,7 +346,11 @@ class NewInstallationDetailController
         .callApi(isShowLoading: false, isShowSuccessMessage: false);
 
     return (response.data?.model ?? []).map((element) {
-      return MySelectorModel(id: element.id, name: element.title ?? '');
+      return MySelectorModel(
+        id: element.id,
+        name: element.title ?? '',
+        extraData: {'isSigned': element.isSigned ?? false},
+      );
     }).toList();
   }
 
@@ -358,22 +397,23 @@ class NewInstallationDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
+      final firstReportType = reportTypeListController.first;
       if (reportFiles.every((report) {
         return report.id != currentReportIdToPreview;
       })) {
         reportFiles.add(
           SignReportFileItemModel(
             url: urlFile,
-            id: reportTypeListController.first?.id,
-            name: reportTypeListController.first?.name ?? '',
-            isSigned: ReportType.isAutoSigned(currentReportIdToPreview),
+            id: firstReportType?.id,
+            name: firstReportType?.name ?? '',
+            isSigned: firstReportType?.extraData?['isSigned'] ?? false,
           ),
         );
       } else {
         reportFiles.forEach((report) {
           if (report.id == currentReportIdToPreview) {
             report.url = urlFile;
-            report.isSigned = ReportType.isAutoSigned(currentReportIdToPreview);
+            report.isSigned = firstReportType?.extraData?['isSigned'] ?? false;
           }
         });
       }
@@ -463,9 +503,29 @@ class NewInstallationDetailController
   }
 
   @override
-  Future addModemReplacementLog() {
-    // TODO: implement addModemReplacementLog
-    throw UnimplementedError();
+  Future addModemReplacementLog() async {
+    final body = RepairRequestAddModemLogPayload(
+      id: id,
+      model: RepairRequestAddModemLogModelPayload(
+        modemNew: newModemTextController.textTrim,
+      ),
+    );
+
+    final response = await Get.find<InstallationApi>()
+        .addModemLog(body)
+        .callApi();
+
+    final data = response.data?.model;
+
+    if (data != null) {
+      newModemTextController.clear();
+
+      modemReplacementLogs.value = data;
+
+      setIsRefreshValue();
+
+      update();
+    }
   }
 
   @override

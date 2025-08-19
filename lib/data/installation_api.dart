@@ -156,4 +156,7 @@ abstract class InstallationApi {
 
   @POST('/newconnectionrequest/CompletedStaff')
   Future<BaseResponse> confirmTaskCompletion(@Body() Map<String, dynamic> body);
+
+  @POST('/newconnectionrequest/UpdateCurrentStep_Survey')
+  Future<BaseResponse> updateSurveyStatus(@Body() Map<String, dynamic> body);
 }

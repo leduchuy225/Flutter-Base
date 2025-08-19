@@ -10,6 +10,7 @@ class MySelector extends StatefulWidget {
   final String title;
   final Widget? suffixIcon;
   final MySelectorData data;
+  final bool isMultipleSelect;
   final bool isDismissOnSelect;
   final MySelectorController? controller;
   final bool Function(MySelectorController)? onBeginSelect;
@@ -22,6 +23,7 @@ class MySelector extends StatefulWidget {
     this.onBeginSelect,
     required this.title,
     this.isDismissOnSelect = true,
+    this.isMultipleSelect = false,
   }) : super(key: key);
 
   @override
@@ -62,6 +64,7 @@ class _MySelectorState extends State<MySelector> {
               title: widget.title,
               controller: _mainController,
               scrollController: scrollController,
+              isMultipleSelect: widget.isMultipleSelect,
             );
           },
         );

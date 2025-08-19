@@ -9,6 +9,7 @@ import '../../../widgets/text_field/text_field_controller.dart';
 import '../../../widgets/text_field/text_field_widget.dart';
 
 class ModemReplaceLogWidget extends StatelessWidget {
+  final bool isReplace;
   final void Function() onPressed;
   final void Function() onRightIconPressed;
   final MyTextFieldController oldModemTextController;
@@ -16,6 +17,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
 
   const ModemReplaceLogWidget({
     super.key,
+    this.isReplace = true,
     required this.onPressed,
     required this.onRightIconPressed,
     required this.oldModemTextController,
@@ -25,7 +27,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyTexttile.card(
-      title: 'Thay thế modem',
+      title: '${isReplace ? 'Thay thế' : 'Lắp mới'} modem',
       suffixHeader: InkWell(
         onTap: onRightIconPressed,
         child: const Icon(Icons.list),
@@ -33,11 +35,16 @@ class ModemReplaceLogWidget extends StatelessWidget {
       child: Column(
         children: [
           AppStyles.pdt15,
-          MyTextField(
-            labelText: 'Modem cũ',
-            controller: oldModemTextController,
+          Visibility(
+            visible: isReplace,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: MyTextField(
+                labelText: 'Modem cũ',
+                controller: oldModemTextController,
+              ),
+            ),
           ),
-          AppStyles.pdt20,
           MyTextField(
             labelText: 'Modem mới',
             controller: newModemTextController,
@@ -66,7 +73,7 @@ class ModemReplacementLogListWidget extends StatelessWidget {
     return SingleChildScrollView(
       controller: scrollController,
       child: MyTexttile.card(
-        title: 'Lịch sử thay thế modem',
+        title: 'Lịch sử lắp đặt modem',
         mainAxisSize: MainAxisSize.min,
         paddingHeader: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Column(

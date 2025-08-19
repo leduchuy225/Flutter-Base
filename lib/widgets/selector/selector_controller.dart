@@ -20,14 +20,15 @@ class MySelectorController extends MyTextFieldController {
 
   set selectors(List<MySelectorModel> selectors) {
     _selectors = selectors;
+
+    final isDotAtStart = selectors.length > 1;
     text = selectors
         .map((element) {
-          if (isNameWithDescription) {
-            return '${element.name} - ${element.description}';
-          }
-          return element.name;
+          return '${isDotAtStart ? '◦' : ''}  ${element.name} ${isNameWithDescription ? '- ${element.description}' : ''}'
+              .trim();
         })
         .join('\n');
+
     if (_onChanged != null) {
       _onChanged!(_selectors);
     }

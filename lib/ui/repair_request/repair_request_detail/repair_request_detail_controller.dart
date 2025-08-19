@@ -86,6 +86,36 @@ class RepairRequestDetailController
         ];
       }
 
+      if (data.reportImageDivider != null) {
+        reportDividerImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.reportImageDivider!,
+            filePath: getFileLink(data.reportImageDivider)!,
+          ),
+        ];
+      }
+
+      if (data.reportCableLengthStart != null) {
+        reportCableStartImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.reportCableLengthStart!,
+            filePath: getFileLink(data.reportCableLengthStart)!,
+          ),
+        ];
+      }
+
+      if (data.reportCableLengthEnd != null) {
+        reportCableEndImageControler.files.value = [
+          FileCollectionModel(
+            fileName: data.reportCableLengthEnd!,
+            filePath: getFileLink(data.reportCableLengthEnd)!,
+          ),
+        ];
+      }
+
+      cableEndTextController.text = (data.cableLengthEnd ?? '').toString();
+      cableStartTextController.text = (data.cableLengthStart ?? '').toString();
+
       materialSelectorController.replace(
         data.listMbRepairRequestMaterialViewModel ?? [],
       );
@@ -98,7 +128,10 @@ class RepairRequestDetailController
 
   @override
   Future assignTechnicalStaff() async {
-    final body = {'id': id, 'userId': technicalStaffSelectController.first?.id};
+    final body = {
+      'id': id,
+      'userId': technicalStaffSelectorController.first?.id,
+    };
     final response = await Get.find<RepairRequestApi>()
         .addTechnicalStaffRepairRequest(body)
         .callApi();
@@ -287,7 +320,11 @@ class RepairRequestDetailController
         .callApi(isShowLoading: false, isShowSuccessMessage: false);
 
     return (response.data?.model ?? []).map((element) {
-      return MySelectorModel(id: element.id, name: element.title ?? '');
+      return MySelectorModel(
+        id: element.id,
+        name: element.title ?? '',
+        extraData: {'isSigned': element.isSigned ?? false},
+      );
     }).toList();
   }
 
@@ -306,22 +343,23 @@ class RepairRequestDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
+      final firstReportType = reportTypeListController.first;
       if (reportFiles.every((report) {
         return report.id != currentReportIdToPreview;
       })) {
         reportFiles.add(
           SignReportFileItemModel(
             url: urlFile,
-            id: reportTypeListController.first?.id,
-            name: reportTypeListController.first?.name ?? '',
-            isSigned: ReportType.isAutoSigned(currentReportIdToPreview),
+            id: firstReportType?.id,
+            name: firstReportType?.name ?? '',
+            isSigned: firstReportType?.extraData?['isSigned'] ?? false,
           ),
         );
       } else {
         reportFiles.forEach((report) {
           if (report.id == currentReportIdToPreview) {
             report.url = urlFile;
-            report.isSigned = ReportType.isAutoSigned(currentReportIdToPreview);
+            report.isSigned = firstReportType?.extraData?['isSigned'] ?? false;
           }
         });
       }

@@ -109,6 +109,7 @@ class _DevScreenState extends State<DevScreen> {
             AppStyles.pdt20,
             MySelector(
               title: 'TEST',
+              isMultipleSelect: true,
               controller: _mySelectorController,
               data: MySelectorData(
                 getFutureData: () {
@@ -130,6 +131,8 @@ class _DevScreenState extends State<DevScreen> {
                       name:
                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
                     ),
+                    MySelectorModel(id: 3, name: 'Option 3'),
+                    MySelectorModel(id: 4, name: 'Option 4'),
                   ]);
                 },
               ),

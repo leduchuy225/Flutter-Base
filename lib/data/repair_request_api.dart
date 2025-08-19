@@ -138,4 +138,7 @@ abstract class RepairRequestApi {
 
   @POST('/ListError/GetAll')
   Future<BaseResponse<List<GetAccidentListModelResponse>>> getListAllAccident();
+
+  // @POST('/newconnectionrequest/UpdateCurrentStep_Survey')
+  // Future<BaseResponse> updateSurveyStatus(@Body() Map<String, dynamic> body);
 }

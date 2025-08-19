@@ -109,7 +109,7 @@ class _SlidListScreenState extends State<SlidListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppbar.appBar('Tra cứu PON ID'),
+      appBar: MyAppbar.appBar('Tra cứu SLID'),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -160,7 +160,7 @@ class _SlidListScreenState extends State<SlidListScreen> {
                 horizontal: AppStyles.horizontalPaddingValue,
               ),
               child: TitleNumberIndicator(
-                title: 'Danh sách bộ chia',
+                title: 'Danh sách SLID',
                 number: (_state.items ?? []).length,
               ),
             ),

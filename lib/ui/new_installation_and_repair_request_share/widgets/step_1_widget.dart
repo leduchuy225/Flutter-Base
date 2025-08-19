@@ -14,13 +14,13 @@ import '../../../widgets/selector/selector_controller.dart';
 class Step1 extends StatelessWidget {
   final void Function() onPressed;
   final TechnicalStaffListModelPayload payload;
-  final MySelectorController technicalStaffSelectController;
+  final MySelectorController technicalStaffSelectorController;
 
   const Step1({
     super.key,
     required this.payload,
     required this.onPressed,
-    required this.technicalStaffSelectController,
+    required this.technicalStaffSelectorController,
   });
 
   @override
@@ -32,7 +32,7 @@ class Step1 extends StatelessWidget {
           AppStyles.pdt15,
           MySelector(
             title: 'Nhân viên kĩ thuật',
-            controller: technicalStaffSelectController,
+            controller: technicalStaffSelectorController,
             data: MySelectorData(
               getFutureData: () async {
                 final response = await Get.find<InstallationApi>()

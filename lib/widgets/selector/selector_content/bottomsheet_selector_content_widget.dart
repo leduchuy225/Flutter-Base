@@ -7,9 +7,12 @@ import 'package:get/get.dart';
 
 import '../../search_field/search_field_widget.dart';
 
+enum SelectorActionEnum { SET, ADD, REMOVE }
+
 class MyBottomsheetSelectorContent extends StatefulWidget {
   final String title;
   final MySelectorData data;
+  final bool isMultipleSelect;
   final bool isDismissOnSelect;
   final MySelectorController controller;
   final ScrollController scrollController;
@@ -18,6 +21,7 @@ class MyBottomsheetSelectorContent extends StatefulWidget {
     required this.data,
     required this.title,
     required this.controller,
+    this.isMultipleSelect = false,
     this.isDismissOnSelect = true,
     required this.scrollController,
   });
@@ -37,12 +41,23 @@ class _MyBottomsheetSelectorContentState
     });
   }
 
-  void _onChanged(MySelectorModel? item) {
+  void _onChanged(MySelectorModel? item, {required SelectorActionEnum action}) {
     if (item == null) {
       return;
     }
-    widget.controller.selectors = [item];
-    if (widget.isDismissOnSelect) {
+    switch (action) {
+      case SelectorActionEnum.SET:
+        widget.controller.selectors = [item];
+        break;
+      case SelectorActionEnum.ADD:
+        widget.controller.selectors = widget.controller.selectors..add(item);
+        break;
+      case SelectorActionEnum.REMOVE:
+        widget.controller.selectors = widget.controller.selectors..remove(item);
+        break;
+    }
+
+    if (widget.isDismissOnSelect && !widget.isMultipleSelect) {
       Get.back();
     }
   }
@@ -56,7 +71,7 @@ class _MyBottomsheetSelectorContentState
           Row(
             children: [
               TextButton(
-                child: Text('Hủy', style: AppTextStyles.body2),
+                child: Text('Đóng', style: AppTextStyles.body2),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -68,19 +83,7 @@ class _MyBottomsheetSelectorContentState
                   textAlign: TextAlign.center,
                 ),
               ),
-              Visibility(
-                visible: !widget.isDismissOnSelect,
-                child: TextButton(
-                  child: Text('OK', style: AppTextStyles.body2),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                replacement: TextButton(
-                  onPressed: () {},
-                  child: const Text(''),
-                ),
-              ),
+              TextButton(onPressed: () {}, child: const Text('')),
             ],
           ),
           Padding(
@@ -136,15 +139,40 @@ class _MyBottomsheetSelectorContentState
                                 ),
                               )
                             : null,
-                        leading: Radio<MySelectorModel?>(
-                          value: item,
-                          groupValue: widget.controller.first,
-                          onChanged: (data) {
-                            _onChanged(data);
-                          },
-                        ),
+                        leading: widget.isMultipleSelect
+                            ? Checkbox(
+                                value: widget.controller.selectors.contains(
+                                  item,
+                                ),
+                                onChanged: (data) {
+                                  _onChanged(
+                                    item,
+                                    action: data == true
+                                        ? SelectorActionEnum.ADD
+                                        : SelectorActionEnum.REMOVE,
+                                  );
+                                },
+                              )
+                            : Radio<MySelectorModel?>(
+                                value: item,
+                                groupValue: widget.controller.first,
+                                onChanged: (data) {
+                                  _onChanged(
+                                    data,
+                                    action: SelectorActionEnum.SET,
+                                  );
+                                },
+                              ),
                         onTap: () {
-                          _onChanged(item);
+                          var action = SelectorActionEnum.SET;
+                          if (widget.isMultipleSelect) {
+                            if (widget.controller.selectors.contains(item)) {
+                              action = SelectorActionEnum.REMOVE;
+                            } else {
+                              action = SelectorActionEnum.ADD;
+                            }
+                          }
+                          _onChanged(item, action: action);
                         },
                       );
                     },
