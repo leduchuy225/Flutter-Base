@@ -1,6 +1,7 @@
 import '../common/customer_viewmodel_response.dart';
 import '../common/note_viewmodel_response.dart';
 import '../common/technical_staff_list_model_response.dart';
+import '../repair_request/repair_request_get_modem_log_model_response.dart';
 import 'material_list_model_response.dart';
 
 class InstallationDetailModelResponse {
@@ -60,6 +61,14 @@ class InstallationDetailModelResponse {
   num? cableLengthEnd;
   String? reportNew;
   dynamic reportNewIsSet;
+  String? technicalStaffSurveyDate;
+  dynamic totalProcessingTime;
+  dynamic convertHours;
+  dynamic kCoefficient;
+  dynamic technicalStaffSurveyDateSuccess;
+  String? technicalStaffSurveyCancelNote;
+  dynamic technicalStaffSurveyPendingNote;
+  num? technicalStaffSurveyStatus;
   num? slidId;
   num? slidIdLong;
   dynamic dividerId;
@@ -73,6 +82,7 @@ class InstallationDetailModelResponse {
   dynamic mbConnectionRequestOverdueViewModel;
   List<NoteViewmodelResponse>? listMbConnectionRequestOverdueViewModel;
   List<MaterialListModelResponse>? listMbConnectionRequestMaterialViewModel;
+  List<RepairRequestGetModemLogModelResponse>? listMbModemLogViewModel;
   String? address2;
   dynamic countryIdTitle;
   dynamic provinceIdTitle;
@@ -161,6 +171,14 @@ class InstallationDetailModelResponse {
     this.cableLengthEnd,
     this.reportNew,
     this.reportNewIsSet,
+    this.technicalStaffSurveyDate,
+    this.totalProcessingTime,
+    this.convertHours,
+    this.kCoefficient,
+    this.technicalStaffSurveyDateSuccess,
+    this.technicalStaffSurveyCancelNote,
+    this.technicalStaffSurveyPendingNote,
+    this.technicalStaffSurveyStatus,
     this.slidId,
     this.slidIdLong,
     this.dividerId,
@@ -174,6 +192,7 @@ class InstallationDetailModelResponse {
     this.mbConnectionRequestOverdueViewModel,
     this.listMbConnectionRequestOverdueViewModel,
     this.listMbConnectionRequestMaterialViewModel,
+    this.listMbModemLogViewModel,
     this.address2,
     this.countryIdTitle,
     this.provinceIdTitle,
@@ -266,6 +285,17 @@ class InstallationDetailModelResponse {
       cableLengthEnd: json['CableLengthEnd'] as num?,
       reportNew: json['Report_New'] as String?,
       reportNewIsSet: json['Report_New_IsSet'] as dynamic,
+      technicalStaffSurveyDate: json['TechnicalStaffSurveyDate'] as String?,
+      totalProcessingTime: json['TotalProcessingTime'] as dynamic,
+      convertHours: json['ConvertHours'] as dynamic,
+      kCoefficient: json['KCoefficient'] as dynamic,
+      technicalStaffSurveyDateSuccess:
+          json['TechnicalStaffSurveyDateSuccess'] as dynamic,
+      technicalStaffSurveyCancelNote:
+          json['TechnicalStaffSurveyCancelNote'] as String?,
+      technicalStaffSurveyPendingNote:
+          json['TechnicalStaffSurveyPendingNote'] as dynamic,
+      technicalStaffSurveyStatus: json['TechnicalStaffSurveyStatus'] as num?,
       slidId: json['SLID_ID'] as num?,
       slidIdLong: json['SLID_IDLong'] as num?,
       dividerId: json['Divider_ID'] as dynamic,
@@ -307,6 +337,14 @@ class InstallationDetailModelResponse {
           (json['ListMB_ConnectionRequestMaterialViewModel'] as List<dynamic>?)
               ?.map(
                 (e) => MaterialListModelResponse.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+      listMbModemLogViewModel:
+          (json['ListMB_ModemLogViewModel'] as List<dynamic>?)
+              ?.map(
+                (e) => RepairRequestGetModemLogModelResponse.fromJson(
                   e as Map<String, dynamic>,
                 ),
               )
@@ -401,6 +439,14 @@ class InstallationDetailModelResponse {
     'CableLengthEnd': cableLengthEnd,
     'Report_New': reportNew,
     'Report_New_IsSet': reportNewIsSet,
+    'TechnicalStaffSurveyDate': technicalStaffSurveyDate,
+    'TotalProcessingTime': totalProcessingTime,
+    'ConvertHours': convertHours,
+    'KCoefficient': kCoefficient,
+    'TechnicalStaffSurveyDateSuccess': technicalStaffSurveyDateSuccess,
+    'TechnicalStaffSurveyCancelNote': technicalStaffSurveyCancelNote,
+    'TechnicalStaffSurveyPendingNote': technicalStaffSurveyPendingNote,
+    'TechnicalStaffSurveyStatus': technicalStaffSurveyStatus,
     'SLID_ID': slidId,
     'SLID_IDLong': slidIdLong,
     'Divider_ID': dividerId,
@@ -422,6 +468,9 @@ class InstallationDetailModelResponse {
         listMbConnectionRequestMaterialViewModel
             ?.map((e) => e.toJson())
             .toList(),
+    'ListMB_ModemLogViewModel': listMbModemLogViewModel
+        ?.map((e) => e.toJson())
+        .toList(),
     'Address2': address2,
     'CountryID_Title': countryIdTitle,
     'ProvinceID_Title': provinceIdTitle,

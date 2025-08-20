@@ -68,6 +68,16 @@ class RepairRequestDetailModelResponse {
   String? reportProblem;
   dynamic reportProblemIsSet;
   CustomerViewmodelResponse? mbCustomerViewModel;
+  dynamic listError;
+  dynamic technicalStaffNote;
+  String? technicalStaffSurveyDate;
+  dynamic technicalStaffSurveyDateSuccess;
+  String? technicalStaffSurveyCancelNote;
+  dynamic technicalStaffSurveyPendingNote;
+  num? technicalStaffSurveyStatus;
+  dynamic totalProcessingTime;
+  dynamic convertHours;
+  dynamic kCoefficient;
   dynamic mbRepairRequestNoteViewModel;
   List<NoteViewmodelResponse>? listMbRepairRequestNoteViewModel;
   List<TechnicalStaffListModelResponse>? listTechnicalLeader;
@@ -162,6 +172,16 @@ class RepairRequestDetailModelResponse {
     this.reportProblem,
     this.reportProblemIsSet,
     this.mbCustomerViewModel,
+    this.listError,
+    this.technicalStaffNote,
+    this.technicalStaffSurveyDate,
+    this.technicalStaffSurveyDateSuccess,
+    this.technicalStaffSurveyCancelNote,
+    this.technicalStaffSurveyPendingNote,
+    this.technicalStaffSurveyStatus,
+    this.totalProcessingTime,
+    this.convertHours,
+    this.kCoefficient,
     this.mbRepairRequestNoteViewModel,
     this.listMbRepairRequestNoteViewModel,
     this.listTechnicalLeader,
@@ -258,6 +278,19 @@ class RepairRequestDetailModelResponse {
       cableLengthEnd: json['CableLengthEnd'] as num?,
       reportProblem: json['Report_Problem'] as String?,
       reportProblemIsSet: json['Report_Problem_IsSet'] as dynamic,
+      listError: json['ListError'] as dynamic,
+      technicalStaffNote: json['TechnicalStaffNote'] as dynamic,
+      technicalStaffSurveyDate: json['TechnicalStaffSurveyDate'] as String?,
+      technicalStaffSurveyDateSuccess:
+          json['TechnicalStaffSurveyDateSuccess'] as dynamic,
+      technicalStaffSurveyCancelNote:
+          json['TechnicalStaffSurveyCancelNote'] as String?,
+      technicalStaffSurveyPendingNote:
+          json['TechnicalStaffSurveyPendingNote'] as dynamic,
+      technicalStaffSurveyStatus: json['TechnicalStaffSurveyStatus'] as num?,
+      totalProcessingTime: json['TotalProcessingTime'] as dynamic,
+      convertHours: json['ConvertHours'] as dynamic,
+      kCoefficient: json['KCoefficient'] as dynamic,
       mbCustomerViewModel: json['MB_CustomerViewModel'] == null
           ? null
           : CustomerViewmodelResponse.fromJson(
@@ -399,6 +432,16 @@ class RepairRequestDetailModelResponse {
     'Report_Problem': reportProblem,
     'Report_Problem_IsSet': reportProblemIsSet,
     'MB_CustomerViewModel': mbCustomerViewModel?.toJson(),
+    'ListError': listError,
+    'TechnicalStaffNote': technicalStaffNote,
+    'TechnicalStaffSurveyDate': technicalStaffSurveyDate,
+    'TechnicalStaffSurveyDateSuccess': technicalStaffSurveyDateSuccess,
+    'TechnicalStaffSurveyCancelNote': technicalStaffSurveyCancelNote,
+    'TechnicalStaffSurveyPendingNote': technicalStaffSurveyPendingNote,
+    'TechnicalStaffSurveyStatus': technicalStaffSurveyStatus,
+    'TotalProcessingTime': totalProcessingTime,
+    'ConvertHours': convertHours,
+    'KCoefficient': kCoefficient,
     'MB_RepairRequestNoteViewModel': mbRepairRequestNoteViewModel,
     'ListMB_RepairRequestNoteViewModel': listMbRepairRequestNoteViewModel
         ?.map((e) => e.toJson())
