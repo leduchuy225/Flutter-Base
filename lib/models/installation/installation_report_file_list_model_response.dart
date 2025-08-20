@@ -1,9 +1,9 @@
 class InstallationReportFileListModelResponse {
   num? id;
   String? title;
-  bool? isSigned;
+  bool? isSign;
 
-  InstallationReportFileListModelResponse({this.id, this.title, this.isSigned});
+  InstallationReportFileListModelResponse({this.id, this.title, this.isSign});
 
   factory InstallationReportFileListModelResponse.fromJson(
     Map<String, dynamic> json,
@@ -11,13 +11,9 @@ class InstallationReportFileListModelResponse {
     return InstallationReportFileListModelResponse(
       id: json['ID'] as num?,
       title: json['Title'] as String?,
-      isSigned: json['IsSign'] as bool?,
+      isSign: json['IsSign'] as bool?,
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    'ID': id,
-    'Title': title,
-    'IsSign': isSigned,
-  };
+  Map<String, dynamic> toJson() => {'ID': id, 'Title': title, 'IsSign': isSign};
 }

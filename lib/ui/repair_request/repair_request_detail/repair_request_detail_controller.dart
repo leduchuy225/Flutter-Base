@@ -323,7 +323,7 @@ class RepairRequestDetailController
       return MySelectorModel(
         id: element.id,
         name: element.title ?? '',
-        extraData: {'isSigned': element.isSigned ?? false},
+        extraData: {'isSigned': element.isSign == false},
       );
     }).toList();
   }
