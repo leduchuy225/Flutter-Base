@@ -21,19 +21,19 @@ class SignReportFileWidget extends StatelessWidget {
   final void Function(int?) onReportSelected;
   final SignatureController staffSignatureController;
   final SignatureController customerSignatureController;
-  final MySelectorController reportTypeListController;
-  final SignReportFileDataController reportController;
+  final MySelectorController reportTypeSelectorController;
+  final SignReportFileDataController reportDataController;
   final Future<List<MySelectorModel>> Function() getReportTypeList;
 
   const SignReportFileWidget({
     super.key,
     required this.files,
     required this.signReportFile,
-    required this.reportController,
+    required this.reportDataController,
     required this.getReportTypeList,
     required this.onReportSelected,
     required this.previewReportFile,
-    required this.reportTypeListController,
+    required this.reportTypeSelectorController,
     required this.staffSignatureController,
     required this.customerSignatureController,
     required this.reportSelectedIdToSign,
@@ -72,32 +72,32 @@ class SignReportFileWidget extends StatelessWidget {
       children: [
         MyTextField(
           labelText: 'Email của KH',
-          controller: reportController.bbntEmailTextController,
+          controller: reportDataController.bbntEmailTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Tài khoản',
-          controller: reportController.bbntAccountTextController,
+          controller: reportDataController.bbntAccountTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Mật khẩu',
-          controller: reportController.bbntPasswordTextController,
+          controller: reportDataController.bbntPasswordTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'IP v4',
-          controller: reportController.bbntIpV4TextController,
+          controller: reportDataController.bbntIpV4TextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Chất lượng dịch vụ',
-          controller: reportController.bbntServiceQualityTextController,
+          controller: reportDataController.bbntServiceQualityTextController,
         ),
         AppStyles.pdt20,
         DatetimePicker(
           title: 'Thời gian hoàn thành',
-          controller: reportController.completeDateController,
+          controller: reportDataController.completeDateController,
         ),
         AppStyles.pdt30,
       ],
@@ -109,28 +109,28 @@ class SignReportFileWidget extends StatelessWidget {
       children: [
         MyTextField(
           labelText: 'Tên thiết bị',
-          controller: reportController.bbbgNameTextController,
+          controller: reportDataController.bbbgNameTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Thông số',
-          controller: reportController.bbbgStatictisTextController,
+          controller: reportDataController.bbbgStatictisTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Số lượng',
           keyboardType: TextInputType.number,
-          controller: reportController.bbbgAmountTextController,
+          controller: reportDataController.bbbgAmountTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Hiện trạng',
-          controller: reportController.bbbgStatusTextController,
+          controller: reportDataController.bbbgStatusTextController,
         ),
         AppStyles.pdt20,
         DatetimePicker(
           title: 'Thời gian hoàn thành',
-          controller: reportController.completeDateController,
+          controller: reportDataController.completeDateController,
         ),
         AppStyles.pdt30,
       ],
@@ -171,7 +171,7 @@ class SignReportFileWidget extends StatelessWidget {
           AppStyles.pdt15,
           MySelector(
             title: 'Loại biên bản',
-            controller: reportTypeListController,
+            controller: reportTypeSelectorController,
             data: MySelectorData(
               getFutureData: getReportTypeList,
               excludeIds: _reportSigned.map((report) {
@@ -181,9 +181,9 @@ class SignReportFileWidget extends StatelessWidget {
           ),
           AppStyles.pdt20,
           ValueListenableBuilder(
-            valueListenable: reportTypeListController,
+            valueListenable: reportTypeSelectorController,
             builder: (context, value, child) {
-              switch (reportTypeListController.first?.id) {
+              switch (reportTypeSelectorController.first?.id) {
                 case ReportType.BBNT:
                   return _buildBienBanNghiemThu(context);
                 case ReportType.BBBG:

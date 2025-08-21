@@ -5,6 +5,7 @@ import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/modem_replace_log_widget.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/sign_report_file/sign_report_file_widget.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/take_surver_widget.dart';
 import 'package:flutter_base/widgets/data_state_widget.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/file_collection/file_collection_controller.dart';
@@ -70,8 +71,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final technicalStaffSelectorController = MySelectorController();
 
-  final reportTypeListController = MySelectorController();
-  final reportController = SignReportFileDataController();
+  final reportTypeSelectorController = MySelectorController();
+  final reportDataController = SignReportFileDataController();
 
   final staffSignatureController = SignatureController();
   final customerSignatureController = SignatureController();
@@ -82,6 +83,11 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final oldModemTextController = MyTextFieldController();
   final newModemTextController = MyTextFieldController();
+
+  final surveyNoteTextController = MyTextFieldController();
+  final surveyStatusSelectorController = MySelectorController(
+    isNameWithDescription: true,
+  );
 
   T? get detailData => detailRxData.value;
 
@@ -96,6 +102,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   String? get expectedCompletionDate;
 
   TechnicalStaffListModelPayload get technicalStaffListModelPayload;
+
+  SurveyStatusEnum get surveyStatus;
 
   bool get isRefreshValue;
 
@@ -133,18 +141,22 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   Future completeRquest(BuildContext context);
 
+  Future updateSurveyStatus();
+
   Future<BaseResponse> deleteMaterialApi(Map<String, dynamic> body);
   Future<BaseResponse<UpdateMaterialResponse>> updateMaterialApi(
     UpdateMaterialPayload body,
   );
 
   int get currentReportIdToSign => reportSelectedIdToSign.value;
-  dynamic get currentReportIdToPreview => reportTypeListController.first?.id;
+
+  dynamic get currentReportIdToPreview =>
+      reportTypeSelectorController.first?.id;
 
   @override
   void onInit() {
     super.onInit();
-    reportController.completeDateController.dateTime = DateTime.now();
+    reportDataController.completeDateController.dateTime = DateTime.now();
   }
 
   String getOverdueTime() {
@@ -192,12 +204,23 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
               isVisible: !isClosed,
               step: InstallationStepEnum.MakeAppointment,
             ),
+            getStepContent(
+              context,
+              isVisible: !isClosed,
+              step: InstallationStepEnum.UpdateSurveyStatus,
+            ),
             buildSteps(context, step: 4),
           ],
         );
       case 4:
+      case 5:
         return Column(
           children: [
+            getStepContent(
+              context,
+              // isVisible: !isClosed,
+              step: InstallationStepEnum.UpdateSurveyStatus,
+            ),
             getStepContent(
               context,
               step: InstallationStepEnum.UpdateSlidAndDivider,
@@ -311,10 +334,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
       case InstallationStepEnum.SignReport:
         return SignReportFileWidget(
           files: reportFiles,
-          reportController: reportController,
+          reportDataController: reportDataController,
           getReportTypeList: getReportTypeList,
           staffSignatureController: staffSignatureController,
-          reportTypeListController: reportTypeListController,
+          reportTypeSelectorController: reportTypeSelectorController,
           reportSelectedIdToSign: reportSelectedIdToSign.value,
           customerSignatureController: customerSignatureController,
           onReportSelected: (value) {
@@ -330,11 +353,11 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           },
           previewReportFile: () async {
             if (currentReportIdToPreview == ReportType.BBNT) {
-              if (!reportController.checkBbntIsValid()) {
+              if (!reportDataController.checkBbntIsValid()) {
                 return;
               }
             } else if (currentReportIdToPreview == ReportType.BBBG) {
-              if (!reportController.checkBbbgIsValid()) {
+              if (!reportDataController.checkBbbgIsValid()) {
                 return;
               }
             }
@@ -421,6 +444,26 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
                   },
                 );
               },
+            );
+          },
+        );
+      case InstallationStepEnum.UpdateSurveyStatus:
+        return TakeSurverWidget(
+          surveyNoteTextController: surveyNoteTextController,
+          surveyStatusSelectorController: surveyStatusSelectorController,
+          onPressed: () {
+            if (!surveyStatusSelectorController.checkIsNotEmpty()) {
+              return;
+            }
+            if (TakeSurverWidget.getIsNoteRequired(
+                  surveyStatusSelectorController.first?.id,
+                ) &&
+                !surveyNoteTextController.checkIsNotEmpty()) {
+              return;
+            }
+            MyDialog.alertDialog(
+              okHandler: updateSurveyStatus,
+              message: 'Xác nhận cập nhật thông tin khảo sát ?',
             );
           },
         );

@@ -47,6 +47,10 @@ class _NewInstallationDetailScreenState
                   text: detailData?.serviceIdTitle,
                 ),
                 MyTexttileItem(
+                  titleText: 'Chi tiết lỗi',
+                  text: detailData?.technicalStaffNote,
+                ),
+                MyTexttileItem(
                   titleText: 'Tọa độ',
                   text: detailData?.googleMap,
                   trailing: InkWell(

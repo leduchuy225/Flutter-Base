@@ -6,6 +6,7 @@ import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
 import 'package:flutter_base/models/installation/update_material_payload.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/take_surver_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
@@ -343,7 +344,7 @@ class RepairRequestDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
-      final firstReportType = reportTypeListController.first;
+      final firstReportType = reportTypeSelectorController.first;
       if (reportFiles.every((report) {
         return report.id != currentReportIdToPreview;
       })) {
@@ -467,4 +468,14 @@ class RepairRequestDetailController
 
   @override
   bool get isRequestReadyToClose => detailData?.isCompletedStaffOn ?? false;
+
+  @override
+  Future updateSurveyStatus() {
+    // TODO: implement updateSurveyStatus
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement surveyStatus
+  SurveyStatusEnum get surveyStatus => throw UnimplementedError();
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_base/models/common/note_list_response.dart';
+import 'package:flutter_base/models/common/update_survey_payload.dart';
 import 'package:flutter_base/models/installation/delete_material_response.dart';
 import 'package:flutter_base/models/installation/update_material_response.dart';
 import 'package:retrofit/retrofit.dart';
@@ -158,5 +159,5 @@ abstract class InstallationApi {
   Future<BaseResponse> confirmTaskCompletion(@Body() Map<String, dynamic> body);
 
   @POST('/newconnectionrequest/UpdateCurrentStep_Survey')
-  Future<BaseResponse> updateSurveyStatus(@Body() Map<String, dynamic> body);
+  Future<BaseResponse> updateSurveyStatus(@Body() UpdateSurveyPayload body);
 }

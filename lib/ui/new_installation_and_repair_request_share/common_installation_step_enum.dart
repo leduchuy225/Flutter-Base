@@ -6,7 +6,8 @@ enum InstallationStepEnum {
   AskForHelp(id: 5),
   UpdateMaterial(id: 6),
   UpdateSlidAndDivider(id: 7),
-  ReplaceModem(id: 8);
+  ReplaceModem(id: 8),
+  UpdateSurveyStatus(id: 9);
 
   final int id;
 

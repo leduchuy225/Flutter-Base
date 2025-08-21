@@ -7,12 +7,14 @@ import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
 import 'package:flutter_base/models/installation/update_material_payload.dart';
+import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/take_surver_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
 import '../../../data/installation_api.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
+import '../../../models/common/update_survey_payload.dart';
 import '../../../models/file_collection_model.dart';
 import '../../../models/installation/installation_detail_model_response.dart';
 import '../../../models/installation/update_device_response.dart';
@@ -360,32 +362,32 @@ class NewInstallationDetailController
       id: id,
       type: currentReportIdToPreview,
       model: ViewInstallationReportFileModelPayload(
-        duLieuHoanThanh: reportController.completeDateController.dateTime,
+        duLieuHoanThanh: reportDataController.completeDateController.dateTime,
         // Biên bản nghiệm thu
         duLieuAcc: currentReportIdToPreview == ReportType.BBNT
-            ? reportController.bbntAccountTextController.textTrim
+            ? reportDataController.bbntAccountTextController.textTrim
             : null,
         duLieuChatLuongDichVu: currentReportIdToPreview == ReportType.BBNT
-            ? reportController.bbntServiceQualityTextController.textTrim
+            ? reportDataController.bbntServiceQualityTextController.textTrim
             : null,
         duLieuIpV4: currentReportIdToPreview == ReportType.BBNT
-            ? reportController.bbntIpV4TextController.textTrim
+            ? reportDataController.bbntIpV4TextController.textTrim
             : null,
         duLieuPass: currentReportIdToPreview == ReportType.BBNT
-            ? reportController.bbntPasswordTextController.textTrim
+            ? reportDataController.bbntPasswordTextController.textTrim
             : null,
         // Biên bản bàn giao
         tb1Ten: currentReportIdToPreview == ReportType.BBBG
-            ? reportController.bbbgNameTextController.textTrim
+            ? reportDataController.bbbgNameTextController.textTrim
             : null,
         tb1SLuong: currentReportIdToPreview == ReportType.BBBG
-            ? reportController.bbbgAmountTextController.textTrim
+            ? reportDataController.bbbgAmountTextController.textTrim
             : null,
         tb1HTrang: currentReportIdToPreview == ReportType.BBBG
-            ? reportController.bbbgStatusTextController.textTrim
+            ? reportDataController.bbbgStatusTextController.textTrim
             : null,
         tb1ThongSo: currentReportIdToPreview == ReportType.BBBG
-            ? reportController.bbbgStatictisTextController.textTrim
+            ? reportDataController.bbbgStatictisTextController.textTrim
             : null,
       ),
     );
@@ -397,7 +399,7 @@ class NewInstallationDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
-      final firstReportType = reportTypeListController.first;
+      final firstReportType = reportTypeSelectorController.first;
       if (reportFiles.every((report) {
         return report.id != currentReportIdToPreview;
       })) {
@@ -546,4 +548,18 @@ class NewInstallationDetailController
 
   @override
   bool get isRequestReadyToClose => detailData?.isCompletedStaffOn ?? false;
+
+  @override
+  Future updateSurveyStatus() async {
+    final body = UpdateSurveyPayload(
+      id: id,
+      note: surveyNoteTextController.textTrim,
+      status: surveyStatusSelectorController.first?.id,
+    );
+    await Get.find<InstallationApi>().updateSurveyStatus(body).callApi();
+  }
+
+  @override
+  // TODO: implement surveyStatus
+  SurveyStatusEnum get surveyStatus => throw UnimplementedError();
 }

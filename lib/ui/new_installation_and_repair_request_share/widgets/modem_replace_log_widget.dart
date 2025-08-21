@@ -40,12 +40,14 @@ class ModemReplaceLogWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: MyTextField(
+                isRequired: true,
                 labelText: 'Modem cũ',
                 controller: oldModemTextController,
               ),
             ),
           ),
           MyTextField(
+            isRequired: true,
             labelText: 'Modem mới',
             controller: newModemTextController,
           ),

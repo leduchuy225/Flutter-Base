@@ -51,6 +51,7 @@ class _MySelectorState extends State<MySelector> {
       labelText: widget.title,
       controller: _mainController,
       suffixIcon: widget.suffixIcon,
+      prefixIcon: const Icon(Icons.arrow_drop_down),
       onTap: () {
         if (widget.onBeginSelect != null &&
             widget.onBeginSelect!(_mainController) == false) {

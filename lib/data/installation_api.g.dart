@@ -945,13 +945,13 @@ class _InstallationApi implements InstallationApi {
 
   @override
   Future<BaseResponse<dynamic>> updateSurveyStatus(
-    Map<String, dynamic> body,
+    UpdateSurveyPayload body,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
+    _data.addAll(body.toJson());
     final _options = _setStreamType<BaseResponse<dynamic>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

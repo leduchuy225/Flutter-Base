@@ -69,7 +69,7 @@ class Step3 extends StatelessWidget {
                           isShowLoading: false,
                           isShowSuccessMessage: false,
                         );
-                    return (response.data ?? []).map((element) {
+                    return (response.data?.listError ?? []).map((element) {
                       return MySelectorModel(
                         id: element.id,
                         name: element.text ?? '',

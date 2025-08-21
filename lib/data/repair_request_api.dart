@@ -5,10 +5,12 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../models/accident/get_accident_list_model_response.dart';
+import '../models/accident/get_accident_list_response.dart';
 import '../models/base_response.dart';
 import '../models/common/installation_detail_payload.dart';
 import '../models/common/installation_list_payload.dart';
 import '../models/common/note_list_response.dart';
+import '../models/common/update_survey_payload.dart';
 import '../models/installation/delete_material_response.dart';
 import '../models/installation/installation_report_file_list_response.dart';
 import '../models/installation/material_list_response.dart';
@@ -137,8 +139,8 @@ abstract class RepairRequestApi {
   Future<BaseResponse> confirmTaskCompletion(@Body() Map<String, dynamic> body);
 
   @POST('/ListError/GetAll')
-  Future<BaseResponse<List<GetAccidentListModelResponse>>> getListAllAccident();
+  Future<BaseResponse<GetAccidentListResponse>> getListAllAccident();
 
-  // @POST('/newconnectionrequest/UpdateCurrentStep_Survey')
-  // Future<BaseResponse> updateSurveyStatus(@Body() Map<String, dynamic> body);
+  @POST('/RepairRequest/UpdateCurrentStep_Survey')
+  Future<BaseResponse> updateSurveyStatus(@Body() UpdateSurveyPayload body);
 }
