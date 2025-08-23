@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/app_binding.dart';
+import 'package:flutter_base/core/const/constants.dart';
 import 'package:flutter_base/core/services/http_service.dart';
 import 'package:flutter_base/core/services/notification_service.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
@@ -51,6 +52,7 @@ class _MainAppState extends State<MainApp> {
     return GetMaterialApp(
       theme: AppTheme.themeData,
       initialBinding: AppBinding(),
+      debugShowCheckedModeBanner: Config().isDevMode,
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

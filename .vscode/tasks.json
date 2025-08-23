@@ -6,7 +6,9 @@
       "command": "sh",
       "args": [
         "-c",
-        "flutter build apk && cp build/app/outputs/flutter-apk/app-release.apk ./app-release.apk"
+        "flutter build apk && cp build/app/outputs/flutter-apk/app-release.apk ./app-release.apk",
+        "--dart-define",
+        "ENV=DEV"
       ],
       "group": {
         "kind": "build",
@@ -21,7 +23,9 @@
       "command": "sh",
       "args": [
         "-c",
-        "flutter build apk --release && cp build/app/outputs/flutter-apk/app-release.apk ./app-release.apk"
+        "flutter build apk --release && cp build/app/outputs/flutter-apk/app-release.apk ./app-release.apk",
+        "--dart-define",
+        "ENV=PROD"
       ],
       "group": {
         "kind": "build",

@@ -37,10 +37,6 @@ class ReportType {
   static const BBBG = 2;
   static const BBKM = 3;
   static const BBSC = 4;
-
-  // static bool isAutoSigned(int id) {
-  //   return [ReportType.BBKM, ReportType.BBSC].contains(id);
-  // }
 }
 
 class Config {
@@ -55,6 +51,14 @@ class Config {
   Config._internal();
 
   String? _deviceToken;
+
+  bool get isProductionMode {
+    return const String.fromEnvironment('ENV') == 'PROD';
+  }
+
+  bool get isDevMode {
+    return !isProductionMode;
+  }
 
   Future<String?> get deviceToken async {
     if (_deviceToken != null) {
