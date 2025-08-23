@@ -15,12 +15,17 @@ import '../../../widgets/selector/selector_controller.dart';
 
 class Step3 extends StatelessWidget {
   final bool isViewOnly;
-  final bool canSelectAccidents;
+  final bool isRepairRequest;
   final void Function() onPressed;
+
+  final MySelectorController accidentsSelectorController;
+
   final MyTextFieldController cableEndTextController;
   final MyTextFieldController step3NoteTextController;
   final MyTextFieldController cableStartTextController;
-  final MySelectorController accidentsSelectorController;
+  final MyTextFieldController accidentSolutionTextController;
+  final MyTextFieldController accidentDescriptionTextController;
+
   final FileCollectionController reportDividerImageControler;
   final FileCollectionController technicalStaffImageControler;
   final FileCollectionController reportCableEndImageControler;
@@ -32,7 +37,7 @@ class Step3 extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.isViewOnly = false,
-    this.canSelectAccidents = false,
+    this.isRepairRequest = false,
     required this.cableEndTextController,
     required this.step3NoteTextController,
     required this.cableStartTextController,
@@ -43,6 +48,8 @@ class Step3 extends StatelessWidget {
     required this.reportCableStartImageControler,
     required this.technicalStaffTestImageControler,
     required this.technicalStaffModuleImageControler,
+    required this.accidentDescriptionTextController,
+    required this.accidentSolutionTextController,
   });
 
   @override
@@ -53,7 +60,7 @@ class Step3 extends StatelessWidget {
         children: [
           AppStyles.pdt10,
           Visibility(
-            visible: canSelectAccidents,
+            visible: isRepairRequest,
             child: Padding(
               padding: const EdgeInsetsGeometry.only(bottom: 20),
               child: MySelector(
@@ -79,6 +86,25 @@ class Step3 extends StatelessWidget {
                   },
                 ),
               ),
+            ),
+          ),
+          Visibility(
+            visible: isRepairRequest,
+            child: Column(
+              children: [
+                MyTextField(
+                  readOnly: isViewOnly,
+                  labelText: 'Mô tả chi tiết lỗi',
+                  controller: accidentDescriptionTextController,
+                ),
+                AppStyles.pdt20,
+                MyTextField(
+                  readOnly: isViewOnly,
+                  labelText: 'Cách giải quyết',
+                  controller: accidentSolutionTextController,
+                ),
+                AppStyles.pdt20,
+              ],
             ),
           ),
           Row(

@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
 import '../../../core/utils/utils.dart';
+import '../../../models/accident/get_accident_list_model_response.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/common/update_survey_payload.dart';
@@ -131,6 +132,9 @@ class RepairRequestDetailController
         return MySelectorModel(id: element.id, name: element.text ?? '');
       }).toList();
 
+      accidentDescriptionTextController.text = data.technicalStaffNote ?? '';
+      accidentSolutionTextController.text = data.reportCorrectionMethod ?? '';
+
       update();
     }
   }
@@ -186,6 +190,23 @@ class RepairRequestDetailController
           technicalStaffTestImage: technicalStaffTestImageControler.firstFile,
           technicalStaffModuleImage:
               technicalStaffModuleImageControler.firstFile,
+          cableLengthEnd: cableEndTextController.textTrim,
+          cableLengthStart: cableStartTextController.textTrim,
+          report_CableLengthEnd: reportCableEndImageControler.firstFile,
+          report_CableLengthStart: reportCableStartImageControler.firstFile,
+          report_ImageDivider: reportDividerImageControler.firstFile,
+          technicalStaffNote: accidentDescriptionTextController.textTrim,
+          reportCorrectionMethod: accidentSolutionTextController.textTrim,
+          accidentList: accidentsSelectorController.selectors.map((element) {
+            return GetAccidentListModelResponse(
+              id: element.id,
+              text: element.name,
+            );
+          }).toList(),
+          report_Distance:
+              ((getNullOrNumber(cableEndTextController.textTrim) ?? 0) -
+                      (getNullOrNumber(cableStartTextController.textTrim) ?? 0))
+                  .toString(),
         )
         .callApi();
 
@@ -492,6 +513,9 @@ class RepairRequestDetailController
         .callApi();
 
     if (response.isSuccess) {
+      surveyNoteTextController.clear();
+      surveyStatusSelectorController.clear();
+
       detailRxData.value?.technicalStaffSurveyStatus = statusId;
 
       setIsRefreshValue();
@@ -511,6 +535,21 @@ class RepairRequestDetailController
         return SurveyStatusEnum.Pending;
       default:
         return null;
+    }
+  }
+
+  @override
+  Future getModemReplacementLog() async {
+    final body = {'id': id};
+
+    final response = await Get.find<RepairRequestApi>()
+        .getModemLog(body)
+        .callApi(isShowSuccessMessage: false);
+
+    final data = response.data?.model ?? [];
+
+    if (data.isNotEmpty) {
+      modemReplacementLogs.value = data;
     }
   }
 }

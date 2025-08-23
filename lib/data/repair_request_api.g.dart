@@ -240,6 +240,9 @@ class _RepairRequestApi implements RepairRequestApi {
     File? report_CableLengthStart,
     File? report_CableLengthEnd,
     List<GetAccidentListModelResponse>? accidentList,
+    String? technicalStaffNote,
+    String? reportCorrectionMethod,
+    String? report_Distance,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -345,6 +348,17 @@ class _RepairRequestApi implements RepairRequestApi {
       }
     }
     _data.fields.add(MapEntry('List_ListError', jsonEncode(accidentList)));
+    if (technicalStaffNote != null) {
+      _data.fields.add(MapEntry('TechnicalStaffNote', technicalStaffNote));
+    }
+    if (reportCorrectionMethod != null) {
+      _data.fields.add(
+        MapEntry('Report_CorrectionMethod', reportCorrectionMethod),
+      );
+    }
+    if (report_Distance != null) {
+      _data.fields.add(MapEntry('Report_Distance', report_Distance));
+    }
     final _options =
         _setStreamType<BaseResponse<UpdateRepairRequestStep4Response>>(
           Options(

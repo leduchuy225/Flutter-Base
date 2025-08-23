@@ -154,7 +154,7 @@ class AppColors {
   static const Color bgRandom6 = Color(0xFFC5D0F9);
 
   static const Color bgHeaderItem =
-      mobifiberRandom2; // mobifoneRandom4; // Color(0xFFE3E8EF);
+      mobifoneRandom8; // mobifoneRandom4; // Color(0xFFE3E8EF);
   static const Color bgChildItem = Color(0xFFF0F4F9);
 
   static const List<Color> defaultGradient = [

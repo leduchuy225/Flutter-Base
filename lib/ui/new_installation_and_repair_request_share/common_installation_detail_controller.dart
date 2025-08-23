@@ -56,6 +56,9 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final step2NoteTextController = MyTextFieldController();
   final step3NoteTextController = MyTextFieldController();
 
+  final accidentSolutionTextController = MyTextFieldController();
+  final accidentDescriptionTextController = MyTextFieldController();
+
   final cableStartTextController = MyTextFieldController();
   final cableEndTextController = MyTextFieldController();
 
@@ -141,6 +144,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   Future addModemReplacementLog();
 
+  Future getModemReplacementLog();
+
   Future completeRquest(BuildContext context);
 
   Future updateSurveyStatus();
@@ -203,13 +208,15 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              isVisible: !isRequestClosed,
+              isVisible:
+                  !isRequestClosed && surveyStatus != SurveyStatusEnum.Done,
               step: InstallationStepEnum.MakeAppointment,
             ),
             getStepContent(
               context,
-              isVisible: !isRequestClosed,
               step: InstallationStepEnum.UpdateSurveyStatus,
+              isVisible:
+                  !isRequestClosed && surveyStatus != SurveyStatusEnum.Done,
             ),
             Visibility(
               child: buildSteps(context, step: 4),
@@ -321,16 +328,18 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           isViewOnly: isViewOnly,
           cableEndTextController: cableEndTextController,
           cableStartTextController: cableStartTextController,
+          isRepairRequest: serviceType == MBService.RepairRequest,
           accidentsSelectorController: accidentsSelectorController,
           reportDividerImageControler: reportDividerImageControler,
           reportCableEndImageControler: reportCableEndImageControler,
-          canSelectAccidents: serviceType == MBService.RepairRequest,
           technicalStaffImageControler: technicalStaffImageControler,
           reportCableStartImageControler: reportCableStartImageControler,
           technicalStaffTestImageControler: technicalStaffTestImageControler,
           technicalStaffModuleImageControler:
               technicalStaffModuleImageControler,
           step3NoteTextController: step3NoteTextController,
+          accidentSolutionTextController: accidentSolutionTextController,
+          accidentDescriptionTextController: accidentDescriptionTextController,
           onPressed: () {
             if (id == null) {
               return;
@@ -446,7 +455,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
               message: 'Xác nhận ${isReplace ? 'thay thế' : 'lắp mới'} modem ?',
             );
           },
-          onRightIconPressed: () {
+          onRightIconPressed: () async {
+            await getModemReplacementLog();
             MyBottomSheet.showDraggableScrollableSheet(
               context,
               builder: (context, scrollController) {
@@ -465,6 +475,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case InstallationStepEnum.UpdateSurveyStatus:
         return TakeSurverWidget(
+          currentStatus: surveyStatus,
           surveyNoteTextController: surveyNoteTextController,
           surveyStatusSelectorController: surveyStatusSelectorController,
           onPressed: () {

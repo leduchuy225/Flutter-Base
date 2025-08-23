@@ -74,8 +74,11 @@ abstract class RepairRequestApi {
     @Part(name: 'report_ImageDivider[0]') File? report_ImageDivider,
     @Part(name: 'report_CableLengthStart[0]') File? report_CableLengthStart,
     @Part(name: 'report_CableLengthEnd[0]') File? report_CableLengthEnd,
-    @Part(name: 'List_ListError')
+    @Part(name: 'List_ListError', contentType: 'application/json')
     List<GetAccidentListModelResponse>? accidentList,
+    @Part(name: 'TechnicalStaffNote') String? technicalStaffNote,
+    @Part(name: 'Report_CorrectionMethod') String? reportCorrectionMethod,
+    @Part(name: 'Report_Distance') String? report_Distance,
   });
 
   @POST('/repairrequest/addnote')

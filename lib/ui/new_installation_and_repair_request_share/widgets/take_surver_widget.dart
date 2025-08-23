@@ -9,14 +9,31 @@ import '../../../widgets/text_field/text_field_controller.dart';
 import '../../../widgets/text_field/text_field_widget.dart';
 
 enum SurveyStatusEnum {
-  Done(id: SurverStatusValue.Done, name: 'DONE'),
-  Cancel(id: SurverStatusValue.Cancel, name: 'CANCEL'),
-  Pending(id: SurverStatusValue.Pending, name: 'PENDING');
+  Done(
+    name: 'DONE',
+    id: SurverStatusValue.Done,
+    description: 'Tiếp tục thực hiện yêu cầu',
+  ),
+  Cancel(
+    name: 'CANCEL',
+    description: 'Hủy yêu cầu',
+    id: SurverStatusValue.Cancel,
+  ),
+  Pending(
+    name: 'PENDING',
+    id: SurverStatusValue.Pending,
+    description: 'Tạm dừng yêu cầu',
+  );
 
   final int id;
   final String name;
+  final String description;
 
-  const SurveyStatusEnum({required this.id, required this.name});
+  const SurveyStatusEnum({
+    required this.id,
+    required this.name,
+    required this.description,
+  });
 }
 
 class SurverStatusValue {
@@ -27,11 +44,13 @@ class SurverStatusValue {
 
 class TakeSurverWidget extends StatelessWidget {
   final void Function() onPressed;
+  final SurveyStatusEnum? currentStatus;
   final MyTextFieldController surveyNoteTextController;
   final MySelectorController surveyStatusSelectorController;
 
   const TakeSurverWidget({
     super.key,
+    this.currentStatus,
     required this.onPressed,
     required this.surveyNoteTextController,
     required this.surveyStatusSelectorController,
@@ -49,10 +68,21 @@ class TakeSurverWidget extends StatelessWidget {
     return MyTexttile.card(
       title: 'Khảo sát công việc',
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Visibility(
+            visible: currentStatus != null,
+            child: Padding(
+              child: Text(
+                'Trạng thái: ${currentStatus?.name}',
+                style: AppTextStyles.body1.copyWith(color: AppColors.secondary),
+              ),
+              padding: const EdgeInsetsGeometry.symmetric(vertical: 10),
+            ),
+          ),
           AppStyles.pdt15,
           MySelector(
-            title: 'Trạng thái khảo sát',
+            title: 'Chọn trạng thái khảo sát',
             controller: surveyStatusSelectorController,
             data: MySelectorData(
               getFutureData: () async {
@@ -60,17 +90,17 @@ class TakeSurverWidget extends StatelessWidget {
                   MySelectorModel(
                     id: SurveyStatusEnum.Done.id,
                     name: SurveyStatusEnum.Done.name,
-                    description: 'Tiếp tục thực hiện yêu cầu',
+                    description: SurveyStatusEnum.Done.description,
                   ),
                   MySelectorModel(
-                    description: 'Hủy yêu cầu',
                     id: SurveyStatusEnum.Cancel.id,
                     name: SurveyStatusEnum.Cancel.name,
+                    description: SurveyStatusEnum.Cancel.description,
                   ),
                   MySelectorModel(
-                    description: 'Tạm dừng yêu cầu',
                     id: SurveyStatusEnum.Pending.id,
                     name: SurveyStatusEnum.Pending.name,
+                    description: SurveyStatusEnum.Pending.description,
                   ),
                 ];
               },

@@ -140,6 +140,8 @@ class NewInstallationDetailController
         data.listMbConnectionRequestMaterialViewModel ?? [],
       );
 
+      modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
+
       slidAndDividerController.data = UpdateDeviceResponse(
         slidCode: data.slidCode,
         deviceAcc: data.deviceAcc,
@@ -567,6 +569,9 @@ class NewInstallationDetailController
         .callApi();
 
     if (response.isSuccess) {
+      surveyNoteTextController.clear();
+      surveyStatusSelectorController.clear();
+
       detailRxData.value?.technicalStaffSurveyStatus = statusId;
 
       setIsRefreshValue();
@@ -586,6 +591,21 @@ class NewInstallationDetailController
         return SurveyStatusEnum.Pending;
       default:
         return null;
+    }
+  }
+
+  @override
+  Future getModemReplacementLog() async {
+    final body = {'id': id};
+
+    final response = await Get.find<InstallationApi>()
+        .getModemLog(body)
+        .callApi(isShowSuccessMessage: false);
+
+    final data = response.data?.model ?? [];
+
+    if (data.isNotEmpty) {
+      modemReplacementLogs.value = data;
     }
   }
 }

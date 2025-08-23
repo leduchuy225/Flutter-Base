@@ -24,7 +24,7 @@ class MySelectorController extends MyTextFieldController {
     final isDotAtStart = selectors.length > 1;
     text = selectors
         .map((element) {
-          return '${isDotAtStart ? '◦' : ''}  ${element.name} ${isNameWithDescription ? '- ${element.description}' : ''}'
+          return '${isDotAtStart ? '•' : ''}  ${element.name} ${isNameWithDescription ? '- ${element.description}' : ''}'
               .trim();
         })
         .join('\n');
