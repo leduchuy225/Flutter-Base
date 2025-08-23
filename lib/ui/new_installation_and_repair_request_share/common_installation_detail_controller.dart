@@ -69,7 +69,9 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final reportCableStartImageControler = FileCollectionController();
   final reportCableEndImageControler = FileCollectionController();
 
-  final technicalStaffSelectorController = MySelectorController();
+  final technicalStaffSelectorController = MySelectorController(
+    isNameWithDescription: true,
+  );
 
   final reportTypeSelectorController = MySelectorController();
   final reportDataController = SignReportFileDataController();
@@ -103,7 +105,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   TechnicalStaffListModelPayload get technicalStaffListModelPayload;
 
-  SurveyStatusEnum get surveyStatus;
+  SurveyStatusEnum? get surveyStatus;
 
   bool get isRefreshValue;
 
@@ -181,7 +183,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              isVisible: !isClosed,
+              isVisible: !isRequestClosed,
               step: InstallationStepEnum.AssignForStaff,
             ),
           ],
@@ -191,7 +193,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              isVisible: !isClosed,
+              isVisible: !isRequestClosed,
               step: InstallationStepEnum.MakeAppointment,
             ),
           ],
@@ -201,15 +203,18 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              isVisible: !isClosed,
+              isVisible: !isRequestClosed,
               step: InstallationStepEnum.MakeAppointment,
             ),
             getStepContent(
               context,
-              isVisible: !isClosed,
+              isVisible: !isRequestClosed,
               step: InstallationStepEnum.UpdateSurveyStatus,
             ),
-            buildSteps(context, step: 4),
+            Visibility(
+              child: buildSteps(context, step: 4),
+              visible: surveyStatus == SurveyStatusEnum.Done,
+            ),
           ],
         );
       case 4:
@@ -218,18 +223,23 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              // isVisible: !isClosed,
-              step: InstallationStepEnum.UpdateSurveyStatus,
-            ),
-            getStepContent(
-              context,
+              isViewOnly: isRequestClosed,
               step: InstallationStepEnum.UpdateSlidAndDivider,
               isVisible: serviceType == MBService.NewInstallation,
             ),
-            getStepContent(context, step: InstallationStepEnum.ReplaceModem),
-            getStepContent(context, step: InstallationStepEnum.UpdateMaterial),
             getStepContent(
               context,
+              isViewOnly: isRequestClosed,
+              step: InstallationStepEnum.ReplaceModem,
+            ),
+            getStepContent(
+              context,
+              isViewOnly: isRequestClosed,
+              step: InstallationStepEnum.UpdateMaterial,
+            ),
+            getStepContent(
+              context,
+              isViewOnly: isRequestClosed,
               step: InstallationStepEnum.InstallAtCustomerHouse,
               isVisible:
                   serviceType == MBService.RepairRequest ||
@@ -238,6 +248,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             ),
             getStepContent(
               context,
+              isViewOnly: isRequestClosed,
               step: InstallationStepEnum.SignReport,
               isVisible:
                   serviceType == MBService.RepairRequest ||
@@ -254,19 +265,21 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   Widget getStepContent(
     BuildContext context, {
     bool isVisible = true,
+    bool isViewOnly = false,
     required InstallationStepEnum step,
   }) {
     if (!isVisible) {
       return const SizedBox.shrink();
     }
     return Padding(
-      child: _getStepWidget(context, step: step),
       padding: const EdgeInsetsGeometry.only(bottom: 15),
+      child: _getStepWidget(context, step: step, isViewOnly: isViewOnly),
     );
   }
 
   Widget _getStepWidget(
     BuildContext context, {
+    bool isViewOnly = false,
     required InstallationStepEnum step,
   }) {
     switch (step) {
@@ -305,7 +318,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case InstallationStepEnum.InstallAtCustomerHouse:
         return Step3(
-          // isViewOnly: isClosed,
+          isViewOnly: isViewOnly,
           cableEndTextController: cableEndTextController,
           cableStartTextController: cableStartTextController,
           accidentsSelectorController: accidentsSelectorController,
@@ -334,6 +347,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
       case InstallationStepEnum.SignReport:
         return SignReportFileWidget(
           files: reportFiles,
+          isViewOnly: isViewOnly,
           reportDataController: reportDataController,
           getReportTypeList: getReportTypeList,
           staffSignatureController: staffSignatureController,
@@ -398,6 +412,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
       case InstallationStepEnum.UpdateMaterial:
         return MaterialSelectorWidget(
           id: id!,
+          isViewOnly: isViewOnly,
           deleteMaterialApi: deleteMaterialApi,
           updateMaterialApi: updateMaterialApi,
           controller: materialSelectorController,
@@ -406,6 +421,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         return SlidAndDividerWidget(
           id: id,
           countryId: countryId,
+          isViewOnly: isViewOnly,
           provinceId: provinceId,
           controller: slidAndDividerController,
           onSuccess: (response) {
@@ -414,20 +430,20 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case InstallationStepEnum.ReplaceModem:
         return ModemReplaceLogWidget(
+          isViewOnly: isViewOnly,
           oldModemTextController: oldModemTextController,
           newModemTextController: newModemTextController,
           isReplace: serviceType == MBService.RepairRequest,
-          onPressed: () {
+          onPressed: (isReplace) {
             if (!newModemTextController.checkIsNotEmpty()) {
               return;
             }
-            if (serviceType == MBService.RepairRequest &&
-                !oldModemTextController.checkIsNotEmpty()) {
+            if (isReplace && !oldModemTextController.checkIsNotEmpty()) {
               return;
             }
             MyDialog.alertDialog(
               okHandler: addModemReplacementLog,
-              message: 'Xác nhận thay thế modem ?',
+              message: 'Xác nhận ${isReplace ? 'thay thế' : 'lắp mới'} modem ?',
             );
           },
           onRightIconPressed: () {

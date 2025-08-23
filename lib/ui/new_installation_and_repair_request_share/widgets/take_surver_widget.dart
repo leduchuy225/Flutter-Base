@@ -9,14 +9,20 @@ import '../../../widgets/text_field/text_field_controller.dart';
 import '../../../widgets/text_field/text_field_widget.dart';
 
 enum SurveyStatusEnum {
-  Done(id: 1, name: 'DONE'),
-  Cancel(id: 2, name: 'CANCEL'),
-  Pending(id: 3, name: 'PENDING');
+  Done(id: SurverStatusValue.Done, name: 'DONE'),
+  Cancel(id: SurverStatusValue.Cancel, name: 'CANCEL'),
+  Pending(id: SurverStatusValue.Pending, name: 'PENDING');
 
   final int id;
   final String name;
 
   const SurveyStatusEnum({required this.id, required this.name});
+}
+
+class SurverStatusValue {
+  static const int Done = 1;
+  static const int Cancel = 2;
+  static const int Pending = 3;
 }
 
 class TakeSurverWidget extends StatelessWidget {

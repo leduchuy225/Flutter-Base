@@ -7,7 +7,6 @@ import '../animate/animate_controller.dart';
 import '../animate/animate_widget.dart';
 
 class MyTextField extends StatefulWidget {
-  final bool? enable;
   final bool readOnly;
   final int? maxLines;
   final bool isRequired;
@@ -25,7 +24,6 @@ class MyTextField extends StatefulWidget {
   const MyTextField({
     super.key,
     this.onTap,
-    this.enable,
     this.hintText,
     this.labelText,
     this.controller,

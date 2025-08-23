@@ -53,39 +53,43 @@ class CommonInstallationListScreen<T> extends StatelessWidget {
         ),
       ),
       body: Obx(() {
-        return CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 16,
-                  horizontal: AppStyles.horizontalPaddingValue,
-                ),
-                child: TitleNumberIndicator(
-                  title: 'Danh sách yêu cầu',
-                  number: (controller.pageState.items ?? []).length,
+        return Scrollbar(
+          thumbVisibility: true,
+          trackVisibility: true,
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: AppStyles.horizontalPaddingValue,
+                  ),
+                  child: TitleNumberIndicator(
+                    title: 'Danh sách yêu cầu',
+                    number: (controller.pageState.items ?? []).length,
+                  ),
                 ),
               ),
-            ),
-            PagedSliverList<int, T>(
-              state: controller.pageState,
-              fetchNextPage: fetchNextPage,
-              builderDelegate: PagedChildBuilderDelegate(
-                itemBuilder: (context, item, index) {
-                  return Padding(
-                    child: buildChild(item),
-                    padding: const EdgeInsetsGeometry.symmetric(
-                      vertical: 10,
-                      horizontal: AppStyles.horizontalPaddingValue,
-                    ),
-                  );
-                },
-                noItemsFoundIndicatorBuilder: (context) {
-                  return MyDataState.empty();
-                },
+              PagedSliverList<int, T>(
+                state: controller.pageState,
+                fetchNextPage: fetchNextPage,
+                builderDelegate: PagedChildBuilderDelegate(
+                  itemBuilder: (context, item, index) {
+                    return Padding(
+                      child: buildChild(item),
+                      padding: const EdgeInsetsGeometry.symmetric(
+                        vertical: 10,
+                        horizontal: AppStyles.horizontalPaddingValue,
+                      ),
+                    );
+                  },
+                  noItemsFoundIndicatorBuilder: (context) {
+                    return MyDataState.empty();
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       }),
     );

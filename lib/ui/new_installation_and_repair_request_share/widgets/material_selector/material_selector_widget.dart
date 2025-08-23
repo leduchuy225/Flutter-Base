@@ -21,6 +21,7 @@ import 'material_selector_controller.dart';
 
 class MaterialSelectorWidget extends StatefulWidget {
   final int id;
+  final bool isViewOnly;
   final MaterialSelectorController controller;
   final Future<BaseResponse> Function(Map<String, dynamic>) deleteMaterialApi;
   final Future<BaseResponse<UpdateMaterialResponse>> Function(
@@ -31,6 +32,7 @@ class MaterialSelectorWidget extends StatefulWidget {
   const MaterialSelectorWidget({
     super.key,
     required this.id,
+    this.isViewOnly = false,
     required this.controller,
     required this.deleteMaterialApi,
     required this.updateMaterialApi,
@@ -54,56 +56,61 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
         builder: (controller) {
           return Column(
             children: [
-              AppStyles.pdt15,
-              MySelector(
-                title: 'Danh sách vật tư',
-                controller: materialSeletorController,
-                suffixIcon: IconButton(
-                  icon: ValueListenableBuilder(
-                    valueListenable: materialSeletorController,
-                    builder: (context, _, _) {
-                      return Icon(
-                        Icons.add_circle,
-                        color: materialSeletorController.first == null
-                            ? AppColors.black
-                            : AppColors.primary,
-                      );
-                    },
+              Visibility(
+                visible: !widget.isViewOnly,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: MySelector(
+                    title: 'Danh sách vật tư',
+                    controller: materialSeletorController,
+                    suffixIcon: IconButton(
+                      icon: ValueListenableBuilder(
+                        valueListenable: materialSeletorController,
+                        builder: (context, _, _) {
+                          return Icon(
+                            Icons.add_circle,
+                            color: materialSeletorController.first == null
+                                ? AppColors.black
+                                : AppColors.primary,
+                          );
+                        },
+                      ),
+                      onPressed: () {
+                        if (materialSeletorController.checkIsNotEmpty()) {
+                          final item = materialSeletorController.first;
+                          controller.add(
+                            MaterialListModelResponse(
+                              materialId: item?.id,
+                              materialTitle: item?.name,
+                              unitIdTitle: item?.description,
+                            ),
+                          );
+                          materialSeletorController.clear();
+                        }
+                      },
+                    ),
+                    data: MySelectorData(
+                      cacheKey: 'MaterialList',
+                      excludeIds: controller.materialList.map((material) {
+                        return material.materialId;
+                      }).toList(),
+                      getFutureData: () async {
+                        final response = await Get.find<MaterialApi>()
+                            .getMaterialList()
+                            .callApi(
+                              isShowLoading: false,
+                              isShowSuccessMessage: false,
+                            );
+                        return (response.data?.material ?? []).map((element) {
+                          return MySelectorModel(
+                            id: element.id,
+                            name: element.title ?? '',
+                            description: element.unitIdTitle,
+                          );
+                        }).toList();
+                      },
+                    ),
                   ),
-                  onPressed: () {
-                    if (materialSeletorController.checkIsNotEmpty()) {
-                      final item = materialSeletorController.first;
-                      controller.add(
-                        MaterialListModelResponse(
-                          materialId: item?.id,
-                          materialTitle: item?.name,
-                          unitIdTitle: item?.description,
-                        ),
-                      );
-                      materialSeletorController.clear();
-                    }
-                  },
-                ),
-                data: MySelectorData(
-                  cacheKey: 'MaterialList',
-                  excludeIds: controller.materialList.map((material) {
-                    return material.materialId;
-                  }).toList(),
-                  getFutureData: () async {
-                    final response = await Get.find<MaterialApi>()
-                        .getMaterialList()
-                        .callApi(
-                          isShowLoading: false,
-                          isShowSuccessMessage: false,
-                        );
-                    return (response.data?.material ?? []).map((element) {
-                      return MySelectorModel(
-                        id: element.id,
-                        name: element.title ?? '',
-                        description: element.unitIdTitle,
-                      );
-                    }).toList();
-                  },
                 ),
               ),
               AppStyles.pdt10,
@@ -166,6 +173,7 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                           child: MyTextField(
                             hintText: 'SL',
                             controller: textController,
+                            readOnly: widget.isViewOnly,
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
                             onChanged: (text) {
@@ -185,33 +193,38 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                   ),
                 );
               }),
-              AppStyles.pdt10,
-              ElevatedButton(
-                child: const Text('Cập nhật'),
-                onPressed: () {
-                  MyDialog.alertDialog(
-                    message: 'Xác nhận muốn cập nhật số lượng vật tư ?',
-                    okHandler: () async {
-                      final body = UpdateMaterialPayload(
-                        id: widget.id,
-                        model: controller.materialList.map((material) {
-                          return UpdateMaterialModelPayload(
-                            id: material.id,
-                            materialId: material.materialId,
-                            quantity: material.quantity ?? 0,
+              Visibility(
+                visible: !widget.isViewOnly,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ElevatedButton(
+                    child: const Text('Cập nhật'),
+                    onPressed: () {
+                      MyDialog.alertDialog(
+                        message: 'Xác nhận muốn cập nhật số lượng vật tư ?',
+                        okHandler: () async {
+                          final body = UpdateMaterialPayload(
+                            id: widget.id,
+                            model: controller.materialList.map((material) {
+                              return UpdateMaterialModelPayload(
+                                id: material.id,
+                                materialId: material.materialId,
+                                quantity: material.quantity ?? 0,
+                              );
+                            }).toList(),
                           );
-                        }).toList(),
+
+                          final response = await widget.updateMaterialApi(body);
+                          final data = response.data?.model ?? [];
+
+                          if (response.isSuccess) {
+                            controller.replace(data);
+                          }
+                        },
                       );
-
-                      final response = await widget.updateMaterialApi(body);
-                      final data = response.data?.model ?? [];
-
-                      if (response.isSuccess) {
-                        controller.replace(data);
-                      }
                     },
-                  );
-                },
+                  ),
+                ),
               ),
               AppStyles.pdt15,
             ],

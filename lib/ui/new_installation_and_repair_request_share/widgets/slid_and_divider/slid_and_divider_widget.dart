@@ -10,6 +10,7 @@ class SlidAndDividerWidget extends StatelessWidget {
   final int? id;
   final int? countryId;
   final int? provinceId;
+  final bool isViewOnly;
   final SlidAndDividerController controller;
   final void Function(UpdateDeviceResponse?)? onSuccess;
 
@@ -19,6 +20,7 @@ class SlidAndDividerWidget extends StatelessWidget {
     this.countryId,
     this.onSuccess,
     this.provinceId,
+    this.isViewOnly = false,
     required this.controller,
   });
 
@@ -29,18 +31,21 @@ class SlidAndDividerWidget extends StatelessWidget {
       builder: (controller) {
         return MyTexttile.card(
           title: 'Thông tin thiết bị',
-          suffixHeader: InkWell(
-            child: const Icon(Icons.edit),
-            onTap: () async {
-              final result = await SlidAndDividerSelectorWidget.openDialog(
-                id: id,
-                onSuccess: onSuccess,
-                countryId: countryId,
-                provinceId: provinceId,
-                defaultData: controller.data,
-              );
-              controller.data = result;
-            },
+          suffixHeader: Visibility(
+            visible: !isViewOnly,
+            child: InkWell(
+              child: const Icon(Icons.edit),
+              onTap: () async {
+                final result = await SlidAndDividerSelectorWidget.openDialog(
+                  id: id,
+                  onSuccess: onSuccess,
+                  countryId: countryId,
+                  provinceId: provinceId,
+                  defaultData: controller.data,
+                );
+                controller.data = result;
+              },
+            ),
           ),
           items: [
             MyTexttileItem(

@@ -8,6 +8,7 @@ import 'selector_content/bottomsheet_selector_content_widget.dart';
 
 class MySelector extends StatefulWidget {
   final String title;
+  final bool readOnly;
   final Widget? suffixIcon;
   final MySelectorData data;
   final bool isMultipleSelect;
@@ -22,6 +23,7 @@ class MySelector extends StatefulWidget {
     required this.data,
     this.onBeginSelect,
     required this.title,
+    this.readOnly = false,
     this.isDismissOnSelect = true,
     this.isMultipleSelect = false,
   }) : super(key: key);
@@ -51,8 +53,11 @@ class _MySelectorState extends State<MySelector> {
       labelText: widget.title,
       controller: _mainController,
       suffixIcon: widget.suffixIcon,
-      prefixIcon: const Icon(Icons.arrow_drop_down),
+      prefixIcon: widget.readOnly ? null : const Icon(Icons.arrow_drop_down),
       onTap: () {
+        if (widget.readOnly) {
+          return;
+        }
         if (widget.onBeginSelect != null &&
             widget.onBeginSelect!(_mainController) == false) {
           return;

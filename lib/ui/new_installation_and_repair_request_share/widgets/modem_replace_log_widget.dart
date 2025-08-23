@@ -10,7 +10,8 @@ import '../../../widgets/text_field/text_field_widget.dart';
 
 class ModemReplaceLogWidget extends StatelessWidget {
   final bool isReplace;
-  final void Function() onPressed;
+  final bool isViewOnly;
+  final void Function(bool) onPressed;
   final void Function() onRightIconPressed;
   final MyTextFieldController oldModemTextController;
   final MyTextFieldController newModemTextController;
@@ -18,6 +19,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
   const ModemReplaceLogWidget({
     super.key,
     this.isReplace = true,
+    this.isViewOnly = false,
     required this.onPressed,
     required this.onRightIconPressed,
     required this.oldModemTextController,
@@ -32,29 +34,35 @@ class ModemReplaceLogWidget extends StatelessWidget {
         onTap: onRightIconPressed,
         child: const Icon(Icons.list),
       ),
-      child: Column(
-        children: [
-          AppStyles.pdt15,
-          Visibility(
-            visible: isReplace,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: MyTextField(
-                isRequired: true,
-                labelText: 'Modem cũ',
-                controller: oldModemTextController,
+      child: Visibility(
+        visible: !isViewOnly,
+        child: Column(
+          children: [
+            AppStyles.pdt15,
+            Visibility(
+              visible: isReplace,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: MyTextField(
+                  isRequired: true,
+                  labelText: 'Modem cũ',
+                  controller: oldModemTextController,
+                ),
               ),
             ),
-          ),
-          MyTextField(
-            isRequired: true,
-            labelText: 'Modem mới',
-            controller: newModemTextController,
-          ),
-          AppStyles.pdt20,
-          ElevatedButton(onPressed: onPressed, child: const Text('Cập nhật')),
-          AppStyles.pdt15,
-        ],
+            MyTextField(
+              isRequired: true,
+              labelText: 'Modem mới',
+              controller: newModemTextController,
+            ),
+            AppStyles.pdt20,
+            ElevatedButton(
+              onPressed: () => onPressed(isReplace),
+              child: const Text('Cập nhật'),
+            ),
+            AppStyles.pdt15,
+          ],
+        ),
       ),
     );
   }

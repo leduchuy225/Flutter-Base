@@ -35,6 +35,7 @@ class MyInterceptor extends Interceptor {
       _addOneMoreRetry(err);
 
       final options = Options(
+        contentType: 'application/json',
         method: err.requestOptions.method,
         headers: err.requestOptions.headers,
       );

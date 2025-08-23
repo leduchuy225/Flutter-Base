@@ -14,6 +14,7 @@ import 'report_file_item.dart';
 import 'sign_report_file_data_controller.dart';
 
 class SignReportFileWidget extends StatelessWidget {
+  final bool isViewOnly;
   final int reportSelectedIdToSign;
   final List<SignReportFileItemModel> files;
   final void Function() signReportFile;
@@ -28,6 +29,7 @@ class SignReportFileWidget extends StatelessWidget {
   const SignReportFileWidget({
     super.key,
     required this.files,
+    this.isViewOnly = false,
     required this.signReportFile,
     required this.reportDataController,
     required this.getReportTypeList,
@@ -166,36 +168,44 @@ class SignReportFileWidget extends StatelessWidget {
               ],
             ),
           ),
-          AppStyles.pdt15,
-          Text('Xem mẫu biên bản', style: AppTextStyles.body1),
-          AppStyles.pdt15,
-          MySelector(
-            title: 'Loại biên bản',
-            controller: reportTypeSelectorController,
-            data: MySelectorData(
-              getFutureData: getReportTypeList,
-              excludeIds: _reportSigned.map((report) {
-                return report.id;
-              }).toList(),
+          Visibility(
+            visible: !isViewOnly,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppStyles.pdt15,
+                Text('Xem mẫu biên bản', style: AppTextStyles.body1),
+                AppStyles.pdt15,
+                MySelector(
+                  title: 'Loại biên bản',
+                  controller: reportTypeSelectorController,
+                  data: MySelectorData(
+                    getFutureData: getReportTypeList,
+                    excludeIds: _reportSigned.map((report) {
+                      return report.id;
+                    }).toList(),
+                  ),
+                ),
+                AppStyles.pdt20,
+                ValueListenableBuilder(
+                  valueListenable: reportTypeSelectorController,
+                  builder: (context, value, child) {
+                    switch (reportTypeSelectorController.first?.id) {
+                      case ReportType.BBNT:
+                        return _buildBienBanNghiemThu(context);
+                      case ReportType.BBBG:
+                        return _buildBienBanBanGiao(context);
+                      default:
+                        return const SizedBox();
+                    }
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: previewReportFile,
+                  child: const Text('Lấy mẫu biên bản'),
+                ),
+              ],
             ),
-          ),
-          AppStyles.pdt20,
-          ValueListenableBuilder(
-            valueListenable: reportTypeSelectorController,
-            builder: (context, value, child) {
-              switch (reportTypeSelectorController.first?.id) {
-                case ReportType.BBNT:
-                  return _buildBienBanNghiemThu(context);
-                case ReportType.BBBG:
-                  return _buildBienBanBanGiao(context);
-                default:
-                  return const SizedBox();
-              }
-            },
-          ),
-          ElevatedButton(
-            onPressed: previewReportFile,
-            child: const Text('Lấy mẫu biên bản'),
           ),
           Visibility(
             visible: _reportNotSigned.isNotEmpty,
@@ -208,7 +218,7 @@ class SignReportFileWidget extends StatelessWidget {
                 ..._reportNotSigned.map((file) {
                   return ReportFileItem(
                     item: file,
-                    isSelectable: true,
+                    isSelectable: !isViewOnly,
                     onChanged: onReportSelected,
                     reportSelectedIdToSign: reportSelectedIdToSign,
                   );
@@ -217,7 +227,10 @@ class SignReportFileWidget extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: _reportNotSigned.isNotEmpty && reportSelectedIdToSign != 0,
+            visible:
+                !isViewOnly &&
+                _reportNotSigned.isNotEmpty &&
+                reportSelectedIdToSign != 0,
             child: Column(
               children: [
                 MyTabBar(

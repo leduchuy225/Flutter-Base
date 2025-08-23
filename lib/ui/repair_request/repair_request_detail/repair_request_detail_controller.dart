@@ -13,6 +13,7 @@ import '../../../core/services/cache_service.dart';
 import '../../../core/utils/utils.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
+import '../../../models/common/update_survey_payload.dart';
 import '../../../models/file_collection_model.dart';
 import '../../../models/installation/update_material_response.dart';
 import '../../../models/installation/view_installation_report_file_model_payload.dart';
@@ -122,6 +123,12 @@ class RepairRequestDetailController
       );
 
       modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
+
+      accidentsSelectorController.selectors = (data.listListError ?? []).map((
+        element,
+      ) {
+        return MySelectorModel(id: element.id, name: element.text ?? '');
+      }).toList();
 
       update();
     }
@@ -470,12 +477,38 @@ class RepairRequestDetailController
   bool get isRequestReadyToClose => detailData?.isCompletedStaffOn ?? false;
 
   @override
-  Future updateSurveyStatus() {
-    // TODO: implement updateSurveyStatus
-    throw UnimplementedError();
+  Future updateSurveyStatus() async {
+    final statusId = surveyStatusSelectorController.first?.id;
+    final body = UpdateSurveyPayload(
+      id: id,
+      status: statusId,
+      note: surveyNoteTextController.textTrim,
+    );
+
+    final response = await Get.find<RepairRequestApi>()
+        .updateSurveyStatus(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      detailRxData.value?.technicalStaffSurveyStatus = statusId;
+
+      setIsRefreshValue();
+
+      update();
+    }
   }
 
   @override
-  // TODO: implement surveyStatus
-  SurveyStatusEnum get surveyStatus => throw UnimplementedError();
+  SurveyStatusEnum? get surveyStatus {
+    switch (detailData?.technicalStaffSurveyStatus) {
+      case SurverStatusValue.Done:
+        return SurveyStatusEnum.Done;
+      case SurverStatusValue.Cancel:
+        return SurveyStatusEnum.Cancel;
+      case SurverStatusValue.Pending:
+        return SurveyStatusEnum.Pending;
+      default:
+        return null;
+    }
+  }
 }

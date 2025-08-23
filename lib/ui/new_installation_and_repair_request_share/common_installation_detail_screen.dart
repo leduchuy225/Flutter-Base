@@ -109,7 +109,7 @@ class CommonInstallationDetailScreen<
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Visibility(
-                        visible: controller.isClosed,
+                        visible: controller.isRequestClosed,
                         child: Padding(
                           padding: const EdgeInsetsGeometry.only(top: 20),
                           child: Center(
@@ -123,7 +123,9 @@ class CommonInstallationDetailScreen<
                         ),
                       ),
                       Visibility(
-                        visible: overdueTime.isNotEmpty,
+                        visible:
+                            overdueTime.isNotEmpty &&
+                            !controller.isRequestClosed,
                         child: Padding(
                           padding: const EdgeInsetsGeometry.only(top: 15),
                           child: Column(
@@ -205,7 +207,9 @@ class CommonInstallationDetailScreen<
                 ),
               ),
               Visibility(
-                visible: controller.isRequestReadyToClose,
+                visible:
+                    controller.isRequestReadyToClose &&
+                    !controller.isRequestClosed,
                 child: Padding(
                   padding: const EdgeInsetsGeometry.symmetric(
                     vertical: 16,

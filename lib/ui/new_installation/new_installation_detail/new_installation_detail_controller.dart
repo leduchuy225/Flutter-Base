@@ -551,15 +551,37 @@ class NewInstallationDetailController
 
   @override
   Future updateSurveyStatus() async {
+    final statusId = surveyStatusSelectorController.first?.id;
     final body = UpdateSurveyPayload(
       id: id,
+      status: statusId,
       note: surveyNoteTextController.textTrim,
-      status: surveyStatusSelectorController.first?.id,
     );
-    await Get.find<InstallationApi>().updateSurveyStatus(body).callApi();
+
+    final response = await Get.find<InstallationApi>()
+        .updateSurveyStatus(body)
+        .callApi();
+
+    if (response.isSuccess) {
+      detailRxData.value?.technicalStaffSurveyStatus = statusId;
+
+      setIsRefreshValue();
+
+      update();
+    }
   }
 
   @override
-  // TODO: implement surveyStatus
-  SurveyStatusEnum get surveyStatus => throw UnimplementedError();
+  SurveyStatusEnum? get surveyStatus {
+    switch (detailData?.technicalStaffSurveyStatus) {
+      case SurverStatusValue.Done:
+        return SurveyStatusEnum.Done;
+      case SurverStatusValue.Cancel:
+        return SurveyStatusEnum.Cancel;
+      case SurverStatusValue.Pending:
+        return SurveyStatusEnum.Pending;
+      default:
+        return null;
+    }
+  }
 }

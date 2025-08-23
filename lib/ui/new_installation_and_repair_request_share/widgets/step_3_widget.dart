@@ -58,6 +58,7 @@ class Step3 extends StatelessWidget {
               padding: const EdgeInsetsGeometry.only(bottom: 20),
               child: MySelector(
                 title: 'Loại sự cố',
+                readOnly: isViewOnly,
                 isMultipleSelect: true,
                 controller: accidentsSelectorController,
                 data: MySelectorData(
@@ -84,6 +85,7 @@ class Step3 extends StatelessWidget {
             children: [
               Expanded(
                 child: MyTextField(
+                  readOnly: isViewOnly,
                   labelText: 'Đầu sợi cáp',
                   keyboardType: TextInputType.number,
                   controller: cableStartTextController,
@@ -92,6 +94,7 @@ class Step3 extends StatelessWidget {
               AppStyles.pdl10,
               Expanded(
                 child: MyTextField(
+                  readOnly: isViewOnly,
                   labelText: 'Cuối sợi cáp',
                   keyboardType: TextInputType.number,
                   controller: cableEndTextController,
