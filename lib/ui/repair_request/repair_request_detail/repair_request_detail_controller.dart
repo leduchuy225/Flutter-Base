@@ -56,6 +56,7 @@ class RepairRequestDetailController
           SignReportFileItemModel(
             id: ReportType.BBNT,
             name: 'Biên bản mẫu sự cố',
+            pathName: data.reportProblem!,
             url: getFileLink(data.reportProblem)!,
             isSigned: data.reportProblemIsSet ?? false,
           ),
@@ -360,6 +361,7 @@ class RepairRequestDetailController
             url: urlFile,
             id: firstReportType?.id,
             name: firstReportType?.name ?? '',
+            pathName: response.data?.urlFile ?? '',
             isSigned: firstReportType?.extraData?['isSigned'] ?? false,
           ),
         );

@@ -56,6 +56,7 @@ class NewInstallationDetailController
         if (data.reportAcceptance != null)
           SignReportFileItemModel(
             id: ReportType.BBNT,
+            pathName: data.reportAcceptance!,
             url: getFileLink(data.reportAcceptance)!,
             name: 'Biên bản nghiệm thu FTTx với khách hàng',
             isSigned: data.reportAcceptanceIsSign ?? false,
@@ -64,6 +65,7 @@ class NewInstallationDetailController
           SignReportFileItemModel(
             id: ReportType.BBBG,
             name: 'Biên bản bàn giao thiết bị',
+            pathName: data.reportHandoverDevice!,
             url: getFileLink(data.reportHandoverDevice)!,
             isSigned: data.reportHandoverDeviceIsSign ?? false,
           ),
@@ -71,6 +73,7 @@ class NewInstallationDetailController
           SignReportFileItemModel(
             id: ReportType.BBKM,
             name: 'Biên bản kéo mới',
+            pathName: data.reportNew!,
             url: getFileLink(data.reportNew)!,
             isSigned: data.reportNewIsSet ?? false,
           ),
@@ -408,6 +411,7 @@ class NewInstallationDetailController
             url: urlFile,
             id: firstReportType?.id,
             name: firstReportType?.name ?? '',
+            pathName: response.data?.urlFile ?? '',
             isSigned: firstReportType?.extraData?['isSigned'] ?? false,
           ),
         );

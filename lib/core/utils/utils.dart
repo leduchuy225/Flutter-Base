@@ -4,7 +4,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
+import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:flutter_base/data/common_api.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -71,9 +74,6 @@ Future<void> launchMyURL(
     return;
   }
   try {
-    // if (data.startsWith('intent://')) {
-    //   data = data.replaceFirst('intent://', 'https://');
-    // }
     await launchUrlString(data, mode: mode);
   } catch (error) {
     MyDialog.snackbar(error.toString(), type: SnackbarType.WARNING);
@@ -135,4 +135,16 @@ void openLocationInMap({
   final String url =
       'https://www.google.com/maps/dir/?api=1&destination=${coordinates ?? '$latitude,$longitude'}&travelmode=driving';
   launchMyURL(url.replaceAll(' ', ''), mode: LaunchMode.externalApplication);
+}
+
+Future<String?> convertDocToPdf(String docPath) async {
+  final body = {'fileUrl': docPath};
+  final response = await Get.find<CommonApi>()
+      .convertDocToPdf(body)
+      .callApi(isShowSuccessMessage: false);
+
+  if (response.data is Map) {
+    return response.data['_resultPath'];
+  }
+  return null;
 }

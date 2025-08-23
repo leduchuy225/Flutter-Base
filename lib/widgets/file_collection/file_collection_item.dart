@@ -24,7 +24,7 @@ class FileCollectionItem extends StatelessWidget {
   static Widget buildChild(
     BuildContext context,
     FileCollectionModel item, {
-    Color? errorIconColor,
+    Color errorIconColor = AppColors.black,
     Widget Function(BuildContext, ImageProvider<Object>)? imageBuilder,
   }) {
     if (item.isLocal) {

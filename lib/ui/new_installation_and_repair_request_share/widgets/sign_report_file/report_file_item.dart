@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_base/widgets/pdf_viewer_screen.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/utils/utils.dart';
 
@@ -9,12 +10,14 @@ class SignReportFileItemModel {
 
   final int id;
   final String name;
+  final String pathName;
 
   SignReportFileItemModel({
     required this.id,
     required this.url,
     required this.name,
     this.isSigned = false,
+    required this.pathName,
   });
 }
 
@@ -36,7 +39,11 @@ class ReportFileItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        await launchMyURL(item.url, mode: LaunchMode.externalApplication);
+        final pdfPath = getFileLink(await convertDocToPdf(item.pathName));
+        if (pdfPath == null) {
+          return;
+        }
+        Get.to(() => PdfViewerScreen(pdfPath: pdfPath));
       },
       child: Card(
         child: ListTile(
