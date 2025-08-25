@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../models/accident/get_accident_list_model_response.dart';
 import '../models/accident/get_accident_list_response.dart';
 import '../models/base_response.dart';
 import '../models/common/installation_detail_payload.dart';
@@ -74,8 +72,7 @@ abstract class RepairRequestApi {
     @Part(name: 'report_ImageDivider[0]') File? report_ImageDivider,
     @Part(name: 'report_CableLengthStart[0]') File? report_CableLengthStart,
     @Part(name: 'report_CableLengthEnd[0]') File? report_CableLengthEnd,
-    @Part(name: 'List_ListError', contentType: 'application/json')
-    List<GetAccidentListModelResponse>? accidentList,
+    @Part(name: 'ListError') String? accidentListString,
     @Part(name: 'TechnicalStaffNote') String? technicalStaffNote,
     @Part(name: 'Report_CorrectionMethod') String? reportCorrectionMethod,
     @Part(name: 'Report_Distance') String? report_Distance,

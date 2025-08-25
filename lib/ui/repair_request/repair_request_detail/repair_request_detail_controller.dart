@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 
 import '../../../core/services/cache_service.dart';
 import '../../../core/utils/utils.dart';
-import '../../../models/accident/get_accident_list_model_response.dart';
 import '../../../models/common/installation_detail_payload.dart';
 import '../../../models/common/note_viewmodel_response.dart';
 import '../../../models/common/update_survey_payload.dart';
@@ -197,12 +196,9 @@ class RepairRequestDetailController
           report_ImageDivider: reportDividerImageControler.firstFile,
           technicalStaffNote: accidentDescriptionTextController.textTrim,
           reportCorrectionMethod: accidentSolutionTextController.textTrim,
-          accidentList: accidentsSelectorController.selectors.map((element) {
-            return GetAccidentListModelResponse(
-              id: element.id,
-              text: element.name,
-            );
-          }).toList(),
+          accidentListString: accidentsSelectorController.selectors
+              .map((element) => element.id)
+              .join(','),
           report_Distance:
               ((getNullOrNumber(cableEndTextController.textTrim) ?? 0) -
                       (getNullOrNumber(cableStartTextController.textTrim) ?? 0))

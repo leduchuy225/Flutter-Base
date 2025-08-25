@@ -239,7 +239,7 @@ class _RepairRequestApi implements RepairRequestApi {
     File? report_ImageDivider,
     File? report_CableLengthStart,
     File? report_CableLengthEnd,
-    List<GetAccidentListModelResponse>? accidentList,
+    String? accidentListString,
     String? technicalStaffNote,
     String? reportCorrectionMethod,
     String? report_Distance,
@@ -347,7 +347,9 @@ class _RepairRequestApi implements RepairRequestApi {
         );
       }
     }
-    _data.fields.add(MapEntry('List_ListError', jsonEncode(accidentList)));
+    if (accidentListString != null) {
+      _data.fields.add(MapEntry('ListError', accidentListString));
+    }
     if (technicalStaffNote != null) {
       _data.fields.add(MapEntry('TechnicalStaffNote', technicalStaffNote));
     }
