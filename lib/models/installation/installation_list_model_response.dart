@@ -52,6 +52,9 @@ class InstallationListModelResponse {
   String? createdByEmail;
   String? createdByUserName;
 
+  String? staffFullName;
+  String? staffPhoneNumber;
+
   InstallationListModelResponse({
     this.id,
     this.idLong,
@@ -105,6 +108,8 @@ class InstallationListModelResponse {
     this.serviceIdTitle,
     this.createdByEmail,
     this.createdByUserName,
+    this.staffFullName,
+    this.staffPhoneNumber,
   });
 
   factory InstallationListModelResponse.fromJson(Map<String, dynamic> json) {
@@ -164,6 +169,8 @@ class InstallationListModelResponse {
       serviceIdTitle: json['ServiceID_Title'] as String?,
       createdByEmail: json['CreatedBy_Email'] as String?,
       createdByUserName: json['CreatedBy_UserName'] as String?,
+      staffFullName: json['StaffFullName'] as String?,
+      staffPhoneNumber: json['StaffPhoneNumber'] as String?,
     );
   }
 
@@ -222,5 +229,7 @@ class InstallationListModelResponse {
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
+    'StaffFullName': staffFullName,
+    'StaffPhoneNumber': staffPhoneNumber,
   };
 }

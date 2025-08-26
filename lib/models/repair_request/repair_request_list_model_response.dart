@@ -51,6 +51,9 @@ class RepairRequestListModelResponse {
   String? createdByEmail;
   String? createdByUserName;
 
+  String? staffFullName;
+  String? staffPhoneNumber;
+
   RepairRequestListModelResponse({
     this.id,
     this.idLong,
@@ -103,6 +106,8 @@ class RepairRequestListModelResponse {
     this.serviceIdTitle,
     this.createdByEmail,
     this.createdByUserName,
+    this.staffFullName,
+    this.staffPhoneNumber,
   });
 
   factory RepairRequestListModelResponse.fromJson(Map<String, dynamic> json) {
@@ -160,6 +165,8 @@ class RepairRequestListModelResponse {
       serviceIdTitle: json['ServiceID_Title'] as String?,
       createdByEmail: json['CreatedBy_Email'] as String?,
       createdByUserName: json['CreatedBy_UserName'] as String?,
+      staffFullName: json['StaffFullName'] as String?,
+      staffPhoneNumber: json['StaffPhoneNumber'] as String?,
     );
   }
 
@@ -215,5 +222,7 @@ class RepairRequestListModelResponse {
     'ServiceID_Title': serviceIdTitle,
     'CreatedBy_Email': createdByEmail,
     'CreatedBy_UserName': createdByUserName,
+    'StaffFullName': staffFullName,
+    'StaffPhoneNumber': staffPhoneNumber,
   };
 }

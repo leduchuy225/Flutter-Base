@@ -60,8 +60,13 @@ class _NewInstallationDetailScreenState
                   ),
                 ),
                 MyTexttileItem(
-                  titleText: 'Người tạo',
-                  text: detailData?.createdByUserName,
+                  titleText: 'Tên người tạo',
+                  text: detailData?.staffFullName,
+                ),
+                MyTexttileItem(
+                  isPhoneNumber: true,
+                  titleText: 'SĐT người tạo',
+                  text: detailData?.staffPhoneNumber,
                 ),
                 MyTexttileItem(
                   titleText: 'Email người tạo',
@@ -71,13 +76,6 @@ class _NewInstallationDetailScreenState
                   titleText: 'Ngày tạo',
                   text: MyDatetimeUtils.formatDateFromAPI(
                     detailData?.createdDate,
-                    toFormat: MyDateFormatEnum.DATE_TIME24s,
-                  ),
-                ),
-                MyTexttileItem(
-                  titleText: 'Ngày HT dự kiến',
-                  text: MyDatetimeUtils.formatDateFromAPI(
-                    detailData?.expectedCompletionDate,
                     toFormat: MyDateFormatEnum.DATE_TIME24s,
                   ),
                 ),

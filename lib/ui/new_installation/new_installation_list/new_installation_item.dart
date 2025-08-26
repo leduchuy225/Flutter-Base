@@ -27,7 +27,13 @@ class NewInstallationItem extends StatelessWidget {
         MyTexttileItem(titleText: 'Gói cước', text: item.serviceIdTitle),
         MyTexttileItem(titleText: 'Tên KH', text: item.customersIdFullName),
         MyTexttileItem(titleText: 'Địa chỉ', text: item.address2),
-        MyTexttileItem(titleText: 'Người tạo', text: item.createdByUserName),
+        MyTexttileItem(titleText: 'Tên người tạo', text: item.staffFullName),
+        MyTexttileItem(
+          isPhoneNumber: true,
+          titleText: 'SĐT người tạo',
+          text: item.staffPhoneNumber,
+        ),
+        MyTexttileItem(titleText: 'Email người tạo', text: item.createdByEmail),
         MyTexttileItem(
           titleText: 'Ngày tạo',
           text: MyDatetimeUtils.formatDateFromAPI(item.createdDate),
