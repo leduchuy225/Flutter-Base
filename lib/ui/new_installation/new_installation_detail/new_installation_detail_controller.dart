@@ -216,8 +216,9 @@ class NewInstallationDetailController
     if (response.isSuccess) {
       setIsRefreshValue();
 
-      final step = response.data?.currentStep ?? 1;
-      currentRxStep.value = step.toInt();
+      currentRxStep.value = (response.data?.currentStep ?? 1).toInt();
+      detailRxData.value?.isCompletedStaffOn =
+          response.data?.isCompletedStaffOn;
 
       update();
     }
@@ -405,23 +406,25 @@ class NewInstallationDetailController
 
     if (urlFile != null) {
       final firstReportType = reportTypeSelectorController.first;
+      final isSignStatus = firstReportType?.extraData?['isSigned'] ?? false;
+
       if (reportFiles.every((report) {
         return report.id != currentReportIdToPreview;
       })) {
         reportFiles.add(
           SignReportFileItemModel(
             url: urlFile,
+            isSigned: isSignStatus,
             id: firstReportType?.id,
             name: firstReportType?.name ?? '',
             pathName: response.data?.urlFile ?? '',
-            isSigned: firstReportType?.extraData?['isSigned'] ?? false,
           ),
         );
       } else {
         reportFiles.forEach((report) {
           if (report.id == currentReportIdToPreview) {
             report.url = urlFile;
-            report.isSigned = firstReportType?.extraData?['isSigned'] ?? false;
+            report.isSigned = isSignStatus;
           }
         });
       }
@@ -452,6 +455,8 @@ class NewInstallationDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
+      detailRxData.value?.isCompletedStaffOn =
+          response.data?.isCompletedStaffOn;
       reportFiles.forEach((report) {
         if (report.id == currentReportIdToSign) {
           report.url = urlFile;

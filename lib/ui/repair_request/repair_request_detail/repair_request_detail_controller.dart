@@ -209,8 +209,9 @@ class RepairRequestDetailController
     if (response.isSuccess) {
       setIsRefreshValue();
 
-      final step = response.data?.currentStep ?? 1;
-      currentRxStep.value = step.toInt();
+      currentRxStep.value = (response.data?.currentStep ?? 1).toInt();
+      detailRxData.value?.isCompletedStaffOn =
+          response.data?.isCompletedStaffOn;
 
       update();
     }

@@ -21,7 +21,7 @@ class FileCollectionWidget extends StatefulWidget {
     super.key,
     this.limit,
     this.controller,
-    this.imageQuality = 50,
+    this.imageQuality = 30,
     this.isViewImageOnly = false,
     this.title = 'Tệp đính kèm',
   });

@@ -43,10 +43,6 @@ class _NewInstallationDetailScreenState
               title: 'Thông tin yêu cầu',
               items: [
                 MyTexttileItem(
-                  titleText: 'Gói cước',
-                  text: detailData?.serviceIdTitle,
-                ),
-                MyTexttileItem(
                   titleText: 'Tọa độ',
                   text: detailData?.googleMap,
                   trailing: InkWell(
@@ -85,11 +81,6 @@ class _NewInstallationDetailScreenState
             MyTexttile.card(
               title: 'Thông tin KH',
               items: [
-                MyTexttileItem(
-                  isCopy: true,
-                  titleText: 'Mã KH',
-                  text: customerData?.code,
-                ),
                 MyTexttileItem(
                   titleText: 'Tên KH',
                   text: customerData?.fullName,

@@ -24,7 +24,6 @@ class NewInstallationItem extends StatelessWidget {
       onTapViewDetail: onTapViewDetail,
       title: (item.idLong ?? '').toString(),
       items: [
-        MyTexttileItem(titleText: 'Gói cước', text: item.serviceIdTitle),
         MyTexttileItem(titleText: 'Tên KH', text: item.customersIdFullName),
         MyTexttileItem(titleText: 'Địa chỉ', text: item.address2),
         MyTexttileItem(titleText: 'Tên người tạo', text: item.staffFullName),

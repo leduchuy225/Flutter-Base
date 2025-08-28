@@ -43,7 +43,7 @@ class ReportFileItem extends StatelessWidget {
         if (pdfPath == null) {
           return;
         }
-        Get.to(() => PdfViewerScreen(pdfPath: pdfPath));
+        Get.to(() => PdfViewerScreen(pdfPath: pdfPath, title: item.name));
       },
       child: Card(
         child: ListTile(

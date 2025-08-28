@@ -61,6 +61,7 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: MySelector(
+                    isMultipleSelect: true,
                     title: 'Danh sách vật tư',
                     controller: materialSeletorController,
                     suffixIcon: IconButton(
@@ -77,13 +78,14 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                       ),
                       onPressed: () {
                         if (materialSeletorController.checkIsNotEmpty()) {
-                          final item = materialSeletorController.first;
-                          controller.add(
-                            MaterialListModelResponse(
-                              materialId: item?.id,
-                              materialTitle: item?.name,
-                              unitIdTitle: item?.description,
-                            ),
+                          controller.addAll(
+                            materialSeletorController.selectors.map((item) {
+                              return MaterialListModelResponse(
+                                materialId: item.id,
+                                materialTitle: item.name,
+                                unitIdTitle: item.description,
+                              );
+                            }).toList(),
                           );
                           materialSeletorController.clear();
                         }

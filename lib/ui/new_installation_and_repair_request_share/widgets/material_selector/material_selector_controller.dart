@@ -18,6 +18,11 @@ class MaterialSelectorController extends GetxController {
     update();
   }
 
+  void addAll(List<MaterialListModelResponse> datas) {
+    _materialListObs.addAll(datas);
+    update();
+  }
+
   void remove(MaterialListModelResponse data) {
     _materialListObs.value = _materialListObs.where((material) {
       return material.materialId != data.materialId;
