@@ -4,6 +4,7 @@ import 'package:flutter_base/ui/dev_screen.dart';
 import 'package:flutter_base/ui/divider/divider_list_screen.dart';
 import 'package:flutter_base/ui/repair_request/repair_request_list/repair_request_list_screen.dart';
 import 'package:flutter_base/ui/slid/slid_list_screen.dart';
+import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/function_item.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/webview/my_webview_screen.dart';
@@ -118,13 +119,18 @@ class _MainScreenState extends State<MainScreen> {
                 MainFunctionItem(
                   icon: Icons.map,
                   title: 'Bản đồ hạ tầng',
-                  onTap: () {
+                  onTap: () async {
+                    final mapURL = await Config().googleMapURL;
+                    if (mapURL == null) {
+                      MyDialog.snackbar(
+                        'Không tìm thấy liên kết bản đồ',
+                        type: SnackbarType.ERROR,
+                      );
+                      return;
+                    }
                     Get.to(
-                      () => const MyWebviewScreen(
-                        title: 'Bản đồ hạ tầng',
-                        url:
-                            'https://www.google.com/maps/d/u/0/viewer?mid=1Pct3jqqytWF5jv2oj9A_VYu3s0lC5-U&ll=20.807126436311332%2C106.77067050000002&z=11',
-                      ),
+                      () =>
+                          MyWebviewScreen(url: mapURL, title: 'Bản đồ hạ tầng'),
                     );
                   },
                 ),

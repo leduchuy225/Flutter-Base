@@ -1,0 +1,65 @@
+{
+  "__className": "divider_view_used_port_response",
+  "__path": "/lib/models/bo_chia",
+  "_model.divider_view_used_port_model_response": [
+    {
+      "Port": 1,
+      "Status": 0, // 0 chưa sủ dụng - 1 đã sử dụng
+      "IDLong": null,
+      "ListUsedPortModel": null
+    },
+    {
+      "Port": 2,
+      "Status": 0,
+      "IDLong": null,
+      "ListUsedPortModel.list_used_port_model_response": [ // Danh sách ID yêu cầu tạo mới sử dụng cổng của bộ chia
+        {
+          "ID": 3,
+          "IDLong": 250908121100957,
+          "Status": 2 // 2 ngừng sủ dụng - 1 đã sử dụng
+        },
+        {
+          "ID": 1,
+          "IDLong": 250908112247413,
+          "Status": 2
+        }
+      ]
+    },
+    {
+      "Port": 3,
+      "Status": 0,
+      "IDLong": null,
+      "ListUsedPortModel": null
+    },
+    {
+      "Port": 4,
+      "Status": 0,
+      "IDLong": null,
+      "ListUsedPortModel": null
+    },
+    {
+      "Port": 5,
+      "Status": 0,
+      "IDLong": null,
+      "ListUsedPortModel": null
+    },
+    {
+      "Port": 6,
+      "Status": 0,
+      "IDLong": null,
+      "ListUsedPortModel": null
+    },
+    {
+      "Port": 7,
+      "Status": 0,
+      "IDLong": null,
+      "ListUsedPortModel": null
+    },
+    {
+      "Port": 8,
+      "Status": 0,
+      "IDLong": null,
+      "ListUsedPortModel": null
+    }
+  ]
+}

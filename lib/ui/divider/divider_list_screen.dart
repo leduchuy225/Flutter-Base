@@ -136,12 +136,12 @@ class _DividerListScreenState extends State<DividerListScreen> {
                     ),
                     AppStyles.pdt20,
                     MyTextField(
-                      labelText: 'Mã OLT',
+                      labelText: 'Tên OLT',
                       controller: _oltIdTextController,
                     ),
                     AppStyles.pdt20,
                     MyTextField(
-                      labelText: 'Mã PON ID',
+                      labelText: 'Tên PON ID',
                       controller: _ponIdTextController,
                     ),
                     AppStyles.pdt20,

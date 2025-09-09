@@ -38,7 +38,9 @@ class _SecondFaStatusScreenState extends State<SecondFaStatusScreen> {
     _updateButtonController.isEnable.value = false;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final data = await Get.find<AuthenticationApi>().get2FaStatus().callApi();
+      final data = await Get.find<AuthenticationApi>().get2FaStatus().callApi(
+        isShowSuccessMessage: false,
+      );
       if (data.data == null) {
         return;
       }

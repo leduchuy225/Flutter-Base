@@ -1,4 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_base/core/extensions/future_extension.dart';
+import 'package:get/get.dart';
+
+import '../../data/common_api.dart';
 
 class MyStrings {
   MyStrings._();
@@ -51,6 +55,7 @@ class Config {
   Config._internal();
 
   String? _deviceToken;
+  String? _googleMapURL;
 
   bool get isProductionMode {
     return const String.fromEnvironment('ENV') == 'PROD';
@@ -68,5 +73,19 @@ class Config {
     _deviceToken = token;
 
     return _deviceToken;
+  }
+
+  Future<String?> get googleMapURL async {
+    if (_googleMapURL != null) {
+      return _googleMapURL;
+    }
+
+    final response = await Get.find<CommonApi>()
+        .getGeneralInformation()
+        .callApi(isShowSuccessMessage: false);
+
+    _googleMapURL = response.data?.model?.firstOrNull?.mbLinkGoogleMapFiber;
+
+    return _googleMapURL;
   }
 }

@@ -3,8 +3,15 @@ class SlidSearchSetPayload {
   String? code;
   String? oltCode;
   String? ponidCode;
+  bool? isOnline;
 
-  SlidSearchSetPayload({this.idLong, this.code, this.oltCode, this.ponidCode});
+  SlidSearchSetPayload({
+    this.idLong,
+    this.code,
+    this.oltCode,
+    this.ponidCode,
+    this.isOnline,
+  });
 
   factory SlidSearchSetPayload.fromJson(Map<String, dynamic> json) {
     return SlidSearchSetPayload(
@@ -12,6 +19,7 @@ class SlidSearchSetPayload {
       code: json['Code'] as String?,
       oltCode: json['OLT_Code'] as String?,
       ponidCode: json['PONID_Code'] as String?,
+      isOnline: json['IsOnline'] as bool?,
     );
   }
 
@@ -20,5 +28,6 @@ class SlidSearchSetPayload {
     'Code': code,
     'OLT_Code': oltCode,
     'PONID_Code': ponidCode,
+    'IsOnline': isOnline,
   };
 }

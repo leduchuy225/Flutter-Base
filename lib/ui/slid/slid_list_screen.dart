@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/core/utils/datetime_utils.dart';
 import 'package:flutter_base/data/slid_api.dart';
+import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/widgets/dialog/dialog_widget.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/my_texttile.dart';
+import 'package:flutter_base/widgets/selector/selector_controller.dart';
+import 'package:flutter_base/widgets/selector/selector_widget.dart';
 import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 import 'package:flutter_base/widgets/title_number_indicator.dart';
 import 'package:get/get.dart';
@@ -31,8 +34,17 @@ class _SlidListScreenState extends State<SlidListScreen> {
   final _slidCodeTextController = MyTextFieldController();
   final _oltCodeTextController = MyTextFieldController();
   final _ponIdCodeTextController = MyTextFieldController();
+  final _statusSelectorController = MySelectorController();
 
   var _state = PagingState<int, SlidListModelResponse>();
+
+  @override
+  void initState() {
+    super.initState();
+    _statusSelectorController.selectors = [
+      MySelectorModel(id: null, name: 'Tất cả'),
+    ];
+  }
 
   bool _getIsEmptySearchText({required bool isShowError}) {
     if (_slidIdTextController.textTrim.isNotEmpty ||
@@ -62,6 +74,7 @@ class _SlidListScreenState extends State<SlidListScreen> {
         idLong: _slidIdTextController.textTrim,
         oltCode: _oltCodeTextController.textTrim,
         ponidCode: _ponIdCodeTextController.textTrim,
+        isOnline: _statusSelectorController.first?.id,
       ),
     );
 
@@ -140,6 +153,20 @@ class _SlidListScreenState extends State<SlidListScreen> {
                     MyTextField(
                       labelText: 'Tên PON ID',
                       controller: _ponIdCodeTextController,
+                    ),
+                    AppStyles.pdt20,
+                    MySelector(
+                      title: 'Trạng thái',
+                      controller: _statusSelectorController,
+                      data: MySelectorData(
+                        getFutureData: () async {
+                          return [
+                            MySelectorModel(id: null, name: 'Tất cả'),
+                            MySelectorModel(id: true, name: 'Online'),
+                            MySelectorModel(id: false, name: 'Offline'),
+                          ];
+                        },
+                      ),
                     ),
                     AppStyles.pdt30,
                     ElevatedButton(
