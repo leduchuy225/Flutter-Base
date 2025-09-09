@@ -162,8 +162,8 @@ class _SlidListScreenState extends State<SlidListScreen> {
                         getFutureData: () async {
                           return [
                             MySelectorModel(id: null, name: 'Tất cả'),
-                            MySelectorModel(id: true, name: 'Online'),
-                            MySelectorModel(id: false, name: 'Offline'),
+                            MySelectorModel(id: true, name: 'ONLINE'),
+                            MySelectorModel(id: false, name: 'OFFLINE'),
                           ];
                         },
                       ),

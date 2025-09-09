@@ -18,6 +18,7 @@ import '../../models/bo_chia/bo_chia_search_set_payload.dart';
 import '../../models/common/search_default_model_payload.dart';
 import '../../widgets/data_state_widget.dart';
 import '../../widgets/text_field/text_field_controller.dart';
+import 'divider_used_port_dialog.dart';
 
 class DividerListScreen extends StatefulWidget {
   const DividerListScreen({super.key});
@@ -190,7 +191,11 @@ class _DividerListScreenState extends State<DividerListScreen> {
                     horizontal: AppStyles.horizontalPaddingValue,
                   ),
                   child: MyTexttile.card(
+                    isViewDetail: true,
                     title: '# ${item.code}',
+                    onTapViewDetail: () {
+                      DividerUsedPortDialog.openDialog(id: item.id);
+                    },
                     items: [
                       MyTexttileItem(
                         isCopy: true,

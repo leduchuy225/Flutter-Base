@@ -76,6 +76,7 @@ class MyTexttile extends StatelessWidget {
     bool isViewDetail = false,
     EdgeInsets? paddingHeader,
     List<MyTexttileItem>? items,
+    bool isHideIfTextNull = false,
     void Function()? onTapViewDetail,
     MainAxisSize mainAxisSize = MainAxisSize.max,
   }) {
@@ -138,6 +139,7 @@ class MyTexttile extends StatelessWidget {
                 maxLines: maxLines,
                 textFlex: textFlex,
                 labelFlex: labelFlex,
+                isHideIfTextNull: isHideIfTextNull,
               ),
         ),
       ],
@@ -148,6 +150,7 @@ class MyTexttile extends StatelessWidget {
     int? maxLines,
     int textFlex = 5,
     int labelFlex = 2,
+    bool isHideIfTextNull = false,
     required List<MyTexttileItem> items,
   }) {
     return Column(
@@ -166,6 +169,7 @@ class MyTexttile extends StatelessWidget {
           trailing: element.trailing,
           titleText: element.titleText,
           isShowCopyIcon: element.isCopy,
+          isHideIfTextNull: isHideIfTextNull,
           isPhoneNumber: element.isPhoneNumber,
           padding: const EdgeInsetsGeometry.symmetric(vertical: 6),
         );
