@@ -131,7 +131,7 @@ class Step3 extends StatelessWidget {
           AppStyles.pdt10,
           FileCollectionWidget(
             limit: 1,
-            title: 'Ảnh module',
+            title: 'Ảnh modem',
             isViewImageOnly: isViewOnly,
             controller: technicalStaffModuleImageControler,
           ),

@@ -36,7 +36,7 @@ class MyDatetimeUtils {
 
   static String? formatDateFromAPI(
     String? date, {
-    MyDateFormatEnum toFormat = MyDateFormatEnum.DATE,
+    MyDateFormatEnum toFormat = MyDateFormatEnum.DATE_TIME24s,
   }) {
     if (date == null) {
       return null;
@@ -49,7 +49,7 @@ class MyDatetimeUtils {
 
   static String? formatDate(
     DateTime? date, {
-    MyDateFormatEnum toFormat = MyDateFormatEnum.DATE,
+    MyDateFormatEnum toFormat = MyDateFormatEnum.DATE_TIME24s,
   }) {
     if (date == null) {
       return null;
