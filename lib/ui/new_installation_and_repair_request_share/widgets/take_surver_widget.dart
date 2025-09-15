@@ -84,6 +84,7 @@ class TakeSurverWidget extends StatelessWidget {
           MySelector(
             title: 'Chọn trạng thái khảo sát',
             controller: surveyStatusSelectorController,
+            validations: const [MyValidation.checkIsNotEmpty],
             data: MySelectorData(
               getFutureData: () async {
                 return [
@@ -118,6 +119,7 @@ class TakeSurverWidget extends StatelessWidget {
                     isRequired: true,
                     labelText: 'Ghi chú khảo sát',
                     controller: surveyNoteTextController,
+                    validations: const [MyValidation.checkIsNotEmpty],
                   ),
                 );
               }

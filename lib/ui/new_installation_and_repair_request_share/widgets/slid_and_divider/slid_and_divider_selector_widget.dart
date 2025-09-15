@@ -131,6 +131,7 @@ class _SlidAndDividerSelectorWidgetState
                   MySelector(
                     title: 'OLT',
                     controller: _oltSelectorController,
+                    validations: const [MyValidation.checkIsNotEmpty],
                     data: MySelectorData(
                       getFutureData: () async {
                         final body = {'ProvinceID': widget.provinceId};
@@ -154,8 +155,9 @@ class _SlidAndDividerSelectorWidgetState
                   MySelector(
                     title: 'PON ID',
                     controller: _ponIdSelectorController,
+                    validations: const [MyValidation.checkIsNotEmpty],
                     onBeginSelect: (controller) {
-                      if (!_oltSelectorController.checkIsNotEmpty()) {
+                      if (!_oltSelectorController.checkValidation()) {
                         return false;
                       }
                       return true;
@@ -185,8 +187,9 @@ class _SlidAndDividerSelectorWidgetState
                   MySelector(
                     title: 'SLID',
                     controller: _slidSelectorController,
+                    validations: const [MyValidation.checkIsNotEmpty],
                     onBeginSelect: (controller) {
-                      if (!_ponIdSelectorController.checkIsNotEmpty()) {
+                      if (!_ponIdSelectorController.checkValidation()) {
                         return false;
                       }
                       return true;
@@ -211,8 +214,9 @@ class _SlidAndDividerSelectorWidgetState
                   MySelector(
                     title: 'Bộ chia',
                     controller: _dividerSelectorController,
+                    validations: const [MyValidation.checkIsNotEmpty],
                     onBeginSelect: (controller) {
-                      if (!_ponIdSelectorController.checkIsNotEmpty()) {
+                      if (!_ponIdSelectorController.checkValidation()) {
                         return false;
                       }
                       return true;
@@ -239,7 +243,7 @@ class _SlidAndDividerSelectorWidgetState
                     title: 'Port',
                     controller: _portSelectorController,
                     onBeginSelect: (controller) {
-                      if (!_dividerSelectorController.checkIsNotEmpty()) {
+                      if (!_dividerSelectorController.checkValidation()) {
                         return false;
                       }
                       return true;

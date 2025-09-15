@@ -25,6 +25,7 @@ class Step2 extends StatelessWidget {
           MyTextField(
             controller: step2NoteTextController,
             labelText: 'Lịch hẹn với khách',
+            validations: const [MyValidation.checkIsNotEmpty],
           ),
           AppStyles.pdt20,
           ElevatedButton(onPressed: onPressed, child: const Text('Cập nhật')),

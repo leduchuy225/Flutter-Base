@@ -55,6 +55,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   obscureText: value,
                   labelText: 'Mật khẩu hiện tại',
                   controller: _currentPasswordController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                   suffixIcon: IconButton(
                     icon: _buildIcon(value),
                     onPressed: () {
@@ -72,6 +73,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   obscureText: value,
                   labelText: 'Mật khẩu mới',
                   controller: _firstNewPasswordController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                   suffixIcon: IconButton(
                     icon: _buildIcon(value),
                     onPressed: () {
@@ -89,6 +91,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                   obscureText: value,
                   labelText: 'Nhập lại mật khẩu mới',
                   controller: _secondNewPasswordController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                   suffixIcon: IconButton(
                     icon: _buildIcon(value),
                     onPressed: () {
@@ -109,9 +112,9 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
         bottomChild: ElevatedButton(
           child: const Text('Lưu thay đổi'),
           onPressed: () async {
-            if (!_currentPasswordController.checkIsNotEmpty() ||
-                !_firstNewPasswordController.checkIsNotEmpty() ||
-                !_secondNewPasswordController.checkIsNotEmpty()) {
+            if (!_currentPasswordController.checkValidation() ||
+                !_firstNewPasswordController.checkValidation() ||
+                !_secondNewPasswordController.checkValidation()) {
               return;
             }
             if (_secondNewPasswordController.text !=

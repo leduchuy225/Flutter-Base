@@ -47,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
           MyTextField(
             labelText: 'Tên đăng nhập',
             controller: _useNameController,
+            validations: const [MyValidation.checkIsNotEmpty],
           ),
           AppStyles.pdt20,
           ValueListenableBuilder(
@@ -56,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: value,
                 labelText: 'Mật khẩu',
                 controller: _passwordController,
+                validations: const [MyValidation.checkIsNotEmpty],
                 suffixIcon: IconButton(
                   onPressed: () {
                     _obscurePasswordNotifier.value = !value;
@@ -88,8 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
       bottomChild: ElevatedButton(
         child: const Text('Đăng nhập'),
         onPressed: () async {
-          if (!_useNameController.checkIsNotEmpty() ||
-              !_passwordController.checkIsNotEmpty()) {
+          if (!_useNameController.checkValidation() ||
+              !_passwordController.checkValidation()) {
             return;
           }
 

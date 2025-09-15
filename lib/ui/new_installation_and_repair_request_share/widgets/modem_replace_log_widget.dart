@@ -47,6 +47,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
                   isRequired: true,
                   labelText: 'Modem cũ',
                   controller: oldModemTextController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                 ),
               ),
             ),
@@ -54,6 +55,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
               isRequired: true,
               labelText: 'Modem mới',
               controller: newModemTextController,
+              validations: const [MyValidation.checkIsNotEmpty],
             ),
             AppStyles.pdt20,
             ElevatedButton(

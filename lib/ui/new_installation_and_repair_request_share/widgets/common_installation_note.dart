@@ -48,6 +48,7 @@ class CommonInstallationNote extends StatelessWidget {
                   isRequired: true,
                   labelText: 'Ghi chú',
                   controller: noteTextController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                   suffixIcon: InkWell(
                     onTap: onPressed,
                     child: const Icon(Icons.send, color: AppColors.primary),

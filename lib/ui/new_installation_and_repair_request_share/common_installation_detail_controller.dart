@@ -298,7 +298,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             if (id == null) {
               return;
             }
-            if (!technicalStaffSelectorController.checkIsNotEmpty()) {
+            if (!technicalStaffSelectorController.checkValidation()) {
               return;
             }
             MyDialog.alertDialog(
@@ -314,7 +314,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             if (id == null) {
               return;
             }
-            if (!step2NoteTextController.checkIsNotEmpty()) {
+            if (!step2NoteTextController.checkValidation()) {
               return;
             }
             MyDialog.alertDialog(
@@ -344,7 +344,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             if (id == null) {
               return;
             }
-            if (!step3NoteTextController.checkIsNotEmpty()) {
+            if (!step3NoteTextController.checkValidation()) {
               return;
             }
             MyDialog.alertDialog(
@@ -444,10 +444,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           newModemTextController: newModemTextController,
           isReplace: serviceType == MBService.RepairRequest,
           onPressed: (isReplace) {
-            if (!newModemTextController.checkIsNotEmpty()) {
+            if (!newModemTextController.checkValidation()) {
               return;
             }
-            if (isReplace && !oldModemTextController.checkIsNotEmpty()) {
+            if (isReplace && !oldModemTextController.checkValidation()) {
               return;
             }
             MyDialog.alertDialog(
@@ -479,13 +479,13 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           surveyNoteTextController: surveyNoteTextController,
           surveyStatusSelectorController: surveyStatusSelectorController,
           onPressed: () {
-            if (!surveyStatusSelectorController.checkIsNotEmpty()) {
+            if (!surveyStatusSelectorController.checkValidation()) {
               return;
             }
             if (TakeSurverWidget.getIsNoteRequired(
                   surveyStatusSelectorController.first?.id,
                 ) &&
-                !surveyNoteTextController.checkIsNotEmpty()) {
+                !surveyNoteTextController.checkValidation()) {
               return;
             }
             MyDialog.alertDialog(

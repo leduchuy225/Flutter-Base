@@ -14,6 +14,7 @@ class MySelector extends StatefulWidget {
   final bool isMultipleSelect;
   final bool isDismissOnSelect;
   final MySelectorController? controller;
+  final List<String? Function(String)>? validations;
   final bool Function(MySelectorController)? onBeginSelect;
 
   const MySelector({
@@ -26,6 +27,7 @@ class MySelector extends StatefulWidget {
     this.readOnly = false,
     this.isDismissOnSelect = true,
     this.isMultipleSelect = false,
+    this.validations,
   }) : super(key: key);
 
   @override
@@ -53,6 +55,7 @@ class _MySelectorState extends State<MySelector> {
       labelText: widget.title,
       controller: _mainController,
       suffixIcon: widget.suffixIcon,
+      validations: widget.validations,
       prefixIcon: widget.readOnly ? null : const Icon(Icons.arrow_drop_down),
       onTap: () {
         if (widget.readOnly) {

@@ -34,6 +34,7 @@ class OverdueReasonWidget extends StatelessWidget {
           MyTextField(
             controller: noteTextController,
             labelText: 'Nội dung giải trình',
+            validations: const [MyValidation.checkIsNotEmpty],
           ),
           AppStyles.pdt20,
           ElevatedButton(onPressed: onPressed, child: const Text('Cập nhật')),

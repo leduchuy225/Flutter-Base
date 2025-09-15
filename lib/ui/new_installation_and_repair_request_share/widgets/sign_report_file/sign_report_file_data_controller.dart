@@ -19,35 +19,35 @@ class SignReportFileDataController {
   final bbbgStatusTextController = MyTextFieldController();
 
   bool checkBbntIsValid() {
-    if (!bbntEmailTextController.checkIsNotEmpty()) {
+    if (!bbntEmailTextController.checkValidation()) {
       return false;
     }
-    if (!bbntAccountTextController.checkIsNotEmpty()) {
+    if (!bbntAccountTextController.checkValidation()) {
       return false;
     }
-    if (!bbntPasswordTextController.checkIsNotEmpty()) {
+    if (!bbntPasswordTextController.checkValidation()) {
       return false;
     }
-    if (!bbntIpV4TextController.checkIsNotEmpty()) {
+    if (!bbntIpV4TextController.checkValidation()) {
       return false;
     }
-    if (!bbntServiceQualityTextController.checkIsNotEmpty()) {
+    if (!bbntServiceQualityTextController.checkValidation()) {
       return false;
     }
     return true;
   }
 
   bool checkBbbgIsValid() {
-    if (!bbbgNameTextController.checkIsNotEmpty()) {
+    if (!bbbgNameTextController.checkValidation()) {
       return false;
     }
-    if (!bbbgStatictisTextController.checkIsNotEmpty()) {
+    if (!bbbgStatictisTextController.checkValidation()) {
       return false;
     }
-    if (!bbbgAmountTextController.checkIsNotEmpty()) {
+    if (!bbbgAmountTextController.checkValidation()) {
       return false;
     }
-    if (!bbbgStatusTextController.checkIsNotEmpty()) {
+    if (!bbbgStatusTextController.checkValidation()) {
       return false;
     }
     return true;

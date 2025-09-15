@@ -64,6 +64,7 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                     isMultipleSelect: true,
                     title: 'Danh sách vật tư',
                     controller: materialSeletorController,
+                    validations: const [MyValidation.checkIsNotEmpty],
                     suffixIcon: IconButton(
                       icon: ValueListenableBuilder(
                         valueListenable: materialSeletorController,
@@ -77,7 +78,7 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
                         },
                       ),
                       onPressed: () {
-                        if (materialSeletorController.checkIsNotEmpty()) {
+                        if (materialSeletorController.checkValidation()) {
                           controller.addAll(
                             materialSeletorController.selectors.map((item) {
                               return MaterialListModelResponse(

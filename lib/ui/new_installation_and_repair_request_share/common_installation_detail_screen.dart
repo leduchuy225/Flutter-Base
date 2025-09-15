@@ -51,7 +51,7 @@ class CommonInstallationDetailScreen<
                       if (controller.id == null) {
                         return;
                       }
-                      if (!controller.noteTextController.checkIsNotEmpty()) {
+                      if (!controller.noteTextController.checkValidation()) {
                         return;
                       }
                       MyDialog.alertDialog(
@@ -80,7 +80,7 @@ class CommonInstallationDetailScreen<
                     if (controller.id == null) {
                       return;
                     }
-                    if (!controller.closeNoteTextController.checkIsNotEmpty()) {
+                    if (!controller.closeNoteTextController.checkValidation()) {
                       return;
                     }
                     MyDialog.alertDialog(
@@ -151,7 +151,7 @@ class CommonInstallationDetailScreen<
                                     return;
                                   }
                                   if (!controller.overdueNoteTextController
-                                      .checkIsNotEmpty()) {
+                                      .checkValidation()) {
                                     return;
                                   }
                                   MyDialog.alertDialog(

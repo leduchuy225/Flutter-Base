@@ -56,12 +56,12 @@ class _NewInstallationDetailScreenState
                   ),
                 ),
                 MyTexttileItem(
-                  titleText: 'Tên người tạo',
+                  titleText: 'Tên người yêu cầu',
                   text: detailData?.staffFullName,
                 ),
                 MyTexttileItem(
                   isPhoneNumber: true,
-                  titleText: 'SĐT người tạo',
+                  titleText: 'SĐT người yêu cầu',
                   text: detailData?.staffPhoneNumber,
                 ),
                 MyTexttileItem(

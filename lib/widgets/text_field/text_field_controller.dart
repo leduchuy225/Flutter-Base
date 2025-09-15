@@ -2,6 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/const/constants.dart';
 import 'package:get/get_utils/get_utils.dart';
 
+class MyValidation {
+  MyValidation._();
+
+  static String? checkIsNotEmpty(String text) {
+    if (text.isNotEmpty) {
+      return null;
+    }
+    return MyStrings.noInput;
+  }
+
+  static String? checkIsPhoneNumber(String text) {
+    final value = GetUtils.isPhoneNumber(text);
+    if (value) {
+      return null;
+    }
+    return 'Số điện thoại không đúng định dạng';
+  }
+
+  static String? checkIsEmail(String text) {
+    final value = GetUtils.isEmail(text);
+    if (value) {
+      return null;
+    }
+    return 'Email không đúng định dạng';
+  }
+
+  static String? checkIsNumericOnly(String text) {
+    final value = GetUtils.isNumericOnly(text);
+    if (value) {
+      return null;
+    }
+    return 'Chuỗi chứa ký tự không phải số';
+  }
+}
+
 class MyTextFieldController extends TextEditingController {
   var state = ValueNotifier(const MyTextFieldValue());
 
@@ -13,38 +48,11 @@ class MyTextFieldController extends TextEditingController {
     return text.trim();
   }
 
-  bool checkIsNotEmpty() {
-    if (textTrim.isNotEmpty) {
+  bool checkValidation() {
+    if (isValid) {
       return true;
     }
-    shake(errorTexts: [MyStrings.noInput]);
-    return false;
-  }
-
-  bool checkIsPhoneNumber() {
-    final value = GetUtils.isPhoneNumber(textTrim);
-    if (value) {
-      return true;
-    }
-    shake(errorTexts: ['Số điện thoại không đúng định dạng']);
-    return false;
-  }
-
-  bool checkIsEmail() {
-    final value = GetUtils.isEmail(textTrim);
-    if (value) {
-      return true;
-    }
-    shake(errorTexts: ['Email không đúng định dạng']);
-    return false;
-  }
-
-  bool checkIsNumericOnly() {
-    final value = GetUtils.isNumericOnly(textTrim);
-    if (value) {
-      return true;
-    }
-    shake(errorTexts: ['Chuỗi chứa ký tự không phải số']);
+    shake(errorTexts: errorTexts ?? []);
     return false;
   }
 
@@ -54,6 +62,14 @@ class MyTextFieldController extends TextEditingController {
 
   set isEnable(bool value) {
     state.value = state.value.copyWith(isEnable: value);
+  }
+
+  bool get isValid {
+    return state.value.isValid;
+  }
+
+  set isValid(bool value) {
+    state.value = state.value.copyWith(isValid: value);
   }
 
   List<String>? get errorTexts {
@@ -66,13 +82,23 @@ class MyTextFieldController extends TextEditingController {
 }
 
 class MyTextFieldValue {
+  final bool isValid;
   final bool isEnable;
   final List<String>? errorTexts;
 
-  const MyTextFieldValue({this.errorTexts, this.isEnable = true});
+  const MyTextFieldValue({
+    this.errorTexts,
+    this.isValid = true,
+    this.isEnable = true,
+  });
 
-  MyTextFieldValue copyWith({bool? isEnable, List<String>? errorTexts}) {
+  MyTextFieldValue copyWith({
+    bool? isEnable,
+    bool? isValid,
+    List<String>? errorTexts,
+  }) {
     return MyTextFieldValue(
+      isValid: isValid ?? this.isValid,
       isEnable: isEnable ?? this.isEnable,
       errorTexts: errorTexts ?? this.errorTexts,
     );

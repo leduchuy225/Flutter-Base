@@ -30,14 +30,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           AppStyles.pdt20,
           const Text('Mật khẩu mới sẽ được gửi qua email'),
           AppStyles.pdt30,
-          MyTextField(labelText: 'Email', controller: _usernameController),
+          MyTextField(
+            labelText: 'Email',
+            controller: _usernameController,
+            validations: const [
+              MyValidation.checkIsNotEmpty,
+              MyValidation.checkIsEmail,
+            ],
+          ),
         ],
       ),
       bottomChild: ElevatedButton(
         child: const Text('Xác nhận'),
         onPressed: () async {
-          if (!_usernameController.checkIsNotEmpty() ||
-              !_usernameController.checkIsEmail()) {
+          if (!_usernameController.checkValidation()) {
             return;
           }
 

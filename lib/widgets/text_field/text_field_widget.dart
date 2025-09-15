@@ -18,8 +18,9 @@ class MyTextField extends StatefulWidget {
   final TextAlign textAlign;
   final void Function()? onTap;
   final TextInputType? keyboardType;
-  final MyTextFieldController? controller;
   final void Function(String)? onChanged;
+  final MyTextFieldController? controller;
+  final List<String? Function(String)>? validations;
 
   const MyTextField({
     super.key,
@@ -36,6 +37,7 @@ class MyTextField extends StatefulWidget {
     this.prefixIcon,
     this.keyboardType,
     this.textAlign = TextAlign.start,
+    this.validations,
   });
 
   @override
@@ -80,10 +82,29 @@ class _MyTextFieldState extends State<MyTextField> {
             readOnly: widget.readOnly,
             controller: _mainController,
             textAlign: widget.textAlign,
-            onChanged: widget.onChanged,
             obscureText: widget.obscureText,
             keyboardType: widget.keyboardType,
             maxLines: widget.obscureText ? 1 : widget.maxLines,
+            onChanged: (value) {
+              final isValid = (widget.validations ?? []).every((validation) {
+                final errorText = validation(_mainController.textTrim);
+                if (errorText == null) {
+                  return true;
+                }
+                _mainController.errorTexts = [errorText];
+                return false;
+              });
+
+              _mainController.isValid = isValid;
+
+              if (_mainController.isValid) {
+                _mainController.errorTexts?.clear();
+              }
+
+              if (widget.onChanged != null) {
+                widget.onChanged!(value);
+              }
+            },
             decoration: InputDecoration(
               suffixIcon: widget.suffixIcon,
               prefixIcon: widget.prefixIcon,
@@ -120,6 +141,9 @@ class _MyTextFieldState extends State<MyTextField> {
 
 String? getErrorText(List<String>? errorTexts) {
   if (errorTexts == null) {
+    return null;
+  }
+  if (errorTexts.isEmpty) {
     return null;
   }
   return errorTexts.reduce((value, element) => '$value\n$element');

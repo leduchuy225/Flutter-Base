@@ -179,6 +179,7 @@ class Step3 extends StatelessWidget {
                   isRequired: true,
                   labelText: 'Báo cáo công việc',
                   controller: step3NoteTextController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                 ),
                 AppStyles.pdt20,
                 ElevatedButton(

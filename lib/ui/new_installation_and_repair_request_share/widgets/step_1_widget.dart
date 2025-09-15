@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/installation_api.dart';
 import 'package:flutter_base/widgets/selector/selector_widget.dart';
+import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../models/base_selector.dart';
@@ -33,6 +34,7 @@ class Step1 extends StatelessWidget {
           MySelector(
             title: 'Nhân viên kĩ thuật',
             controller: technicalStaffSelectorController,
+            validations: const [MyValidation.checkIsNotEmpty],
             data: MySelectorData(
               getFutureData: () async {
                 final response = await Get.find<InstallationApi>()

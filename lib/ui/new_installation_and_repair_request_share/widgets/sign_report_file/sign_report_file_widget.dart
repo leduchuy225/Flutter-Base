@@ -10,6 +10,7 @@ import '../../../../widgets/datetime_picker/datetime_picker_widget.dart';
 import '../../../../widgets/my_tab_bar.dart';
 import '../../../../widgets/my_texttile.dart';
 import '../../../../widgets/selector/selector_controller.dart';
+import '../../../../widgets/text_field/text_field_controller.dart';
 import 'report_file_item.dart';
 import 'sign_report_file_data_controller.dart';
 
@@ -74,26 +75,31 @@ class SignReportFileWidget extends StatelessWidget {
       children: [
         MyTextField(
           labelText: 'Email của KH',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbntEmailTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Tài khoản',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbntAccountTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Mật khẩu',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbntPasswordTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'IP v4',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbntIpV4TextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Chất lượng dịch vụ',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbntServiceQualityTextController,
         ),
         AppStyles.pdt20,
@@ -111,22 +117,26 @@ class SignReportFileWidget extends StatelessWidget {
       children: [
         MyTextField(
           labelText: 'Tên thiết bị',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbbgNameTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Thông số',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbbgStatictisTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Số lượng',
           keyboardType: TextInputType.number,
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbbgAmountTextController,
         ),
         AppStyles.pdt20,
         MyTextField(
           labelText: 'Hiện trạng',
+          validations: const [MyValidation.checkIsNotEmpty],
           controller: reportDataController.bbbgStatusTextController,
         ),
         AppStyles.pdt20,

@@ -32,6 +32,7 @@ class RequestCancellation extends StatelessWidget {
               isRequired: true,
               labelText: 'Ghi chú',
               controller: closeNoteTextController,
+              validations: const [MyValidation.checkIsNotEmpty],
             ),
             AppStyles.pdt20,
             ElevatedButton(
