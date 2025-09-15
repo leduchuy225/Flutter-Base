@@ -71,6 +71,7 @@ dependencies:
   webview_flutter: ^4.13.0
   flutter_cached_pdfview: ^0.4.3
   firebase_crashlytics: ^4.3.10
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -142,3 +143,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
