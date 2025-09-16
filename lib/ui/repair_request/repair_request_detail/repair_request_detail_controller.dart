@@ -549,4 +549,8 @@ class RepairRequestDetailController
       modemReplacementLogs.value = data;
     }
   }
+
+  @override
+  String? get technicalStaffReportCompletedDate =>
+      detailData?.technicalStaffReportCompletedDate;
 }

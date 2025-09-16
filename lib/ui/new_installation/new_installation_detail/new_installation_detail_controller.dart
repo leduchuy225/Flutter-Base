@@ -613,4 +613,8 @@ class NewInstallationDetailController
       modemReplacementLogs.value = data;
     }
   }
+
+  @override
+  String? get technicalStaffReportCompletedDate =>
+      detailData?.technicalStaffReportCompletedDate;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base/core/utils/datetime_utils.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/overdue_reason_widget.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/request_cancellation_widget.dart';
@@ -215,21 +216,39 @@ class CommonInstallationDetailScreen<
                     vertical: 16,
                     horizontal: 16,
                   ),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all<Color>(
-                        AppColors.mobifoneRandom8,
+                  child: Column(
+                    children: [
+                      Visibility(
+                        visible:
+                            controller.technicalStaffReportCompletedDate !=
+                            null,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            'Đã hoàn thành yêu cầu vào lúc ${MyDatetimeUtils.formatDateFromAPI(controller.technicalStaffReportCompletedDate)}',
+                            style: AppTextStyles.body2.copyWith(
+                              color: AppColors.error,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      MyDialog.alertDialog(
-                        message: 'Xác nhận hoàn thành yêu cầu ?',
-                        okHandler: () {
-                          controller.completeRquest(context);
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all<Color>(
+                            AppColors.mobifoneRandom8,
+                          ),
+                        ),
+                        onPressed: () {
+                          MyDialog.alertDialog(
+                            message: 'Xác nhận hoàn thành yêu cầu ?',
+                            okHandler: () {
+                              controller.completeRquest(context);
+                            },
+                          );
                         },
-                      );
-                    },
-                    child: const Text('Hoàn thành yêu cầu'),
+                        child: const Text('Hoàn thành yêu cầu'),
+                      ),
+                    ],
                   ),
                 ),
               ),

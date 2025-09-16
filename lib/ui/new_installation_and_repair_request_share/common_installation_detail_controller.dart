@@ -106,6 +106,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   String? get expectedCompletionDate;
 
+  String? get technicalStaffReportCompletedDate;
+
   TechnicalStaffListModelPayload get technicalStaffListModelPayload;
 
   SurveyStatusEnum? get surveyStatus;
@@ -344,7 +346,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             if (id == null) {
               return;
             }
-            if (!step3NoteTextController.checkValidation()) {
+            if (!accidentsSelectorController.checkValidation() ||
+                !accidentDescriptionTextController.checkValidation() ||
+                !accidentSolutionTextController.checkValidation() ||
+                !step3NoteTextController.checkValidation()) {
               return;
             }
             MyDialog.alertDialog(

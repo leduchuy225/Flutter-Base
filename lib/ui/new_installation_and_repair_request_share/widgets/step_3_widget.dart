@@ -68,6 +68,7 @@ class Step3 extends StatelessWidget {
                 readOnly: isViewOnly,
                 isMultipleSelect: true,
                 controller: accidentsSelectorController,
+                validations: const [MyValidation.checkIsNotEmpty],
                 data: MySelectorData(
                   cacheKey: 'AccidentList',
                   getFutureData: () async {
@@ -96,12 +97,14 @@ class Step3 extends StatelessWidget {
                   readOnly: isViewOnly,
                   labelText: 'Mô tả chi tiết lỗi',
                   controller: accidentDescriptionTextController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                 ),
                 AppStyles.pdt20,
                 MyTextField(
                   readOnly: isViewOnly,
                   labelText: 'Cách giải quyết',
                   controller: accidentSolutionTextController,
+                  validations: const [MyValidation.checkIsNotEmpty],
                 ),
                 AppStyles.pdt20,
               ],
