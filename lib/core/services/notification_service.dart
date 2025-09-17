@@ -108,7 +108,7 @@ class NotificationService {
     void Function(NotificationResponse)? onDidReceiveNotificationResponse,
   }) async {
     const initializationSettingsAndroid = AndroidInitializationSettings(
-      '@mipmap/ic_launcher',
+      '@mipmap/launcher_icon',
     );
 
     const initializationSettings = InitializationSettings(

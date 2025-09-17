@@ -135,6 +135,9 @@ class RepairRequestDetailController
       accidentDescriptionTextController.text = data.technicalStaffNote ?? '';
       accidentSolutionTextController.text = data.reportCorrectionMethod ?? '';
 
+      isViewOnlyModeRxData.value =
+          isRequestClosed || technicalStaffReportCompletedDate != null;
+
       update();
     }
   }

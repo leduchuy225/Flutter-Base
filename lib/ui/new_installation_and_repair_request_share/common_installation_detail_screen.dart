@@ -110,7 +110,7 @@ class CommonInstallationDetailScreen<
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Visibility(
-                        visible: controller.isRequestClosed,
+                        visible: controller.isViewOnlyModeRxData.value,
                         child: Padding(
                           padding: const EdgeInsetsGeometry.only(top: 20),
                           child: Center(
@@ -220,8 +220,9 @@ class CommonInstallationDetailScreen<
                     children: [
                       Visibility(
                         visible:
+                            controller.isViewOnlyModeRxData.value &&
                             controller.technicalStaffReportCompletedDate !=
-                            null,
+                                null,
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Text(
@@ -239,6 +240,11 @@ class CommonInstallationDetailScreen<
                           ),
                         ),
                         onPressed: () {
+                          if (controller.isViewOnlyModeRxData.value) {
+                            controller.isViewOnlyModeRxData.value = false;
+                            controller.update();
+                            return;
+                          }
                           MyDialog.alertDialog(
                             message: 'Xác nhận hoàn thành yêu cầu ?',
                             okHandler: () {
@@ -246,7 +252,11 @@ class CommonInstallationDetailScreen<
                             },
                           );
                         },
-                        child: const Text('Hoàn thành yêu cầu'),
+                        child: Text(
+                          controller.isViewOnlyModeRxData.value
+                              ? 'Mở lại yêu cầu'
+                              : 'Hoàn thành yêu cầu',
+                        ),
                       ),
                     ],
                   ),

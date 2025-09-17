@@ -49,6 +49,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final noteListRxData = RxList<NoteViewmodelResponse>([]);
   final overdueNoteListRxData = RxList<NoteViewmodelResponse>([]);
 
+  final isViewOnlyModeRxData = RxBool(false);
+
   final noteTextController = MyTextFieldController();
   final overdueNoteTextController = MyTextFieldController();
 
@@ -192,7 +194,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              isVisible: !isRequestClosed,
+              isVisible: !isViewOnlyModeRxData.value,
               step: InstallationStepEnum.AssignForStaff,
             ),
           ],
@@ -202,7 +204,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              isVisible: !isRequestClosed,
+              isVisible: !isViewOnlyModeRxData.value,
               step: InstallationStepEnum.MakeAppointment,
             ),
           ],
@@ -213,14 +215,16 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             getStepContent(
               context,
               isVisible:
-                  !isRequestClosed && surveyStatus != SurveyStatusEnum.Done,
+                  !isViewOnlyModeRxData.value &&
+                  surveyStatus != SurveyStatusEnum.Done,
               step: InstallationStepEnum.MakeAppointment,
             ),
             getStepContent(
               context,
               step: InstallationStepEnum.UpdateSurveyStatus,
               isVisible:
-                  !isRequestClosed && surveyStatus != SurveyStatusEnum.Done,
+                  !isViewOnlyModeRxData.value &&
+                  surveyStatus != SurveyStatusEnum.Done,
             ),
             Visibility(
               child: buildSteps(context, step: 4),
@@ -234,23 +238,23 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           children: [
             getStepContent(
               context,
-              isViewOnly: isRequestClosed,
+              isViewOnly: isViewOnlyModeRxData.value,
               step: InstallationStepEnum.UpdateSlidAndDivider,
               isVisible: serviceType == MBService.NewInstallation,
             ),
             getStepContent(
               context,
-              isViewOnly: isRequestClosed,
+              isViewOnly: isViewOnlyModeRxData.value,
               step: InstallationStepEnum.ReplaceModem,
             ),
             getStepContent(
               context,
-              isViewOnly: isRequestClosed,
+              isViewOnly: isViewOnlyModeRxData.value,
               step: InstallationStepEnum.UpdateMaterial,
             ),
             getStepContent(
               context,
-              isViewOnly: isRequestClosed,
+              isViewOnly: isViewOnlyModeRxData.value,
               step: InstallationStepEnum.InstallAtCustomerHouse,
               isVisible:
                   serviceType == MBService.RepairRequest ||
@@ -259,7 +263,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             ),
             getStepContent(
               context,
-              isViewOnly: isRequestClosed,
+              isViewOnly: isViewOnlyModeRxData.value,
               step: InstallationStepEnum.SignReport,
               isVisible:
                   serviceType == MBService.RepairRequest ||

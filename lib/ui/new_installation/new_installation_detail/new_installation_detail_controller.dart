@@ -151,6 +151,9 @@ class NewInstallationDetailController
         dividerCode: data.dividerCode,
       );
 
+      isViewOnlyModeRxData.value =
+          isRequestClosed || technicalStaffReportCompletedDate != null;
+
       update();
     }
   }

@@ -67,7 +67,7 @@ class Step2 extends StatelessWidget {
           AppStyles.pdt20,
           ElevatedButton(
             onPressed: onPressed,
-            child: Text(lastestNote == null ? 'Cập nhật' : 'Hẹn lại'),
+            child: Text(lastestNote == null ? 'Cập nhật' : 'Hẹn lại KH'),
           ),
           AppStyles.pdt15,
         ],

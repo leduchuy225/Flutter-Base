@@ -97,7 +97,7 @@ class _MyTextFieldState extends State<MyTextField> {
               });
 
               if (isValid) {
-                _mainController.errorTexts?.clear();
+                _mainController.errorTexts = [];
               }
 
               if (widget.onChanged != null) {
