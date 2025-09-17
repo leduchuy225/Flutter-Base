@@ -16,6 +16,8 @@ class MyStrings {
 
   static const String baseURL =
       'https://mbf.hig.asia'; // 'https://jsonplaceholder.typicode.com';
+
+  static const String appointmentPrefix = 'ĐẶT HẸN:';
 }
 
 class MyStatus {

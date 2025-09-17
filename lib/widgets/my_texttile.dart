@@ -19,11 +19,14 @@ class MyTexttileItem {
   final Widget? child;
   final Widget? trailing;
 
+  final TextStyle? textStyle;
+
   MyTexttileItem({
     this.text,
     this.child,
     this.trailing,
     this.titleText,
+    this.textStyle,
     this.isCopy = false,
     this.isHide = false,
     this.isPhoneNumber = false,
@@ -168,6 +171,7 @@ class MyTexttile extends StatelessWidget {
           labelFlex: labelFlex,
           trailing: element.trailing,
           titleText: element.titleText,
+          textStyle: element.textStyle,
           isShowCopyIcon: element.isCopy,
           isHideIfTextNull: isHideIfTextNull,
           isPhoneNumber: element.isPhoneNumber,

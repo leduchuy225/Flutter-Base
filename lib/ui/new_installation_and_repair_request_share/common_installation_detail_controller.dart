@@ -118,6 +118,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   bool get isRequestReadyToClose;
 
+  List<RepairRequestGetModemLogModelResponse> get modemLogs;
+
   void setIsRefreshValue();
 
   Future getDetailData();
@@ -311,6 +313,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case InstallationStepEnum.MakeAppointment:
         return Step2(
+          notes: noteListRxData,
           step2NoteTextController: step2NoteTextController,
           onPressed: () {
             if (id == null) {
@@ -444,6 +447,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         );
       case InstallationStepEnum.ReplaceModem:
         return ModemReplaceLogWidget(
+          modemLogs: modemLogs,
           isViewOnly: isViewOnly,
           oldModemTextController: oldModemTextController,
           newModemTextController: newModemTextController,

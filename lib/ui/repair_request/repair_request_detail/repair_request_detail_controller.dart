@@ -6,6 +6,7 @@ import 'package:flutter_base/models/base_response.dart';
 import 'package:flutter_base/models/base_selector.dart';
 import 'package:flutter_base/models/common/technical_staff_list_model_payload.dart';
 import 'package:flutter_base/models/installation/update_material_payload.dart';
+import 'package:flutter_base/models/repair_request/repair_request_get_modem_log_model_response.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/take_surver_widget.dart';
 import 'package:get/get.dart';
 
@@ -160,7 +161,11 @@ class RepairRequestDetailController
 
   @override
   Future updateStep3() async {
-    final body = {'id': id, 'note': step2NoteTextController.textTrim};
+    final body = {
+      'id': id,
+      'note':
+          '${MyStrings.appointmentPrefix} ${step2NoteTextController.textTrim}',
+    };
     final response = await Get.find<RepairRequestApi>()
         .updateRepairRequestStep3(body)
         .callApi();
@@ -174,6 +179,8 @@ class RepairRequestDetailController
       currentRxStep.value = step.toInt();
 
       step2NoteTextController.clear();
+
+      await getNoteList();
 
       update();
     }
@@ -553,4 +560,8 @@ class RepairRequestDetailController
   @override
   String? get technicalStaffReportCompletedDate =>
       detailData?.technicalStaffReportCompletedDate;
+
+  @override
+  List<RepairRequestGetModemLogModelResponse> get modemLogs =>
+      detailData?.listMbModemLogViewModel ?? [];
 }

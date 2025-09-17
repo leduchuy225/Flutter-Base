@@ -40,6 +40,7 @@ class MyValidation {
 class MyTextFieldController extends TextEditingController {
   var state = ValueNotifier(const MyTextFieldValue());
 
+  late List<String? Function(String)>? validations;
   late void Function({List<String> errorTexts}) shake;
 
   MyTextFieldController();
@@ -49,6 +50,14 @@ class MyTextFieldController extends TextEditingController {
   }
 
   bool checkValidation() {
+    final isValid = (validations ?? []).every((validation) {
+      final errorText = validation(textTrim);
+      if (errorText == null) {
+        return true;
+      }
+      errorTexts = [errorText];
+      return false;
+    });
     if (isValid) {
       return true;
     }
@@ -64,14 +73,6 @@ class MyTextFieldController extends TextEditingController {
     state.value = state.value.copyWith(isEnable: value);
   }
 
-  bool get isValid {
-    return state.value.isValid;
-  }
-
-  set isValid(bool value) {
-    state.value = state.value.copyWith(isValid: value);
-  }
-
   List<String>? get errorTexts {
     return state.value.errorTexts;
   }
@@ -82,15 +83,10 @@ class MyTextFieldController extends TextEditingController {
 }
 
 class MyTextFieldValue {
-  final bool isValid;
   final bool isEnable;
   final List<String>? errorTexts;
 
-  const MyTextFieldValue({
-    this.errorTexts,
-    this.isValid = true,
-    this.isEnable = true,
-  });
+  const MyTextFieldValue({this.errorTexts, this.isEnable = true});
 
   MyTextFieldValue copyWith({
     bool? isEnable,
@@ -98,7 +94,6 @@ class MyTextFieldValue {
     List<String>? errorTexts,
   }) {
     return MyTextFieldValue(
-      isValid: isValid ?? this.isValid,
       isEnable: isEnable ?? this.isEnable,
       errorTexts: errorTexts ?? this.errorTexts,
     );

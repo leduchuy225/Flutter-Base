@@ -66,6 +66,7 @@ class _MyTextFieldState extends State<MyTextField> {
       _controller = MyTextFieldController();
     }
     _mainController.shake = shake;
+    _mainController.validations = widget.validations;
   }
 
   @override
@@ -95,9 +96,7 @@ class _MyTextFieldState extends State<MyTextField> {
                 return false;
               });
 
-              _mainController.isValid = isValid;
-
-              if (_mainController.isValid) {
+              if (isValid) {
                 _mainController.errorTexts?.clear();
               }
 
