@@ -53,7 +53,7 @@ class RepairRequestDetailController
           data.listMbRepairRequestOverdueViewModel ?? [];
 
       reportFiles.addAll([
-        if (data.reportProblem != null)
+        if ((data.reportProblem ?? '').isNotEmpty)
           SignReportFileItemModel(
             id: ReportType.BBNT,
             name: 'Biên bản mẫu sự cố',
@@ -63,7 +63,7 @@ class RepairRequestDetailController
           ),
       ]);
 
-      if (data.technicalStaffModuleImage != null) {
+      if ((data.technicalStaffModuleImage ?? '').isNotEmpty) {
         technicalStaffModuleImageControler.files.value = [
           FileCollectionModel(
             fileName: data.technicalStaffModuleImage!,
@@ -72,7 +72,7 @@ class RepairRequestDetailController
         ];
       }
 
-      if (data.technicalStaffImage != null) {
+      if ((data.technicalStaffImage ?? '').isNotEmpty) {
         technicalStaffImageControler.files.value = [
           FileCollectionModel(
             fileName: data.technicalStaffImage!,
@@ -81,7 +81,7 @@ class RepairRequestDetailController
         ];
       }
 
-      if (data.technicalStaffTestImage != null) {
+      if ((data.technicalStaffTestImage ?? '').isNotEmpty) {
         technicalStaffTestImageControler.files.value = [
           FileCollectionModel(
             fileName: data.technicalStaffTestImage!,
@@ -90,7 +90,7 @@ class RepairRequestDetailController
         ];
       }
 
-      if (data.reportImageDivider != null) {
+      if ((data.reportImageDivider ?? '').isNotEmpty) {
         reportDividerImageControler.files.value = [
           FileCollectionModel(
             fileName: data.reportImageDivider!,
@@ -99,7 +99,7 @@ class RepairRequestDetailController
         ];
       }
 
-      if (data.reportCableLengthStart != null) {
+      if ((data.reportCableLengthStart ?? '').isNotEmpty) {
         reportCableStartImageControler.files.value = [
           FileCollectionModel(
             fileName: data.reportCableLengthStart!,
@@ -108,7 +108,7 @@ class RepairRequestDetailController
         ];
       }
 
-      if (data.reportCableLengthEnd != null) {
+      if ((data.reportCableLengthEnd ?? '').isNotEmpty) {
         reportCableEndImageControler.files.value = [
           FileCollectionModel(
             fileName: data.reportCableLengthEnd!,
@@ -218,6 +218,10 @@ class RepairRequestDetailController
 
     if (response.isSuccess) {
       setIsRefreshValue();
+
+      if (isReportTaskAgain && reportFiles.isNotEmpty) {
+        reportFiles.clear();
+      }
 
       currentRxStep.value = (response.data?.currentStep ?? 1).toInt();
       detailRxData.value?.isCompletedStaffOn =

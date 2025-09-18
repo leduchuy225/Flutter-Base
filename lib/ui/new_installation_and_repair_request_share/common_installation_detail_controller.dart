@@ -33,8 +33,6 @@ import 'widgets/step_2_widget.dart';
 import 'widgets/step_3_widget.dart';
 
 abstract class CommonInstallationDetailController<T> extends GetxController {
-  final int totalSteps = 5;
-
   final userInfor = Get.find<UserService>().userInfor;
 
   final currentRxStep = RxInt(1);
@@ -162,6 +160,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   );
 
   int get currentReportIdToSign => reportSelectedIdToSign.value;
+
+  bool get isReportTaskAgain => currentRxStep.value >= 4;
 
   dynamic get currentReportIdToPreview =>
       reportTypeSelectorController.first?.id;
@@ -349,6 +349,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           step3NoteTextController: step3NoteTextController,
           accidentSolutionTextController: accidentSolutionTextController,
           accidentDescriptionTextController: accidentDescriptionTextController,
+          buttonLabel: isReportTaskAgain ? 'Báo cáo lại CV' : 'Báo cáo CV',
           onPressed: () {
             if (id == null) {
               return;
@@ -361,7 +362,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
             }
             MyDialog.alertDialog(
               okHandler: uploadStep4,
-              message: 'Xác nhận báo cáo công việc ?',
+              message:
+                  'Xác nhận báo cáo công việc ? ${isReportTaskAgain ? '\n\nKhi báo cáo lại các biên bản sẽ bị xóa.' : ''}',
             );
           },
         );

@@ -55,7 +55,7 @@ class RepairRequestItem extends StatelessWidget {
   String get tagText {
     return item.isClosed == true
         ? 'Đã đóng'
-        : 'Bước ${item.currentStep}${item.technicalStaffReportCompletedDate == null ? '' : ' - DONE'}';
+        : 'Bước ${item.currentStep}${item.technicalStaffReportCompletedDate == null ? '' : ' - HT'}';
   }
 
   @override

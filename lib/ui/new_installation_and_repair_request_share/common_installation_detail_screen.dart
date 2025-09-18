@@ -220,9 +220,8 @@ class CommonInstallationDetailScreen<
                     children: [
                       Visibility(
                         visible:
-                            controller.isViewOnlyModeRxData.value &&
-                            controller.technicalStaffReportCompletedDate !=
-                                null,
+                            (controller.technicalStaffReportCompletedDate ?? '')
+                                .isNotEmpty,
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Text(
@@ -233,29 +232,42 @@ class CommonInstallationDetailScreen<
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(
-                            AppColors.mobifoneRandom8,
+                      Visibility(
+                        visible:
+                            !controller.isViewOnlyModeRxData.value &&
+                            (controller.technicalStaffReportCompletedDate ?? '')
+                                .isEmpty,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all<Color>(
+                              AppColors.mobifoneRandom8,
+                            ),
                           ),
+                          onPressed: () {
+                            MyDialog.alertDialog(
+                              message: 'Xác nhận hoàn thành yêu cầu ?',
+                              okHandler: () {
+                                controller.completeRquest(context);
+                              },
+                            );
+                          },
+                          child: const Text('Hoàn thành yêu cầu'),
                         ),
-                        onPressed: () {
-                          if (controller.isViewOnlyModeRxData.value) {
+                      ),
+                      Visibility(
+                        visible: controller.isViewOnlyModeRxData.value,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all<Color>(
+                              AppColors.mobifoneRandom8,
+                            ),
+                          ),
+                          onPressed: () {
                             controller.isViewOnlyModeRxData.value = false;
                             controller.update();
                             return;
-                          }
-                          MyDialog.alertDialog(
-                            message: 'Xác nhận hoàn thành yêu cầu ?',
-                            okHandler: () {
-                              controller.completeRquest(context);
-                            },
-                          );
-                        },
-                        child: Text(
-                          controller.isViewOnlyModeRxData.value
-                              ? 'Mở lại yêu cầu'
-                              : 'Hoàn thành yêu cầu',
+                          },
+                          child: const Text('Mở lại yêu cầu'),
                         ),
                       ),
                     ],

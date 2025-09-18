@@ -15,6 +15,7 @@ import '../../../widgets/selector/selector_controller.dart';
 
 class Step3 extends StatelessWidget {
   final bool isViewOnly;
+  final String buttonLabel;
   final bool isRepairRequest;
   final void Function() onPressed;
 
@@ -50,6 +51,7 @@ class Step3 extends StatelessWidget {
     required this.technicalStaffModuleImageControler,
     required this.accidentDescriptionTextController,
     required this.accidentSolutionTextController,
+    required this.buttonLabel,
   });
 
   @override
@@ -185,10 +187,7 @@ class Step3 extends StatelessWidget {
                   validations: const [MyValidation.checkIsNotEmpty],
                 ),
                 AppStyles.pdt20,
-                ElevatedButton(
-                  onPressed: onPressed,
-                  child: const Text('Cập nhật'),
-                ),
+                ElevatedButton(onPressed: onPressed, child: Text(buttonLabel)),
                 AppStyles.pdt15,
               ],
             ),

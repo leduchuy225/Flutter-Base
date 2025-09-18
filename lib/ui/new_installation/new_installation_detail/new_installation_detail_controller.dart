@@ -54,7 +54,7 @@ class NewInstallationDetailController
           data.listMbConnectionRequestOverdueViewModel ?? [];
 
       reportFiles.addAll([
-        if (data.reportAcceptance != null)
+        if ((data.reportAcceptance ?? '').isNotEmpty)
           SignReportFileItemModel(
             id: ReportType.BBNT,
             pathName: data.reportAcceptance!,
@@ -62,7 +62,7 @@ class NewInstallationDetailController
             name: 'Biên bản nghiệm thu FTTx với khách hàng',
             isSigned: data.reportAcceptanceIsSign ?? false,
           ),
-        if (data.reportHandoverDevice != null)
+        if ((data.reportHandoverDevice ?? '').isNotEmpty)
           SignReportFileItemModel(
             id: ReportType.BBBG,
             name: 'Biên bản bàn giao thiết bị',
@@ -70,7 +70,7 @@ class NewInstallationDetailController
             url: getFileLink(data.reportHandoverDevice)!,
             isSigned: data.reportHandoverDeviceIsSign ?? false,
           ),
-        if (data.reportNew != null)
+        if ((data.reportNew ?? '').isNotEmpty)
           SignReportFileItemModel(
             id: ReportType.BBKM,
             name: 'Biên bản kéo mới',
@@ -80,7 +80,7 @@ class NewInstallationDetailController
           ),
       ]);
 
-      if (data.technicalStaffModuleImage != null) {
+      if ((data.technicalStaffModuleImage ?? '').isNotEmpty) {
         technicalStaffModuleImageControler.files.value = [
           FileCollectionModel(
             fileName: data.technicalStaffModuleImage!,
@@ -89,7 +89,7 @@ class NewInstallationDetailController
         ];
       }
 
-      if (data.technicalStaffImage != null) {
+      if ((data.technicalStaffImage ?? '').isNotEmpty) {
         technicalStaffImageControler.files.value = [
           FileCollectionModel(
             fileName: data.technicalStaffImage!,
@@ -98,7 +98,7 @@ class NewInstallationDetailController
         ];
       }
 
-      if (data.technicalStaffTestImage != null) {
+      if ((data.technicalStaffTestImage ?? '').isNotEmpty) {
         technicalStaffTestImageControler.files.value = [
           FileCollectionModel(
             fileName: data.technicalStaffTestImage!,
@@ -107,7 +107,7 @@ class NewInstallationDetailController
         ];
       }
 
-      if (data.reportImageDivider != null) {
+      if ((data.reportImageDivider ?? '').isNotEmpty) {
         reportDividerImageControler.files.value = [
           FileCollectionModel(
             fileName: data.reportImageDivider!,
@@ -116,7 +116,7 @@ class NewInstallationDetailController
         ];
       }
 
-      if (data.reportCableLengthStart != null) {
+      if ((data.reportCableLengthStart ?? '').isNotEmpty) {
         reportCableStartImageControler.files.value = [
           FileCollectionModel(
             fileName: data.reportCableLengthStart!,
@@ -125,7 +125,7 @@ class NewInstallationDetailController
         ];
       }
 
-      if (data.reportCableLengthEnd != null) {
+      if ((data.reportCableLengthEnd ?? '').isNotEmpty) {
         reportCableEndImageControler.files.value = [
           FileCollectionModel(
             fileName: data.reportCableLengthEnd!,
@@ -225,6 +225,10 @@ class NewInstallationDetailController
 
     if (response.isSuccess) {
       setIsRefreshValue();
+
+      if (isReportTaskAgain && reportFiles.isNotEmpty) {
+        reportFiles.clear();
+      }
 
       currentRxStep.value = (response.data?.currentStep ?? 1).toInt();
       detailRxData.value?.isCompletedStaffOn =

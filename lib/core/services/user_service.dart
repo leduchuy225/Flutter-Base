@@ -100,7 +100,7 @@ class UserService extends GetxController {
         .getNewToken(
           NewTokenPayload(deviceId: deviceId, refreshToken: refreshToken),
         )
-        .callApi();
+        .callApi(isShowSuccessMessage: false);
 
     if (data.isError) {
       await clearLocalData();
