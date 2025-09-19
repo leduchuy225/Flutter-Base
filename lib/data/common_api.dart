@@ -16,4 +16,7 @@ abstract class CommonApi {
   @POST('/admin/adgeneralcompanyinfomation/loaddata')
   Future<BaseResponse<AdgeneralcompanyinfomationResponse>>
   getGeneralInformation();
+
+  @POST('/home/loaddata')
+  Future<BaseResponse> getAmountOfRequest();
 }

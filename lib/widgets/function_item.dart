@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base/theme/styles.dart';
 
+import 'title_number_indicator.dart';
+
 class FunctionItem extends StatelessWidget {
   final int counter;
   final String title;
@@ -47,7 +49,7 @@ class FunctionItem extends StatelessWidget {
 }
 
 class MainFunctionItem extends StatelessWidget {
-  final int counter;
+  final int? counter;
   final String title;
   final IconData icon;
 
@@ -55,7 +57,7 @@ class MainFunctionItem extends StatelessWidget {
 
   const MainFunctionItem({
     super.key,
-    this.counter = 0,
+    this.counter,
     required this.icon,
     required this.title,
     required this.onTap,
@@ -65,22 +67,40 @@ class MainFunctionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsetsGeometry.all(10),
-          child: Column(
-            children: [
-              const SizedBox(),
-              Icon(icon, color: AppColors.primary, size: 28),
-              Text(
-                title,
-                style: AppTextStyles.body2,
-                textAlign: TextAlign.center,
+      child: Stack(
+        fit: StackFit.passthrough,
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsetsGeometry.all(10),
+              child: Column(
+                children: [
+                  const SizedBox(),
+                  Icon(icon, color: AppColors.primary, size: 28),
+                  Text(
+                    title,
+                    style: AppTextStyles.body2,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
           ),
-        ),
+          Visibility(
+            visible: (counter ?? 0) > 0,
+            child: Positioned(
+              top: 8,
+              right: 8,
+              child: TitleNumberIndicator.getnumber(
+                counter,
+                radius: 50,
+                fontSize: 10,
+                padding: const EdgeInsets.all(8),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -14,6 +14,7 @@ class TitleNumberIndicator extends StatelessWidget {
   static Widget getnumber(
     dynamic number, {
     double? radius,
+    double? fontSize,
     EdgeInsets? padding,
     Color color = AppColors.error,
   }) {
@@ -26,7 +27,7 @@ class TitleNumberIndicator extends StatelessWidget {
           padding ?? const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
       child: Text(
         number.toString(),
-        style: const TextStyle(color: AppColors.textLight),
+        style: TextStyle(color: AppColors.textLight, fontSize: fontSize),
       ),
     );
   }
