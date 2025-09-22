@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/extensions/future_extension.dart';
 import 'package:flutter_base/data/installation_api.dart';
 import 'package:flutter_base/widgets/selector/selector_widget.dart';
-import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
+import '../../../core/utils/validation.dart';
 import '../../../models/base_selector.dart';
 import '../../../models/common/technical_staff_list_model_payload.dart';
 import '../../../models/common/technical_staff_list_payload.dart';

@@ -47,7 +47,7 @@ class MyTexttile extends StatelessWidget {
     this.hasDivider = true,
     this.isPhoneNumber = false,
     this.isShowCopyIcon = false,
-    this.isHideIfTextNull = false,
+    this.isHideIfTextNull = true,
     this.padding = EdgeInsets.zero,
     this.orientation = MyTexttileOrientation.HORIZONTAL,
   }) : super(key: key);
@@ -79,7 +79,7 @@ class MyTexttile extends StatelessWidget {
     bool isViewDetail = false,
     EdgeInsets? paddingHeader,
     List<MyTexttileItem>? items,
-    bool isHideIfTextNull = false,
+    bool isHideIfTextNull = true,
     void Function()? onTapViewDetail,
     MainAxisSize mainAxisSize = MainAxisSize.max,
   }) {
@@ -153,7 +153,7 @@ class MyTexttile extends StatelessWidget {
     int? maxLines,
     int textFlex = 5,
     int labelFlex = 2,
-    bool isHideIfTextNull = false,
+    bool isHideIfTextNull = true,
     required List<MyTexttileItem> items,
   }) {
     return Column(

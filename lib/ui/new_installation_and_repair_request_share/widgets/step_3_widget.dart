@@ -9,6 +9,7 @@ import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 import 'package:get/get.dart';
 
+import '../../../core/utils/validation.dart';
 import '../../../theme/styles.dart';
 import '../../../widgets/file_collection/file_collection_controller.dart';
 import '../../../widgets/selector/selector_controller.dart';

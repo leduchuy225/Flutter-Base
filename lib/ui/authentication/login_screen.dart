@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../core/const/constants.dart';
 import '../../core/services/shared_preference_service.dart';
+import '../../core/utils/validation.dart';
 import '../../widgets/text_field/text_field_controller.dart';
 import '../../widgets/text_field/text_field_widget.dart';
 import 'widgets/authentication_scaffold.dart';

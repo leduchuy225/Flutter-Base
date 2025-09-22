@@ -88,6 +88,17 @@ class NewInstallationItem extends StatelessWidget {
           titleText: 'Tình trạng khảo sát',
           textStyle: AppTextStyles.body2.copyWith(color: surveyStatusColor),
         ),
+        MyTexttileItem(
+          titleText: 'Thời gian HT',
+          text: MyDatetimeUtils.formatDateFromAPI(
+            item.technicalStaffReportCompletedDate,
+          ),
+        ),
+        MyTexttileItem(
+          titleText: 'Thời gian đóng',
+          text: MyDatetimeUtils.formatDateFromAPI(item.closedDate),
+        ),
+        MyTexttileItem(titleText: 'Lý do đóng', text: item.closedNote),
       ],
     );
   }

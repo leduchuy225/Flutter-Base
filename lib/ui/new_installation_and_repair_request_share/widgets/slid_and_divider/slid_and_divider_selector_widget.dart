@@ -10,6 +10,7 @@ import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/utils/validation.dart';
 import '../../../../models/base_selector.dart';
 import '../../../../models/installation/slid_list_and_divider_list_model_payload.dart';
 import '../../../../models/installation/slid_list_and_divider_list_payload.dart';

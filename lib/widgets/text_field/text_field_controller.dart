@@ -1,52 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base/core/const/constants.dart';
-import 'package:get/get_utils/get_utils.dart';
-
-class MyValidation {
-  MyValidation._();
-
-  static String? checkIsNotEmpty(String text) {
-    if (text.isNotEmpty) {
-      return null;
-    }
-    return MyStrings.noInput;
-  }
-
-  static String? checkIsPhoneNumber(String text) {
-    final value = GetUtils.isPhoneNumber(text);
-    if (value) {
-      return null;
-    }
-    return 'Số điện thoại không đúng định dạng';
-  }
-
-  static String? checkIsEmail(String text) {
-    final value = GetUtils.isEmail(text);
-    if (value) {
-      return null;
-    }
-    return 'Email không đúng định dạng';
-  }
-
-  static String? checkIsNumericOnly(String text) {
-    final value = GetUtils.isNumericOnly(text);
-    if (value) {
-      return null;
-    }
-    return 'Chuỗi chứa ký tự không phải số';
-  }
-}
 
 class MyTextFieldController extends TextEditingController {
   var state = ValueNotifier(const MyTextFieldValue());
 
-  late List<String? Function(String)>? validations;
-  late void Function({List<String> errorTexts}) shake;
+  List<String? Function(String)>? validations;
+  void Function({List<String> errorTexts})? _shake;
 
   MyTextFieldController();
 
   String get textTrim {
     return text.trim();
+  }
+
+  void shakeWithErrors({List<String>? errors}) {
+    if (_shake == null) {
+      return;
+    }
+    _shake!(errorTexts: errors ?? []);
   }
 
   bool checkValidation() {
@@ -61,7 +31,7 @@ class MyTextFieldController extends TextEditingController {
     if (isValid) {
       return true;
     }
-    shake(errorTexts: errorTexts ?? []);
+    shakeWithErrors(errors: errorTexts);
     return false;
   }
 
@@ -79,6 +49,10 @@ class MyTextFieldController extends TextEditingController {
 
   set errorTexts(List<String>? value) {
     state.value = state.value.copyWith(errorTexts: value);
+  }
+
+  set shake(void Function({List<String> errorTexts})? shakeFunction) {
+    _shake = shakeFunction;
   }
 }
 

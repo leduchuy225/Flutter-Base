@@ -4,13 +4,13 @@ import 'package:flutter_base/widgets/selector/selector_widget.dart';
 import 'package:flutter_base/widgets/text_field/text_field_widget.dart';
 import 'package:signature/signature.dart';
 
+import '../../../../core/utils/validation.dart';
 import '../../../../models/base_selector.dart';
 import '../../../../theme/styles.dart';
 import '../../../../widgets/datetime_picker/datetime_picker_widget.dart';
 import '../../../../widgets/my_tab_bar.dart';
 import '../../../../widgets/my_texttile.dart';
 import '../../../../widgets/selector/selector_controller.dart';
-import '../../../../widgets/text_field/text_field_controller.dart';
 import 'report_file_item.dart';
 import 'sign_report_file_data_controller.dart';
 

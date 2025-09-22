@@ -43,6 +43,10 @@ class _NewInstallationDetailScreenState
               title: 'Thông tin yêu cầu',
               items: [
                 MyTexttileItem(
+                  titleText: 'Ghi chú KH',
+                  text: detailData?.customerNote,
+                ),
+                MyTexttileItem(
                   titleText: 'Tọa độ',
                   text: detailData?.googleMap,
                   trailing: InkWell(

@@ -7,6 +7,7 @@ import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:flutter_base/widgets/text_field/text_field_controller.dart';
 import 'package:get/get.dart';
 
+import '../../core/utils/validation.dart';
 import '../../models/authentication/change_password_payload.dart';
 import '../../widgets/checkbox/checkbox_controller.dart';
 import '../../widgets/scrollview_with_bottom_widget.dart';
@@ -119,8 +120,8 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
             }
             if (_secondNewPasswordController.text !=
                 _firstNewPasswordController.text) {
-              _secondNewPasswordController.shake(
-                errorTexts: ['Không khớp với mật khẩu mới'],
+              _secondNewPasswordController.shakeWithErrors(
+                errors: ['Không khớp với mật khẩu mới'],
               );
               return;
             }
