@@ -43,6 +43,11 @@ class _NewInstallationDetailScreenState
               title: 'Thông tin yêu cầu',
               items: [
                 MyTexttileItem(
+                  titleText: 'Hệ số K',
+                  text: detailData?.kCoefficient,
+                  textStyle: AppTextStyles.body1,
+                ),
+                MyTexttileItem(
                   titleText: 'Ghi chú KH',
                   text: detailData?.customerNote,
                 ),

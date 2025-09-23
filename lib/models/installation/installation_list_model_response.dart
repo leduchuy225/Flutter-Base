@@ -58,6 +58,8 @@ class InstallationListModelResponse {
   num? technicalStaffSurveyStatus;
   String? technicalStaffReportCompletedDate;
 
+  dynamic kCoefficient;
+
   InstallationListModelResponse({
     this.id,
     this.idLong,
@@ -115,6 +117,7 @@ class InstallationListModelResponse {
     this.staffPhoneNumber,
     this.technicalStaffSurveyStatus,
     this.technicalStaffReportCompletedDate,
+    this.kCoefficient,
   });
 
   factory InstallationListModelResponse.fromJson(Map<String, dynamic> json) {
@@ -179,6 +182,7 @@ class InstallationListModelResponse {
       technicalStaffSurveyStatus: json['TechnicalStaffSurveyStatus'] as num?,
       technicalStaffReportCompletedDate:
           json['TechnicalStaffReportCompletedDate'] as String?,
+      kCoefficient: json['KCoefficient'] as dynamic,
     );
   }
 
@@ -241,5 +245,6 @@ class InstallationListModelResponse {
     'StaffPhoneNumber': staffPhoneNumber,
     'TechnicalStaffSurveyStatus': technicalStaffSurveyStatus,
     'TechnicalStaffReportCompletedDate': technicalStaffReportCompletedDate,
+    'KCoefficient': kCoefficient,
   };
 }

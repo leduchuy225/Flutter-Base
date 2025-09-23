@@ -43,6 +43,11 @@ class _NewInstallationDetailScreenState
               title: 'Thông tin yêu cầu',
               items: [
                 MyTexttileItem(
+                  titleText: 'Hệ số K',
+                  text: detailData?.kCoefficient,
+                  textStyle: AppTextStyles.body1,
+                ),
+                MyTexttileItem(
                   titleText: 'Tọa độ',
                   text: detailData?.googleMap,
                   trailing: InkWell(

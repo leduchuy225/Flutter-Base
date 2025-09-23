@@ -99,6 +99,11 @@ class RepairRequestItem extends StatelessWidget {
           text: MyDatetimeUtils.formatDateFromAPI(item.closedDate),
         ),
         MyTexttileItem(titleText: 'Lý do đóng', text: item.closedNote),
+        MyTexttileItem(
+          titleText: 'Hệ số K',
+          text: item.kCoefficient,
+          textStyle: AppTextStyles.body1,
+        ),
       ],
     );
   }
