@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../core/utils/datetime_utils.dart';
 import '../../../core/utils/utils.dart';
+import '../../../widgets/file_collection/file_collection_widget.dart';
 import '../../new_installation_and_repair_request_share/common_installation_detail_screen.dart';
 import 'repair_request_detail_controller.dart';
 
@@ -84,6 +85,13 @@ class _NewInstallationDetailScreenState
                     toFormat: MyDateFormatEnum.DATE_TIME24s,
                   ),
                 ),
+                MyTexttileItem(
+                  titleText: 'Đánh giá',
+                  textStyle: AppTextStyles.body1,
+                  text: detailData?.technicalStaffRating != null
+                      ? '${detailData?.technicalStaffRating}/10'
+                      : '',
+                ),
               ],
             ),
             AppStyles.pdt15,
@@ -108,6 +116,23 @@ class _NewInstallationDetailScreenState
                 MyTexttileItem(
                   titleText: 'Địa chỉ',
                   text: customerData?.address2,
+                ),
+                MyTexttileItem(titleText: 'CCCD', text: customerData?.cccd),
+                MyTexttileItem(
+                  titleText: 'Ngày cấp CCCD',
+                  text: MyDatetimeUtils.formatDateFromAPI(
+                    customerData?.cccdIssue,
+                  ),
+                ),
+                MyTexttileItem(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: FileCollectionWidget(
+                      isViewImageOnly: true,
+                      title: 'Ảnh CCCD',
+                      controller: controller.cccdImageController,
+                    ),
+                  ),
                 ),
               ],
             ),

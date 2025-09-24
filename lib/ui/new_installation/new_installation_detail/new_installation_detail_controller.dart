@@ -134,6 +134,19 @@ class NewInstallationDetailController
         ];
       }
 
+      cccdImageController.files.value = [
+        if ((data.mbCustomerViewModel?.cccdFront ?? '').isNotEmpty)
+          FileCollectionModel(
+            fileName: data.mbCustomerViewModel?.cccdFront,
+            filePath: getFileLink(data.mbCustomerViewModel?.cccdFront)!,
+          ),
+        if ((data.mbCustomerViewModel?.cccdBack ?? '').isNotEmpty)
+          FileCollectionModel(
+            fileName: data.mbCustomerViewModel?.cccdBack,
+            filePath: getFileLink(data.mbCustomerViewModel?.cccdBack)!,
+          ),
+      ];
+
       cableEndTextController.text = (data.cableLengthEnd ?? '').toString();
       cableStartTextController.text = (data.cableLengthStart ?? '').toString();
 

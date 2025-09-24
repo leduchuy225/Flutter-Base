@@ -24,7 +24,7 @@ class _AccountScreenState extends State<AccountScreen> {
   final _nameTextController = MyTextFieldController();
   final _phoneTextController = MyTextFieldController();
   final _genderTextController = MyTextFieldController();
-  final _emailTextController = MyTextFieldController();
+  final _usernameTextController = MyTextFieldController();
   final _addressTextController = MyTextFieldController();
 
   @override
@@ -34,7 +34,7 @@ class _AccountScreenState extends State<AccountScreen> {
     _nameTextController.text = _userService.userInfor?.fullName ?? '';
     _phoneTextController.text = _userService.userInfor?.phoneNumber ?? '';
     _genderTextController.text = _userService.userInfor?.gioiTinh ?? '';
-    _emailTextController.text = _userService.userInfor?.email ?? '';
+    _usernameTextController.text = _userService.userInfor?.userName ?? '';
     _addressTextController.text = _userService.userInfor?.address ?? '';
   }
 
@@ -92,8 +92,8 @@ class _AccountScreenState extends State<AccountScreen> {
             AppStyles.pdt25,
             MyTextField(
               readOnly: true,
-              labelText: 'Email',
-              controller: _emailTextController,
+              labelText: 'Username',
+              controller: _usernameTextController,
             ),
             AppStyles.pdt25,
             MyTextField(

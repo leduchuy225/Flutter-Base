@@ -104,6 +104,13 @@ class RepairRequestItem extends StatelessWidget {
           text: item.kCoefficient,
           textStyle: AppTextStyles.body1,
         ),
+        MyTexttileItem(
+          titleText: 'Đánh giá',
+          textStyle: AppTextStyles.body1,
+          text: item.technicalStaffRating != null
+              ? '${item.technicalStaffRating}/10'
+              : '',
+        ),
       ],
     );
   }

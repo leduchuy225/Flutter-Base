@@ -24,6 +24,24 @@ import 'search_customer/search_customer_screen.dart';
 class MainScreen extends StatefulWidget {
   @override
   State<MainScreen> createState() => _MainScreenState();
+
+  static Widget buildHeaderItem({required IconData icon, String? text}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        children: [
+          Icon(icon, color: AppColors.textLight),
+          AppStyles.pdl10,
+          Expanded(
+            child: Text(
+              text ?? '',
+              style: AppTextStyles.body2.copyWith(color: AppColors.textLight),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -71,41 +89,17 @@ class _MainScreenState extends State<MainScreen> {
             init: _userService,
             builder: (service) {
               return Container(
-                padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
                 color: AppColors.mobifiberRandom2,
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.account_box_rounded,
-                          color: AppColors.textLight,
-                        ),
-                        AppStyles.pdl10,
-                        Expanded(
-                          child: Text(
-                            service.userInfor?.fullName ?? '',
-                            style: AppTextStyles.body2.copyWith(
-                              color: AppColors.textLight,
-                            ),
-                          ),
-                        ),
-                      ],
+                    MainScreen.buildHeaderItem(
+                      icon: Icons.email,
+                      text: service.userInfor?.userName,
                     ),
-                    AppStyles.pdt10,
-                    Row(
-                      children: [
-                        const Icon(Icons.email, color: AppColors.textLight),
-                        AppStyles.pdl10,
-                        Expanded(
-                          child: Text(
-                            service.userInfor?.email ?? '',
-                            style: AppTextStyles.body2.copyWith(
-                              color: AppColors.textLight,
-                            ),
-                          ),
-                        ),
-                      ],
+                    MainScreen.buildHeaderItem(
+                      icon: Icons.account_box,
+                      text: service.userInfor?.fullName,
                     ),
                   ],
                 ),

@@ -9,6 +9,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../theme/styles.dart';
 import '../../ui/authentication/2fa_status_screen.dart';
+import '../../ui/main_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   final _userService = Get.find<UserService>();
@@ -40,40 +41,13 @@ class MyDrawer extends StatelessWidget {
                     builder: (service) {
                       return Column(
                         children: [
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.account_box_rounded,
-                                color: AppColors.textLight,
-                              ),
-                              AppStyles.pdl10,
-                              Expanded(
-                                child: Text(
-                                  service.userInfor?.fullName ?? '',
-                                  style: AppTextStyles.body2.copyWith(
-                                    color: AppColors.textLight,
-                                  ),
-                                ),
-                              ),
-                            ],
+                          MainScreen.buildHeaderItem(
+                            icon: Icons.email,
+                            text: service.userInfor?.userName,
                           ),
-                          AppStyles.pdt10,
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.email,
-                                color: AppColors.textLight,
-                              ),
-                              AppStyles.pdl10,
-                              Expanded(
-                                child: Text(
-                                  service.userInfor?.email ?? '',
-                                  style: AppTextStyles.body2.copyWith(
-                                    color: AppColors.textLight,
-                                  ),
-                                ),
-                              ),
-                            ],
+                          MainScreen.buildHeaderItem(
+                            icon: Icons.account_box,
+                            text: service.userInfor?.fullName,
                           ),
                         ],
                       );

@@ -66,6 +66,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final technicalStaffTestImageControler = FileCollectionController();
   final technicalStaffModuleImageControler = FileCollectionController();
 
+  final cccdImageController = FileCollectionController();
+
   final accidentsSelectorController = MySelectorController();
 
   final reportDividerImageControler = FileCollectionController();
