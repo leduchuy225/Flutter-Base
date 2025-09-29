@@ -14,8 +14,8 @@ class MyStrings {
 
   static const String noInput = 'Thông tin không được để trống';
 
-  static const String baseURL =
-      'https://mbf.hig.asia'; // 'https://jsonplaceholder.typicode.com';
+  static const String baseURL = 'https://ktmobifiber.mobifone5.vn';
+  // 'https://mbf.hig.asia'; // 'https://jsonplaceholder.typicode.com';
 
   static const String appointmentPrefix = 'ĐẶT HẸN:';
 }
