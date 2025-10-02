@@ -89,8 +89,12 @@ class NotificationService {
       // priority: Priority.high,
       // importance: Importance.max,
     );
+    const iosDetails = DarwinNotificationDetails();
 
-    const notificationDetails = NotificationDetails(android: androidDetails);
+    const notificationDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iosDetails,
+    );
     final notification = message.notification;
 
     if (notification != null) {
@@ -111,8 +115,16 @@ class NotificationService {
       '@mipmap/launcher_icon',
     );
 
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+          requestAlertPermission: true,
+          requestBadgePermission: true,
+          requestSoundPermission: true,
+        );
+
     const initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
     );
 
     await _localNotifications.initialize(
