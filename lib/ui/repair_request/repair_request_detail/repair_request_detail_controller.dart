@@ -264,7 +264,7 @@ class RepairRequestDetailController
       Navigator.of(context).popUntil((route) {
         return [
           '/MainScreen',
-          '/RepairRequestDetailScreen',
+          '/RepairRequestListScreen',
         ].contains(route.settings.name);
       });
     }
@@ -405,23 +405,25 @@ class RepairRequestDetailController
 
     if (urlFile != null) {
       final firstReportType = reportTypeSelectorController.first;
+      final isSignStatus = firstReportType?.extraData?['isSigned'] ?? false;
+
       if (reportFiles.every((report) {
         return report.id != currentReportIdToPreview;
       })) {
         reportFiles.add(
           SignReportFileItemModel(
             url: urlFile,
+            isSigned: isSignStatus,
             id: firstReportType?.id,
             name: firstReportType?.name ?? '',
             pathName: response.data?.urlFile ?? '',
-            isSigned: firstReportType?.extraData?['isSigned'] ?? false,
           ),
         );
       } else {
         reportFiles.forEach((report) {
           if (report.id == currentReportIdToPreview) {
             report.url = urlFile;
-            report.isSigned = firstReportType?.extraData?['isSigned'] ?? false;
+            report.isSigned = isSignStatus;
           }
         });
       }
