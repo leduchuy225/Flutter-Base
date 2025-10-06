@@ -25,6 +25,7 @@ class Step3 extends StatelessWidget {
   final MyTextFieldController cableEndTextController;
   final MyTextFieldController step3NoteTextController;
   final MyTextFieldController cableStartTextController;
+  final MyTextFieldController cableDistanceTextController;
   final MyTextFieldController accidentSolutionTextController;
   final MyTextFieldController accidentDescriptionTextController;
 
@@ -53,6 +54,7 @@ class Step3 extends StatelessWidget {
     required this.accidentDescriptionTextController,
     required this.accidentSolutionTextController,
     required this.buttonLabel,
+    required this.cableDistanceTextController,
   });
 
   @override
@@ -67,6 +69,7 @@ class Step3 extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsetsGeometry.only(bottom: 20),
               child: MySelector(
+                isRequired: true,
                 title: 'Loại sự cố',
                 readOnly: isViewOnly,
                 isMultipleSelect: true,
@@ -97,6 +100,7 @@ class Step3 extends StatelessWidget {
             child: Column(
               children: [
                 MyTextField(
+                  isRequired: true,
                   readOnly: isViewOnly,
                   labelText: 'Mô tả chi tiết lỗi',
                   controller: accidentDescriptionTextController,
@@ -104,6 +108,7 @@ class Step3 extends StatelessWidget {
                 ),
                 AppStyles.pdt20,
                 MyTextField(
+                  isRequired: true,
                   readOnly: isViewOnly,
                   labelText: 'Cách giải quyết',
                   controller: accidentSolutionTextController,
@@ -133,6 +138,13 @@ class Step3 extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          AppStyles.pdt20,
+          MyTextField(
+            readOnly: isViewOnly,
+            keyboardType: TextInputType.number,
+            labelText: 'KC từ bộ chia đến nhà KH',
+            controller: cableDistanceTextController,
           ),
           AppStyles.pdt10,
           FileCollectionWidget(

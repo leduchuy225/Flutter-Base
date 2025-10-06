@@ -15,5 +15,5 @@ class InstallationDetailResponse {
     );
   }
 
-  Map<String, dynamic> toJson() => {'model': model?.toJson()};
+  // Map<String, dynamic> toJson() => {'model': model?.toJson()};
 }

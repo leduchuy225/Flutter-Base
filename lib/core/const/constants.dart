@@ -43,6 +43,7 @@ class ReportType {
   static const BBBG = 2;
   static const BBKM = 3;
   static const BBSC = 4;
+  static const BBReplaceModem = 5;
 }
 
 class Config {

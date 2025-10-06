@@ -603,6 +603,83 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
+  Future<BaseResponse<SignInstallationReportFileResponse>>
+  signRepairRequestReportFile({
+    required String id,
+    required String type,
+    File? customersSign,
+    File? technicalStaffSign,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.fields.add(MapEntry('id', id));
+    _data.fields.add(MapEntry('type', type));
+    if (customersSign != null) {
+      if (customersSign != null) {
+        _data.files.add(
+          MapEntry(
+            'customersSign[0]',
+            MultipartFile.fromFileSync(
+              customersSign.path,
+              filename: customersSign.path.split(Platform.pathSeparator).last,
+            ),
+          ),
+        );
+      }
+    }
+    if (technicalStaffSign != null) {
+      if (technicalStaffSign != null) {
+        _data.files.add(
+          MapEntry(
+            'technicalStaffSign[0]',
+            MultipartFile.fromFileSync(
+              technicalStaffSign.path,
+              filename: technicalStaffSign.path
+                  .split(Platform.pathSeparator)
+                  .last,
+            ),
+          ),
+        );
+      }
+    }
+    final _options =
+        _setStreamType<BaseResponse<SignInstallationReportFileResponse>>(
+          Options(
+                method: 'POST',
+                headers: _headers,
+                extra: _extra,
+                contentType: 'multipart/form-data',
+              )
+              .compose(
+                _dio.options,
+                '/RepairRequest/SignReport',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseResponse<SignInstallationReportFileResponse> _value;
+    try {
+      _value = BaseResponse<SignInstallationReportFileResponse>.fromJson(
+        _result.data!,
+        (json) => SignInstallationReportFileResponse.fromJson(
+          json as Map<String, dynamic>,
+        ),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<BaseResponse<dynamic>> deleteRepairReportFile(
     ViewInstallationReportFilePayload body,
   ) async {

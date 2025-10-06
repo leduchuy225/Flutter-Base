@@ -111,6 +111,12 @@ class RepairRequestItem extends StatelessWidget {
               ? '${item.technicalStaffRating}/10'
               : '',
         ),
+        MyTexttileItem(
+          titleText: 'Cảnh báo',
+          isHide: (item.listWarning ?? []).isEmpty,
+          text: (item.listWarning ?? []).join('\n• '),
+          textStyle: AppTextStyles.body2.copyWith(color: AppColors.error),
+        ),
       ],
     );
   }

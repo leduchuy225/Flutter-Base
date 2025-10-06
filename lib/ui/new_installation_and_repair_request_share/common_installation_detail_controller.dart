@@ -61,6 +61,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
 
   final cableStartTextController = MyTextFieldController();
   final cableEndTextController = MyTextFieldController();
+  final cableDistanceTextController = MyTextFieldController();
 
   final technicalStaffImageControler = FileCollectionController();
   final technicalStaffTestImageControler = FileCollectionController();
@@ -339,6 +340,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           isViewOnly: isViewOnly,
           cableEndTextController: cableEndTextController,
           cableStartTextController: cableStartTextController,
+          cableDistanceTextController: cableDistanceTextController,
           isRepairRequest: serviceType == MBService.RepairRequest,
           accidentsSelectorController: accidentsSelectorController,
           reportDividerImageControler: reportDividerImageControler,

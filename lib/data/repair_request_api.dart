@@ -12,6 +12,7 @@ import '../models/common/update_survey_payload.dart';
 import '../models/installation/delete_material_response.dart';
 import '../models/installation/installation_report_file_list_response.dart';
 import '../models/installation/material_list_response.dart';
+import '../models/installation/sign_installation_report_file_response.dart';
 import '../models/installation/update_material_payload.dart';
 import '../models/installation/update_material_response.dart';
 import '../models/installation/view_installation_report_file_payload.dart';
@@ -104,6 +105,16 @@ abstract class RepairRequestApi {
   Future<BaseResponse<ViewInstallationReportFileResponse>> viewRepairReportFile(
     @Body() ViewInstallationReportFilePayload body,
   );
+
+  @MultiPart()
+  @POST('/RepairRequest/SignReport')
+  Future<BaseResponse<SignInstallationReportFileResponse>>
+  signRepairRequestReportFile({
+    @Part(name: 'id') required String id,
+    @Part(name: 'type') required String type,
+    @Part(name: 'customersSign[0]') File? customersSign,
+    @Part(name: 'technicalStaffSign[0]') File? technicalStaffSign,
+  });
 
   @POST('/RepairRequest/DeleteReport')
   Future<BaseResponse> deleteRepairReportFile(

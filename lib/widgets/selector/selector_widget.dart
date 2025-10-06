@@ -9,6 +9,7 @@ import 'selector_content/bottomsheet_selector_content_widget.dart';
 class MySelector extends StatefulWidget {
   final String title;
   final bool readOnly;
+  final bool isRequired;
   final Widget? suffixIcon;
   final MySelectorData data;
   final bool isMultipleSelect;
@@ -25,6 +26,7 @@ class MySelector extends StatefulWidget {
     this.onBeginSelect,
     required this.title,
     this.readOnly = false,
+    this.isRequired = false,
     this.isDismissOnSelect = true,
     this.isMultipleSelect = false,
     this.validations,
@@ -54,6 +56,7 @@ class _MySelectorState extends State<MySelector> {
       readOnly: true,
       labelText: widget.title,
       controller: _mainController,
+      isRequired: widget.isRequired,
       suffixIcon: widget.suffixIcon,
       validations: widget.validations,
       prefixIcon: widget.readOnly ? null : const Icon(Icons.arrow_drop_down),

@@ -243,6 +243,7 @@ class _InstallationApi implements InstallationApi {
     File? report_ImageDivider,
     File? report_CableLengthStart,
     File? report_CableLengthEnd,
+    String? report_Distance,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -346,6 +347,9 @@ class _InstallationApi implements InstallationApi {
           ),
         );
       }
+    }
+    if (report_Distance != null) {
+      _data.fields.add(MapEntry('Report_Distance', report_Distance));
     }
     final _options =
         _setStreamType<BaseResponse<UpdateNewInstallationStep4Response>>(

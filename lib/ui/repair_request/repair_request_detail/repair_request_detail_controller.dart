@@ -61,6 +61,14 @@ class RepairRequestDetailController
             url: getFileLink(data.reportProblem)!,
             isSigned: data.reportProblemIsSet ?? false,
           ),
+        if ((data.reportModem ?? '').isNotEmpty)
+          SignReportFileItemModel(
+            pathName: data.reportModem!,
+            id: ReportType.BBReplaceModem,
+            name: 'Biên bản thay thế modem',
+            url: getFileLink(data.reportModem)!,
+            isSigned: data.reportModemIsSign ?? false,
+          ),
       ]);
 
       if ((data.technicalStaffModuleImage ?? '').isNotEmpty) {
@@ -132,6 +140,8 @@ class RepairRequestDetailController
 
       cableEndTextController.text = (data.cableLengthEnd ?? '').toString();
       cableStartTextController.text = (data.cableLengthStart ?? '').toString();
+
+      cableDistanceTextController.text = (data.reportDistance ?? '').toString();
 
       materialSelectorController.replace(
         data.listMbRepairRequestMaterialViewModel ?? [],
@@ -222,10 +232,7 @@ class RepairRequestDetailController
           accidentListString: accidentsSelectorController.selectors
               .map((element) => element.id)
               .join(','),
-          report_Distance:
-              ((getNullOrNumber(cableEndTextController.textTrim) ?? 0) -
-                      (getNullOrNumber(cableStartTextController.textTrim) ?? 0))
-                  .toString(),
+          report_Distance: cableDistanceTextController.textTrim,
         )
         .callApi();
 
@@ -423,9 +430,38 @@ class RepairRequestDetailController
   }
 
   @override
-  Future signReportFile() {
-    // TODO: implement signReportFile
-    throw UnimplementedError();
+  Future signReportFile() async {
+    final staffSignFile = await writeToImageFile(
+      fileName: 'staff_sign',
+      data: await staffSignatureController.toPngBytes(),
+    );
+    final customersSignFile = await writeToImageFile(
+      fileName: 'customer_sign',
+      data: await customerSignatureController.toPngBytes(),
+    );
+
+    final response = await Get.find<RepairRequestApi>()
+        .signRepairRequestReportFile(
+          id: id.toString(),
+          customersSign: customersSignFile,
+          technicalStaffSign: staffSignFile,
+          type: currentReportIdToSign.toString(),
+        )
+        .callApi();
+
+    final urlFile = getFileLink(response.data?.urlFile);
+
+    if (urlFile != null) {
+      detailRxData.value?.isCompletedStaffOn =
+          response.data?.isCompletedStaffOn;
+      reportFiles.forEach((report) {
+        if (report.id == currentReportIdToSign) {
+          report.url = urlFile;
+          report.isSigned = true;
+        }
+      });
+      update();
+    }
   }
 
   @override

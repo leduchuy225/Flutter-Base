@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base/core/utils/datetime_utils.dart';
 import 'package:flutter_base/theme/styles.dart';
 import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/overdue_reason_widget.dart';
-import 'package:flutter_base/ui/new_installation_and_repair_request_share/widgets/request_cancellation_widget.dart';
 import 'package:flutter_base/widgets/dialog/bottom_sheet_widget.dart';
 import 'package:flutter_base/widgets/my_appbar.dart';
 import 'package:get/get.dart';
@@ -69,33 +68,33 @@ class CommonInstallationDetailScreen<
       ),
       appBar: MyAppbar.appBar(
         title,
-        action: IconButton(
-          icon: const Icon(Icons.cancel_outlined),
-          onPressed: () {
-            MyBottomSheet.showBottomSheet(
-              context,
-              builder: (context) {
-                return RequestCancellation(
-                  closeNoteTextController: controller.closeNoteTextController,
-                  onPressed: () {
-                    if (controller.id == null) {
-                      return;
-                    }
-                    if (!controller.closeNoteTextController.checkValidation()) {
-                      return;
-                    }
-                    MyDialog.alertDialog(
-                      message: 'Xác nhận đóng phiếu ?',
-                      okHandler: () {
-                        controller.closeRequest(context);
-                      },
-                    );
-                  },
-                );
-              },
-            );
-          },
-        ),
+        // action: IconButton(
+        //   icon: const Icon(Icons.cancel_outlined),
+        //   onPressed: () {
+        //     MyBottomSheet.showBottomSheet(
+        //       context,
+        //       builder: (context) {
+        //         return RequestCancellation(
+        //           closeNoteTextController: controller.closeNoteTextController,
+        //           onPressed: () {
+        //             if (controller.id == null) {
+        //               return;
+        //             }
+        //             if (!controller.closeNoteTextController.checkValidation()) {
+        //               return;
+        //             }
+        //             MyDialog.alertDialog(
+        //               message: 'Xác nhận đóng phiếu ?',
+        //               okHandler: () {
+        //                 controller.closeRequest(context);
+        //               },
+        //             );
+        //           },
+        //         );
+        //       },
+        //     );
+        //   },
+        // ),
       ),
       body: GetBuilder(
         init: controller,

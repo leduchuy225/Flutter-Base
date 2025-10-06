@@ -150,6 +150,8 @@ class NewInstallationDetailController
       cableEndTextController.text = (data.cableLengthEnd ?? '').toString();
       cableStartTextController.text = (data.cableLengthStart ?? '').toString();
 
+      cableDistanceTextController.text = (data.reportDistance ?? '').toString();
+
       materialSelectorController.replace(
         data.listMbConnectionRequestMaterialViewModel ?? [],
       );
@@ -233,6 +235,7 @@ class NewInstallationDetailController
           report_CableLengthEnd: reportCableEndImageControler.firstFile,
           report_CableLengthStart: reportCableStartImageControler.firstFile,
           report_ImageDivider: reportDividerImageControler.firstFile,
+          report_Distance: cableDistanceTextController.textTrim,
         )
         .callApi();
 

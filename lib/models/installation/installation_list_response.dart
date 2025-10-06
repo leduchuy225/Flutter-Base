@@ -24,9 +24,9 @@ class InstallationListResponse {
     );
   }
 
-  Map<String, dynamic> toJson() => {
-    'model': model?.map((e) => e.toJson()).toList(),
-    'totalItems': totalItems,
-    'role': role?.toJson(),
-  };
+  // Map<String, dynamic> toJson() => {
+  //   'model': model?.map((e) => e.toJson()).toList(),
+  //   'totalItems': totalItems,
+  //   'role': role?.toJson(),
+  // };
 }

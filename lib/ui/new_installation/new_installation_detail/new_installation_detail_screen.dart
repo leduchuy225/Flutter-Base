@@ -88,6 +88,14 @@ class _NewInstallationDetailScreenState
                       ? '${detailData?.technicalStaffRating}/10'
                       : '',
                 ),
+                MyTexttileItem(
+                  titleText: 'Cảnh báo',
+                  isHide: (detailData?.listWarning ?? []).isEmpty,
+                  text: (detailData?.listWarning ?? []).join('\n• '),
+                  textStyle: AppTextStyles.body2.copyWith(
+                    color: AppColors.error,
+                  ),
+                ),
               ],
             ),
             AppStyles.pdt15,

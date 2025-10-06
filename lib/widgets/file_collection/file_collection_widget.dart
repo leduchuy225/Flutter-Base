@@ -33,6 +33,7 @@ class FileCollectionWidget extends StatefulWidget {
 class _FileCollectionWidgetState extends State<FileCollectionWidget> {
   final picker = ImagePicker();
 
+  bool _isPickingImage = false;
   late final FileCollectionController _controller;
 
   FileCollectionController get _mainController =>
@@ -62,35 +63,47 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
       return;
     }
 
-    List<XFile> results = [];
-
-    if (isTakeFromCamera) {
-      final file = await picker.pickImage(
-        source: ImageSource.camera,
-        imageQuality: widget.imageQuality,
-      );
-      if (file != null) {
-        results = [file];
-      }
-    } else {
-      results = await picker.pickMultiImage(imageQuality: widget.imageQuality);
-    }
-
-    if (results.isEmpty) {
+    if (_isPickingImage) {
       return;
     }
 
-    _mainController.addFiles(
-      results.map((element) {
-        print(element.name);
+    _isPickingImage = true;
+    try {
+      List<XFile> results = [];
 
-        return FileCollectionModel(
-          isLocal: true,
-          fileName: element.name,
-          filePath: element.path,
+      if (isTakeFromCamera) {
+        final file = await picker.pickImage(
+          source: ImageSource.camera,
+          imageQuality: widget.imageQuality,
         );
-      }).toList(),
-    );
+        if (file != null) {
+          results = [file];
+        }
+      } else {
+        results = await picker.pickMultiImage(
+          imageQuality: widget.imageQuality,
+        );
+      }
+
+      _isPickingImage = false;
+
+      if (results.isEmpty) {
+        return;
+      }
+      _mainController.addFiles(
+        results.map((element) {
+          return FileCollectionModel(
+            isLocal: true,
+            fileName: element.name,
+            filePath: element.path,
+          );
+        }).toList(),
+      );
+    } catch (error) {
+      MyDialog.snackbar(error.toString(), type: SnackbarType.ERROR);
+    } finally {
+      _isPickingImage = false;
+    }
   }
 
   void onViewDetail(int index) {
