@@ -59,7 +59,7 @@ class RepairRequestListModelResponse {
 
   dynamic kCoefficient;
 
-  List<String>? listWarning;
+  List<dynamic>? listWarning;
 
   RepairRequestListModelResponse({
     this.id,
@@ -182,7 +182,7 @@ class RepairRequestListModelResponse {
       technicalStaffReportCompletedDate:
           json['TechnicalStaffReportCompletedDate'] as String?,
       kCoefficient: json['KCoefficient'] as dynamic,
-      listWarning: json['ListWarning'] as List<String>?,
+      listWarning: json['ListWarning'] as List<dynamic>?,
     );
   }
 

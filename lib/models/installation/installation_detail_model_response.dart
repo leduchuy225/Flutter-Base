@@ -114,7 +114,7 @@ class InstallationDetailModelResponse {
   num? ponidIdLong;
   dynamic ponidCode;
 
-  List<String>? listWarning;
+  List<dynamic>? listWarning;
 
   InstallationDetailModelResponse({
     this.id,
@@ -382,7 +382,7 @@ class InstallationDetailModelResponse {
       ponidId: json['PONID_ID'] as num?,
       ponidIdLong: json['PONID_IDLong'] as num?,
       ponidCode: json['PONID_Code'] as dynamic,
-      listWarning: json['ListWarning'] as List<String>?,
+      listWarning: json['ListWarning'] as List<dynamic>?,
     );
   }
 

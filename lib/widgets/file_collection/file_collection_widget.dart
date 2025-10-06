@@ -51,7 +51,7 @@ class _FileCollectionWidgetState extends State<FileCollectionWidget> {
   @override
   void dispose() {
     super.dispose();
-    _mainController.dispose();
+    // _mainController.dispose();
   }
 
   Future<void> onPickImage({bool isTakeFromCamera = false}) async {

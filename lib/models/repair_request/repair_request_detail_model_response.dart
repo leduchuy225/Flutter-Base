@@ -112,7 +112,7 @@ class RepairRequestDetailModelResponse {
   String? reportModem;
   bool? reportModemIsSign;
 
-  List<String>? listWarning;
+  List<dynamic>? listWarning;
 
   RepairRequestDetailModelResponse({
     this.id,
@@ -374,7 +374,7 @@ class RepairRequestDetailModelResponse {
             ),
           )
           .toList(),
-      listWarning: json['ListWarning'] as List<String>?,
+      listWarning: json['ListWarning'] as List<dynamic>?,
       reportModem: json['Report_Modem'] as String?,
       reportModemIsSign: json['Report_Modem_IsSign'] as bool?,
     );
