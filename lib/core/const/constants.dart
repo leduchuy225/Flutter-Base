@@ -72,8 +72,12 @@ class Config {
     if (_deviceToken != null) {
       return _deviceToken;
     }
-    final token = await FirebaseMessaging.instance.getToken();
-    _deviceToken = token;
+    try {
+      final token = await FirebaseMessaging.instance.getToken();
+      _deviceToken = token;
+    } catch (_) {
+      _deviceToken = '';
+    }
 
     return _deviceToken;
   }
