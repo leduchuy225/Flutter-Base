@@ -18,6 +18,9 @@ class SignReportFileDataController {
   final bbbgAmountTextController = MyTextFieldController();
   final bbbgStatusTextController = MyTextFieldController();
 
+  // Biên bản kéo mới
+  final bbkmUsernameTextController = MyTextFieldController();
+
   bool checkBbntIsValid() {
     if (!bbntEmailTextController.checkValidation()) {
       return false;
@@ -48,6 +51,13 @@ class SignReportFileDataController {
       return false;
     }
     if (!bbbgStatusTextController.checkValidation()) {
+      return false;
+    }
+    return true;
+  }
+
+  bool checkBbkmIsValid() {
+    if (!bbkmUsernameTextController.checkValidation()) {
       return false;
     }
     return true;

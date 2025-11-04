@@ -401,7 +401,12 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
               if (!reportDataController.checkBbbgIsValid()) {
                 return;
               }
+            } else if (currentReportIdToSign == ReportType.BBKM) {
+              if (!reportDataController.checkBbkmIsValid()) {
+                return;
+              }
             }
+
             staffSignatureController.clear();
             customerSignatureController.clear();
 

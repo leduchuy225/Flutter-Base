@@ -10,6 +10,8 @@ class ViewInstallationReportFileModelPayload {
   String? tb1ThongSo;
   String? tb1SLuong;
   String? tb1HTrang;
+  // Biên bản kéo mới
+  String? khachHangUsername;
 
   ViewInstallationReportFileModelPayload({
     this.duLieuHoanThanh,
@@ -21,25 +23,27 @@ class ViewInstallationReportFileModelPayload {
     this.tb1ThongSo,
     this.tb1SLuong,
     this.tb1HTrang,
+    this.khachHangUsername,
   });
 
-  factory ViewInstallationReportFileModelPayload.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return ViewInstallationReportFileModelPayload(
-      duLieuHoanThanh: json['DuLieu_HoanThanh'] == null
-          ? null
-          : DateTime.parse(json['DuLieu_HoanThanh'] as String),
-      duLieuAcc: json['DuLieu_Acc'] as String?,
-      duLieuPass: json['DuLieu_Pass'] as String?,
-      duLieuIpV4: json['DuLieu_IpV4'] as String?,
-      duLieuChatLuongDichVu: json['DuLieu_ChatLuongDichVu'] as String?,
-      tb1Ten: json['TB_1_Ten'] as String?,
-      tb1ThongSo: json['TB_1_ThongSo'] as String?,
-      tb1SLuong: json['TB_1_SLuong'] as String?,
-      tb1HTrang: json['TB_1_HTrang'] as String?,
-    );
-  }
+  // factory ViewInstallationReportFileModelPayload.fromJson(
+  //   Map<String, dynamic> json,
+  // ) {
+  //   return ViewInstallationReportFileModelPayload(
+  //     duLieuHoanThanh: json['DuLieu_HoanThanh'] == null
+  //         ? null
+  //         : DateTime.parse(json['DuLieu_HoanThanh'] as String),
+  //     duLieuAcc: json['DuLieu_Acc'] as String?,
+  //     duLieuPass: json['DuLieu_Pass'] as String?,
+  //     duLieuIpV4: json['DuLieu_IpV4'] as String?,
+  //     duLieuChatLuongDichVu: json['DuLieu_ChatLuongDichVu'] as String?,
+  //     tb1Ten: json['TB_1_Ten'] as String?,
+  //     tb1ThongSo: json['TB_1_ThongSo'] as String?,
+  //     tb1SLuong: json['TB_1_SLuong'] as String?,
+  //     tb1HTrang: json['TB_1_HTrang'] as String?,
+  //     khachHangUsername: json['KhachHang_UserName'] as String?,
+  //   );
+  // }
 
   Map<String, dynamic> toJson() => {
     'DuLieu_HoanThanh': duLieuHoanThanh?.toIso8601String(),
@@ -51,5 +55,6 @@ class ViewInstallationReportFileModelPayload {
     'TB_1_ThongSo': tb1ThongSo,
     'TB_1_SLuong': tb1SLuong,
     'TB_1_HTrang': tb1HTrang,
+    'KhachHang_UserName': khachHangUsername,
   };
 }

@@ -425,6 +425,10 @@ class NewInstallationDetailController
         tb1ThongSo: currentReportIdToPreview == ReportType.BBBG
             ? reportDataController.bbbgStatictisTextController.textTrim
             : null,
+        // Biên bản kéo mới
+        khachHangUsername: currentReportIdToPreview == ReportType.BBKM
+            ? reportDataController.bbkmUsernameTextController.textTrim
+            : null,
       ),
     );
 

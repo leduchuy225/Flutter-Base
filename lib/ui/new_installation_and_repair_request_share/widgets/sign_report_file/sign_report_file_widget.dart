@@ -70,6 +70,19 @@ class SignReportFileWidget extends StatelessWidget {
     );
   }
 
+  Widget _buildBienBanKeoMoi(BuildContext context) {
+    return Column(
+      children: [
+        MyTextField(
+          labelText: 'Username của KH',
+          validations: const [MyValidation.checkIsNotEmpty],
+          controller: reportDataController.bbkmUsernameTextController,
+        ),
+        AppStyles.pdt30,
+      ],
+    );
+  }
+
   Widget _buildBienBanNghiemThu(BuildContext context) {
     return Column(
       children: [
@@ -205,6 +218,8 @@ class SignReportFileWidget extends StatelessWidget {
                         return _buildBienBanNghiemThu(context);
                       case ReportType.BBBG:
                         return _buildBienBanBanGiao(context);
+                      case ReportType.BBKM:
+                        return _buildBienBanKeoMoi(context);
                       default:
                         return const SizedBox();
                     }

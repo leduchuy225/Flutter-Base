@@ -55,6 +55,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
                 child: MyTextField(
                   isRequired: true,
                   labelText: 'Modem cũ',
+                  hintText: 'Nhập mã seri modem cũ',
                   controller: oldModemTextController,
                   validations: const [MyValidation.checkIsNotEmpty],
                 ),
@@ -63,6 +64,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
             MyTextField(
               isRequired: true,
               labelText: 'Modem mới',
+              hintText: 'Nhập mã seri modem mới',
               controller: newModemTextController,
               validations: const [MyValidation.checkIsNotEmpty],
             ),

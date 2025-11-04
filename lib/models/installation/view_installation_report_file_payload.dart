@@ -7,19 +7,19 @@ class ViewInstallationReportFilePayload {
 
   ViewInstallationReportFilePayload({this.id, this.type, this.model});
 
-  factory ViewInstallationReportFilePayload.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return ViewInstallationReportFilePayload(
-      id: json['id'] as num?,
-      type: json['type'] as num?,
-      model: json['model'] == null
-          ? null
-          : ViewInstallationReportFileModelPayload.fromJson(
-              json['model'] as Map<String, dynamic>,
-            ),
-    );
-  }
+  // factory ViewInstallationReportFilePayload.fromJson(
+  //   Map<String, dynamic> json,
+  // ) {
+  //   return ViewInstallationReportFilePayload(
+  //     id: json['id'] as num?,
+  //     type: json['type'] as num?,
+  //     model: json['model'] == null
+  //         ? null
+  //         : ViewInstallationReportFileModelPayload.fromJson(
+  //             json['model'] as Map<String, dynamic>,
+  //           ),
+  //   );
+  // }
 
   Map<String, dynamic> toJson() => {
     'id': id,
