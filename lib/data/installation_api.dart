@@ -27,7 +27,6 @@ import '../models/installation/update_new_installation_step_3_response.dart';
 import '../models/installation/update_new_installation_step_4_response.dart';
 import '../models/installation/update_new_installation_technical_staff_response.dart';
 import '../models/installation/view_installation_report_file_payload.dart';
-import '../models/installation/view_installation_report_file_response.dart';
 import '../models/repair_request/repair_request_add_modem_log_payload.dart';
 import '../models/repair_request/repair_request_add_modem_log_response.dart';
 import '../models/repair_request/repair_request_get_modem_log_response.dart';
@@ -108,7 +107,7 @@ abstract class InstallationApi {
   getInstallationReportFileList(@Body() Map<String, dynamic> body);
 
   @POST('/newconnectionrequest/SetReport')
-  Future<BaseResponse<ViewInstallationReportFileResponse>>
+  Future<BaseResponse<SignInstallationReportFileResponse>>
   viewInstallationReportFile(@Body() ViewInstallationReportFilePayload body);
 
   @MultiPart()

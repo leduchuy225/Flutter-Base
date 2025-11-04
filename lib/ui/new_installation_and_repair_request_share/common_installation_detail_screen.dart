@@ -208,7 +208,7 @@ class CommonInstallationDetailScreen<
               ),
               Visibility(
                 visible:
-                    controller.isRequestReadyToClose &&
+                    controller.isCompletedStaffOnController &&
                     !controller.isRequestClosed,
                 child: Padding(
                   padding: const EdgeInsetsGeometry.symmetric(

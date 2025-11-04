@@ -178,6 +178,8 @@ class NewInstallationDetailController
       isViewOnlyModeRxData.value =
           isRequestClosed || technicalStaffReportCompletedDate != null;
 
+      isCompletedStaffOnController = data.isCompletedStaffOn;
+
       update();
     }
   }
@@ -256,8 +258,7 @@ class NewInstallationDetailController
       }
 
       currentRxStep.value = (response.data?.currentStep ?? 1).toInt();
-      detailRxData.value?.isCompletedStaffOn =
-          response.data?.isCompletedStaffOn;
+      isCompletedStaffOnController = response.data?.isCompletedStaffOn;
 
       update();
     }
@@ -448,6 +449,8 @@ class NewInstallationDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
+      isCompletedStaffOnController = response.data?.isCompletedStaffOn;
+
       final firstReportType = reportTypeSelectorController.first;
       final isSignStatus = firstReportType?.extraData?['isSigned'] ?? false;
 
@@ -498,8 +501,7 @@ class NewInstallationDetailController
     final urlFile = getFileLink(response.data?.urlFile);
 
     if (urlFile != null) {
-      detailRxData.value?.isCompletedStaffOn =
-          response.data?.isCompletedStaffOn;
+      isCompletedStaffOnController = response.data?.isCompletedStaffOn;
       reportFiles.forEach((report) {
         if (report.id == currentReportIdToSign) {
           report.url = urlFile;
@@ -601,9 +603,6 @@ class NewInstallationDetailController
 
   @override
   bool get isRequestClosed => detailData?.isClosed ?? false;
-
-  @override
-  bool get isRequestReadyToClose => detailData?.isCompletedStaffOn ?? false;
 
   @override
   Future updateSurveyStatus() async {

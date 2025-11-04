@@ -1,15 +1,15 @@
-class ViewInstallationReportFileResponse {
-  String? urlFile;
+// class ViewInstallationReportFileResponse {
+//   String? urlFile;
 
-  ViewInstallationReportFileResponse({this.urlFile});
+//   ViewInstallationReportFileResponse({this.urlFile});
 
-  factory ViewInstallationReportFileResponse.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    return ViewInstallationReportFileResponse(
-      urlFile: json['urlFile'] as String?,
-    );
-  }
+//   factory ViewInstallationReportFileResponse.fromJson(
+//     Map<String, dynamic> json,
+//   ) {
+//     return ViewInstallationReportFileResponse(
+//       urlFile: json['urlFile'] as String?,
+//     );
+//   }
 
-  Map<String, dynamic> toJson() => {'urlFile': urlFile};
-}
+//   Map<String, dynamic> toJson() => {'urlFile': urlFile};
+// }

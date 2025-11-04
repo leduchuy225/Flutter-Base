@@ -16,7 +16,6 @@ import '../models/installation/sign_installation_report_file_response.dart';
 import '../models/installation/update_material_payload.dart';
 import '../models/installation/update_material_response.dart';
 import '../models/installation/view_installation_report_file_payload.dart';
-import '../models/installation/view_installation_report_file_response.dart';
 import '../models/repair_request/close_repair_request_response.dart';
 import '../models/repair_request/repair_request_add_modem_log_payload.dart';
 import '../models/repair_request/repair_request_add_modem_log_response.dart';
@@ -102,7 +101,7 @@ abstract class RepairRequestApi {
   getRepairReportFileList(@Body() Map<String, dynamic> body);
 
   @POST('/RepairRequest/SetReport')
-  Future<BaseResponse<ViewInstallationReportFileResponse>> viewRepairReportFile(
+  Future<BaseResponse<SignInstallationReportFileResponse>> viewRepairReportFile(
     @Body() ViewInstallationReportFilePayload body,
   );
 

@@ -565,7 +565,7 @@ class _RepairRequestApi implements RepairRequestApi {
   }
 
   @override
-  Future<BaseResponse<ViewInstallationReportFileResponse>> viewRepairReportFile(
+  Future<BaseResponse<SignInstallationReportFileResponse>> viewRepairReportFile(
     ViewInstallationReportFilePayload body,
   ) async {
     final _extra = <String, dynamic>{};
@@ -574,7 +574,7 @@ class _RepairRequestApi implements RepairRequestApi {
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
     final _options =
-        _setStreamType<BaseResponse<ViewInstallationReportFileResponse>>(
+        _setStreamType<BaseResponse<SignInstallationReportFileResponse>>(
           Options(method: 'POST', headers: _headers, extra: _extra)
               .compose(
                 _dio.options,
@@ -587,11 +587,11 @@ class _RepairRequestApi implements RepairRequestApi {
               ),
         );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BaseResponse<ViewInstallationReportFileResponse> _value;
+    late BaseResponse<SignInstallationReportFileResponse> _value;
     try {
-      _value = BaseResponse<ViewInstallationReportFileResponse>.fromJson(
+      _value = BaseResponse<SignInstallationReportFileResponse>.fromJson(
         _result.data!,
-        (json) => ViewInstallationReportFileResponse.fromJson(
+        (json) => SignInstallationReportFileResponse.fromJson(
           json as Map<String, dynamic>,
         ),
       );

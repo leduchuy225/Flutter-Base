@@ -101,6 +101,19 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   final checkUpdateMaterialController = RxBool(false);
   final checkUpdateSlidAndDividerController = RxBool(false);
 
+  final _isCompletedStaffOnController = RxBool(false);
+
+  bool get isCompletedStaffOnController {
+    return _isCompletedStaffOnController.value;
+  }
+
+  set isCompletedStaffOnController(bool? value) {
+    if (_isCompletedStaffOnController.value) {
+      return;
+    }
+    _isCompletedStaffOnController.value = value ?? false;
+  }
+
   T? get detailData => detailRxData.value;
 
   int? get id;
@@ -122,8 +135,6 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
   bool get isRefreshValue;
 
   bool get isRequestClosed;
-
-  bool get isRequestReadyToClose;
 
   List<RepairRequestGetModemLogModelResponse> get modemLogs;
 
