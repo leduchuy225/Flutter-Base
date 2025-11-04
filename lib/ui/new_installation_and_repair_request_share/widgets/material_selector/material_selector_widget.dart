@@ -22,6 +22,7 @@ import 'material_selector_controller.dart';
 
 class MaterialSelectorWidget extends StatefulWidget {
   final int id;
+  final bool isDone;
   final bool isViewOnly;
   final MaterialSelectorController controller;
   final Future<BaseResponse> Function(Map<String, dynamic>) deleteMaterialApi;
@@ -33,6 +34,7 @@ class MaterialSelectorWidget extends StatefulWidget {
   const MaterialSelectorWidget({
     super.key,
     required this.id,
+    this.isDone = false,
     this.isViewOnly = false,
     required this.controller,
     required this.deleteMaterialApi,
@@ -52,6 +54,8 @@ class _MaterialSelectorWidgetState extends State<MaterialSelectorWidget> {
   Widget build(BuildContext context) {
     return MyTexttile.card(
       title: 'Vật tư',
+      tagColor: AppColors.success,
+      tag: widget.isDone ? 'Đã thực hiện' : null,
       child: GetBuilder(
         init: widget.controller,
         builder: (controller) {

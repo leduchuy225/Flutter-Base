@@ -3,7 +3,7 @@ enum InstallationStepEnum {
   MakeAppointment(id: 2),
   InstallAtCustomerHouse(id: 3),
   SignReport(id: 4),
-  AskForHelp(id: 5),
+  AskForHelp(id: 0),
   UpdateMaterial(id: 6),
   UpdateSlidAndDivider(id: 7),
   ReplaceModem(id: 8),

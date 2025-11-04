@@ -97,6 +97,10 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
     isNameWithDescription: true,
   );
 
+  final checkReplaceModemController = RxBool(false);
+  final checkUpdateMaterialController = RxBool(false);
+  final checkUpdateSlidAndDividerController = RxBool(false);
+
   T? get detailData => detailRxData.value;
 
   int? get id;
@@ -448,6 +452,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           deleteMaterialApi: deleteMaterialApi,
           updateMaterialApi: updateMaterialApi,
           controller: materialSelectorController,
+          isDone: checkUpdateMaterialController.value,
         );
       case InstallationStepEnum.UpdateSlidAndDivider:
         return SlidAndDividerWidget(
@@ -456,7 +461,9 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           isViewOnly: isViewOnly,
           provinceId: provinceId,
           controller: slidAndDividerController,
+          isDone: checkUpdateSlidAndDividerController.value,
           onSuccess: (response) {
+            checkUpdateSlidAndDividerController.value = true;
             setIsRefreshValue();
           },
         );
@@ -464,6 +471,7 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
         return ModemReplaceLogWidget(
           modemLogs: modemLogs,
           isViewOnly: isViewOnly,
+          isDone: checkReplaceModemController.value,
           oldModemTextController: oldModemTextController,
           newModemTextController: newModemTextController,
           isReplace: serviceType == MBService.RepairRequest,

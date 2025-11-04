@@ -71,7 +71,7 @@ class _NewInstallationListScreenState extends State<RepairRequestListScreen> {
           },
           binding: BindingsBuilder.put(() {
             return RepairRequestDetailController(
-              repairRequestId: item.id!.toInt(),
+              repairRequestId: (item.id ?? 0).toInt(),
             );
           }),
         );

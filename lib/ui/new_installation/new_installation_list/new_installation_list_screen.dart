@@ -71,7 +71,7 @@ class _NewInstallationListScreenState extends State<NewInstallationListScreen> {
           },
           binding: BindingsBuilder.put(() {
             return NewInstallationDetailController(
-              newInstallationId: item.id!.toInt(),
+              newInstallationId: (item.id ?? 0).toInt(),
             );
           }),
         );

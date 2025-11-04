@@ -28,9 +28,9 @@ import '../../new_installation_and_repair_request_share/widgets/sign_report_file
 class RepairRequestDetailController
     extends
         CommonInstallationDetailController<RepairRequestDetailModelResponse> {
-  final int repairRequestId;
+  final int? repairRequestId;
 
-  RepairRequestDetailController({required this.repairRequestId});
+  RepairRequestDetailController({this.repairRequestId});
 
   @override
   Future getDetailData() async {
@@ -143,17 +143,26 @@ class RepairRequestDetailController
 
       cableDistanceTextController.text = (data.reportDistance ?? '').toString();
 
-      materialSelectorController.replace(
-        data.listMbRepairRequestMaterialViewModel ?? [],
-      );
+      if ((data.listMbRepairRequestMaterialViewModel ?? []).isNotEmpty) {
+        checkUpdateMaterialController.value = true;
+        materialSelectorController.replace(
+          data.listMbRepairRequestMaterialViewModel ?? [],
+        );
+      }
 
-      modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
+      if ((data.listMbModemLogViewModel ?? []).isNotEmpty) {
+        checkReplaceModemController.value = true;
+        modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
+      }
 
-      accidentsSelectorController.selectors = (data.listListError ?? []).map((
-        element,
-      ) {
-        return MySelectorModel(id: element.id, name: element.text ?? '');
-      }).toList();
+      accidentsSelectorController.selectors = (data.listListError ?? [])
+          .where((item) {
+            return item.id != null;
+          })
+          .map((element) {
+            return MySelectorModel(id: element.id, name: element.text ?? '');
+          })
+          .toList();
 
       accidentDescriptionTextController.text = data.technicalStaffNote ?? '';
       accidentSolutionTextController.text = data.reportCorrectionMethod ?? '';
@@ -497,7 +506,8 @@ class RepairRequestDetailController
         .callApi();
 
     if (response.data?.currentStep != null) {
-      currentRxStep.value = response.data!.currentStep!.toInt();
+      checkUpdateMaterialController.value = true;
+      currentRxStep.value = (response.data?.currentStep ?? 0).toInt();
       setIsRefreshValue();
 
       update();
@@ -534,6 +544,7 @@ class RepairRequestDetailController
       newModemTextController.clear();
       oldModemTextController.clear();
 
+      checkReplaceModemController.value = true;
       modemReplacementLogs.value = data;
 
       setIsRefreshValue();

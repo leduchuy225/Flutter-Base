@@ -30,9 +30,9 @@ import '../../new_installation_and_repair_request_share/widgets/sign_report_file
 class NewInstallationDetailController
     extends
         CommonInstallationDetailController<InstallationDetailModelResponse> {
-  final int newInstallationId;
+  final int? newInstallationId;
 
-  NewInstallationDetailController({required this.newInstallationId});
+  NewInstallationDetailController({this.newInstallationId});
 
   @override
   Future getDetailData() async {
@@ -152,19 +152,28 @@ class NewInstallationDetailController
 
       cableDistanceTextController.text = (data.reportDistance ?? '').toString();
 
-      materialSelectorController.replace(
-        data.listMbConnectionRequestMaterialViewModel ?? [],
-      );
+      if ((data.listMbConnectionRequestMaterialViewModel ?? []).isNotEmpty) {
+        checkUpdateMaterialController.value = true;
+        materialSelectorController.replace(
+          data.listMbConnectionRequestMaterialViewModel ?? [],
+        );
+      }
 
-      modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
+      if ((data.listMbModemLogViewModel ?? []).isNotEmpty) {
+        checkReplaceModemController.value = true;
+        modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
+      }
 
-      slidAndDividerController.data = UpdateDeviceResponse(
-        slidCode: data.slidCode,
-        deviceAcc: data.deviceAcc,
-        devicePort: data.devicePort,
-        devicePass: data.devicePass,
-        dividerCode: data.dividerCode,
-      );
+      if (data.slidCode != null) {
+        checkUpdateSlidAndDividerController.value = true;
+        slidAndDividerController.data = UpdateDeviceResponse(
+          slidCode: data.slidCode,
+          deviceAcc: data.deviceAcc,
+          devicePort: data.devicePort,
+          devicePass: data.devicePass,
+          dividerCode: data.dividerCode,
+        );
+      }
 
       isViewOnlyModeRxData.value =
           isRequestClosed || technicalStaffReportCompletedDate != null;
@@ -532,7 +541,8 @@ class NewInstallationDetailController
         .callApi();
 
     if (response.data?.currentStep != null) {
-      currentRxStep.value = response.data!.currentStep!.toInt();
+      checkUpdateMaterialController.value = true;
+      currentRxStep.value = (response.data?.currentStep ?? 0).toInt();
       setIsRefreshValue();
 
       update();
@@ -567,6 +577,7 @@ class NewInstallationDetailController
     if (data != null) {
       newModemTextController.clear();
 
+      checkReplaceModemController.value = true;
       modemReplacementLogs.value = data;
 
       setIsRefreshValue();

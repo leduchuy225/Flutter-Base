@@ -3,11 +3,13 @@ import 'package:flutter_base/widgets/my_texttile.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../../../../models/installation/update_device_response.dart';
+import '../../../../theme/styles.dart';
 import 'slid_and_divider_controller.dart';
 import 'slid_and_divider_selector_widget.dart';
 
 class SlidAndDividerWidget extends StatelessWidget {
   final int? id;
+  final bool isDone;
   final int? countryId;
   final int? provinceId;
   final bool isViewOnly;
@@ -20,6 +22,7 @@ class SlidAndDividerWidget extends StatelessWidget {
     this.countryId,
     this.onSuccess,
     this.provinceId,
+    this.isDone = false,
     this.isViewOnly = false,
     required this.controller,
   });
@@ -31,6 +34,8 @@ class SlidAndDividerWidget extends StatelessWidget {
       builder: (controller) {
         return MyTexttile.card(
           title: 'Thông tin thiết bị',
+          tagColor: AppColors.success,
+          tag: isDone ? 'Đã thực hiện' : null,
           suffixHeader: Visibility(
             visible: !isViewOnly,
             child: InkWell(

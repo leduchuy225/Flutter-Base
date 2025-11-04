@@ -10,6 +10,7 @@ import '../../../widgets/text_field/text_field_controller.dart';
 import '../../../widgets/text_field/text_field_widget.dart';
 
 class ModemReplaceLogWidget extends StatelessWidget {
+  final bool isDone;
   final bool isReplace;
   final bool isViewOnly;
   final void Function(bool) onPressed;
@@ -20,6 +21,7 @@ class ModemReplaceLogWidget extends StatelessWidget {
 
   const ModemReplaceLogWidget({
     super.key,
+    this.isDone = false,
     this.isReplace = true,
     this.isViewOnly = false,
     required this.modemLogs,
@@ -41,6 +43,8 @@ class ModemReplaceLogWidget extends StatelessWidget {
         onTap: onRightIconPressed,
         child: const Icon(Icons.list),
       ),
+      tagColor: AppColors.success,
+      tag: isDone ? 'Đã thực hiện' : null,
       child: Visibility(
         visible: !isViewOnly,
         child: Column(
