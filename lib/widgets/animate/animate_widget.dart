@@ -24,11 +24,13 @@ class _MyAnimateWidgetState extends State<MyAnimateWidget>
   late final AnimationController _myAnimateController;
 
   void animate() {
-    if (_myAnimateController.isCompleted) {
-      _myAnimateController.reverse();
-    } else {
-      _myAnimateController.forward();
-    }
+    try {
+      if (_myAnimateController.isCompleted) {
+        _myAnimateController.reverse();
+      } else {
+        _myAnimateController.forward();
+      }
+    } catch (_) {}
   }
 
   @override
