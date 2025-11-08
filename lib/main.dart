@@ -9,6 +9,7 @@ import 'package:flutter_base/core/services/http_service.dart';
 import 'package:flutter_base/core/services/notification_service.dart';
 import 'package:flutter_base/core/services/service_locator.dart';
 import 'package:flutter_base/data/api_locator.dart';
+import 'package:flutter_base/firebase_options.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ import 'ui/splash_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   if (Config().isDevMode) {
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);

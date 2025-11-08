@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'mobifiber-5fb79.firebasestorage.app',
     iosBundleId: 'com.hig.mobifiber',
   );
-
 }
