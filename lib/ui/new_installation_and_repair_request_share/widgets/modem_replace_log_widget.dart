@@ -103,8 +103,8 @@ class ModemReplacementLogListWidget extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: MyTexttile.list(
           items: [
-            MyTexttileItem(titleText: 'Seri modem mới', text: element.modemNew),
-            MyTexttileItem(titleText: 'Seri modem cũ', text: element.modemOld),
+            MyTexttileItem(titleText: 'Seri mới', text: element.modemNew),
+            MyTexttileItem(titleText: 'Seri cũ', text: element.modemOld),
             MyTexttileItem(titleText: 'Người TH', text: element.userIdUserName),
             MyTexttileItem(
               titleText: 'Ngày TH',

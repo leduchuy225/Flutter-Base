@@ -476,6 +476,8 @@ abstract class CommonInstallationDetailController<T> extends GetxController {
           onSuccess: (response) {
             checkUpdateSlidAndDividerController.value = true;
             setIsRefreshValue();
+
+            update();
           },
         );
       case InstallationStepEnum.ReplaceModem:
