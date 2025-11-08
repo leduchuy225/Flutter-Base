@@ -78,7 +78,7 @@ class RepairRequestItem extends StatelessWidget {
           titleText: 'SĐT người yêu cầu',
           text: item.staffPhoneNumber,
         ),
-        MyTexttileItem(titleText: 'Email người tạo', text: item.createdByEmail),
+        MyTexttileItem(titleText: 'Người tạo', text: item.createdByUserName),
         MyTexttileItem(
           titleText: 'Ngày tạo',
           text: MyDatetimeUtils.formatDateFromAPI(item.createdDate),

@@ -78,8 +78,8 @@ class _NewInstallationDetailScreenState
                   text: detailData?.staffPhoneNumber,
                 ),
                 MyTexttileItem(
-                  titleText: 'Email người tạo',
-                  text: detailData?.createdByEmail,
+                  titleText: 'Người tạo',
+                  text: detailData?.createdByUserName,
                 ),
                 MyTexttileItem(
                   titleText: 'Ngày tạo',
@@ -117,6 +117,7 @@ class _NewInstallationDetailScreenState
                   titleText: 'Ngày sinh',
                   text: MyDatetimeUtils.formatDateFromAPI(
                     customerData?.birthDay,
+                    toFormat: MyDateFormatEnum.DATE,
                   ),
                 ),
                 MyTexttileItem(
@@ -133,6 +134,7 @@ class _NewInstallationDetailScreenState
                   titleText: 'Ngày cấp CCCD',
                   text: MyDatetimeUtils.formatDateFromAPI(
                     customerData?.cccdIssue,
+                    toFormat: MyDateFormatEnum.DATE,
                   ),
                 ),
                 MyTexttileItem(
