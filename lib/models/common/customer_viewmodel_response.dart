@@ -6,8 +6,8 @@ class CustomerViewmodelResponse {
   dynamic avatar;
   String? cccd;
   dynamic cccdIssue;
-  dynamic cccdFront;
-  dynamic cccdBack;
+  String? cccdFront;
+  String? cccdBack;
   String? phoneNumber;
   int? countryId;
   int? provinceId;
