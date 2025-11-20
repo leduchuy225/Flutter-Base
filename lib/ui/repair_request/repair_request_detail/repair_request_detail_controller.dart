@@ -44,136 +44,140 @@ class RepairRequestDetailController
 
     final data = response.data?.model;
 
-    if (data != null) {
-      detailRxData.value = data;
-      currentRxStep.value = data.currentStep?.toInt() ?? 1;
-      noteListRxData.value = data.listMbRepairRequestNoteViewModel ?? [];
+    try {
+      if (data != null) {
+        detailRxData.value = data;
+        currentRxStep.value = data.currentStep?.toInt() ?? 1;
+        noteListRxData.value = data.listMbRepairRequestNoteViewModel ?? [];
 
-      overdueNoteListRxData.value =
-          data.listMbRepairRequestOverdueViewModel ?? [];
+        overdueNoteListRxData.value =
+            data.listMbRepairRequestOverdueViewModel ?? [];
 
-      reportFiles.addAll([
-        if ((data.reportProblem ?? '').isNotEmpty)
-          SignReportFileItemModel(
-            id: ReportType.BBNT,
-            name: 'Biên bản mẫu sự cố',
-            pathName: data.reportProblem!,
-            url: getFileLink(data.reportProblem)!,
-            isSigned: data.reportProblemIsSet ?? false,
-          ),
-        if ((data.reportModem ?? '').isNotEmpty)
-          SignReportFileItemModel(
-            pathName: data.reportModem!,
-            id: ReportType.BBReplaceModem,
-            name: 'Biên bản thay thế modem',
-            url: getFileLink(data.reportModem)!,
-            isSigned: data.reportModemIsSign ?? false,
-          ),
-      ]);
+        reportFiles.addAll([
+          if ((data.reportProblem ?? '').isNotEmpty)
+            SignReportFileItemModel(
+              id: ReportType.BBNT,
+              name: 'Biên bản mẫu sự cố',
+              pathName: data.reportProblem!,
+              url: getFileLink(data.reportProblem)!,
+              isSigned: data.reportProblemIsSet ?? false,
+            ),
+          if ((data.reportModem ?? '').isNotEmpty)
+            SignReportFileItemModel(
+              pathName: data.reportModem!,
+              id: ReportType.BBReplaceModem,
+              name: 'Biên bản thay thế modem',
+              url: getFileLink(data.reportModem)!,
+              isSigned: data.reportModemIsSign ?? false,
+            ),
+        ]);
 
-      if ((data.technicalStaffModuleImage ?? '').isNotEmpty) {
-        technicalStaffModuleImageControler.files.value = [
-          FileCollectionModel(
-            fileName: data.technicalStaffModuleImage!,
-            filePath: getFileLink(data.technicalStaffModuleImage)!,
-          ),
-        ];
+        if ((data.technicalStaffModuleImage ?? '').isNotEmpty) {
+          technicalStaffModuleImageControler.files.value = [
+            FileCollectionModel(
+              fileName: data.technicalStaffModuleImage!,
+              filePath: getFileLink(data.technicalStaffModuleImage)!,
+            ),
+          ];
+        }
+
+        if ((data.technicalStaffImage ?? '').isNotEmpty) {
+          technicalStaffImageControler.files.value = [
+            FileCollectionModel(
+              fileName: data.technicalStaffImage!,
+              filePath: getFileLink(data.technicalStaffImage)!,
+            ),
+          ];
+        }
+
+        if ((data.technicalStaffTestImage ?? '').isNotEmpty) {
+          technicalStaffTestImageControler.files.value = [
+            FileCollectionModel(
+              fileName: data.technicalStaffTestImage!,
+              filePath: getFileLink(data.technicalStaffTestImage)!,
+            ),
+          ];
+        }
+
+        if ((data.reportImageDivider ?? '').isNotEmpty) {
+          reportDividerImageControler.files.value = [
+            FileCollectionModel(
+              fileName: data.reportImageDivider!,
+              filePath: getFileLink(data.reportImageDivider)!,
+            ),
+          ];
+        }
+
+        if ((data.reportCableLengthStart ?? '').isNotEmpty) {
+          reportCableStartImageControler.files.value = [
+            FileCollectionModel(
+              fileName: data.reportCableLengthStart!,
+              filePath: getFileLink(data.reportCableLengthStart)!,
+            ),
+          ];
+        }
+
+        if ((data.reportCableLengthEnd ?? '').isNotEmpty) {
+          reportCableEndImageControler.files.value = [
+            FileCollectionModel(
+              fileName: data.reportCableLengthEnd!,
+              filePath: getFileLink(data.reportCableLengthEnd)!,
+            ),
+          ];
+        }
+
+        cccdImageController.files.addAll([
+          if ((data.mbCustomerViewModel?.cccdFront ?? '').isNotEmpty)
+            FileCollectionModel(
+              fileName: data.mbCustomerViewModel!.cccdFront!,
+              filePath: getFileLink(data.mbCustomerViewModel?.cccdFront)!,
+            ),
+          if ((data.mbCustomerViewModel?.cccdBack ?? '').isNotEmpty)
+            FileCollectionModel(
+              fileName: data.mbCustomerViewModel!.cccdBack!,
+              filePath: getFileLink(data.mbCustomerViewModel?.cccdBack)!,
+            ),
+        ]);
+
+        cableEndTextController.text = (data.cableLengthEnd ?? '').toString();
+        cableStartTextController.text = (data.cableLengthStart ?? '')
+            .toString();
+
+        cableDistanceTextController.text = (data.reportDistance ?? '')
+            .toString();
+
+        if ((data.listMbRepairRequestMaterialViewModel ?? []).isNotEmpty) {
+          checkUpdateMaterialController.value = true;
+          materialSelectorController.replace(
+            data.listMbRepairRequestMaterialViewModel ?? [],
+          );
+        }
+
+        if ((data.listMbModemLogViewModel ?? []).isNotEmpty) {
+          checkReplaceModemController.value = true;
+          modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
+        }
+
+        accidentsSelectorController.selectors = (data.listListError ?? [])
+            .where((item) {
+              return item.id != null;
+            })
+            .map((element) {
+              return MySelectorModel(id: element.id, name: element.text ?? '');
+            })
+            .toList();
+
+        accidentDescriptionTextController.text = data.technicalStaffNote ?? '';
+        accidentSolutionTextController.text = data.reportCorrectionMethod ?? '';
+
+        isViewOnlyModeRxData.value =
+            isRequestClosed || technicalStaffReportCompletedDate != null;
+
+        isCompletedStaffOnController = data.isCompletedStaffOn;
+
+        update();
       }
-
-      if ((data.technicalStaffImage ?? '').isNotEmpty) {
-        technicalStaffImageControler.files.value = [
-          FileCollectionModel(
-            fileName: data.technicalStaffImage!,
-            filePath: getFileLink(data.technicalStaffImage)!,
-          ),
-        ];
-      }
-
-      if ((data.technicalStaffTestImage ?? '').isNotEmpty) {
-        technicalStaffTestImageControler.files.value = [
-          FileCollectionModel(
-            fileName: data.technicalStaffTestImage!,
-            filePath: getFileLink(data.technicalStaffTestImage)!,
-          ),
-        ];
-      }
-
-      if ((data.reportImageDivider ?? '').isNotEmpty) {
-        reportDividerImageControler.files.value = [
-          FileCollectionModel(
-            fileName: data.reportImageDivider!,
-            filePath: getFileLink(data.reportImageDivider)!,
-          ),
-        ];
-      }
-
-      if ((data.reportCableLengthStart ?? '').isNotEmpty) {
-        reportCableStartImageControler.files.value = [
-          FileCollectionModel(
-            fileName: data.reportCableLengthStart!,
-            filePath: getFileLink(data.reportCableLengthStart)!,
-          ),
-        ];
-      }
-
-      if ((data.reportCableLengthEnd ?? '').isNotEmpty) {
-        reportCableEndImageControler.files.value = [
-          FileCollectionModel(
-            fileName: data.reportCableLengthEnd!,
-            filePath: getFileLink(data.reportCableLengthEnd)!,
-          ),
-        ];
-      }
-
-      cccdImageController.files.addAll([
-        if ((data.mbCustomerViewModel?.cccdFront ?? '').isNotEmpty)
-          FileCollectionModel(
-            fileName: data.mbCustomerViewModel!.cccdFront!,
-            filePath: getFileLink(data.mbCustomerViewModel?.cccdFront)!,
-          ),
-        if ((data.mbCustomerViewModel?.cccdBack ?? '').isNotEmpty)
-          FileCollectionModel(
-            fileName: data.mbCustomerViewModel!.cccdBack!,
-            filePath: getFileLink(data.mbCustomerViewModel?.cccdBack)!,
-          ),
-      ]);
-
-      cableEndTextController.text = (data.cableLengthEnd ?? '').toString();
-      cableStartTextController.text = (data.cableLengthStart ?? '').toString();
-
-      cableDistanceTextController.text = (data.reportDistance ?? '').toString();
-
-      if ((data.listMbRepairRequestMaterialViewModel ?? []).isNotEmpty) {
-        checkUpdateMaterialController.value = true;
-        materialSelectorController.replace(
-          data.listMbRepairRequestMaterialViewModel ?? [],
-        );
-      }
-
-      if ((data.listMbModemLogViewModel ?? []).isNotEmpty) {
-        checkReplaceModemController.value = true;
-        modemReplacementLogs.value = data.listMbModemLogViewModel ?? [];
-      }
-
-      accidentsSelectorController.selectors = (data.listListError ?? [])
-          .where((item) {
-            return item.id != null;
-          })
-          .map((element) {
-            return MySelectorModel(id: element.id, name: element.text ?? '');
-          })
-          .toList();
-
-      accidentDescriptionTextController.text = data.technicalStaffNote ?? '';
-      accidentSolutionTextController.text = data.reportCorrectionMethod ?? '';
-
-      isViewOnlyModeRxData.value =
-          isRequestClosed || technicalStaffReportCompletedDate != null;
-
-      isCompletedStaffOnController = data.isCompletedStaffOn;
-
-      update();
-    }
+    } catch (_) {}
   }
 
   @override

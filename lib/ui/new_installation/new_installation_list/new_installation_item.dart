@@ -65,9 +65,10 @@ class NewInstallationItem extends StatelessWidget {
       isViewDetail: true,
       tagColor: tagColor,
       onTapViewDetail: onTapViewDetail,
-      title: (item.idLong ?? '').toString(),
+      title: '${item.customersIdFullName ?? ''}\n${item.serviceIdTitle ?? ''}',
       items: [
         MyTexttileItem(titleText: 'Tên KH', text: item.customersIdFullName),
+        MyTexttileItem(titleText: 'Dịch vụ', text: item.serviceIdTitle),
         MyTexttileItem(titleText: 'Địa chỉ', text: item.address2),
         MyTexttileItem(
           titleText: 'Tên người yêu cầu',
@@ -78,10 +79,19 @@ class NewInstallationItem extends StatelessWidget {
           titleText: 'SĐT người yêu cầu',
           text: item.staffPhoneNumber,
         ),
-        MyTexttileItem(titleText: 'Người tạo', text: item.createdByUserName),
         MyTexttileItem(
-          titleText: 'Ngày tạo',
-          text: MyDatetimeUtils.formatDateFromAPI(item.createdDate),
+          titleText: 'Ngày đấu nối',
+          text: MyDatetimeUtils.formatDateFromAPI(
+            item.startDate,
+            toFormat: MyDateFormatEnum.DATE_TIME24s,
+          ),
+        ),
+        MyTexttileItem(
+          titleText: 'Ngày KT gói cước',
+          text: MyDatetimeUtils.formatDateFromAPI(
+            item.endDate,
+            toFormat: MyDateFormatEnum.DATE_TIME24s,
+          ),
         ),
         MyTexttileItem(
           text: surveyStatusText,

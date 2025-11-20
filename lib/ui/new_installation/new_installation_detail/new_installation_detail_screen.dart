@@ -51,6 +51,10 @@ class _NewInstallationDetailScreenState
               title: 'Thông tin yêu cầu',
               items: [
                 MyTexttileItem(
+                  titleText: 'Dịch vụ',
+                  text: detailData?.serviceIdTitle,
+                ),
+                MyTexttileItem(
                   titleText: 'Hệ số K',
                   text: detailData?.kCoefficient,
                   textStyle: AppTextStyles.body1,
@@ -78,13 +82,16 @@ class _NewInstallationDetailScreenState
                   text: detailData?.staffPhoneNumber,
                 ),
                 MyTexttileItem(
-                  titleText: 'Người tạo',
-                  text: detailData?.createdByUserName,
+                  titleText: 'Ngày đấu nối',
+                  text: MyDatetimeUtils.formatDateFromAPI(
+                    detailData?.startDate,
+                    toFormat: MyDateFormatEnum.DATE_TIME24s,
+                  ),
                 ),
                 MyTexttileItem(
-                  titleText: 'Ngày tạo',
+                  titleText: 'Ngày KT gói cước',
                   text: MyDatetimeUtils.formatDateFromAPI(
-                    detailData?.createdDate,
+                    detailData?.endDate,
                     toFormat: MyDateFormatEnum.DATE_TIME24s,
                   ),
                 ),

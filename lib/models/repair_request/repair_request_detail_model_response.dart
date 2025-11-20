@@ -114,6 +114,9 @@ class RepairRequestDetailModelResponse {
 
   List<dynamic>? listWarning;
 
+  String? startDate;
+  String? endDate;
+
   RepairRequestDetailModelResponse({
     this.id,
     this.idLong,
@@ -220,6 +223,8 @@ class RepairRequestDetailModelResponse {
     this.listWarning,
     this.reportModem,
     this.reportModemIsSign,
+    this.startDate,
+    this.endDate,
   });
 
   factory RepairRequestDetailModelResponse.fromJson(Map<String, dynamic> json) {
@@ -377,6 +382,8 @@ class RepairRequestDetailModelResponse {
       listWarning: json['ListWarning'] as List<dynamic>?,
       reportModem: json['Report_Modem'] as String?,
       reportModemIsSign: json['Report_Modem_IsSign'] as bool?,
+      startDate: json['StartDate'] as String?,
+      endDate: json['EndDate'] as String?,
     );
   }
 

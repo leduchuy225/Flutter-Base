@@ -116,6 +116,9 @@ class InstallationDetailModelResponse {
 
   List<dynamic>? listWarning;
 
+  String? startDate;
+  String? endDate;
+
   InstallationDetailModelResponse({
     this.id,
     this.idLong,
@@ -226,6 +229,8 @@ class InstallationDetailModelResponse {
     this.ponidIdLong,
     this.ponidCode,
     this.listWarning,
+    this.startDate,
+    this.endDate,
   });
 
   factory InstallationDetailModelResponse.fromJson(Map<String, dynamic> json) {
@@ -383,6 +388,8 @@ class InstallationDetailModelResponse {
       ponidIdLong: json['PONID_IDLong'] as num?,
       ponidCode: json['PONID_Code'] as dynamic,
       listWarning: json['ListWarning'] as List<dynamic>?,
+      startDate: json['StartDate'] as String?,
+      endDate: json['EndDate'] as String?,
     );
   }
 

@@ -61,6 +61,9 @@ class RepairRequestListModelResponse {
 
   List<dynamic>? listWarning;
 
+  String? startDate;
+  String? endDate;
+
   RepairRequestListModelResponse({
     this.id,
     this.idLong,
@@ -119,6 +122,8 @@ class RepairRequestListModelResponse {
     this.technicalStaffReportCompletedDate,
     this.kCoefficient,
     this.listWarning,
+    this.startDate,
+    this.endDate,
   });
 
   factory RepairRequestListModelResponse.fromJson(Map<String, dynamic> json) {
@@ -183,6 +188,8 @@ class RepairRequestListModelResponse {
           json['TechnicalStaffReportCompletedDate'] as String?,
       kCoefficient: json['KCoefficient'] as dynamic,
       listWarning: json['ListWarning'] as List<dynamic>?,
+      startDate: json['StartDate'] as String?,
+      endDate: json['EndDate'] as String?,
     );
   }
 
