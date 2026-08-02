@@ -66,6 +66,7 @@ class _NewInstallationDetailScreenState
                 MyTexttileItem(
                   titleText: 'Tọa độ',
                   text: detailData?.googleMap,
+                  isHide: !(detailData?.googleMap ?? '').contains(','),
                   trailing: InkWell(
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5),

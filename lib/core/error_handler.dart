@@ -41,7 +41,9 @@ class MyError implements Exception {
     switch (error.runtimeType) {
       case DioException:
         final dioException = error as DioException;
-        _baseResponse = _baseResponse.copyWith(message: dioException.message);
+        _baseResponse = _baseResponse.copyWith(
+          message: dioException.message ?? dioException.error.toString(),
+        );
         if (dioException.type == DioExceptionType.connectionError) {
           _baseResponse = _baseResponse.copyWith(
             message: MyStrings.connectionOff,
