@@ -52,7 +52,6 @@ linter:
     - always_declare_return_types
     # - always_use_package_imports
     # - always_put_control_body_on_new_line
-    - always_require_non_null_named_parameters
     - annotate_overrides
     # - avoid_bool_literals_in_conditional_expressions
     - avoid_empty_else
@@ -84,17 +83,14 @@ linter:
     # - flutter_style_todos
     - hash_and_equals
     - implementation_imports
-    - iterable_contains_unrelated_type
     - leading_newlines_in_multiline_strings
     - library_names
     - library_prefixes
-    - list_remove_unrelated_type
     - no_adjacent_strings_in_list
     - no_duplicate_case_values
     - no_logic_in_create_state
     # - non_constant_identifier_names
     - overridden_fields
-    - package_api_docs
     - package_prefixed_library_names
     - prefer_adjacent_string_concatenation
     - prefer_asserts_in_initializer_lists
@@ -105,7 +101,6 @@ linter:
     - prefer_const_declarations
     - prefer_const_literals_to_create_immutables
     - prefer_contains
-    - prefer_equal_for_default_values
     - prefer_final_fields
     - prefer_final_in_for_each
     - prefer_final_locals
