@@ -29,6 +29,14 @@ class MyLoading extends StatelessWidget {
         return Stack(
           children: [
             const ModalBarrier(dismissible: false, color: Colors.black54),
+            const Positioned(
+              top: 10,
+              right: 10,
+              child: IconButton.filled(
+                onPressed: hide,
+                icon: Icon(Icons.close),
+              ),
+            ),
             GestureDetector(
               // onTap: hide,
               child: MyLoading(),
