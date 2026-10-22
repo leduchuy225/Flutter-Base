@@ -30,7 +30,7 @@ class MyLoading extends StatelessWidget {
           children: [
             const ModalBarrier(dismissible: false, color: Colors.black54),
             GestureDetector(
-              onTap: hide,
+              // onTap: hide,
               child: MyLoading(),
               behavior: HitTestBehavior.translucent,
             ),

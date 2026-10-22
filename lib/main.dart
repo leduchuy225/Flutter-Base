@@ -87,7 +87,18 @@ class _MainAppState extends State<MainApp> {
         // return GetPageRoute(page: () => const LoginScreen());
       },
       builder: (context, child) {
-        return SafeArea(child: KeyboardDismissOnTap(child: child!), top: false);
+        return Overlay(
+          initialEntries: [
+            OverlayEntry(
+              builder: (context) {
+                return SafeArea(
+                  child: KeyboardDismissOnTap(child: child!),
+                  top: false,
+                );
+              },
+            ),
+          ],
+        );
       },
 
       // initialRoute: MainRouter.LOGIN,
