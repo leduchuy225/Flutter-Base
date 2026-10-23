@@ -1,4 +1,5 @@
 {
+  "version": "2.0.0",
   "tasks": [
     {
       "label": "Build and Move Flutter APK DEV",
@@ -29,6 +30,21 @@
       },
       "problemMatcher": [],
       "detail": "Builds the APK and moves it to project root"
+    },
+    {
+      "label": "Build IOS Runner.xcarchive",
+      "type": "shell",
+      "command": "sh",
+      "args": [
+        "-c",
+        "fvm flutter build ipa --release --no-codesign --dart-define=ENV=PROD && open -a Xcode build/ios/archive/Runner.xcarchive"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Builds Runner.xcarchive and opens it in Xcode"
     },
     {
       "label": "Dart Build_Runner",
